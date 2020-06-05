@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <!--import stylesheet-->
+    <link rel="stylesheet" type="text/css" href="resources/Styles.css">
+</head>
+<body>
+<!--header-->
+<h1 class="header" id="header">Vælg Role</h1>
+
+<!--container for actions-->
+<div class="cont" id="container">
+    <!--buttons-->
+    <form action="javascript:getMID('admin')">
+        <button class="btn">Administrator</button>
+    </form>
+    <form action="javascript:getMID('pharmaceut')">
+        <button class="btn">Farmaceut</button>
+    </form>
+    <form action="javascript:getMID('produktionsleder')">
+        <button class="btn">Produktionsleder</button>
+    </form>
+    <form action="javascript:getMID('laborant')">
+        <button class="btn">Laborant</button>
+    </form>
+</div>
+
+<!--import scripts-->
+<script src="resources/IndexFunctions.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</body>
+</html>
