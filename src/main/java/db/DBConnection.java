@@ -7,10 +7,10 @@ public class DBConnection {
     private Connection connection;
 
     public DBConnection() throws SQLException {
-        String host = "";
+        String host = "cdiofinalsem2.cibykspwyepg.us-east-2.rds.amazonaws.com";
         String port = "3306";
-        String database = "";
-        String username = "";
+        String database = "cdiofinalsem2";
+        String username = "admin";
         String password = "gruppe22";
         String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password;
         connection = DriverManager.getConnection(jdbcUrl);
