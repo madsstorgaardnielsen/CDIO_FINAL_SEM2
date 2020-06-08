@@ -23,9 +23,7 @@ function addUser() { //adds the new user to backend
 function getUsers() { //gets existing users from backend
     $("#header").text("Brugeroversigt");
     $("#container").html(
-        '<table>' +
-        '<thead>' +
-        '<tr>' +
+        '<table> <thead> <tr>' +
         '<th>ID</th>' +
         '<th>Rolle</th>' +
         '<th>Fornavn</th>' +
@@ -33,12 +31,29 @@ function getUsers() { //gets existing users from backend
         '<th>Initialer</th>' +
         '<th>Aktiv</th>' +
         '<th colspan="2"></th>' +
-        '</tr>' +
-        '</thead>' +
-        '<tbody id="tablebody"></tbody>' +
+        '</tr> </thead> ' +
+        '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    
+
+    var user = {};
+    user.userId = 12;
+    user.role = "Admin";
+    user.firstName = "Mads";
+    user.lastName = "Langer";
+    user.initials = "ML";
+    user.active = true;
+    $("#tablebody").append(generateUserHtml(user));
+
+    user.userId = 14;
+    user.role = "Admin";
+    user.firstName = "Magnus";
+    user.lastName = "Milang";
+    user.initials = "MM";
+    user.active = false;
+    $("#tablebody").append(generateUserHtml(user));
+
+
     //TODO: kode der henter brugere fra backend
     //TODO: kode der appender brugere til container
 }
