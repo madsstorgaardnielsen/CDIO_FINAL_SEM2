@@ -36,25 +36,3 @@ Agent.PUT = function (URL, data, success, error) {
         error: error
     })
 };
-
-Agent.GETByID = function (URL, data, success, error) {
-    $.ajax({
-        url: URL,
-        method: 'GET',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        success: success,
-        error: error
-    })
-};
-
-Agent.POSTByID = function (URL, data, success, error) {
-    $.ajax({
-        url: URL,
-        method: 'POST',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        success: success,
-        error: error
-    })
-};

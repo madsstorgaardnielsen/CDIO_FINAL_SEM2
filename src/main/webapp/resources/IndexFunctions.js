@@ -13,7 +13,7 @@ function displayName() { //gets the information about the user from the backend
     var role = $("#MID").attr("data-role");
 
     //TODO: connect to correct path in rest backend
-    Agent.GETByID("rest/" + role, ID, function (data) {
+    Agent.GET("rest/user?userId=" + ID + "&role=" + role, function (data) {
         $("#header").text("Velkommen");
         $("#container").html(
             '<form action="'+ data.role +'.html">' +
