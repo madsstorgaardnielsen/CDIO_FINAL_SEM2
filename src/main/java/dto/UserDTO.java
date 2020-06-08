@@ -3,12 +3,13 @@ package dto;
 import java.io.Serializable;
 
 public class UserDTO implements Serializable {
-    public UserDTO(int userId, String firstName, String lastName, String initials, String role) {
+    public UserDTO(int userId, String firstName, String lastName, String initials, String role, boolean active) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.initials = initials;
         this.role = role;
+        this.active = active;
     }
 
     private int userId;
@@ -16,6 +17,7 @@ public class UserDTO implements Serializable {
     private String lastName;
     private String initials;
     private String role;
+    private boolean active;
     private static final long serialVersionUID = 4545864587995944260L;
 
     public String toString() {
@@ -64,5 +66,13 @@ public class UserDTO implements Serializable {
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public void setActive(boolean active){
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 }
