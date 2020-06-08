@@ -5,7 +5,8 @@ function addUserForm() { //gets user credentials for new user from admin user
         '<input type="text" placeholder="Fornavn" id="firstName">' +
         '<input type="text" placeholder="Efternavn" id="lastName">' +
         '<input type="text" placeholder="Initialer" id="ini">' +
-        '<select id="roller">' +
+        '<select id="roller" required>' +
+        '<option value="" disabled selected hidden>Rolle</option> ' +
         '<option value="Admin">Admin</option>' +
         '<option value="Farmaceut">Farmaceut</option>' +
         '<option value="Produktionsleder">Produktionsleder</option>' +
