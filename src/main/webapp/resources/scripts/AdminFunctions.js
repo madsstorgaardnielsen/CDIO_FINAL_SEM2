@@ -35,11 +35,12 @@ function addUser() { //adds the new user to backend
         )
     }, function (data) {
         $("#error").remove();
+        console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: status code '+ data.status +
+            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
             '</div></div>'
-        )
+        );
     })
 }
 
@@ -58,16 +59,17 @@ function getUsers() { //gets existing users from backend
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-
+var row;
     Agent.GET("rest/user", function (data) {
         $.each(data, function () {
-            $("#tablebody").append(generateUserHtml(this));
+            row = $("#tablebody").append(generateUserHtml(this));
         });
-        listener();
-        listeneredit();
+        listener(row);
+        listeneredit(row);
+        listenersave(row);
     }, function (data) {
-        $("#container").html(data.responseText);
-    })
+        $("#container").html($(data.responseText).find("u").first().text());
+    });
 }
 
 
@@ -84,8 +86,8 @@ function generateUserHtml(user) { //generates html to show in user table
         '</tr>'
 }
 
-function listeneredit() {
-    $("#tablebody").on('click', '.editbtn', function () {
+function listeneredit(row) {
+    $(row).on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
         var firstName = row.find(".firstName").text();
         var lastName = row.find(".lastName").text();
@@ -105,12 +107,11 @@ function listeneredit() {
             '</select>'
         );
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
-        listenersave();
     })
 }
 
-function listenersave() {
-    $("#tablebody").on('click', '.savebtn', function () {
+function listenersave(row) {
+    $(row).on('click', '.savebtn', function () {
         var row = $(this).closest('tr');
         var userId = row.find(".userId").text();
         var firstName = row.find("#editfirstName").val();
@@ -125,26 +126,22 @@ function listenersave() {
 
         var params = "?userId=" + userId;
 
-        console.log(firstName + " " + origfirstName);
-        if (firstName !== origfirstName)
+        if (firstName !== "" && firstName !== origfirstName)
             params = params + "&firstName=" + firstName;
 
-        console.log(lastName + " " + origlastName);
-        if (lastName !== origlastName)
+        if (lastName !== "" && lastName !== origlastName)
             params= params + "&lastName=" + lastName;
 
-        console.log(initials + " " + initials);
-        if (initials !== originitials)
+        if (initials !== "" && initials !== originitials)
             params = params + "&initials=" + initials;
 
-        console.log(role + " " + origrole);
         if (role !== origrole)
             params = params + "&role=" + role;
 
         Agent.PUT("rest/user" + params, null, function (data) {
             row.replaceWith(generateUserHtml(data));
         }, function (data) {
-            window.alert("kunne ikke gemme ændringer");
+            window.alert("Ændringer ikke gemt: " + $(data.responseText).find("u").first().text());
             console.log(data)
         })
 
@@ -153,8 +150,8 @@ function listenersave() {
 
 
 
-function listener() {
-    $("#tablebody").on('click', '.toglebtn', function () {
+function listener(row) {
+    $(row).on('click', '.toglebtn', function () {
         var row = $(this).closest('tr');
         var active = invertTextToBoolean(row.find(".active").text());
         var ID = row.find(".userId").text();
@@ -162,7 +159,7 @@ function listener() {
         Agent.PUT("rest/user?userId=" + ID + "&active=" + active, null, function (data) {
             row.replaceWith(generateUserHtml(data))
         }, function (data) {
-            window.alert("Kunne ikke ændre status");
+            window.alert("Kunne ikke ændre status: " + $(data.responseText).find("u").first().text());
             console.log(data)
         })
     });

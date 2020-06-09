@@ -34,11 +34,15 @@ public class UserController {
     }
 
     public Response addUser(UserDTO userDTO) throws Exception {
-        try {
-            userDAO.addUser(userDTO);
-            return Response.ok().build();
-        } catch (Exception e){
-            return Response.serverError().build();
+        if (validation.addUserInputValidation(userDTO)) {
+            try {
+                userDAO.addUser(userDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        } else {
+            return Response.status(418, "Bad input").build();
         }
     }
 
@@ -95,18 +99,20 @@ public class UserController {
             else
                 user.setInitials(params.getFirst("initials"));
 
-            if (params.get("role") == null) {
+            if (params.get("role") == null)
                 user.setRole(null);
-            }
-            else {
+            else
                 user.setRole(params.getFirst("role"));
-            }
 
-            try {
-                return Response.ok(userDAO.updateUser(user)).build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.serverError().build();
+            if (validation.updateUserInputValidation(user)) {
+                try {
+                    return Response.ok(userDAO.updateUser(user)).build();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return Response.serverError().build();
+                }
+            } else {
+                return Response.status(418, "Bad input").build();
             }
         }
     }
