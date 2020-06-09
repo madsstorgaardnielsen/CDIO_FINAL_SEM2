@@ -2,7 +2,6 @@ package dao;
 
 import db.DBConnection;
 import dto.IngredientBatchDTO;
-import dto.IngredientDTO;
 
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -11,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+//TODO implement inputvalidation class
 public class IngredientBatchDAO {
 
     private static IngredientBatchDAO instance;
@@ -57,7 +57,7 @@ public class IngredientBatchDAO {
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setInt(2, ingredientBatch.getIngredientBatchId());
+        statement.setInt(2, ingredientBatch.getIngredientId());
         statement.setDouble(3, ingredientBatch.getAmount());
 
         try {
@@ -71,7 +71,7 @@ public class IngredientBatchDAO {
 
     public void deleteIngredientBatch(int id) throws IOException, SQLException {
 
-        String deleteIngredientBatch = "{call DeleteIngredientBatch(+"+id+")}";
+        String deleteIngredientBatch = "{call DeleteIngredientBatch(?)}";
         PreparedStatement statement = database.callableStatement(deleteIngredientBatch);
         statement.setInt(1, id);
 
@@ -105,7 +105,7 @@ public class IngredientBatchDAO {
     private void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) throws SQLException {
         ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
         ingredientBatchDTO.setIngredientId(rs.getInt(2));
-        ingredientBatchDTO.setAmountInStock(rs.getDouble(3));
+        ingredientBatchDTO.setAmount(rs.getDouble(3));
     }
 
     public IngredientBatchDTO getIngredientBatch(int ID) throws Exception {

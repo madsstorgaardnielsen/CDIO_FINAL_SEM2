@@ -25,14 +25,14 @@ public class IngredientBatchDTO {
         return amount;
     }
 
-    public void setAmountInStock(double amountInStock) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
     public IngredientBatchDTO() {
     }
 
-    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amountInStock) {
+    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount) {
         this.ingredientBatchId = ingredientBatchId;
         this.ingredientId = ingredientId;
         this.amount = amount;
