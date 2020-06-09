@@ -77,7 +77,7 @@ public class InputValidation {
         } else
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
     }
-
+/*
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
         int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
@@ -105,4 +105,5 @@ public class InputValidation {
             return false;
         } else return nettoDecimalLength == 4;
     }
+ */
 }
