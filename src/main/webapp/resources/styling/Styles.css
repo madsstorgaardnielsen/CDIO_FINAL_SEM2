@@ -1,6 +1,6 @@
 .btn, .toglebtn, .editbtn  {
     background-color: #008CBA;
-    border: 1px #008CBA;
+    border: 1px solid black;
     color: #F7F7F7;
     padding: 7px 10px;
     text-align: center;
@@ -26,7 +26,8 @@ form {
 }
 
 .header {
-    text-align: center;
+    width: fit-content;
+    margin: auto auto 15px;
     font-size: xx-large;
 }
 
@@ -50,10 +51,10 @@ input, select {
     text-align: center;
     margin: auto auto 10px;
     border: 1px solid rgba(0, 0, 0, .15);
-    font-size: 1rem;
+    font-size: 1.5rem;
     border-radius: .25rem;
     background-color: #fff;
-    line-height: 1.25;
+    padding: 5px 10px;
 }
 
 td, th {
@@ -71,4 +72,29 @@ table {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+.homebtn {
+    width: 32px;
+    height: 32px;
+    float: left;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    border-radius: .25rem;
+    background-color: #008cba;
+}
+
+.navbar {
+    float: left;
+    width: fit-content;
+    border: none;
+}
+
+.home {
+    width: 30px;
+    height: 30px;
+    background-color: #008cba;
+    color: #008cba;
+    border: none;
 }

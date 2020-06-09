@@ -9,7 +9,7 @@ public class DBConnection {
     public DBConnection() throws SQLException {
         String host = "cdiofinalsem2.cibykspwyepg.us-east-2.rds.amazonaws.com";
         String port = "3306";
-        String database = "cdiofinalsem2";
+        String database = "cdio_final";
         String username = "admin";
         String password = "gruppe22";
         String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password;

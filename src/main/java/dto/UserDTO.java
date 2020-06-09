@@ -12,6 +12,9 @@ public class UserDTO implements Serializable {
         this.active = active;
     }
 
+    public UserDTO() {
+    }
+
     private int userId;
     private String firstName;
     private String lastName;
@@ -62,10 +65,6 @@ public class UserDTO implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public void setActive(boolean active){

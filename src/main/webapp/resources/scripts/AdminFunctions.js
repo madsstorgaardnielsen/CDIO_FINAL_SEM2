@@ -37,26 +37,13 @@ function getUsers() { //gets existing users from backend
         '</table>'
     );
 
-    var user = {};
-    user.userId = 12;
-    user.role = "Admin";
-    user.firstName = "Mads";
-    user.lastName = "Langer";
-    user.initials = "ML";
-    user.active = true;
-    $("#tablebody").append(generateUserHtml(user));
-
-    user.userId = 14;
-    user.role = "Admin";
-    user.firstName = "Magnus";
-    user.lastName = "Milang";
-    user.initials = "MM";
-    user.active = false;
-    $("#tablebody").append(generateUserHtml(user));
-
-
-    //TODO: kode der henter brugere fra backend
-    //TODO: kode der appender brugere til container
+    Agent.GET("rest/user", function (data) {
+        $.each(data, function () {
+            $("#tablebody").append(generateUserHtml(this));
+        })
+    }, function (data) {
+        $("#container").html(data.responseText);
+    })
 }
 
 

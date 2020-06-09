@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>Administration</title>
     <!-- import stylesheet-->
-    <link rel="stylesheet" type="text/css" href="resources/Styles.css">
+    <link rel="stylesheet" type="text/css" href="resources/styling/Styles.css">
 </head>
 <body>
+<!--navigation bar-->
+<div class="navbar">
+    <!--TODO: get this button working-->
+    <button class="homebtn" onclick="href='index.html'">
+        <img class="home" src="https://storage.cloud.google.com/sukkeregernimages/home.png?authuser=1" alt="index">
+    </button>
+</div>
+<br>
 <!--header-->
 <h1 class="header" id="header">Administration</h1>
 
@@ -23,7 +31,8 @@
 </div>
 
 <!--import scripts-->
-<script src="resources/AdminFunctions.js"></script>
+<script src="resources/scripts/AdminFunctions.js"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/scripts/RequestHandler.js"></script>
 </body>
 </html>

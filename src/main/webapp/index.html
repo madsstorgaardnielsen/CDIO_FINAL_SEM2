@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <title>Index</title>
     <!--import stylesheet-->
-    <link rel="stylesheet" type="text/css" href="resources/Styles.css">
+    <link rel="stylesheet" type="text/css" href="resources/styling/Styles.css">
 </head>
 <body>
+<!--navigation bar-->
+<div class="navbar">
+    <button class="homebtn" onclick="href='index.html'">
+        <img class="home" src="https://storage.cloud.google.com/sukkeregernimages/home.png?authuser=1" alt="index">
+    </button>
+</div>
+<br>
 <!--header-->
 <h1 class="header" id="header">Vælg Role</h1>
 
 <!--container for actions-->
 <div class="cont" id="container">
     <!--buttons-->
-    <form action="javascript:getMID('admin')">
+    <form action="javascript:getMID('Admin')">
         <button class="btn">Administrator</button>
     </form>
     <form action="javascript:getMID('pharmaceut')">
@@ -28,7 +35,8 @@
 </div>
 
 <!--import scripts-->
-<script src="resources/IndexFunctions.js"></script>
+<script src="resources/scripts/IndexFunctions.js"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="resources/scripts/RequestHandler.js"></script>
 </body>
 </html>
