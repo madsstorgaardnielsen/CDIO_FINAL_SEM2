@@ -92,5 +92,18 @@ public class RecipeDAO {
         }
         return  recipe;
     }
+
+    public RecipeDTO deleteRecipe(int ID) throws Exception {
+        CallableStatement stmt = database.callableStatement("{call DeleteRecipe(?)}");
+        stmt.setInt(1,ID);
+        RecipeDTO recipe = new RecipeDTO();
+        ResultSet resultSet = stmt.executeQuery();
+        try {
+            while (resultSet.next()){
+
+            }
+        }
+    }
+
 }
 
