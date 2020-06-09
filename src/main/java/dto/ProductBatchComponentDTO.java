@@ -8,6 +8,9 @@ public class ProductBatchComponentDTO {
     double tara;
     double netto;
 
+    public ProductBatchComponentDTO() {
+    }
+
     public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID,
                                     int laborantID, double tara, double netto) {
         this.id = id;

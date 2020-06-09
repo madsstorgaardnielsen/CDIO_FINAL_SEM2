@@ -8,6 +8,24 @@ public class ProductBatchDTO {
     int ingredientBatchId;
     String creationDate;
     String finishDate;
+    double tara;
+    double netto;
+
+    public double getTara() {
+        return tara;
+    }
+
+    public void setTara(double tara) {
+        this.tara = tara;
+    }
+
+    public double getNetto() {
+        return netto;
+    }
+
+    public void setNetto(double netto) {
+        this.netto = netto;
+    }
 
     public String getFinishDate() {
         return finishDate;
