@@ -1,9 +1,6 @@
 package validation;
 
-import dto.IngredientBatchDTO;
-import dto.IngredientDTO;
-import dto.ProductBatchDTO;
-import dto.UserDTO;
+import dto.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -82,14 +79,15 @@ class InputValidationTest {
     void productBatchInputValidation() {
         InputValidation iv = new InputValidation();
         ProductBatchDTO pbd = new ProductBatchDTO();
+        ProductBatchComponentDTO pbcd = new ProductBatchComponentDTO();
 
         pbd.setProductBatchId(1);
         pbd.setIngredientBatchId(1);
         pbd.setRecipeId(1);
         pbd.setUserId(1);
         pbd.setStatus(1);
-        pbd.setTara(4.4444);
-        pbd.setNetto(4.4444);
+        pbcd.setTara(4.4444);
+        pbcd.setNetto(4.4444);
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(-1);
@@ -97,8 +95,8 @@ class InputValidationTest {
         pbd.setRecipeId(-1);
         pbd.setUserId(-1);
         pbd.setStatus(-1);
-        pbd.setTara(5.333);
-        pbd.setNetto(5.333);
+        pbcd.setTara(5.333);
+        pbcd.setNetto(5.333);
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(1000000000);
@@ -106,8 +104,8 @@ class InputValidationTest {
         pbd.setRecipeId(1000000000);
         pbd.setUserId(1000000000);
         pbd.setStatus(4);
-        pbd.setTara(-4.333);
-        pbd.setNetto(-4.333);
+        pbcd.setTara(-4.333);
+        pbcd.setNetto(-4.333);
         iv.productBatchInputValidation(pbd);
     }
 }

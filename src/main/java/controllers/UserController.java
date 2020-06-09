@@ -67,43 +67,43 @@ public class UserController {
 
     public Response updateUser(UriInfo uriInfo) throws Exception {
         if (uriInfo.getQueryParameters().keySet().size() == 1) {
-            return Response.status(200, "No data changed").build();
+            return Response.ok(userDAO.getUser(uriInfo.getQueryParameters().getFirst("userId"))).build();
         } else {
             MultivaluedMap<String,String> params = uriInfo.getQueryParameters();
             UserDTO user = new UserDTO();
 
             user.setUserId(Integer.parseInt(params.getFirst("userId")));
 
-            if (params.getFirst("active") != null) {
+            if (params.get("active") != null) {
                 user.setActive(params.getFirst("active"));
                 user = userDAO.updateActivity(user);
                 return Response.ok(user).build();
             }
 
-            if (params.getFirst("firstName") == null)
+            if (params.get("firstName") == null)
                 user.setFirstName(null);
             else
                 user.setFirstName(params.getFirst("firstName"));
 
-            if (params.getFirst("lastName") == null)
+            if (params.get("lastName") == null)
                 user.setLastName(null);
             else
                 user.setLastName(params.getFirst("lastName"));
 
-            if (params.getFirst("initials") == null)
+            if (params.get("initials") == null)
                 user.setInitials(null);
             else
                 user.setInitials(params.getFirst("initials"));
 
-            if (params.getFirst("role") == null)
+            if (params.get("role") == null) {
                 user.setRole(null);
-            else
+            }
+            else {
                 user.setRole(params.getFirst("role"));
+            }
 
             try {
-                user = userDAO.updateUser(user);
-                System.out.println("1");
-                return Response.ok(user).build();
+                return Response.ok(userDAO.updateUser(user)).build();
             } catch (Exception e) {
                 e.printStackTrace();
                 return Response.serverError().build();

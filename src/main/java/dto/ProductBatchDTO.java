@@ -6,8 +6,42 @@ public class ProductBatchDTO {
     int status;
     int userId;
     int ingredientBatchId;
+    String creationDate;
+    String finishDate;
     double tara;
     double netto;
+
+    public double getTara() {
+        return tara;
+    }
+
+    public void setTara(double tara) {
+        this.tara = tara;
+    }
+
+    public double getNetto() {
+        return netto;
+    }
+
+    public void setNetto(double netto) {
+        this.netto = netto;
+    }
+
+    public String getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public String getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 
     public int getProductBatchId() {
         return productBatchId;
@@ -49,32 +83,14 @@ public class ProductBatchDTO {
         this.ingredientBatchId = ingredientBatchId;
     }
 
-    public double getTara() {
-        return tara;
-    }
-
-    public void setTara(double tara) {
-        this.tara = tara;
-    }
-
-    public double getNetto() {
-        return netto;
-    }
-
-    public void setNetto(double netto) {
-        this.netto = netto;
-    }
-
     public ProductBatchDTO() {
     }
 
-    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId, int ingredientBatchId, double tara, double netto) {
+    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId, int ingredientBatchId) {
         this.productBatchId = productBatchId;
         this.recipeId = recipeId;
         this.status = status;
         this.userId = userId;
         this.ingredientBatchId = ingredientBatchId;
-        this.tara = tara;
-        this.netto = netto;
     }
 }
