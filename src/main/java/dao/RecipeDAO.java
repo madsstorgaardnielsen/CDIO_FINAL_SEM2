@@ -2,7 +2,6 @@ package dao;
 
 import db.DBConnection;
 import dto.RecipeDTO;
-import dto.UserDTO;
 
 import java.io.IOException;
 import java.sql.CallableStatement;
@@ -46,7 +45,7 @@ public class RecipeDAO {
 
         try {
             statement.executeUpdate();
-            System.out.println("User successfully added to database");
+            System.out.println("Recipe successfully added to database");
         } catch (Exception e) {
             e.printStackTrace();
             throw new IOException("Something went wrong with createRecipe()");
@@ -93,15 +92,37 @@ public class RecipeDAO {
         return  recipe;
     }
 
-    public RecipeDTO deleteRecipe(int ID) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call DeleteRecipe(?)}");
-        stmt.setInt(1,ID);
-        RecipeDTO recipe = new RecipeDTO();
-        ResultSet resultSet = stmt.executeQuery();
-        try {
-            while (resultSet.next()){
+    public void deleteRecipe(int ID) throws IOException, SQLException {
 
-            }
+        String deleteRecipe = "{call DeleteRecipe(+"+ID+")}";
+        PreparedStatement statement = database.callableStatement(deleteRecipe);
+        statement.setInt(1, ID);
+        try {
+            statement.executeUpdate();
+            System.out.println("Recipe successfully deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Recipe could no be deleted");
+        }
+    }
+
+    public void updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
+
+        String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
+        PreparedStatement statement = database.callableStatement(updateRecipe);
+
+        statement.setInt(1, recipe.getRecipeID());
+        statement.setString(2, recipe.getRecipeName());
+        statement.setInt(3, recipe.getIngredientID());
+        statement.setDouble(4,recipe.getNonNetto());
+        statement.setDouble(5,recipe.getTolerance());
+
+        try {
+            statement.executeUpdate();
+            System.out.println("Recipe successfully updated");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Recipe could no be updated");
         }
     }
 

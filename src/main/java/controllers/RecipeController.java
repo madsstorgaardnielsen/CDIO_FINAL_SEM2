@@ -1,19 +1,14 @@
 package controllers;
 
 import dao.RecipeDAO;
-import dao.UserDAO;
 import dto.RecipeDTO;
-import dto.UserDTO;
 import validation.InputValidation;
 
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RecipeController {
-    private final InputValidation validation;
-    private final RecipeDAO recipeDAO;
     private static RecipeController instance;
 
     static {
@@ -24,31 +19,53 @@ public class RecipeController {
         }
     }
 
+    private final InputValidation validation;
+    private final RecipeDAO RecipeDAO;
+    private RecipeDTO RecipeDTO;
+
     private RecipeController() throws SQLException {
-        this.recipeDAO = new RecipeDAO();
+        this.RecipeDAO = new RecipeDAO();
+        this.RecipeDTO = new RecipeDTO();
         this.validation = new InputValidation();
     }
 
-    public static RecipeController getInstance()
-    {
+    public static RecipeController getInstance() {
         return instance;
     }
 
-    public Response addRecipe(RecipeDTO recipeDTO) throws Exception {
+    public void deleteRecipe(int ID) {
         try {
-            recipeDAO.addRecipe(recipeDTO);
-            return Response.ok().build();
-        } catch (Exception e){
-            return Response.serverError().build();
+            RecipeDAO.deleteRecipe(ID);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    public Response getAllRecipes(UriInfo uriInfo) throws Exception {
-            try {
-                return Response.ok(recipeDAO.getAllRecipes()).build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.serverError().build();
-            }
+    public void addRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) {
+        RecipeDTO = new RecipeDTO(recipeID,recipeName,ingredientID,nonNetto,tolerance);
+        try {
+            RecipeDAO.addRecipe(RecipeDTO);
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
         }
+    }
+
+    public void updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) {
+        RecipeDTO = new RecipeDTO(recipeID, recipeName, ingredientID, nonNetto, tolerance);
+
+        try {
+            RecipeDAO.updateRecipe(RecipeDTO);
+        } catch (SQLException | IOException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public ArrayList<RecipeDTO> getAllRecipes() throws Exception {
+        return RecipeDAO.getAllRecipes();
+    }
+
+    public RecipeDTO getRecipe(int ID) throws Exception {
+        return RecipeDAO.getRecipe(ID);
+    }
+
 }
