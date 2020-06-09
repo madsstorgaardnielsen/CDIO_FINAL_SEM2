@@ -51,10 +51,19 @@ input, select {
     text-align: center;
     margin: auto auto 10px;
     border: 1px solid rgba(0, 0, 0, .15);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     border-radius: .25rem;
     background-color: #fff;
     padding: 5px 10px;
+    width: auto;
+}
+
+.errorcont {
+    text-align: center;
+    margin: auto auto 10px;
+    border: none;
+    padding: 0;
+    width: 300px;
 }
 
 td, th {

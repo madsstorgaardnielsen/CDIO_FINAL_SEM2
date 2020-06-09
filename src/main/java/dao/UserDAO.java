@@ -40,7 +40,7 @@ public class UserDAO {
         statement.setString(2,user.getLastName());
         statement.setString(3,user.getInitials());
         statement.setString(4,user.getRole());
-        statement.setString(5,Boolean.toString(user.isActive()));
+        statement.setString(5,String.valueOf(user.isActive()? 1 : 0));
 
 
         try {
@@ -86,6 +86,45 @@ public class UserDAO {
         try {
             while (resultSet.next()){
                 getUserInfo(resultSet, user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  user;
+    }
+
+    public UserDTO updateUser(UserDTO user) throws Exception{
+        CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?)}");
+
+        stmt.setString(1, String.valueOf(user.getUserId()));
+        stmt.setString(2, user.getFirstName());
+        stmt.setString(3, user.getLastName());
+        stmt.setString(4, user.getInitials());
+        stmt.setString(5, user.getRole());
+
+        ResultSet rs = stmt.executeQuery();
+
+        try {
+            while (rs.next()){
+                getUserInfo(rs, user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  user;
+    }
+
+    public UserDTO updateActivity(UserDTO user) throws Exception {
+        CallableStatement stmt = database.callableStatement("{call UpdateActivity(?,?)}");
+
+        stmt.setString(1, String.valueOf(user.getUserId()));
+        stmt.setString(2, String.valueOf(user.isActive()? 1:0));
+
+        ResultSet rs = stmt.executeQuery();
+
+        try {
+            while (rs.next()){
+                getUserInfo(rs, user);
             }
         } catch (Exception e) {
             e.printStackTrace();
