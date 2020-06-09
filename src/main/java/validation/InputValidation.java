@@ -58,7 +58,7 @@ public class InputValidation {
         } else return decimalLength == 4;
     }
 
-/*    public boolean receptInputValidation(RecipeDTO recipeDTO) {
+/*    public boolean recipeInputValidation(RecipeDTO recipeDTO) {
 
     }*/
 
