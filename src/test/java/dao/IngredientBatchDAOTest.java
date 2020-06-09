@@ -24,12 +24,20 @@ class IngredientBatchDAOTest {
 
     @Test
     void updateIngredientBatch() throws Exception {
+        IngredientBatchDTO ibDTO = new IngredientBatchDTO();
+        IngredientBatchDAO ibDAO = new IngredientBatchDAO();
+        ibDTO.setIngredientBatchId(99999999);
+        ibDTO.setIngredientId(ibDAO.getIngredientBatch(99999999).getIngredientId());
+        ibDTO.setAmount(6.6666);
+
+        ibDAO.updateIngredientBatch(ibDTO);
+
+        assertEquals(6.6666, ibDTO.getAmount());
 
     }
 
     @Test
-    void deleteIngredientBatch() {
-
+    void deleteIngredientBatch() throws Exception {
     }
 
     @Test
@@ -37,6 +45,6 @@ class IngredientBatchDAOTest {
     }
 
     @Test
-    void getIngredientBatch() {
+    void getIngredientBatch() throws Exception {
     }
 }
