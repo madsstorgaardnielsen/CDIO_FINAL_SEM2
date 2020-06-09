@@ -71,6 +71,17 @@ public class UserDTO implements Serializable {
         this.active = active;
     }
 
+    public void setActive(String active) throws Exception {
+        if (active.equals("true"))
+            this.active = true;
+        else {
+            if (active.equals("false"))
+                this.active = false;
+            else
+                throw new Exception();
+        }
+    }
+
     public boolean isActive() {
         return active;
     }
