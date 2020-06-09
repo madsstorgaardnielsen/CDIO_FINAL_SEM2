@@ -21,7 +21,6 @@ function displayName() { //gets the information about the user from the backend
             '</form>'
         );
     }, function (data) {
-        //TODO: add error handling
         $("#container").html(data.responseText);
     })
 }
