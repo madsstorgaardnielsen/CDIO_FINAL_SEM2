@@ -64,6 +64,7 @@ function getUsers() { //gets existing users from backend
             $("#tablebody").append(generateUserHtml(this));
         });
         listener();
+        listeneredit();
     }, function (data) {
         $("#container").html(data.responseText);
     })
@@ -83,7 +84,75 @@ function generateUserHtml(user) { //generates html to show in user table
         '</tr>'
 }
 
-//TODO: eventlistener på editbtn
+function listeneredit() {
+    $("#tablebody").on('click', '.editbtn', function () {
+        var row = $(this).closest('tr');
+        var firstName = row.find(".firstName").text();
+        var lastName = row.find(".lastName").text();
+        var initials = row.find(".initials").text();
+        var role = row.find(".role").text();
+
+        row.find(".firstName").html('<input type="text" placeholder="' + firstName + '" id="editfirstName" data-orig="'+ firstName +'">');
+        row.find(".lastName").html('<input type="text" placeholder="' + lastName + '" id="editlastName" data-orig="'+ lastName +'">');
+        row.find(".initials").html('<input type="text" placeholder="' + initials + '" id="editinitials" data-orig="'+ initials +'">');
+        row.find(".role").html('' +
+            '<select id="editrole" data-orig="'+ role +'">' +
+            '<option value="'+ role +'" selected hidden>'+ role +'</option>' +
+            '<option value="Admin">Admin</option>' +
+            '<option value="Farmaceut">Farmaceut</option>' +
+            '<option value="Produktionsleder">Produktionsleder</option>' +
+            '<option value="Laborant">Laborant</option>' +
+            '</select>'
+        );
+        row.find(".editbutton").html('<button class="savebtn">Gem</button>');
+        listenersave();
+    })
+}
+
+function listenersave() {
+    $("#tablebody").on('click', '.savebtn', function () {
+        var row = $(this).closest('tr');
+        var userId = row.find(".userId").text();
+        var firstName = row.find("#editfirstName").val();
+        var lastName = row.find("#editlastName").val();
+        var initials = row.find("#editinitials").val();
+        var role = row.find("#editrole").val();
+
+        var origfirstName = row.find("#editfirstName").attr('data-orig');
+        var origlastName = row.find("#editlastName").attr('data-orig');
+        var originitials = row.find("#editinitials").attr('data-orig');
+        var origrole = row.find("#editrole").attr('data-orig');
+
+        var params = "?userId=" + userId;
+
+        console.log(firstName + " " + origfirstName);
+        if (firstName !== origfirstName)
+            params = params + "&firstName=" + firstName;
+
+        console.log(lastName + " " + origlastName);
+        if (lastName !== origlastName)
+            params= params + "&lastName=" + lastName;
+
+        console.log(initials + " " + initials);
+        if (initials !== originitials)
+            params = params + "&initials=" + initials;
+
+        console.log(role + " " + origrole);
+        if (role !== origrole)
+            params = params + "&role=" + role;
+
+        Agent.PUT("rest/user" + params, null, function (data) {
+            row.replaceWith(generateUserHtml(data));
+        }, function (data) {
+            window.alert("kunne ikke gemme ændringer");
+            console.log(data)
+        })
+
+    })
+}
+
+
+
 function listener() {
     $("#tablebody").on('click', '.toglebtn', function () {
         var row = $(this).closest('tr');
@@ -93,14 +162,11 @@ function listener() {
         Agent.PUT("rest/user?userId=" + ID + "&active=" + active, null, function (data) {
             row.replaceWith(generateUserHtml(data))
         }, function (data) {
-            window.alert(data.reason);
+            window.alert("Kunne ikke ændre status");
+            console.log(data)
         })
     });
 }
-
-//TODO: måde at opdatere data når der er lavet ændringer (enten alt data eller den ændrede)
-
-
 
 function booleanToBtn(active) { //generates text according to users active state
     if (active)
@@ -120,8 +186,4 @@ function invertTextToBoolean(active) {
         return false;
     else
         return true;
-}
-
-function toIndex() {
-    window.location = "localhost:8080";
 }

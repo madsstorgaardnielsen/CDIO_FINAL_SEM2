@@ -1,4 +1,4 @@
-.btn, .toglebtn, .editbtn  {
+.btn, .toglebtn, .editbtn, .savebtn  {
     background-color: #008CBA;
     border: 1px solid black;
     color: #F7F7F7;
@@ -84,8 +84,8 @@ tr:nth-child(even) {
 }
 
 .homebtn {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     float: left;
     padding: 0;
     margin: 0;
@@ -98,6 +98,7 @@ tr:nth-child(even) {
     float: left;
     width: fit-content;
     border: none;
+    background-color: white;
 }
 
 .home {
