@@ -108,3 +108,25 @@ tr:nth-child(even) {
     color: #008cba;
     border: none;
 }
+
+.shortcut {
+    text-decoration: none;
+    width: fit-content;
+    height: 30px;
+    padding: 0 5px;
+    border: 1px solid black;
+    float: left;
+    border-radius: 0.25rem;
+    margin-left: 10px;
+}
+
+.text {
+    margin: auto;
+    font-size: 1rem;
+    text-align: center;
+    width: auto;
+    padding-top: 7px;
+    color: black;
+    text-decoration-line: none;
+    text-decoration-style: unset;
+}
