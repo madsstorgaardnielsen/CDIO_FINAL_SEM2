@@ -37,11 +37,10 @@ public class IngredientDAO {
 
     public void addIngredient(IngredientDTO ingredient) throws SQLException, IOException {
 
-        String addIngredient = "{call AddIngredient(?,?,?)}";
+        String addIngredient = "{call AddIngredient(?,?)}";
         PreparedStatement statement = database.callableStatement(addIngredient);
         statement.setInt(1, ingredient.getIngredientID());
         statement.setString(2, ingredient.getIngredientName());
-        statement.setString(3, ingredient.getSupplier());
 
         try {
             statement.executeUpdate();
@@ -54,12 +53,11 @@ public class IngredientDAO {
 
     public void updateIngredient(IngredientDTO ingredient) throws IOException, SQLException {
 
-        String updateIngredient = "{call UpdateIngredient(?,?,?)}";
+        String updateIngredient = "{call UpdateIngredient(?,?)}";
         PreparedStatement statement = database.callableStatement(updateIngredient);
 
         statement.setInt(1, ingredient.getIngredientID());
         statement.setString(2, ingredient.getIngredientName());
-        statement.setString(3, ingredient.getSupplier());
 
         try {
             statement.executeUpdate();
@@ -72,7 +70,7 @@ public class IngredientDAO {
 
     public void deleteIngredient(int id) throws IOException, SQLException {
 
-        String deleteIngredient = "{call DeleteIngredient(+"+id+")}";
+        String deleteIngredient = "{call DeleteIngredient(?)}";
         PreparedStatement statement = database.callableStatement(deleteIngredient);
         statement.setInt(1, id);
 
@@ -106,7 +104,6 @@ public class IngredientDAO {
     private void getIngredientInfo(ResultSet rs, IngredientDTO ingredientDTO) throws SQLException {
         ingredientDTO.setIngredientID(rs.getInt(1));
         ingredientDTO.setIngredientName(rs.getString(2));
-        ingredientDTO.setIngredientSupplier(rs.getString(3));
     }
 
     public IngredientDTO getIngredient(int ID) throws Exception {

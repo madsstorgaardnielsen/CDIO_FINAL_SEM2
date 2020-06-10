@@ -12,7 +12,8 @@ import java.util.ArrayList;
 
 public class RecipeDAO {
     private static RecipeDAO instance;
-    static{
+
+    static {
         try {
             instance = new RecipeDAO();
         } catch (SQLException throwables) {
@@ -20,7 +21,6 @@ public class RecipeDAO {
         }
     }
 
-    PreparedStatement preparedStatement;
     private DBConnection database;
 
     public RecipeDAO() throws SQLException {
@@ -35,13 +35,11 @@ public class RecipeDAO {
 
         String addRecipe = "{call AddRecipe(?,?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(addRecipe);
-
-        statement.setString(1,Integer.toString(recipe.getRecipeID()));
-        statement.setString(2,recipe.getRecipeName());
-        statement.setString(3,Integer.toString(recipe.getIngredientID()));
-        statement.setString(4,Double.toString(recipe.getNonNetto()));
-        statement.setString(5,Double.toString(recipe.getTolerance()));
-
+        statement.setInt(1, recipe.getRecipeID());
+        statement.setString(2, recipe.getRecipeName());
+        statement.setInt(3, recipe.getIngredientID());
+        statement.setDouble(4, recipe.getNonNetto());
+        statement.setDouble(5, recipe.getTolerance());
 
         try {
             statement.executeUpdate();
@@ -49,6 +47,40 @@ public class RecipeDAO {
         } catch (Exception e) {
             e.printStackTrace();
             throw new IOException("Something went wrong with createRecipe()");
+        }
+    }
+
+    public void updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
+
+        String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
+        PreparedStatement statement = database.callableStatement(updateRecipe);
+
+        statement.setInt(1, recipe.getRecipeID());
+        statement.setString(2, recipe.getRecipeName());
+        statement.setInt(3, recipe.getIngredientID());
+        statement.setDouble(4, recipe.getNonNetto());
+        statement.setDouble(5, recipe.getTolerance());
+
+        try {
+            statement.executeUpdate();
+            System.out.println("Recipe successfully updated");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Recipe could no be updated");
+        }
+    }
+
+    public void deleteRecipe(int ID) throws IOException, SQLException {
+
+        String deleteRecipe = "{call DeleteRecipe(?)}";
+        PreparedStatement statement = database.callableStatement(deleteRecipe);
+        statement.setInt(1, ID);
+        try {
+            statement.executeUpdate();
+            System.out.println("Recipe successfully deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Recipe could no be deleted");
         }
     }
 
@@ -83,48 +115,18 @@ public class RecipeDAO {
         RecipeDTO recipe = new RecipeDTO();
         ResultSet resultSet = stmt.executeQuery();
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 getRecipeInfo(resultSet, recipe);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  recipe;
+        return recipe;
     }
 
-    public void deleteRecipe(int ID) throws IOException, SQLException {
 
-        String deleteRecipe = "{call DeleteRecipe(+"+ID+")}";
-        PreparedStatement statement = database.callableStatement(deleteRecipe);
-        statement.setInt(1, ID);
-        try {
-            statement.executeUpdate();
-            System.out.println("Recipe successfully deleted");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Recipe could no be deleted");
-        }
-    }
 
-    public void updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
-        String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
-        PreparedStatement statement = database.callableStatement(updateRecipe);
-
-        statement.setInt(1, recipe.getRecipeID());
-        statement.setString(2, recipe.getRecipeName());
-        statement.setInt(3, recipe.getIngredientID());
-        statement.setDouble(4,recipe.getNonNetto());
-        statement.setDouble(5,recipe.getTolerance());
-
-        try {
-            statement.executeUpdate();
-            System.out.println("Recipe successfully updated");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Recipe could no be updated");
-        }
-    }
 
 }
 

@@ -28,8 +28,7 @@ public class UserController {
         this.validation = new InputValidation();
     }
 
-    public static UserController getInstance()
-    {
+    public static UserController getInstance() {
         return instance;
     }
 
@@ -46,74 +45,49 @@ public class UserController {
         }
     }
 
-    public Response getAllUsers(UriInfo uriInfo) throws Exception {
-        if (uriInfo.getQueryParameters().isEmpty()) {
-            try {
-                return Response.ok(userDAO.getAllUsers()).build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.serverError().build();
-            }
-        } else {
-            try {
-                MultivaluedMap<String, String> params = uriInfo.getQueryParameters();
-                UserDTO user = userDAO.getUser(params.getFirst("userId"));
-                if (validation.userValidation(user, params.getFirst("role")))
-                    return Response.ok(user).build();
-                else
-                    return Response.status(400, "bruger har ikke adgang").build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Response.serverError().build();
-            }
+    public Response getAllUsers() throws Exception {
+        try {
+            return Response.ok(userDAO.getAllUsers()).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
         }
     }
 
-    public Response updateUser(UriInfo uriInfo) throws Exception {
-        if (uriInfo.getQueryParameters().keySet().size() == 1) {
-            return Response.ok(userDAO.getUser(uriInfo.getQueryParameters().getFirst("userId"))).build();
+    public Response updateUser(int userId, String firstName, String lastName, String initials, String role, String active) throws Exception {
+        if (firstName.equals("null") && lastName.equals("null") && initials.equals("null") && role.equals("null") && active.equals("null")) {
+            return Response.ok(userDAO.getUser(String.valueOf(userId))).build();
+        }
+
+        UserDTO user = new UserDTO(userId, firstName, lastName, initials, role, true);
+        if (!active.equals("null")) {
+            user.setActive(active);
+            user = userDAO.updateActivity(user);
+            return Response.ok(user).build();
+        }
+
+        if (validation.updateUserInputValidation(user)) {
+            try {
+                return Response.ok(userDAO.updateUser(user)).build();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Response.serverError().build();
+            }
         } else {
-            MultivaluedMap<String,String> params = uriInfo.getQueryParameters();
-            UserDTO user = new UserDTO();
+            return Response.status(418, "Bad input").build();
+        }
+    }
 
-            user.setUserId(Integer.parseInt(params.getFirst("userId")));
-
-            if (params.get("active") != null) {
-                user.setActive(params.getFirst("active"));
-                user = userDAO.updateActivity(user);
+    public Response getUser(String userId, String role) throws Exception {
+        try {
+            UserDTO user = userDAO.getUser(userId);
+            if (validation.userValidation(user, role))
                 return Response.ok(user).build();
-            }
-
-            if (params.get("firstName") == null)
-                user.setFirstName(null);
             else
-                user.setFirstName(params.getFirst("firstName"));
-
-            if (params.get("lastName") == null)
-                user.setLastName(null);
-            else
-                user.setLastName(params.getFirst("lastName"));
-
-            if (params.get("initials") == null)
-                user.setInitials(null);
-            else
-                user.setInitials(params.getFirst("initials"));
-
-            if (params.get("role") == null)
-                user.setRole(null);
-            else
-                user.setRole(params.getFirst("role"));
-
-            if (validation.updateUserInputValidation(user)) {
-                try {
-                    return Response.ok(userDAO.updateUser(user)).build();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return Response.serverError().build();
-                }
-            } else {
-                return Response.status(418, "Bad input").build();
-            }
+                return Response.status(400, "bruger har ikke adgang").build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
         }
     }
 }
