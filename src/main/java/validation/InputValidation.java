@@ -111,22 +111,22 @@ public class InputValidation {
         String initials = userDTO.getInitials();
         String role = userDTO.getRole();
 
-        if (firstName != null){
+        if (!firstName.equals("null")){
             if (firstName.length() < 2 || firstName.length() > 20)
                 return false;
         }
 
-        if (lastName != null){
+        if (!lastName.equals("null")){
             if (lastName.length() < 2 || lastName.length() > 20)
                 return false;
         }
 
-        if (initials != null) {
+        if (!initials.equals("null")) {
             if (initials.length() < 2 || initials.length() > 4)
                 return false;
         }
 
-        if (role != null){
+        if (!role.equals("null")){
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;

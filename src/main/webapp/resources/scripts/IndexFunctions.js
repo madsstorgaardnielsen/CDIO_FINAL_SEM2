@@ -12,7 +12,7 @@ function displayName() { //gets the information about the user from the backend
     var ID = $("#MID").val();
     var role = $("#MID").attr("data-role");
 
-    Agent.GET('rest/user?userId=' + ID + '&role=' + role, function (data) {
+    Agent.GET('rest/user/' + ID + '/' + role + "/", function (data) {
         $("#header").text("Velkommen");
         $("#container").html(
             '<form action="'+ data.role +'.html">' +
