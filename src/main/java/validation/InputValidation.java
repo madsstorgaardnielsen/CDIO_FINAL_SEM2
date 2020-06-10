@@ -49,18 +49,18 @@ public class InputValidation {
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         double amount = ingredientBatchDTO.getAmount();
-        int decimalLength = (df.format(amount).length() - 1);
+        int decimalLength = df.format(amount).length()-2;
 
         if (batchId < 1 || batchId > 99999999) {
             return false;
-        } else if (ingredientId <= 1 || ingredientId >= 99999999) {
+        } else if (ingredientId < 1 || ingredientId > 99999999) {
             return false;
-        } else return decimalLength == 4;
+        } else if (decimalLength != 4) {
+            return false;
+        }
+        return true;
     }
 
-/*    public boolean recipeInputValidation(RecipeDTO recipeDTO) {
-
-    }*/
 
     public boolean addUserInputValidation(UserDTO userDTO) {
         String firstName = userDTO.getFirstName();
@@ -77,6 +77,7 @@ public class InputValidation {
         } else
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
     }
+
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
         int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
@@ -111,12 +112,12 @@ public class InputValidation {
         String initials = userDTO.getInitials();
         String role = userDTO.getRole();
 
-        if (!firstName.equals("null")){
+        if (!firstName.equals("null")) {
             if (firstName.length() < 2 || firstName.length() > 20)
                 return false;
         }
 
-        if (!lastName.equals("null")){
+        if (!lastName.equals("null")) {
             if (lastName.length() < 2 || lastName.length() > 20)
                 return false;
         }
@@ -126,7 +127,7 @@ public class InputValidation {
                 return false;
         }
 
-        if (!role.equals("null")){
+        if (!role.equals("null")) {
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;
