@@ -42,7 +42,6 @@ public class UserDAO {
         statement.setString(4,user.getRole());
         statement.setString(5,String.valueOf(user.isActive()? 1 : 0));
 
-
         try {
             statement.executeUpdate();
             System.out.println("User successfully added to database");

@@ -77,7 +77,10 @@ public class InputValidation {
         } else
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
     }
+
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
+        final int MIN_ID_VALUE = 1;
+        final int MAX_ID_VALUE = 99999999;
         int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
         int status = productBatchDTO.getStatus();
@@ -90,15 +93,15 @@ public class InputValidation {
         int taraDecimalLength = (df.format(tara).length() - 1);
         int nettoDecimalLength = (df.format(netto).length() - 1);
 
-        if (productBatchId < 1 || productBatchId > 99999999) {
+        if (productBatchId < MIN_ID_VALUE || productBatchId > MAX_ID_VALUE) {
             return false;
-        } else if (recipeId < 1 || recipeId > 99999999) {
+        } else if (recipeId < MIN_ID_VALUE || recipeId > MAX_ID_VALUE) {
             return false;
         } else if (status < 1 || status > 3) {
             return false;
-        } else if (userId < 1 || userId > 99999999) {
+        } else if (userId < MIN_ID_VALUE || userId > MAX_ID_VALUE) {
             return false;
-        } else if (ingredientBatchId < 1 || ingredientBatchId > 99999999) {
+        } else if (ingredientBatchId < MIN_ID_VALUE || ingredientBatchId > MAX_ID_VALUE) {
             return false;
         } else if (taraDecimalLength != 4) {
             return false;
@@ -111,12 +114,12 @@ public class InputValidation {
         String initials = userDTO.getInitials();
         String role = userDTO.getRole();
 
-        if (firstName != null){
+        if (firstName != null) {
             if (firstName.length() < 2 || firstName.length() > 20)
                 return false;
         }
 
-        if (lastName != null){
+        if (lastName != null) {
             if (lastName.length() < 2 || lastName.length() > 20)
                 return false;
         }
@@ -126,7 +129,7 @@ public class InputValidation {
                 return false;
         }
 
-        if (role != null){
+        if (role != null) {
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;
