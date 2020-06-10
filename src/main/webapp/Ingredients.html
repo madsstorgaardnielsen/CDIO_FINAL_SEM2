@@ -3,42 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Farmaceut</title>
-    <link rel="stylesheet" type="text/css" href="../resources/Styles.css">
+    <link rel="stylesheet" type="text/css" href="resources/styling/Styles.css">
 </head>
 <body>
-<div id="menu">
-
-    <a href="index.html">Tilbage til index</a>
+<!--navigation bar-->
+<div class="navbar">
+    <a class="homebtn" href="index.html">
+        <img class="home" src="https://storage.cloud.google.com/sukkeregernimages/home.png?authuser=1" alt="index">
+    </a>
+    <a class="shortcut" href="Admin.html">
+        <p class="text">Admin</p>
+    </a>
 </div>
 
 <div>
-    <h2>IngredientsBatch</h2>
+
     <table class="lefttable">
         <tr>
-            <th>Batch ID</th>
-            <th>Mængde</th>
+            <th>Nr.</th>
+            <th>Navn</th>
         </tr>
         <tr>
             <td><input type = number id = "id"></td>
-            <td><input type = number id = "amount"></td>
-
+            <td><input type = text id = "name"></td>
         </tr>
     </table>
     <button id = "confirmbutton">Opret</button>
 </div>
 
-<h2>Ingredient Batch administration</h2>
+<h2>Råvareadministration</h2>
 
 <div>
     <table border = "1" class="lefttable" id = "ingredientTable">
         <thead>
         <tr>
-            <th>Ingredients Batch ID</th>
-            <th>Råvare ID</th>
-            <th>Mængde</th>
-
+            <th>Nr.</th>
+            <th>Navn</th>
+            <th>Rette?</th>
         </tr>
         </thead>
+
+
         <tbody id = "ingredientTableBody">
 
         </tbody>

@@ -130,3 +130,24 @@ tr:nth-child(even) {
     text-decoration-line: none;
     text-decoration-style: unset;
 }
+
+
+#confirmbutton {
+    width: 10%;
+    padding: 5px 10px;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: black;
+    background-color: lawngreen;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    margin: auto auto 10px auto;
+    display: inline-block;
+    box-sizing: border-box;
+}
+#confirmbutton:hover {
+    background-color: red;
+}
+
