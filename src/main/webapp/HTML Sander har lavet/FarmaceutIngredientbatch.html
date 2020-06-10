@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Farmaceut</title>
+    <link rel="stylesheet" type="text/css" href="../resources/Styles.css">
+</head>
+<body>
+<div id="menu">
+
+    <a href="index.html">Tilbage til index</a>
+</div>
+
+<div>
+    <h2>IngredientsBatch</h2>
+    <table class="lefttable">
+        <tr>
+            <th>Batch ID</th>
+            <th>Mængde</th>
+        </tr>
+        <tr>
+            <td><input type = number id = "id"></td>
+            <td><input type = number id = "amount"></td>
+
+        </tr>
+    </table>
+    <button id = "confirmbutton">Opret</button>
+</div>
+
+<h2>Ingredient Batch administration</h2>
+
+<div>
+    <table border = "1" class="lefttable" id = "ingredientTable">
+        <thead>
+        <tr>
+            <th>Ingredients Batch ID</th>
+            <th>Råvare ID</th>
+            <th>Mængde</th>
+
+        </tr>
+        </thead>
+        <tbody id = "ingredientTableBody">
+
+        </tbody>
+    </table>
+</div>
+<script src="resources/AdminFunctions.js"></script>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</body>
+</html>
