@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//TODO implement inputvalidation class
 public class UserDAO {
     private static UserDAO instance;
     static {
