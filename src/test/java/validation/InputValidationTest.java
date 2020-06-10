@@ -108,4 +108,18 @@ class InputValidationTest {
         pbcd.setNetto(-4.333);
         iv.productBatchInputValidation(pbd);
     }
+
+    @Test
+    void recipeInputValidation() {
+        InputValidation iv = new InputValidation();
+        RecipeDTO rp = new RecipeDTO();
+
+        rp.setRecipeID(5000);
+        rp.setRecipeName("skateboard");
+        rp.setIngredientID(8);
+        rp.setNonNetto(6.0);
+        rp.setTolerance(7.0);
+
+        iv.recipeInputValidation(rp);
+    }
 }
