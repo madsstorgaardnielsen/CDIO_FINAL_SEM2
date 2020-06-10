@@ -4,6 +4,15 @@ public class IngredientBatchDTO {
     int ingredientBatchId;
     int ingredientId;
     double amount;
+    String supplier;
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
 
     public int getIngredientBatchId() {
         return ingredientBatchId;

@@ -36,11 +36,12 @@ public class IngredientBatchDAO {
 
     public void addIngredientBatch(IngredientBatchDTO ingredientBatch) throws SQLException, IOException {
 
-        String addIngredientBatch = "{call AddIngredientBatch(?,?,?)}";
+        String addIngredientBatch = "{call AddIngredientBatch(?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(addIngredientBatch);
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
         statement.setInt(2, ingredientBatch.getIngredientId());
         statement.setDouble(3, ingredientBatch.getAmount());
+        statement.setString(4,ingredientBatch.getSupplier());
 
         try {
             statement.executeUpdate();
@@ -53,12 +54,11 @@ public class IngredientBatchDAO {
 
     public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws IOException, SQLException {
 
-        String updateIngredientBatch = "{call UpdateIngredient(?,?,?)}";
+        String updateIngredientBatch = "{call UpdateIngredientBatch(?,?)}";
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setInt(2, ingredientBatch.getIngredientId());
-        statement.setDouble(3, ingredientBatch.getAmount());
+        statement.setDouble(2, ingredientBatch.getAmount());
 
         try {
             statement.executeUpdate();
