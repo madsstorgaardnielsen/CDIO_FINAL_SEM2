@@ -61,6 +61,23 @@ public class InputValidation {
         return true;
     }
 
+    public boolean recipeInputValidation(RecipeDTO recipeDTO) {
+        int ID = recipeDTO.getRecipeID();
+        String recipeName = recipeDTO.getRecipeName();
+        double nonNetto = recipeDTO.getNonNetto();
+        double tolerance = recipeDTO.getTolerance();
+
+        if (ID < 1 || ID > 99999999){
+            return false;
+        }
+        else if (recipeName.length() < 2 || recipeName.length() > 20){
+            return false;
+        }
+        else if (nonNetto < 0.05 || nonNetto > 20.0){
+            return false;
+        }
+        else return tolerance < 0.1 || tolerance > 10.0;
+    }
 
     public boolean addUserInputValidation(UserDTO userDTO) {
         String firstName = userDTO.getFirstName();
@@ -77,7 +94,6 @@ public class InputValidation {
         } else
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
     }
-
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
         int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
@@ -112,12 +128,12 @@ public class InputValidation {
         String initials = userDTO.getInitials();
         String role = userDTO.getRole();
 
-        if (!firstName.equals("null")) {
+        if (!firstName.equals("null")){
             if (firstName.length() < 2 || firstName.length() > 20)
                 return false;
         }
 
-        if (!lastName.equals("null")) {
+        if (!lastName.equals("null")){
             if (lastName.length() < 2 || lastName.length() > 20)
                 return false;
         }
@@ -127,7 +143,7 @@ public class InputValidation {
                 return false;
         }
 
-        if (!role.equals("null")) {
+        if (!role.equals("null")){
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;
