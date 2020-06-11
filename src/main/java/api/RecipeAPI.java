@@ -22,11 +22,11 @@ public class RecipeAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateRecipe(@QueryParam("ID") int ID,
-                               @DefaultValue(null) @QueryParam("recipeID") int recipeID,
+                               @DefaultValue("0") @QueryParam("recipeID") int recipeID,
                                @DefaultValue("null") @QueryParam("recipeName") String recipeName,
-                               @DefaultValue("null") @QueryParam("ingredientID") int ingredientID,
-                               @DefaultValue("null") @QueryParam("nonNetto") double nonNetto,
-                               @DefaultValue(null) @QueryParam("tolerance") double tolerance) throws Exception {
+                               @DefaultValue("0") @QueryParam("ingredientID") int ingredientID,
+                               @DefaultValue("0") @QueryParam("nonNetto") double nonNetto,
+                               @DefaultValue("0") @QueryParam("tolerance") double tolerance) throws Exception {
         return RecipeController.getInstance().updateRecipe(recipeID, recipeName, ingredientID, nonNetto, tolerance);
     }
 
