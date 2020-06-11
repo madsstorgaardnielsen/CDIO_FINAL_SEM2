@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Farmaceut</title>
     <link rel="stylesheet" type="text/css" href="resources/styling/Styles.css">
 </head>
+<script src="resources/AdminFunctions.js"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
 
@@ -15,26 +16,29 @@
 <!-- -->
 
 <body>
+<!--navigation bar-->
 <div class="navbar">
     <a class="homebtn" href="index.html">
         <img class="home" src="https://storage.cloud.google.com/sukkeregernimages/home.png?authuser=1" alt="index">
     </a>
+    <a class="shortcut" href="Admin.html">
+        <p class="text">Admin</p>
+    </a>
 </div>
-<br>
 <h1 class="header" id="header">Choose what you are working with</h1>
 <div class="cont" id="container">
 
-    <form action="HTML%20Sander%20har%20lavet/FarmaceutIngredients.html">
-        <button class="btn">ingredients</button>
+    <form action="Ingredients.html">
+        <button class="btn">Vis, Opret og rediger råvare</button>
     </form>
-    <form action="HTML%20Sander%20har%20lavet/FarmaceutRecipe.html">
-        <button class="btn">Recipes</button>
+    <form action="Recipe.html">
+        <button class="btn">Vis, Opret og rediger recepter</button>
     </form>
-    <form action="HTML%20Sander%20har%20lavet/FarmaceutIngredientbatch.html">
-        <button class="btn">Ingredient batch</button>
+    <form action="Ingredientbatch.html">
+        <button class="btn">Vis, Opret og rediger råvare batch</button>
     </form>
-    <form action="HTML%20Sander%20har%20lavet/FarmaceutProductbatch.html">
-        <button class="btn">Product batch</button>
+    <form action="Productbatch.html">
+        <button class="btn">Vis, Opret og rediger Produkt batch</button>
     </form>
  </div>
 
