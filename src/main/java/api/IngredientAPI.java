@@ -32,13 +32,15 @@ public class IngredientAPI {
     }
 
 
+/*
+    Virker ikke for some reason
     @POST
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteIngredient(@PathParam("id") int id) throws Exception {
         IngredientDAO.getInstance().deleteIngredient(id);
         return Response.ok().build();
-    }
+    }*/
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

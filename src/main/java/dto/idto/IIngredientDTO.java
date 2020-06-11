@@ -12,7 +12,4 @@ public interface IIngredientDTO extends Serializable {
 
     void setIngredientName(String ingredientName);
 
-    String getSupplier() ;
-
-    void setIngredientSupplier(String supplier) ;
 }

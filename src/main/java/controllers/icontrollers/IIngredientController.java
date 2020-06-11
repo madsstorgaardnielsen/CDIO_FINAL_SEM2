@@ -20,9 +20,9 @@ public interface IIngredientController {
 
     public void deleteIngredient(int id);
 
-    public void addIngredient(int id, String name, String supplier);
+    public void addIngredient(int id, String name);
 
-    public void updateIngredient(int id, String name, String supplier);
+    public void updateIngredient(int id, String name);
 
     public ArrayList<IngredientDTO> getAllIngredients() throws Exception ;
 

@@ -24,23 +24,17 @@ public class IngredientDTO implements IIngredientDTO {
         this.ingredientName = ingredientName;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
 
-    public void setIngredientSupplier(String supplier) {
-        this.supplier = supplier;
-    }
+
 
     String ingredientName;
 
-    public IngredientDTO(int ingredientID, String ingredientName, String supplier) {
+    public IngredientDTO(int ingredientID, String ingredientName) {
         this.ingredientID = ingredientID;
         this.ingredientName = ingredientName;
-        this.supplier = supplier;
     }
 
-    String supplier;
+
 }
 
 

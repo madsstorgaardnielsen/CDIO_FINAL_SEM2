@@ -42,8 +42,8 @@ public class IngredientController implements IIngredientController {
         }
     }
 
-    public void addIngredient(int id, String name, String supplier) {
-        ingredientDTO = new IngredientDTO(id, name, supplier);
+    public void addIngredient(int id, String name) {
+        ingredientDTO = new IngredientDTO(id, name);
         try {
             ingredientDAO.addIngredient(ingredientDTO);
         } catch (SQLException | IOException throwables) {
@@ -51,8 +51,8 @@ public class IngredientController implements IIngredientController {
         }
     }
 
-    public void updateIngredient(int id, String name, String supplier) {
-        ingredientDTO = new IngredientDTO(id, name, supplier);
+    public void updateIngredient(int id, String name) {
+        ingredientDTO = new IngredientDTO(id, name);
 
         try {
             ingredientDAO.updateIngredient(ingredientDTO);
