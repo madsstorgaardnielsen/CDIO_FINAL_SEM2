@@ -18,11 +18,11 @@ public class ProductBatchAPI {
         return Response.ok().build(); ////ProductBatchController.getInstance().getProductBatch(batchId)
     }
 
-    @Path("/afvejning/{batchID}/")
+    @Path("/afvejning/recipe/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeName(@PathParam("batchID") int batchId) {
-        return Response.ok(batchId).build(); //ProductBatchController.getInstance().getRecipeName(batchId);
+        return Response.ok().build(); //ProductBatchController.getInstance().getRecipeName(batchId);
     }
 
     @Path("/afvejning/{batchID}/")
@@ -30,5 +30,12 @@ public class ProductBatchAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response setStatus(@PathParam("batchID") int batchId) {
         return Response.ok().build(); //ProductBatchController.getInstance().setStatus();
+    }
+
+    @Path("/afvejning/getproductbatchcomponent/{batchID}/")
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) {
+        return Response.ok().build(); //ProductBatchController.getInstance().getNextComponent(batchId);
     }
 }

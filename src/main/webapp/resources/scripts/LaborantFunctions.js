@@ -11,7 +11,7 @@ function getPID() {
 function getRecipeName() {
     var ID = $("#pID").val();
 
-    Agent.GET("rest/productBatch/afvejning/" + ID, function (data) {
+    Agent.GET("rest/productBatch/recipe/afvejning/" + ID, function (data) {
         $("#header").text("Recept navn");
         $("#container").html('' +
             '<form action="javascript:setStatus('+ ID +')">' +
