@@ -1,6 +1,8 @@
 package dto;
 
-public class IngredientDTO {
+import dto.idto.IIngredientDTO;
+
+public class IngredientDTO implements IIngredientDTO {
     int ingredientID;
 
     public IngredientDTO() {

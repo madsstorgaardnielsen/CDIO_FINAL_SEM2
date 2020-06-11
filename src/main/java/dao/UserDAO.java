@@ -1,5 +1,6 @@
 package dao;
 
+import dao.idao.IUserDAO;
 import db.DBConnection;
 import dto.UserDTO;
 

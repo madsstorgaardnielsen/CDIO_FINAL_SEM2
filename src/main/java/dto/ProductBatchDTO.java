@@ -1,6 +1,8 @@
 package dto;
 
-public class ProductBatchDTO {
+import dto.idto.IProductBatchDTO;
+
+public class ProductBatchDTO implements IProductBatchDTO {
     int productBatchId;
     int recipeId;
     int status;

@@ -1,6 +1,7 @@
 package controllers;
 
-import dao.IUserDAO;
+import controllers.icontrollers.IUserController;
+import dao.idao.IUserDAO;
 import dao.UserDAO;
 import dto.UserDTO;
 import validation.InputValidation;

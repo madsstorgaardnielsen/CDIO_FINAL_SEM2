@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.icontrollers.IRecipeController;
 import dao.RecipeDAO;
 import dto.RecipeDTO;
 import validation.InputValidation;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RecipeController {
+public class RecipeController implements IRecipeController {
     private static RecipeController instance;
 
     static {
