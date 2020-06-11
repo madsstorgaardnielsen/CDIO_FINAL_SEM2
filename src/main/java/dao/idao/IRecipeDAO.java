@@ -19,7 +19,7 @@ public interface IRecipeDAO {
 
     void addRecipe(RecipeDTO recipe) throws IOException, SQLException;
 
-    void updateRecipe(RecipeDTO recipe) throws IOException, SQLException;
+    RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException;
 
     void deleteRecipe(int ID) throws IOException, SQLException;
 

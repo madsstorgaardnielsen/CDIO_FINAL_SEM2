@@ -1,6 +1,7 @@
 package controllers.icontrollers;
 
 import controllers.RecipeController;
+import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 
 import javax.ws.rs.core.Response;
@@ -15,7 +16,7 @@ public interface IRecipeController {
 
     public Response addRecipe(RecipeDTO recipeDTO) ;
 
-    public Response updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) ;
+    public Response updateRecipe(int recipeID, String recipeName);
 
     public Response getAllRecipes() throws Exception ;
 

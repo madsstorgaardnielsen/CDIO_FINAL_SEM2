@@ -2,6 +2,7 @@ package controllers;
 
 import controllers.icontrollers.IRecipeController;
 import dao.RecipeDAO;
+import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 import validation.InputValidation;
 
@@ -60,8 +61,8 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance){
-        RecipeDTO recipeDTO = new RecipeDTO(recipeID, recipeName, ingredientID, nonNetto, tolerance);
+    public Response updateRecipe(int recipeID, String recipeName){
+        RecipeDTO recipeDTO = new RecipeDTO(recipeID, recipeName);
         if (validation.recipeInputValidation(recipeDTO)) {
             try {
                 return Response.ok(RecipeDAO.updateRecipe(recipeDTO)).build();
