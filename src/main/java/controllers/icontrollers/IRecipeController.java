@@ -3,6 +3,7 @@ package controllers.icontrollers;
 import controllers.RecipeController;
 import dto.RecipeDTO;
 
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 public interface IRecipeController {
@@ -10,13 +11,13 @@ public interface IRecipeController {
         return null;
     }
 
-    public void deleteRecipe(int ID);
+    public Response deleteRecipe(int ID);
 
-    public void addRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) ;
+    public Response addRecipe(RecipeDTO recipeDTO) ;
 
-    public void updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) ;
+    public Response updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance) ;
 
-    public ArrayList<RecipeDTO> getAllRecipes() throws Exception ;
+    public Response getAllRecipes() throws Exception ;
 
-    public RecipeDTO getRecipe(int ID) throws Exception ;
+    public Response getRecipe(int ID) throws Exception ;
 }

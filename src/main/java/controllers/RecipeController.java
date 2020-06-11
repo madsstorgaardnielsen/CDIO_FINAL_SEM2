@@ -36,7 +36,7 @@ public class RecipeController implements IRecipeController {
         return instance;
     }
 
-    public Response deleteRecipe(int ID) throws Exception{
+    public Response deleteRecipe(int ID){
             try {
                 RecipeDAO.deleteRecipe(ID);
                 return Response.ok().build();
@@ -46,7 +46,7 @@ public class RecipeController implements IRecipeController {
     }
 
 
-    public Response addRecipe(RecipeDTO recipeDTO) throws Exception{
+    public Response addRecipe(RecipeDTO recipeDTO){
         if(validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipe(RecipeDTO);
@@ -60,8 +60,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance)
-        throws Exception{
+    public Response updateRecipe(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance){
         RecipeDTO recipeDTO = new RecipeDTO(recipeID, recipeName, ingredientID, nonNetto, tolerance);
         if (validation.recipeInputValidation(recipeDTO)) {
             try {
