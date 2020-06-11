@@ -1,8 +1,6 @@
 package dto;
 
-import java.io.Serializable;
-
-public class UserDTO implements Serializable {
+public class UserDTO implements IUserDTO {
     public UserDTO(int userId, String firstName, String lastName, String initials, String role, boolean active) {
         this.userId = userId;
         this.firstName = firstName;
@@ -23,54 +21,67 @@ public class UserDTO implements Serializable {
     private boolean active;
     private static final long serialVersionUID = 4545864587995944260L;
 
+    @Override
     public String toString() {
         return userId+" "+firstName+" "+lastName;
     }
 
+    @Override
     public int getUserId() {
         return userId;
     }
 
+    @Override
     public void setUserId(int userId) {
         this.userId = userId;
     }
 
+    @Override
     public String getFirstName() {
         return firstName;
     }
 
+    @Override
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    @Override
     public String getLastName() {
         return lastName;
     }
 
+    @Override
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    @Override
     public String getInitials() {
         return initials;
     }
 
+    @Override
     public void setInitials(String initials) {
         this.initials = initials;
     }
 
+    @Override
     public String getRole() {
         return role;
     }
 
+    @Override
     public void setRole(String role) {
         this.role = role;
     }
 
+    @Override
     public void setActive(boolean active){
         this.active = active;
     }
 
+    @Override
     public void setActive(String active) throws Exception {
         if (active.equals("true"))
             this.active = true;
@@ -82,6 +93,7 @@ public class UserDTO implements Serializable {
         }
     }
 
+    @Override
     public boolean isActive() {
         return active;
     }

@@ -1,19 +1,18 @@
 package controllers;
 
+import dao.IUserDAO;
 import dao.UserDAO;
 import dto.UserDTO;
 import validation.InputValidation;
 
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 import java.sql.SQLException;
 
 
-public class UserController {
+public class UserController implements IUserController {
     private final InputValidation validation;
-    private final UserDAO userDAO;
-    private static UserController instance;
+    private final IUserDAO userDAO;
+    private static IUserController instance;
 
     static {
         try {
@@ -28,10 +27,11 @@ public class UserController {
         this.validation = new InputValidation();
     }
 
-    public static UserController getInstance() {
+    public static IUserController getInstance() {
         return instance;
     }
 
+    @Override
     public Response addUser(UserDTO userDTO) throws Exception {
         if (validation.addUserInputValidation(userDTO)) {
             try {
@@ -45,6 +45,7 @@ public class UserController {
         }
     }
 
+    @Override
     public Response getAllUsers() throws Exception {
         try {
             return Response.ok(userDAO.getAllUsers()).build();
@@ -54,6 +55,7 @@ public class UserController {
         }
     }
 
+    @Override
     public Response updateUser(int userId, String firstName, String lastName, String initials, String role, String active) throws Exception {
         if (firstName.equals("null") && lastName.equals("null") && initials.equals("null") && role.equals("null") && active.equals("null")) {
             return Response.ok(userDAO.getUser(String.valueOf(userId))).build();
@@ -78,6 +80,7 @@ public class UserController {
         }
     }
 
+    @Override
     public Response getUser(String userId, String role) throws Exception {
         try {
             UserDTO user = userDAO.getUser(userId);
