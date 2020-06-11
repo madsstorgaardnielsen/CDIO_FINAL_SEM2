@@ -1,7 +1,7 @@
 package controllers;
 
+import controllers.icontrollers.IIngredientController;
 import dao.IngredientDAO;
-import dao.UserDAO;
 import dto.IngredientDTO;
 import validation.InputValidation;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IngredientController {
+public class IngredientController implements IIngredientController {
     private static IngredientController instance;
 
     static {

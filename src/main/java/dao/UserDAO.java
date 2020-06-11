@@ -1,5 +1,6 @@
 package dao;
 
+import dao.idao.IUserDAO;
 import db.DBConnection;
 import dto.UserDTO;
 
@@ -10,8 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserDAO {
-    private static UserDAO instance;
+public class UserDAO implements IUserDAO {
+    private static IUserDAO instance;
     static {
         try {
             instance = new UserDAO();
@@ -20,17 +21,17 @@ public class UserDAO {
         }
     }
 
-    PreparedStatement statement;
     private DBConnection database;
 
     public UserDAO() throws SQLException {
         database = new DBConnection();
     }
 
-    public static UserDAO getInstance() {
+    public static IUserDAO getInstance() {
         return instance;
     }
 
+    @Override
     public void addUser(UserDTO user) throws IOException, SQLException {
 
         String addUser = "{call addUser(?,?,?,?,?)}";
@@ -51,6 +52,7 @@ public class UserDAO {
         }
     }
 
+    @Override
     public ArrayList<UserDTO> getAllUsers() throws Exception {
         ArrayList<UserDTO> userList = new ArrayList<>();
         CallableStatement stmt = database.callableStatement("{call GetAllUsers}");
@@ -77,6 +79,7 @@ public class UserDAO {
         userDTO.setActive(rs.getBoolean(6));
     }
 
+    @Override
     public UserDTO getUser(String ID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetUser(?)}");
         stmt.setString(1, ID);
@@ -92,6 +95,7 @@ public class UserDAO {
         return  user;
     }
 
+    @Override
     public UserDTO updateUser(UserDTO user) throws Exception{
         CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?)}");
 
@@ -113,6 +117,7 @@ public class UserDAO {
         return  user;
     }
 
+    @Override
     public UserDTO updateActivity(UserDTO user) throws Exception {
         CallableStatement stmt = database.callableStatement("{call UpdateActivity(?,?)}");
 
