@@ -51,7 +51,7 @@ public class RecipeDAO implements IRecipeDAO {
         }
     }
 
-    public void updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
+    public RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
         String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(updateRecipe);
@@ -69,6 +69,7 @@ public class RecipeDAO implements IRecipeDAO {
             e.printStackTrace();
             throw new IOException("Recipe could no be updated");
         }
+        return recipe;
     }
 
     public void deleteRecipe(int ID) throws IOException, SQLException {
