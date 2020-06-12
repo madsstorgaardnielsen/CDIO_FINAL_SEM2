@@ -11,6 +11,13 @@ import javax.ws.rs.core.UriInfo;
 
 @Path("productBatchComponent")
 public class ProductBatchComponentAPI {
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateBatchComponent(ProductBatchComponentDTO batchComponent){
+        return Response.ok().build(); //ProductBatchComponentController.getInstance().updateBatchComponent(batchComponent);
+    }
+
     @Path("/{ID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -19,10 +26,16 @@ public class ProductBatchComponentAPI {
     }
 
     @Path("/{ID}/{tara}/")
-    @PUT
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response setTara(@PathParam("ID") int ID, @PathParam("tara") int tara) {
-        return Response.ok().build(); //ProductBatchComponentController.getInstance().setTara(ID, tara);
+    public Response validateTara(@PathParam("ID") int ID, @PathParam("tara") double tara) {
+        return Response.ok().build(); //ProductBatchComponentController.getInstance().validateTara(ID, tara);
     }
 
+    @Path("/validateBatch/{ID}/{ingredientBatchID}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) {
+        return Response.ok().build(); //ProductBatchComponent.Controller.getInstance().validateIngredientBatch(ID, batchID);
+    }
 }

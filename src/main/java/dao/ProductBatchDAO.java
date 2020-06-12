@@ -48,4 +48,34 @@ public class ProductBatchDAO {
             throw new IOException("Something went wrong with addProductBatch()");
         }
     }
+
+    public ProductBatchDTO getProductBatch(int batchID) {
+        try {
+            PreparedStatement statement = database.callableStatement("{call GetProductBatch(?)}");
+            statement.setString(1, String.valueOf(batchID));
+            ProductBatchDTO batch = new ProductBatchDTO();
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                getBatchInfo(rs, batch);
+            }
+            return batch;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ProductBatchDTO();
+    }
+
+    private void getBatchInfo(ResultSet rs, ProductBatchDTO batch) throws Exception {
+        batch.setProductBatchId(rs.getInt(1));
+        batch.setRecipeId(rs.getInt(2));
+        batch.setStatus(rs.getInt(3));
+        batch.setUserId(rs.getInt(4));
+        batch.setCreationDate(rs.getDate(5).toString());
+
+        try {
+            batch.setFinishDate(rs.getDate(6).toString());
+        } catch (NullPointerException ignored) {
+
+        }
+    }
 }

@@ -3,31 +3,34 @@ package dto;
 import dto.idto.IProductBatchComponentDTO;
 
 public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
-    int id;
-    int productBatchID;
-    int ingredientBatchID;
-    String ingredientName;
-    double amount;
-    double tolerance;
-    int laborantID;
-    double tara;
-    double netto;
-    double brutto;
-    int terminal;
-    int del;
+    private int id;
+    private int productBatchID;
+    private int ingredientBatchID; //
+    private String ingredientName;
+    private double amount;
+    private double tolerance;
+    private int laborantID; //
+    private double tara; //
+    private double netto;
+    private double brutto; //
+    private int terminal; //
 
     public ProductBatchComponentDTO() {
     }
 
-    public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID,
-                                    int laborantID, double tara, double netto,double brutto, int terminal) {
+    public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID, String ingredientName, int amount, int tolerance
+                                    ,int laborantID, double tara, double netto,double brutto, int terminal) {
         this.id = id;
         this.productBatchID = productBatchID;
         this.ingredientBatchID = ingredientBatchID;
         this.laborantID = laborantID;
         this.tara = tara;
         this.netto = netto;
+        this.brutto = brutto;
         this.terminal = terminal;
+        this.ingredientName = ingredientName;
+        this.tolerance = tolerance;
+        this.amount = amount;
     }
 
     public int getTerminal() {
@@ -86,4 +89,35 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
         this.netto = netto;
     }
 
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getTolerance() {
+        return tolerance;
+    }
+
+    public double getBrutto() {
+        return brutto;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setTolerance(double tolerance) {
+        this.tolerance = tolerance;
+    }
+
+    public void setBrutto(double brutto) {
+        this.brutto = brutto;
+    }
 }

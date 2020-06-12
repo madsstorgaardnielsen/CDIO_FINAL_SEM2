@@ -46,5 +46,11 @@ public class ProductBatchController {
         }
     }
 
-
+    public Response getProductBatch(int batchID) throws Exception{
+        try {
+            return Response.ok(ProductBatchDAO.getInstance().getProductBatch(batchID)).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
 }

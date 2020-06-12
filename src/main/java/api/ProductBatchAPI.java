@@ -9,26 +9,27 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("productbatch")
+@Path("productBatch")
 public class ProductBatchAPI {
-    @Path("/add/{recipeID}/{userID}")
+
+    @Path("/{batchID}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getProductBatch(@PathParam("batchID") int batchID) throws Exception {
+        return ProductBatchController.getInstance().getProductBatch(batchID);
+    }
+
+    @Path("/{recipeID}/{userID}/")
     @POST
     public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID) throws Exception {
         return ProductBatchController.getInstance().addProductBatch(recipeID,userID);
     }
 
-    @Path("/afvejning/{batchID}")
+    @Path("/afvejning/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBatch(@PathParam("batchID") int batchId){
         return Response.ok().build(); ////ProductBatchController.getInstance().getProductBatch(batchId)
-    }
-
-    @Path("/afvejning/recipe/{batchID}/")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeName(@PathParam("batchID") int batchId) {
-        return Response.ok().build(); //ProductBatchController.getInstance().getRecipeName(batchId);
     }
 
     @Path("/afvejning/{batchID}/")
