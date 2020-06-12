@@ -6,6 +6,7 @@ import dto.ProductBatchDTO;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProductBatchDAO {
@@ -29,7 +30,7 @@ public class ProductBatchDAO {
         return instance;
     }
 
-    public void addProductBatch(int recipeID, int userID) throws SQLException, IOException {
+    public int addProductBatch(int recipeID, int userID) throws SQLException, IOException {
         String addProductBatchString = "{call AddProductBatch(?,?)}";
         PreparedStatement statement = database.callableStatement(addProductBatchString);
 
@@ -37,8 +38,11 @@ public class ProductBatchDAO {
         statement.setInt(2,userID);
 
         try {
-            statement.executeUpdate();
+            //adding batch while getting the new ID back
+            ResultSet rs = statement.executeQuery();
             System.out.println("ProductBatch successfully added to database");
+            rs.next();
+            return rs.getInt(1);
         } catch (Exception e) {
             e.printStackTrace();
             throw new IOException("Something went wrong with addProductBatch()");

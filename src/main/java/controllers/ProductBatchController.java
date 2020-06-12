@@ -1,10 +1,12 @@
 package controllers;
 
+import dao.ProductBatchComponentDAO;
 import dao.ProductBatchDAO;
 import dao.RecipeDAO;
 import dao.UserDAO;
 import db.DBConnection;
 import dto.ProductBatchDTO;
+import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 import validation.InputValidation;
 
@@ -34,7 +36,10 @@ public class ProductBatchController {
 
     public Response addProductBatch(int recipeID, int userID) throws Exception {
         try {
-            productBatchDAO.addProductBatch(recipeID, userID);
+            //add batch and get recipe and new batch id to make components.
+            int newBatchID = productBatchDAO.addProductBatch(recipeID, userID);
+            ProductBatchComponentDAO.getInstance().addComponentsByRecipe(RecipeDAO.getInstance().getRecipe(recipeID),newBatchID); ;
+
             return Response.ok().build();
         } catch (Exception e) {
             return Response.serverError().build();
