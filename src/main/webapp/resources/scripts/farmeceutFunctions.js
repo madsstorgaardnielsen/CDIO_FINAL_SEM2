@@ -2,8 +2,11 @@ function addRecipeForm() { //gets recipe
     $("#header").text("Indtast Recipe ID");
     $("#container").html(
         '<form action="javascript:addRecipe()">' +
-        '<input type="text" placeholder="Recipe ID" id="Recipe ID">' +
+        '<input type="text" placeholder="Recipe ID" id="RecipeID">' +
         '<input type="text" placeholder="Recipe Name" id="recipeName">' +
+        '<input type="text" placeholder="ingrediantID" id="ingrediantID">' +
+        '<input type="text" placeholder="Recipe Name" id="nonNetto">' +
+        '<input type="text" placeholder="Recipe ID" id="tolerance">' +
         '</select> <br>' +
         '<button class="btn">Opret</button>' +
         '</form>'
@@ -12,15 +15,18 @@ function addRecipeForm() { //gets recipe
 
 function addRecipe() { //adds the new recipe to backend
     var recipe = {};
-    recipe.userId = 0;
+    //recipe.userId = 0;
     recipe.RecipeID = $("#recipeID").val();
-    recipe.lastName = $("#recipeName").val();
+    recipe.recipeName = $("#recipeName").val();
+    recipe.ingrediantID = $("#ingrtediantID").val();
+    recipe.nonNetto = $("#nonNetto").val();
+    recipe.nonNetto = $("#tolerance").val();
     //skal måske fjernes
     recipe.active = true;
-
+//url skal ændres herunder
     Agent.POST("rest/user", recipe, function (data) {
         $("#container").html('' +
-            '<form action="Admin.html">' +
+            '<form action="farmaceut.html">' +
             '<div class="boxedText">Recept oprettet</div>' +
             '<button class="btn">Videre</button>' +
             '</form>'
@@ -64,17 +70,19 @@ function getRecipe() { //gets existing Recipes from backend
 }
 
 
-function generateRecipeHtml(user) { //generates html to show in recipeTable
+function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
-        '<td class = userId>' + user.userId + '</td>' +
-        '<td class= role>' + user.role + '</td>' +
-        '<td class= firstName>' + user.firstName + '</td>' +
-        '<td class= lastName>' + user.lastName + '</td>' +
-        '<td class= initials>' + user.initials + '</td>' +
-        '<td class= active>' + booleanToText(user.active) + '</td>' +
+        '<td class = recipeID>' + recipe.recipeID + '</td>' +
+        '<td class= name>' + recipe.name + '</td>' +
+        '<td class= ingrediantID>' + recipe.ingrediantID + '</td>' +
+        '<td class= nonNetto>' + recipe.nonNetto + '</td>' +
+        '<td class= tolerance>' + recipe.tolerance + '</td>' +
+        '<td class= active>' + booleanToText(recipe.active) + '</td>' +
         '<td class= editbutton> <button class="editbtn">Ændre</button></td>' +
-        '<td class= toglebutton> <button class="toglebtn">'+ booleanToBtn(user.active) +'</button> </td>' +
+        '<td class= toglebutton> <button class="toglebtn">'+ booleanToBtn(recipe.active) +'</button> </td>' +
         '</tr>'
+}
+
 
 function listeneredit(row) {
     $(row).on('click', '.editbtn', function () {

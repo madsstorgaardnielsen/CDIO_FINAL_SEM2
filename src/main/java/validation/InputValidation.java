@@ -99,8 +99,8 @@ public class InputValidation {
         int status = productBatchDTO.getStatus();
         int userId = productBatchDTO.getUserId();
         int ingredientBatchId = productBatchDTO.getIngredientBatchId();
-        double tara = productBatchDTO.getTara();
-        double netto = productBatchDTO.getNetto();
+        double tara = productBatchDTO.getTaraSum();
+        double netto = productBatchDTO.getNettoSum();
         DecimalFormat df = new DecimalFormat("#.0000");
 
         int taraDecimalLength = (df.format(tara).length() - 1);
