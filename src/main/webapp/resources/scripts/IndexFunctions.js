@@ -14,10 +14,10 @@ function displayName() { //gets the information about the user from the backend
 
     Agent.GET('rest/user/' + ID + '/' + role + "/", function (data) {
         $("#header").text("Velkommen");
+        next(ID)
         $("#container").html(
-            '<form action="javascript:next(ID)">' +
+            '<form action="'+ role +'.html">' +
             '<div class="boxedText">'+ data.firstName + ' ' + data.lastName +'</div>' +
-            '<input hidden value="'+ ID +'">' +
             '<button class="btn">Videre</button> ' +
             '</form>'
         );
@@ -27,5 +27,5 @@ function displayName() { //gets the information about the user from the backend
 }
 
 function next(ID) {
-    
+    localStorage.setItem('ID', ID);
 }

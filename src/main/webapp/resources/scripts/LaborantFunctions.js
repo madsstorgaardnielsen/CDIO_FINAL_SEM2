@@ -1,9 +1,12 @@
 function init() {
-    if (document.location.search) {
-        console.log("Hej")
+    if (document.location.search !== '') {
+        var ID = location.search.replace(/^.*?\=/, '');
+        $("#laborantHome").attr('data-id',''+ ID);
+        $("#laborantHome").attr('href', 'Laborant.html?ID=' + $("#laborantHome").attr('data-id'));
+    } else {
+        $("#laborantHome").attr('data-id',''+ localStorage.getItem("ID"));
+        $("#laborantHome").attr('href', 'Laborant.html?ID=' + $("#laborantHome").attr('data-id'));
     }
-    console.log(document.location.search);
-    console.log("Hej")
 }
 
 function getPID() {
