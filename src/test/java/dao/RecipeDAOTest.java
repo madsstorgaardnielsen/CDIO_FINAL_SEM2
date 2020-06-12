@@ -18,7 +18,7 @@ class RecipeDAOTest {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
-        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 300.1, -4.2);
+        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 300.1, 4.2);
 
         recipeDAO.deleteRecipe(99999999);
         recipeDTO.setRecipeID(99999999);
