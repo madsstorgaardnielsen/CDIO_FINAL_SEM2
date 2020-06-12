@@ -35,22 +35,34 @@ public class RecipeDAO implements IRecipeDAO {
 
     public void addRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
-        String addRecipe = "{call AddRecipe(?,?,?,?,?)}";
+        String addRecipe = "{call AddRecipe(?,?)}";
+        String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
+
+        PreparedStatement statement1 = database.callableStatement(addRecipe);
+        statement1.setInt(1, recipe.getRecipeID());
+        statement1.setString(2, recipe.getRecipeName());
+
+        try {
+            statement1.executeUpdate();
+            System.out.println("Recipe successfully added to database");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Something went wrong with addRecipe()");
+        }
 
         for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
-            PreparedStatement statement = database.callableStatement(addRecipe);
-            statement.setInt(1, recipe.getRecipeID());
-            statement.setString(2, recipe.getRecipeName());
-            statement.setInt(3, recipe.getRecipeCompList().get(i).getIngredientID());
-            statement.setDouble(4, recipe.getRecipeCompList().get(i).getNonNetto());
-            statement.setDouble(5, recipe.getRecipeCompList().get(i).getTolerance());
+            PreparedStatement statement2 = database.callableStatement(addRecipeComponent);
+            statement2.setInt(1, recipe.getRecipeID());
+            statement2.setInt(2, recipe.getRecipeCompList().get(i).getIngredientID());
+            statement2.setDouble(3, recipe.getRecipeCompList().get(i).getNonNetto());
+            statement2.setDouble(4, recipe.getRecipeCompList().get(i).getTolerance());
 
             try {
-                statement.executeUpdate();
-                System.out.println("Recipe successfully added to database");
+                statement2.executeUpdate();
+                System.out.println("RecipeComponent successfully added to database");
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new IOException("Something went wrong with createRecipe()");
+                throw new IOException("Something went wrong with addRecipe()");
             }
         }
     }

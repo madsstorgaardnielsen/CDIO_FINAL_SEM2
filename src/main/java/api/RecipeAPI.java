@@ -2,14 +2,11 @@ package api;
 
 
 import controllers.RecipeController;
-import controllers.UserController;
 import dto.RecipeDTO;
-import dto.UserDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 
 @Path ("recipe")
 public class RecipeAPI {
@@ -22,8 +19,7 @@ public class RecipeAPI {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateRecipe(@QueryParam("ID") int ID,
-                               @DefaultValue("0") @QueryParam("recipeID") int recipeID,
+    public Response updateRecipe(@QueryParam("recipeID") int recipeID,
                                @DefaultValue("null") @QueryParam("recipeName") String recipeName) throws Exception {
         return RecipeController.getInstance().updateRecipe(recipeID, recipeName);
     }

@@ -60,6 +60,7 @@ class RecipeDAOTest {
         try {
             recipeDAO.addRecipe(recipeDTO);
             assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
+            assertEquals(2.22, recipeDAO.getRecipe(99999999).getRecipeCompList().get(0).getNonNetto());
         } catch (Exception e) {
             e.printStackTrace();
         }
