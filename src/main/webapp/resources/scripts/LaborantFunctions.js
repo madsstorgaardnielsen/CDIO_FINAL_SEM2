@@ -1,3 +1,11 @@
+function init() {
+    if (document.location.search) {
+        console.log("Hej")
+    }
+    console.log(document.location.search);
+    console.log("Hej")
+}
+
 function getPID() {
     $("#header").text("Indtast produktbatch ID");
     $("#container").html('' +
@@ -23,10 +31,10 @@ function getRecipeName() {
 }
 
 function setStatus(batchID) {
-    Agent.PUT("rest/productBatch/afvejning/" + batchID, null ,function (data) {
+    Agent.PUT("rest/afvejning/getproductbatchcomponent/" + batchID, null ,function (data) {
         $("#header").text("Indtast Tara");
         $("#container").html('' +
-            '<form action="javascript:setTara('+ data.responseText +')">' +
+            '<form action="javascript:setTara('+ data +')">' +
             '<input type="text" placeholder="kg" id="tarainput">' +
             '<button class="btn">Ok</button>' +
             '</form>'
@@ -39,8 +47,25 @@ function setStatus(batchID) {
 function setTara(compID) {
     var tara = $("#tarainput").val();
     Agent.PUT("rest/productBatchComponent/" + compID + "/" + tara, null, function () {
-
+        $("#header").text("Indtast raavarebatch");
+        $("#container").html('' +
+            '<form action="javascript:setRaavare('+ compID +')">' +
+            '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
+            '<button class="btn">Ok</button>' +
+            '</form>'
+        )
     }, function (data) {
 
     })
 }
+
+function setRaavare(compID) {
+    var raavareBatch = $("#raavarebatchinput").val();
+    Agent.PUT("rest/productBatchComponent/setbatch/"+ compID +"/"+ raavareBatch, null, function () {
+
+    })
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    init();
+});

@@ -15,12 +15,17 @@ function displayName() { //gets the information about the user from the backend
     Agent.GET('rest/user/' + ID + '/' + role + "/", function (data) {
         $("#header").text("Velkommen");
         $("#container").html(
-            '<form action="'+ data.role +'.html">' +
+            '<form action="javascript:next(ID)">' +
             '<div class="boxedText">'+ data.firstName + ' ' + data.lastName +'</div>' +
+            '<input hidden value="'+ ID +'">' +
             '<button class="btn">Videre</button> ' +
             '</form>'
         );
     }, function (data) {
         $("#container").html(data.responseText);
     })
+}
+
+function next(ID) {
+    
 }

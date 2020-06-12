@@ -83,8 +83,10 @@ public class UserController {
             UserDTO user = userDAO.getUser(userId);
             if (validation.userValidation(user, role))
                 return Response.ok(user).build();
-            else
+            else {
+                System.out.println(role + userId + user.getRole());
                 return Response.status(400, "bruger har ikke adgang").build();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
