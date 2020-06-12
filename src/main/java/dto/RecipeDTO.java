@@ -1,8 +1,11 @@
 package dto;
 
+import dao.idao.IRecipeDAO;
+import dto.idto.IRecipeDTO;
+
 import java.io.Serializable;
 
-public class RecipeDTO implements Serializable {
+public class RecipeDTO implements IRecipeDTO {
     public RecipeDTO(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance){
         this.recipeID = recipeID;
         this.recipeName = recipeName;

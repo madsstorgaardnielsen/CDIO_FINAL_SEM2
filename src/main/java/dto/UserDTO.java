@@ -1,5 +1,7 @@
 package dto;
 
+import dto.idto.IUserDTO;
+
 public class UserDTO implements IUserDTO {
     public UserDTO(int userId, String firstName, String lastName, String initials, String role, boolean active) {
         this.userId = userId;

@@ -1,4 +1,4 @@
-package dao;
+package dao.idao;
 
 import dto.UserDTO;
 

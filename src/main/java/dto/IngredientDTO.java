@@ -1,6 +1,8 @@
 package dto;
 
-public class IngredientDTO {
+import dto.idto.IIngredientDTO;
+
+public class IngredientDTO implements IIngredientDTO {
     int ingredientID;
 
     public IngredientDTO() {
@@ -22,23 +24,17 @@ public class IngredientDTO {
         this.ingredientName = ingredientName;
     }
 
-    public String getSupplier() {
-        return supplier;
-    }
 
-    public void setIngredientSupplier(String supplier) {
-        this.supplier = supplier;
-    }
+
 
     String ingredientName;
 
-    public IngredientDTO(int ingredientID, String ingredientName, String supplier) {
+    public IngredientDTO(int ingredientID, String ingredientName) {
         this.ingredientID = ingredientID;
         this.ingredientName = ingredientName;
-        this.supplier = supplier;
     }
 
-    String supplier;
+
 }
 
 

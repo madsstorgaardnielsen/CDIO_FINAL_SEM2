@@ -1,5 +1,6 @@
 package dao;
 
+import dao.idao.IRecipeDAO;
 import db.DBConnection;
 import dto.RecipeDTO;
 
@@ -10,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class RecipeDAO {
+public class RecipeDAO implements IRecipeDAO {
     private static RecipeDAO instance;
 
     static {
@@ -50,7 +51,7 @@ public class RecipeDAO {
         }
     }
 
-    public void updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
+    public RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
         String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(updateRecipe);
@@ -68,6 +69,7 @@ public class RecipeDAO {
             e.printStackTrace();
             throw new IOException("Recipe could no be updated");
         }
+        return recipe;
     }
 
     public void deleteRecipe(int ID) throws IOException, SQLException {
@@ -101,7 +103,7 @@ public class RecipeDAO {
         return recipeList;
     }
 
-    private void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException {
+    public void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException {
         recipeDTO.setRecipeID(rs.getInt(1));
         recipeDTO.setRecipeName(rs.getString(2));
         recipeDTO.setIngredientID(rs.getInt(3));

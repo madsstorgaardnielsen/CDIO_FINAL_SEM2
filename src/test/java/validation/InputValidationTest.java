@@ -14,15 +14,15 @@ class InputValidationTest {
 
         ingredientDTO.setIngredientID(1);
         ingredientDTO.setIngredientName("aaa");
-        ingredientDTO.setIngredientSupplier("aaa");
+
         assertTrue(iv.ingredientInputValidation(ingredientDTO));
 
         ingredientDTO.setIngredientID(-1);
-        ingredientDTO.setIngredientSupplier("a");
+
         ingredientDTO.setIngredientName("a");
         assertFalse(iv.ingredientInputValidation(ingredientDTO));
 
-        ingredientDTO.setIngredientSupplier("aaaaaaaaaaaaaaaaaaaaa");
+
         ingredientDTO.setIngredientID(100000000);
         ingredientDTO.setIngredientName("aaaaaaaaaaaaaaaaaaaa");
         assertFalse(iv.ingredientInputValidation(ingredientDTO));
