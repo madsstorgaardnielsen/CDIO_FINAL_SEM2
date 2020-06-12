@@ -1,35 +1,27 @@
-function addRecipeForm() { //gets user credentials for new user from admin user
-    $("#header").text("Indtast bruger oplysninger");
+function addRecipeForm() { //gets recipe
+    $("#header").text("Indtast Recipe ID");
     $("#container").html(
-        '<form action="javascript:addUser()">' +
-        '<input type="text" placeholder="Fornavn" id="firstName">' +
-        '<input type="text" placeholder="Efternavn" id="lastName">' +
-        '<input type="text" placeholder="Initialer" id="ini">' +
-        '<select id="roller" required>' +
-        '<option value="" disabled selected hidden>Rolle</option> ' +
-        '<option value="Admin">Admin</option>' +
-        '<option value="Farmaceut">Farmaceut</option>' +
-        '<option value="Produktionsleder">Produktionsleder</option>' +
-        '<option value="Laborant">Laborant</option> ' +
+        '<form action="javascript:addRecipe()">' +
+        '<input type="text" placeholder="Recipe ID" id="Recipe ID">' +
+        '<input type="text" placeholder="Recipe Name" id="recipeName">' +
         '</select> <br>' +
         '<button class="btn">Opret</button>' +
         '</form>'
     );
 }
 
-function addRecipe() { //adds the new user to backend
-    var user = {};
-    user.userId = 0;
-    user.firstName = $("#firstName").val();
-    user.lastName = $("#lastName").val();
-    user.initials = $("#ini").val();
-    user.role = $("#roller").val();
-    user.active = true;
+function addRecipe() { //adds the new recipe to backend
+    var recipe = {};
+    recipe.userId = 0;
+    recipe.RecipeID = $("#recipeID").val();
+    recipe.lastName = $("#recipeName").val();
+    //skal måske fjernes
+    recipe.active = true;
 
-    Agent.POST("rest/user", user, function (data) {
+    Agent.POST("rest/user", recipe, function (data) {
         $("#container").html('' +
             '<form action="Admin.html">' +
-            '<div class="boxedText">Bruger oprettet</div>' +
+            '<div class="boxedText">Recept oprettet</div>' +
             '<button class="btn">Videre</button>' +
             '</form>'
         )
@@ -38,22 +30,21 @@ function addRecipe() { //adds the new user to backend
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            'Recept ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })
 }
 
-function getRecipe() { //gets existing users from backend
-    $("#header").text("Brugeroversigt");
+function getRecipe() { //gets existing Recipes from backend
+    $("#header").text("Recept oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
-        '<th>ID</th>' +
-        '<th>Rolle</th>' +
-        '<th>Fornavn</th>' +
-        '<th>Efternavn</th>' +
-        '<th>Initialer</th>' +
-        '<th>Aktiv</th>' +
+        '<th>Recept ID</th>' +
+        '<th>Recept Navn</th>' +
+        '<th>ingredient ID</th>' +
+        '<th>nonNetto</th>' +
+        '<th>Tolerance</th>' +
         '<th colspan="2"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
@@ -62,7 +53,7 @@ function getRecipe() { //gets existing users from backend
     var row;
     Agent.GET("rest/user", function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateUserHtml(this));
+            row = $("#tablebody").append(generateRecipeHtml(this));
         });
         listener(row);
         listeneredit(row);
@@ -73,7 +64,7 @@ function getRecipe() { //gets existing users from backend
 }
 
 
-function generateReceipeHtml(user) { //generates html to show in user table
+function generateRecipeHtml(user) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = userId>' + user.userId + '</td>' +
         '<td class= role>' + user.role + '</td>' +
@@ -84,7 +75,6 @@ function generateReceipeHtml(user) { //generates html to show in user table
         '<td class= editbutton> <button class="editbtn">Ændre</button></td>' +
         '<td class= toglebutton> <button class="toglebtn">'+ booleanToBtn(user.active) +'</button> </td>' +
         '</tr>'
-}
 
 function listeneredit(row) {
     $(row).on('click', '.editbtn', function () {
