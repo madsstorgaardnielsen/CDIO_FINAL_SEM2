@@ -9,6 +9,7 @@ import dto.UserDTO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 
 @Path ("recipe")
 public class RecipeAPI {
@@ -23,11 +24,8 @@ public class RecipeAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateRecipe(@QueryParam("ID") int ID,
                                @DefaultValue("0") @QueryParam("recipeID") int recipeID,
-                               @DefaultValue("null") @QueryParam("recipeName") String recipeName,
-                               @DefaultValue("0") @QueryParam("ingredientID") int ingredientID,
-                               @DefaultValue("0") @QueryParam("nonNetto") double nonNetto,
-                               @DefaultValue("0") @QueryParam("tolerance") double tolerance) throws Exception {
-        return RecipeController.getInstance().updateRecipe(recipeID, recipeName, ingredientID, nonNetto, tolerance);
+                               @DefaultValue("null") @QueryParam("recipeName") String recipeName) throws Exception {
+        return RecipeController.getInstance().updateRecipe(recipeID, recipeName);
     }
 
     @POST

@@ -2,6 +2,7 @@ package dao;
 
 import dao.idao.IRecipeDAO;
 import db.DBConnection;
+import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 
 import java.io.IOException;
@@ -35,39 +36,42 @@ public class RecipeDAO implements IRecipeDAO {
     public void addRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
         String addRecipe = "{call AddRecipe(?,?,?,?,?)}";
-        PreparedStatement statement = database.callableStatement(addRecipe);
-        statement.setInt(1, recipe.getRecipeID());
-        statement.setString(2, recipe.getRecipeName());
-        statement.setInt(3, recipe.getIngredientID());
-        statement.setDouble(4, recipe.getNonNetto());
-        statement.setDouble(5, recipe.getTolerance());
 
-        try {
-            statement.executeUpdate();
-            System.out.println("Recipe successfully added to database");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Something went wrong with createRecipe()");
+        for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
+            PreparedStatement statement = database.callableStatement(addRecipe);
+            statement.setInt(1, recipe.getRecipeID());
+            statement.setString(2, recipe.getRecipeName());
+            statement.setInt(3, recipe.getRecipeCompList().get(i).getIngredientID());
+            statement.setDouble(4, recipe.getRecipeCompList().get(i).getNonNetto());
+            statement.setDouble(5, recipe.getRecipeCompList().get(i).getTolerance());
+
+            try {
+                statement.executeUpdate();
+                System.out.println("Recipe successfully added to database");
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new IOException("Something went wrong with createRecipe()");
+            }
         }
     }
 
     public RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
         String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
-        PreparedStatement statement = database.callableStatement(updateRecipe);
-
-        statement.setInt(1, recipe.getRecipeID());
-        statement.setString(2, recipe.getRecipeName());
-        statement.setInt(3, recipe.getIngredientID());
-        statement.setDouble(4, recipe.getNonNetto());
-        statement.setDouble(5, recipe.getTolerance());
-
-        try {
-            statement.executeUpdate();
-            System.out.println("Recipe successfully updated");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Recipe could no be updated");
+        for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
+            PreparedStatement statement = database.callableStatement(updateRecipe);
+            statement.setInt(1, recipe.getRecipeID());
+            statement.setString(2, recipe.getRecipeName());
+            statement.setInt(3, recipe.getRecipeCompList().get(i).getIngredientID());
+            statement.setDouble(4, recipe.getRecipeCompList().get(i).getNonNetto());
+            statement.setDouble(5, recipe.getRecipeCompList().get(i).getTolerance());
+            try {
+                statement.executeUpdate();
+                System.out.println("Recipe successfully updated");
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new IOException("Recipe could no be updated");
+            }
         }
         return recipe;
     }
@@ -106,9 +110,9 @@ public class RecipeDAO implements IRecipeDAO {
     public void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException {
         recipeDTO.setRecipeID(rs.getInt(1));
         recipeDTO.setRecipeName(rs.getString(2));
-        recipeDTO.setIngredientID(rs.getInt(3));
-        recipeDTO.setNonNetto(rs.getDouble(4));
-        recipeDTO.setTolerance(rs.getDouble(5));
+
+        RecipeComponentDTO component = new RecipeComponentDTO(rs.getInt(1), rs.getInt(3), rs.getDouble(4), rs.getDouble(5));
+        recipeDTO.addToRecipeCompList(component);
     }
 
     public RecipeDTO getRecipe(int ID) throws Exception {
@@ -125,6 +129,8 @@ public class RecipeDAO implements IRecipeDAO {
         }
         return recipe;
     }
+
+
 
 
 

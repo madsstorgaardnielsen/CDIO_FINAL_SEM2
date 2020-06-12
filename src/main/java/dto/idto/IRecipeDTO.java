@@ -13,16 +13,4 @@ public interface IRecipeDTO  {
     String getRecipeName();
 
     void setRecipeName(String recipeName);
-
-    int getIngredientID();
-
-    void setIngredientID(int ingredientID);
-
-    double getNonNetto();
-
-    void setNonNetto(double nonNetto);
-
-    double getTolerance();
-
-    void setTolerance(double tolerance);
 }

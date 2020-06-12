@@ -113,12 +113,11 @@ class InputValidationTest {
     void recipeInputValidation() {
         InputValidation iv = new InputValidation();
         RecipeDTO rp = new RecipeDTO();
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(5000, 8, 6.0, 7.0);
 
         rp.setRecipeID(5000);
         rp.setRecipeName("skateboard");
-        rp.setIngredientID(8);
-        rp.setNonNetto(6.0);
-        rp.setTolerance(7.0);
+        rp.addToRecipeCompList(recipeComponentDTO);
 
         iv.recipeInputValidation(rp);
     }
