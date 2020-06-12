@@ -1,5 +1,7 @@
 package dao;
 
+import dao.idao.IIngredientBatchDAO;
+import dao.idao.IIngredientDAO;
 import db.DBConnection;
 import dto.IngredientBatchDTO;
 
@@ -11,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 //TODO implement inputvalidation class
-public class IngredientBatchDAO {
+public class IngredientBatchDAO implements IIngredientBatchDAO {
 
     private static IngredientBatchDAO instance;
 
@@ -102,7 +104,7 @@ public class IngredientBatchDAO {
         return ingredientBatchList;
     }
 
-    private void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) throws SQLException {
+    public void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) throws SQLException {
         ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
         ingredientBatchDTO.setIngredientId(rs.getInt(2));
         ingredientBatchDTO.setAmount(rs.getDouble(3));

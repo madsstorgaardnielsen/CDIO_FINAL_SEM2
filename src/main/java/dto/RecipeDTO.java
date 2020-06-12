@@ -1,27 +1,32 @@
 package dto;
 
-import java.io.Serializable;
+import dto.idto.IRecipeDTO;
 
-public class RecipeDTO implements Serializable {
-    public RecipeDTO(int recipeID, String recipeName, int ingredientID, double nonNetto, double tolerance){
+import java.util.ArrayList;
+
+
+public class RecipeDTO implements IRecipeDTO {
+    public RecipeDTO(int recipeID, String recipeName, ArrayList<RecipeComponentDTO> recipeCompList){
         this.recipeID = recipeID;
         this.recipeName = recipeName;
-        this.ingredientID = ingredientID;
-        this.nonNetto = nonNetto;
-        this.tolerance = tolerance;
+        this.recipeCompList = recipeCompList;
     }
 
-    public RecipeDTO(){
+    public RecipeDTO(int recipeID, String recipeName){
+        this.recipeID = recipeID;
+        this.recipeName = recipeName;
+    }
+
+    public RecipeDTO() {
+
     }
 
     private int recipeID;
     private String recipeName;
-    private int ingredientID;
-    private double nonNetto;
-    private double tolerance;
+    private ArrayList<RecipeComponentDTO> recipeCompList = new ArrayList<RecipeComponentDTO>();
     private static final long serialVersionUID = 4732984592846315285L;
 
-    public String toString() {return recipeID+" "+recipeName+" "+ingredientID+" "+nonNetto+" "+tolerance;}
+    public String toString() {return recipeID+" "+recipeName;}
 
     public int getRecipeID() {return recipeID;}
 
@@ -31,18 +36,19 @@ public class RecipeDTO implements Serializable {
 
     public void setRecipeName(String recipeName) {this.recipeName = recipeName;}
 
-    public int getIngredientID() {return ingredientID;}
+    public ArrayList<RecipeComponentDTO> getRecipeCompList() {
+        return recipeCompList;
+    }
 
-    public void setIngredientID(int ingredientID) {this.ingredientID = ingredientID;}
+    public void setRecipeCompList(ArrayList<RecipeComponentDTO> recipeCompList) {
+        this.recipeCompList = recipeCompList;
+    }
 
-    public double getNonNetto() {return nonNetto;}
+    public void addToRecipeCompList(RecipeComponentDTO recipeComponent) {
+        this.recipeCompList.add(recipeComponent);
+    }
 
-    public void setNonNetto(double nonNetto) {this.nonNetto = nonNetto;}
-
-    public double getTolerance() {return tolerance;}
-
-    public void setTolerance(double tolerance) {this.tolerance = tolerance;}
-
-
-
+    public void removeFromRecipeCompList(int recipeComponentID) {
+        this.recipeCompList.remove(recipeComponentID);
+    }
 }

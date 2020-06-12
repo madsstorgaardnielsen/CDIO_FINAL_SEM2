@@ -14,15 +14,15 @@ class InputValidationTest {
 
         ingredientDTO.setIngredientID(1);
         ingredientDTO.setIngredientName("aaa");
-        ingredientDTO.setIngredientSupplier("aaa");
+
         assertTrue(iv.ingredientInputValidation(ingredientDTO));
 
         ingredientDTO.setIngredientID(-1);
-        ingredientDTO.setIngredientSupplier("a");
+
         ingredientDTO.setIngredientName("a");
         assertFalse(iv.ingredientInputValidation(ingredientDTO));
 
-        ingredientDTO.setIngredientSupplier("aaaaaaaaaaaaaaaaaaaaa");
+
         ingredientDTO.setIngredientID(100000000);
         ingredientDTO.setIngredientName("aaaaaaaaaaaaaaaaaaaa");
         assertFalse(iv.ingredientInputValidation(ingredientDTO));
@@ -113,12 +113,11 @@ class InputValidationTest {
     void recipeInputValidation() {
         InputValidation iv = new InputValidation();
         RecipeDTO rp = new RecipeDTO();
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(5000, 8, 6.0, 7.0);
 
         rp.setRecipeID(5000);
         rp.setRecipeName("skateboard");
-        rp.setIngredientID(8);
-        rp.setNonNetto(6.0);
-        rp.setTolerance(7.0);
+        rp.addToRecipeCompList(recipeComponentDTO);
 
         iv.recipeInputValidation(rp);
     }

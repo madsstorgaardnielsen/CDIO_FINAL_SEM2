@@ -1,6 +1,9 @@
 package dto;
 
-public class IngredientBatchDTO {
+import dao.idao.IIngredientBatchDAO;
+import dto.idto.IIngredientBatchDTO;
+
+public class IngredientBatchDTO implements IIngredientBatchDTO {
     int ingredientBatchId;
     int ingredientId;
     double amount;

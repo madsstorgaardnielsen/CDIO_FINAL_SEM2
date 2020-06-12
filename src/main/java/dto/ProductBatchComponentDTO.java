@@ -1,25 +1,43 @@
 package dto;
 
-public class ProductBatchComponentDTO {
+import dto.idto.IProductBatchComponentDTO;
+
+public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     int id;
     int productBatchID;
     int ingredientBatchID;
+    String ingredientName;
+    double amount;
+    double tolerance;
     int laborantID;
     double tara;
     double netto;
+    double brutto;
+    int terminal;
+    int del;
 
     public ProductBatchComponentDTO() {
     }
 
     public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID,
-                                    int laborantID, double tara, double netto) {
+                                    int laborantID, double tara, double netto,double brutto, int terminal) {
         this.id = id;
         this.productBatchID = productBatchID;
         this.ingredientBatchID = ingredientBatchID;
         this.laborantID = laborantID;
         this.tara = tara;
         this.netto = netto;
+        this.terminal = terminal;
     }
+
+    public int getTerminal() {
+        return terminal;
+    }
+
+    public void setTerminal(int terminal) {
+        this.terminal = terminal;
+    }
+
     public int getId() {
         return id;
     }

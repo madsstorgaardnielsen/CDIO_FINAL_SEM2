@@ -1,16 +1,15 @@
 package controllers;
 
+import controllers.icontrollers.IIngredientBatchController;
 import dao.IngredientBatchDAO;
-import dao.IngredientDAO;
 import dto.IngredientBatchDTO;
-import dto.IngredientDTO;
 import validation.InputValidation;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IngredientBatchController {
+public class IngredientBatchController implements IIngredientBatchController {
 
     private static IngredientBatchController instance;
 

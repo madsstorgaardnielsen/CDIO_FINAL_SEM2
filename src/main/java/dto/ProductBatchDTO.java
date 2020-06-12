@@ -1,6 +1,8 @@
 package dto;
+import dto.idto.IProductBatchDTO;
+import java.util.ArrayList;
 
-public class ProductBatchDTO {
+public class ProductBatchDTO implements IProductBatchDTO {
     int productBatchId;
     int recipeId;
     int status;
@@ -8,23 +10,24 @@ public class ProductBatchDTO {
     int ingredientBatchId;
     String creationDate;
     String finishDate;
-    double tara;
-    double netto;
+    double taraSum;
+    double nettoSum;
+    ArrayList<ProductBatchComponentDTO> components;
 
-    public double getTara() {
-        return tara;
+    public double getTaraSum() {
+        return taraSum;
     }
 
-    public void setTara(double tara) {
-        this.tara = tara;
+    public void setTaraSum(double taraSum) {
+        this.taraSum = taraSum;
     }
 
-    public double getNetto() {
-        return netto;
+    public double getNettoSum() {
+        return nettoSum;
     }
 
-    public void setNetto(double netto) {
-        this.netto = netto;
+    public void setNettoSum(double nettoSum) {
+        this.nettoSum = nettoSum;
     }
 
     public String getFinishDate() {

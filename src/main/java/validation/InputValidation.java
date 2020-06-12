@@ -35,13 +35,10 @@ public class InputValidation {
         int id = ingredientDTO.getIngredientID();
 
         String name = ingredientDTO.getIngredientName();
-        String supplier = ingredientDTO.getSupplier();
 
         if (id < 1 || id > 99999999) {
             return false;
-        } else if (name.length() < 1 || name.length() > 20) {
-            return false;
-        } else return supplier.length() >= 1 && supplier.length() <= 20;
+        } else return name.length() < 1 || name.length() > 20;
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {
@@ -49,7 +46,7 @@ public class InputValidation {
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         double amount = ingredientBatchDTO.getAmount();
-        int decimalLength = df.format(amount).length()-2;
+        int decimalLength = df.format(amount).length() - 2;
 
         if (batchId < 1 || batchId > 99999999) {
             return false;
@@ -64,19 +61,20 @@ public class InputValidation {
     public boolean recipeInputValidation(RecipeDTO recipeDTO) {
         int ID = recipeDTO.getRecipeID();
         String recipeName = recipeDTO.getRecipeName();
-        double nonNetto = recipeDTO.getNonNetto();
-        double tolerance = recipeDTO.getTolerance();
 
-        if (ID < 1 || ID > 99999999){
+
+        if (ID < 1 || ID > 99999999) {
             return false;
-        }
-        else if (recipeName.length() < 2 || recipeName.length() > 20){
+        } else if (recipeName.length() < 2 || recipeName.length() > 20) {
             return false;
+        } else {
+            return true;
         }
-        else if (nonNetto < 0.05 || nonNetto > 20.0){
-            return false;
-        }
-        else return tolerance < 0.1 || tolerance > 10.0;
+    }
+
+    // to do
+    public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
+        return true;
     }
 
     public boolean addUserInputValidation(UserDTO userDTO) {
@@ -94,14 +92,15 @@ public class InputValidation {
         } else
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
     }
+
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
         int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
         int status = productBatchDTO.getStatus();
         int userId = productBatchDTO.getUserId();
         int ingredientBatchId = productBatchDTO.getIngredientBatchId();
-        double tara = productBatchDTO.getTara();
-        double netto = productBatchDTO.getNetto();
+        double tara = productBatchDTO.getTaraSum();
+        double netto = productBatchDTO.getNettoSum();
         DecimalFormat df = new DecimalFormat("#.0000");
 
         int taraDecimalLength = (df.format(tara).length() - 1);
@@ -128,12 +127,12 @@ public class InputValidation {
         String initials = userDTO.getInitials();
         String role = userDTO.getRole();
 
-        if (!firstName.equals("null")){
+        if (!firstName.equals("null")) {
             if (firstName.length() < 2 || firstName.length() > 20)
                 return false;
         }
 
-        if (!lastName.equals("null")){
+        if (!lastName.equals("null")) {
             if (lastName.length() < 2 || lastName.length() > 20)
                 return false;
         }
@@ -143,7 +142,7 @@ public class InputValidation {
                 return false;
         }
 
-        if (!role.equals("null")){
+        if (!role.equals("null")) {
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;

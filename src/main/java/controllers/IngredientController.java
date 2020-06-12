@@ -1,7 +1,7 @@
 package controllers;
 
+import controllers.icontrollers.IIngredientController;
 import dao.IngredientDAO;
-import dao.UserDAO;
 import dto.IngredientDTO;
 import validation.InputValidation;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class IngredientController {
+public class IngredientController implements IIngredientController {
     private static IngredientController instance;
 
     static {
@@ -42,8 +42,8 @@ public class IngredientController {
         }
     }
 
-    public void addIngredient(int id, String name, String supplier) {
-        ingredientDTO = new IngredientDTO(id, name, supplier);
+    public void addIngredient(int id, String name) {
+        ingredientDTO = new IngredientDTO(id, name);
         try {
             ingredientDAO.addIngredient(ingredientDTO);
         } catch (SQLException | IOException throwables) {
@@ -51,8 +51,8 @@ public class IngredientController {
         }
     }
 
-    public void updateIngredient(int id, String name, String supplier) {
-        ingredientDTO = new IngredientDTO(id, name, supplier);
+    public void updateIngredient(int id, String name) {
+        ingredientDTO = new IngredientDTO(id, name);
 
         try {
             ingredientDAO.updateIngredient(ingredientDTO);

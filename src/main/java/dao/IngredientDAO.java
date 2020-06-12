@@ -1,5 +1,6 @@
 package dao;
 
+import dao.idao.IIngredientDAO;
 import db.DBConnection;
 import dto.IngredientDTO;
 import dto.UserDTO;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 //TODO implement inputvalidation class
-public class IngredientDAO {
+public class IngredientDAO implements IIngredientDAO {
 
     private static IngredientDAO instance;
 
@@ -101,7 +102,7 @@ public class IngredientDAO {
         return ingredientList;
     }
 
-    private void getIngredientInfo(ResultSet rs, IngredientDTO ingredientDTO) throws SQLException {
+    public void getIngredientInfo(ResultSet rs, IngredientDTO ingredientDTO) throws SQLException {
         ingredientDTO.setIngredientID(rs.getInt(1));
         ingredientDTO.setIngredientName(rs.getString(2));
     }
