@@ -14,8 +14,9 @@ function displayName() { //gets the information about the user from the backend
 
     Agent.GET('rest/user/' + ID + '/' + role + "/", function (data) {
         $("#header").text("Velkommen");
+        next(ID)
         $("#container").html(
-            '<form action="'+ data.role +'.html">' +
+            '<form action="'+ role +'.html">' +
             '<div class="boxedText">'+ data.firstName + ' ' + data.lastName +'</div>' +
             '<button class="btn">Videre</button> ' +
             '</form>'
@@ -23,4 +24,8 @@ function displayName() { //gets the information about the user from the backend
     }, function (data) {
         $("#container").html(data.responseText);
     })
+}
+
+function next(ID) {
+    localStorage.setItem('ID', ID);
 }

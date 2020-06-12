@@ -9,8 +9,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("productBatch")
+@Path("productbatch")
 public class ProductBatchAPI {
+    @Path("/add/{recipeID}/{userID}")
+    @POST
+    public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID) throws Exception {
+        return ProductBatchController.getInstance().addProductBatch(recipeID,userID);
+    }
+
     @Path("/afvejning/{batchID}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
