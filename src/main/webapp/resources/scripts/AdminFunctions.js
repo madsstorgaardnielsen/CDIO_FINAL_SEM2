@@ -81,7 +81,7 @@ function generateUserHtml(user) { //generates html to show in user table
         '<td class= lastName>' + user.lastName + '</td>' +
         '<td class= initials>' + user.initials + '</td>' +
         '<td class= active>' + booleanToText(user.active) + '</td>' +
-        '<td class= editbutton> <button class="editbtn">Ændre</button></td>' +
+        '<td class= editbutton> <button class="editbtn">Rediger</button></td>' +
         '<td class= toglebutton> <button class="toglebtn">'+ booleanToBtn(user.active) +'</button> </td>' +
         '</tr>'
 }
@@ -167,9 +167,9 @@ function listener(row) {
 
 function booleanToBtn(active) { //generates text according to users active state
     if (active)
-        return "deaktiver";
+        return "Deaktiver";
     else
-        return "aktiver";
+        return "Aktiver";
 }
 function booleanToText(active) { //generates text according to users active state
     if (active)
