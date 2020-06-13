@@ -6,6 +6,7 @@ import dto.IngredientDTO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.sql.SQLException;
 
 @Path("ingredient")
@@ -32,15 +33,12 @@ public class IngredientAPI {
     }
 
 
-/*
-    Virker ikke for some reason
-    @POST
+    @DELETE
     @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteIngredient(@PathParam("id") int id) throws Exception {
+    public Response deleteIngredient(@PathParam("id") int id) throws IOException, SQLException {
         IngredientDAO.getInstance().deleteIngredient(id);
         return Response.ok().build();
-    }*/
+    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

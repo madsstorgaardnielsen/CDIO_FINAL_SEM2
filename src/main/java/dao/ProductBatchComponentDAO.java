@@ -32,7 +32,7 @@ public class ProductBatchComponentDAO {
 
     public void addComponentsByRecipe(RecipeDTO recipe, int batchID) throws SQLException, IOException {
         // making string for statement
-        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID) VALUES ";
+        String statementString = "{call AddComponents(?,?)}";
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()){
             statementString += "(" + batchID + ", " + comp.getIngredientID() + "),";

@@ -5,15 +5,15 @@ import dto.idto.IProductBatchComponentDTO;
 public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     private int id;
     private int productBatchID;
-    private int ingredientBatchID; //
     private String ingredientName;
-    private double amount;
-    private double tolerance;
+    private int ingredientBatchID; //
     private int laborantID; //
     private double tara; //
     private double netto;
-    private double brutto; //
     private int terminal; //
+    private double amount;
+    private double tolerance;
+    private double brutto; //
 
     public ProductBatchComponentDTO() {
     }
