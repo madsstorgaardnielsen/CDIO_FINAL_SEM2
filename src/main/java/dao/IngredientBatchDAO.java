@@ -56,11 +56,13 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
 
     public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws IOException, SQLException {
 
-        String updateIngredientBatch = "{call UpdateIngredientBatch(?,?)}";
+        String updateIngredientBatch = "{call UpdateIngredientBatch(?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setDouble(2, ingredientBatch.getAmount());
+        statement.setInt(2,ingredientBatch.getIngredientId());
+        statement.setDouble(3, ingredientBatch.getAmount());
+        statement.setString(4,ingredientBatch.getSupplier());
 
         try {
             statement.executeUpdate();

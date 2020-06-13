@@ -44,9 +44,10 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
     public IngredientBatchDTO() {
     }
 
-    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount) {
+    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount, String supplier) {
         this.ingredientBatchId = ingredientBatchId;
         this.ingredientId = ingredientId;
         this.amount = amount;
+        this.supplier = supplier;
     }
 }

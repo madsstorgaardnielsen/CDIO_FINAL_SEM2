@@ -32,9 +32,8 @@ public class IngredientBatchAPI {
     }
 
 
-    @POST
+    @DELETE
     @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteIngredientBatch(@PathParam("id") int id) throws Exception {
         IngredientBatchDAO.getInstance().deleteIngredientBatch(id);
         return Response.ok().build();
@@ -46,4 +45,6 @@ public class IngredientBatchAPI {
         IngredientBatchDAO.getInstance().updateIngredientBatch(ingredientBatchDTO);
         return Response.ok().build();
     }
+
+
 }

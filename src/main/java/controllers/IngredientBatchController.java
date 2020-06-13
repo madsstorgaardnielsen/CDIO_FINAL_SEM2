@@ -35,7 +35,7 @@ public class IngredientBatchController implements IIngredientBatchController {
         return instance;
     }
 
-    public void deleteIngredient(int id) {
+    public void deleteIngredientBatch(int id) {
         try {
             ingredientBatchDAO.deleteIngredientBatch(id);
         } catch (IOException | SQLException e) {
@@ -43,8 +43,8 @@ public class IngredientBatchController implements IIngredientBatchController {
         }
     }
 
-    public void addIngredient(int batchId, int ingredientId, double amount) {
-        ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount);
+    public void addIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
+        ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
         try {
             ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
         } catch (SQLException | IOException throwables) {
@@ -52,8 +52,8 @@ public class IngredientBatchController implements IIngredientBatchController {
         }
     }
 
-    public void updateIngredient(int batchId, int ingredientId, double amount) {
-        ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount);
+    public void updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
+        ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
 
         try {
             ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
@@ -62,11 +62,11 @@ public class IngredientBatchController implements IIngredientBatchController {
         }
     }
 
-    public ArrayList<IngredientBatchDTO> getAllIngredients() throws Exception {
+    public ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception {
         return ingredientBatchDAO.getAllIngredientBatch();
     }
 
-    public IngredientBatchDTO getIngredient(int id) throws Exception {
+    public IngredientBatchDTO getIngredientBatch(int id) throws Exception {
         return ingredientBatchDAO.getIngredientBatch(id);
     }
 

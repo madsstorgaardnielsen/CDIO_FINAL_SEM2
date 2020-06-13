@@ -15,14 +15,14 @@ public interface IIngredientBatchController {
         return null;
     }
 
-    void deleteIngredient(int id);
+    void deleteIngredientBatch(int id);
 
-    void addIngredient(int batchId, int ingredientId, double amount);
+    void addIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
 
-    void updateIngredient(int batchId, int ingredientId, double amount);
+    void updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
 
-    ArrayList<IngredientBatchDTO> getAllIngredients() throws Exception;
+    ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception;
 
-    IngredientBatchDTO getIngredient(int id) throws Exception;
+    IngredientBatchDTO getIngredientBatch(int id) throws Exception;
 
 }
