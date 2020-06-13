@@ -38,7 +38,10 @@ public class InputValidation {
 
         if (id < 1 || id > 99999999) {
             return false;
-        } else return name.length() < 1 || name.length() > 20;
+        } else if (name.length() < 1 || name.length() > 20) {
+            return false;
+        } else
+            return true;
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {

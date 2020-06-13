@@ -34,7 +34,7 @@ class IngredientBatchDAOTest {
 
         ibDAO.deleteIngredientBatch(99999999);
         ibDTO.setIngredientBatchId(99999999);
-        ibDTO.setIngredientId(99999999);
+        ibDTO.setIngredientId(1);
         ibDTO.setAmount(5.5555);
         ibDTO.setSupplier("TestSupplier");
         ibDAO.addIngredientBatch(ibDTO);
