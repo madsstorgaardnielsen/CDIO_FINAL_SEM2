@@ -37,31 +37,30 @@ public class RecipeController implements IRecipeController {
         return instance;
     }
 
-    public Response deleteRecipe(int ID){
-            try {
-                RecipeDAO.deleteRecipe(ID);
-                return Response.ok().build();
-            } catch (Exception e) {
-                return Response.status(418, "Bad input").build();
-            }
+    public Response deleteRecipe(int ID) {
+        try {
+            RecipeDAO.deleteRecipe(ID);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.status(418, "Bad input").build();
+        }
     }
 
 
-    public Response addRecipe(RecipeDTO recipeDTO){
-        if(validation.recipeInputValidation(recipeDTO)) {
+    public Response addRecipe(RecipeDTO recipeDTO) {
+        if (validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipe(RecipeDTO);
                 return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
-        }
-        else {
+        } else {
             return Response.status(418, "Bad input").build();
         }
     }
 
-    public Response updateRecipe(int recipeID, String recipeName){
+    public Response updateRecipe(int recipeID, String recipeName) {
         RecipeDTO recipeDTO = new RecipeDTO(recipeID, recipeName);
         if (validation.recipeInputValidation(recipeDTO)) {
             try {
@@ -71,7 +70,7 @@ public class RecipeController implements IRecipeController {
                 return Response.serverError().build();
 
             }
-        }else {
+        } else {
             return Response.status(418, "Bad input").build();
         }
     }

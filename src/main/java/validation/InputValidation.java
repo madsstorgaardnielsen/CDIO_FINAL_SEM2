@@ -75,9 +75,9 @@ public class InputValidation {
         }
     }
 
-    // to do
+    //TODO
     public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
-        return true;
+        return false;
     }
 
     public boolean addUserInputValidation(UserDTO userDTO) {
