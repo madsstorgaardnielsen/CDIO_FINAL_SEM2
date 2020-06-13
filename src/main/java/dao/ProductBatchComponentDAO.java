@@ -38,7 +38,7 @@ public class ProductBatchComponentDAO {
             statementString += "(" + batchID + ", " + comp.getIngredientID() + "),";
         }
         statementString = statementString.substring(0, statementString.length()-1);
-        System.out.println(statementString); //testing
+        //System.out.println(statementString); //testing
         statement = database.prepareStatement(statementString);
         try {
             statement.executeUpdate();
