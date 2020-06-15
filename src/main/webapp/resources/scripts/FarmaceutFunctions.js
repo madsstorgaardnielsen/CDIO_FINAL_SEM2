@@ -33,13 +33,14 @@ function addRecipe() { //adds the new recipe to backend
     //recipe.userId = 0;
     recipe.RecipeID = $("#recipeID").val();
     recipe.recipeName = $("#recipeName").val();
-    recipe.ingrediantID = $("#ingrtediantID").val();
+    recipe.ingredientID = $("#ingredientID").val();
     recipe.nonNetto = $("#nonNetto").val();
-    recipe.tolerance = $("#tolerance").val();
+    recipe.ingredientID = $("#tolerance").val();
+
     //skal måske fjernes
     recipe.active = true;
 //url skal ændres herunder
-    Agent.POST("rest/user", recipe, function (data) {
+    Agent.POST("rest/recipe", recipe, function (data) {
         $("#container").html('' +
             '<form action="Farmaceut.html">' +
             '<div class="boxedText">Recept oprettet</div>' +
@@ -62,17 +63,14 @@ function getRecipe() { //gets existing Recipes from backend
     $("#container").html(
         '<table> <thead> <tr>' +
         '<th>Recept ID</th>' +
-        '<th>Recept Navn</th>' +
-        '<th>ingredient ID</th>' +
-        '<th>nonNetto</th>' +
-        '<th>Tolerance</th>' +
-        '<th colspan="2"></th>' +
+        '<th>Recept Name</th>' +
+        '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
     var row;
-    Agent.GET("rest/user", function (data) {
+    Agent.GET("rest/recipes", function (data) {
         $.each(data, function () {
             row = $("#tablebody").append(generateRecipeHtml(this));
         });
@@ -89,30 +87,47 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= name>' + recipe.name + '</td>' +
-        '<td class= ingrediantID>' + recipe.ingrediantID + '</td>' +
-        '<td class= nonNetto>' + recipe.nonNetto + '</td>' +
-        '<td class= tolerance>' + recipe.tolerance + '</td>' +
-        '<td class= active>' + booleanToText(recipe.active) + '</td>' +
-        '<td class= editbutton> <button class="editbtn">Ændre</button></td>' +
-        '<td class= toglebutton> <button class="toglebtn">'+ booleanToBtn(recipe.active) +'</button> </td>' +
+        '<td class= viewbtn> <button class="viewbtn">View commponents</button></td>' +
         '</tr>'
 }
 
+function getRecipeComponent(recipeID)
+function getUsers() { //gets existing users from backend
+    $("#header").text("Brugeroversigt");
+    $("#container").html(
+        '<table> <thead> <tr>' +
+        '<th>RecipeID</th>' +
+        '<th>ingredientID</th>' +
+        '<th>nonNetto</th>' +
+        '<th>tolerance</th>' +
+        '<th colspan="1"></th>' +
+        '</tr> </thead> ' +
+        '<tbody id="tablebody"></tbody> ' +
+        '</table>'
+    );
+    var row;
+    Agent.GET("rest/user", function (data) {
+        $.each(data, function () {
+            row = $("#tablebody").append(generateUserHtml(this));
+        });
+        listener(row);
+        listeneredit(row);
+        listenersave(row);
+    }, function (data) {
+        $("#container").html($(data.responseText).find("u").first().text());
+    });
+}
 
 function listeneredit(row) {
     $(row).on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
         var recipeID = row.find(".firstName").text();
         var recipeName = row.find(".recipeName").text();
-        var ingredientID = row.find(".ingrediendID").text();
-        var nonNetto = row.find(".nonNetto").text();
-        var tolerance = row.find(".tolerance").text();
+
 
         row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
         row.find(".recipeName").html('<input type="text" placeholder="' + recipeName + '" id="editrecipeName" data-orig="'+ recipeName +'">');
-        row.find(".ingredientID").html('<input type="text" placeholder="' + ingredientID + '" id="editingredientID" data-orig="'+ ingredientID +'">');
-        row.find(".nonNetto").html('<input type="text" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
-        row.find(".tolerance").html('<input type="text" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
+
 
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
@@ -123,9 +138,7 @@ function listenersave(row) {
         var row = $(this).closest('tr');
         var recipeID = row.find(".userId").text();
         var recipeName = row.find("#editrecipeID").val();
-        var ingredientID = row.find("#editrecipeName").val();
-        var nonNetto = row.find("#editingrediantID").val();
-        var tolerance = row.find("#edittolerance").val();
+
 
         var origrecipeName = row.find("#editrecipeName").attr('data-orig');
         var origingredientID = row.find("#editingredientID").attr('data-orig');
