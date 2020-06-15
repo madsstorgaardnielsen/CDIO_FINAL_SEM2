@@ -31,7 +31,6 @@ public class IngredientAPI {
     public Response updateIngredient(@QueryParam("ingredientId") int ingredientId,
                                      @DefaultValue("null") @QueryParam("ingredientName") String ingredientName) {
         return IngredientController.getInstance().updateIngredient(ingredientId,ingredientName);
-
     }
 
     @POST
