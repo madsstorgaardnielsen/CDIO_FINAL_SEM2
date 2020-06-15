@@ -111,7 +111,7 @@ public class RecipeComponentDAO {
     public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetRecipeComponent(?,?)}");
         stmt.setInt(1, recipeID);
-        stmt.setInt(1, ingredientID);
+        stmt.setInt(2, ingredientID);
         RecipeComponentDTO recipe = new RecipeComponentDTO();
         ResultSet resultSet = stmt.executeQuery();
         try {

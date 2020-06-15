@@ -86,6 +86,7 @@ public class RecipeDAO implements IRecipeDAO {
         }
     }
 
+    //TODO fix i DB
     public RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
         String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
