@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientControllerTest {
 
-/*
+
     @Test
     void deleteIngredient() {
         IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
@@ -54,5 +54,5 @@ class IngredientControllerTest {
 
     }
 
-*/
+
 }

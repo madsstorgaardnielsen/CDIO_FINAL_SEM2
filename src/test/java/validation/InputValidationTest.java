@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InputValidationTest {
-/*
+
     @Test
     void ingredientInputValidation() {
         InputValidation iv = new InputValidation();
@@ -82,7 +82,6 @@ class InputValidationTest {
         ProductBatchComponentDTO pbcd = new ProductBatchComponentDTO();
 
         pbd.setProductBatchId(1);
-        pbd.setIngredientBatchId(1);
         pbd.setRecipeId(1);
         pbd.setUserId(1);
         pbd.setStatus(1);
@@ -91,7 +90,6 @@ class InputValidationTest {
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(-1);
-        pbd.setIngredientBatchId(-1);
         pbd.setRecipeId(-1);
         pbd.setUserId(-1);
         pbd.setStatus(-1);
@@ -100,7 +98,6 @@ class InputValidationTest {
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(1000000000);
-        pbd.setIngredientBatchId(1000000000);
         pbd.setRecipeId(1000000000);
         pbd.setUserId(1000000000);
         pbd.setStatus(4);
@@ -130,5 +127,5 @@ class InputValidationTest {
 
     }
 
- */
+
 }
