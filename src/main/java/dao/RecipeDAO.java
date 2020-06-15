@@ -138,6 +138,23 @@ public class RecipeDAO implements IRecipeDAO {
         return recipeList;
     }
 
+    public ArrayList<RecipeDTO> getAllRecipesOnly() throws Exception {
+        ArrayList<RecipeDTO> recipeList = new ArrayList<>();
+        CallableStatement stmt = database.callableStatement("{call GetAllRecipesOnly}");
+        ResultSet rs = stmt.executeQuery();
+        RecipeDTO recipeDTO;
+        try {
+            while (rs.next()) {
+                recipeDTO = new RecipeDTO();
+                getRecipeInfo(rs, recipeDTO);
+                recipeList.add(recipeDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recipeList;
+    }
+
     public void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException {
         recipeDTO.setRecipeID(rs.getInt(1));
         recipeDTO.setRecipeName(rs.getString(2));
