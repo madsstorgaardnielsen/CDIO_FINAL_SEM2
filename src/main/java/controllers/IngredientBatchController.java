@@ -46,8 +46,8 @@ public class IngredientBatchController implements IIngredientBatchController {
         }
     }
 
-    public Response addIngredientBatch(IngredientDTO ingredientDTO) {
-        if (validation.ingredientInputValidation(ingredientDTO)) {
+    public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
+        if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
             try {
                 ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
                 return Response.ok().build();

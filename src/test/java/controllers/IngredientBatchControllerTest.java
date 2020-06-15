@@ -1,55 +1,56 @@
 package controllers;
 
+import dao.IngredientBatchDAO;
+import dto.IngredientBatchDTO;
 import org.junit.jupiter.api.Test;
+
+import javax.ws.rs.core.Response;
+
+import java.io.IOException;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientBatchControllerTest {
 
     @Test
-    void deleteIngredientBatch() throws Exception {
-        IngredientBatchController.getInstance().addIngredientBatch(999,1,999.99, "TestSupplier");
-        int id = IngredientBatchController.getInstance().getIngredientBatch(999).getIngredientBatchId();
-        assertEquals(999,id);
+    void deleteIngredientBatch() {
+        IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
-        id = IngredientBatchController.getInstance().getIngredientBatch(999).getIngredientBatchId();
-        assertNotEquals(999,id);
+        assertEquals("OutboundJaxrsResponse{status=200, reason=OK, hasEntity=false, closed=false, buffered=false}",IngredientBatchController.getInstance().getIngredientBatch(999).toString());
     }
 
     @Test
-    void addIngredientBatch() throws Exception {
-        IngredientBatchController.getInstance().addIngredientBatch(999,1,999.99, "TestSupplier");
-        int id = IngredientBatchController.getInstance().getIngredientBatch(999).getIngredientBatchId();
-        assertEquals(999,id);
+    void addIngredientBatch() {
+        IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
 
+
     @Test
-    void updateIngredientBatch() throws Exception {
-        IngredientBatchController.getInstance().addIngredientBatch(999,1,999.99, "TestSupplier");
-        int id = IngredientBatchController.getInstance().getIngredientBatch(999).getIngredientBatchId();
-        assertEquals(999,id);
-        IngredientBatchController.getInstance().updateIngredientBatch(999,1,111.11,"TestSupplierUpdated");
-        double updatedAmount = IngredientBatchController.getInstance().getIngredientBatch(999).getAmount();
-        assertEquals(111.11,updatedAmount);
+    void updateIngredientBatch() throws SQLException, IOException {
+        IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
+        IngredientBatchDAO ibdao = new IngredientBatchDAO();
+        ibdao.addIngredientBatch(ibdto);
+        IngredientBatchController.getInstance().updateIngredientBatch(999,1,111.1111,"TestSupplierUpdated");
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().updateIngredientBatch(999,1,111.1111,"TestSupplierUpdated").toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
+
 
     @Test
     void getAllIngredientBatch() throws Exception {
-
-        if (IngredientBatchController.getInstance().getAllIngredientBatch().size() > 0) {
-            assertTrue(true);
-        } else {
-            assertFalse(false);
-        }
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().getAllIngredientBatch().toString());
     }
 
     @Test
     void getIngredientBatch() throws Exception {
-        IngredientBatchController.getInstance().addIngredientBatch(999,1,999.99, "TestSupplier");
-        int id = IngredientBatchController.getInstance().getIngredientBatch(999).getIngredientBatchId();
-        assertEquals(999,id);
+        IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
+        IngredientBatchDAO ibdao = new IngredientBatchDAO();
+        ibdao.addIngredientBatch(ibdto);
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().getIngredientBatch(999).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
 }

@@ -50,7 +50,10 @@ public class InputValidation {
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         double amount = ingredientBatchDTO.getAmount();
-        int decimalLength = df.format(amount).length() - 2;
+        String doubleToText = Double.toString(Math.abs(amount));
+        int integerLength = doubleToText.indexOf('.');
+        int decimalLength = doubleToText.length()-integerLength-1;
+
 
         if (batchId < 1 || batchId > 99999999) {
             return false;
