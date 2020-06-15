@@ -1,7 +1,9 @@
 package api;
 
 
+import controllers.RecipeComponentController;
 import controllers.RecipeController;
+import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 
 import javax.ws.rs.*;
@@ -13,33 +15,37 @@ public class RecipeComponentAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRecipeComponents() throws Exception{
-        return RecipeController.getInstance().getAllRecipes();
+        return RecipeComponentController.getInstance().getAllRecipeComponents();
     }
 
     @Path("/{recipeComponentId}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeComponent(@PathParam("recipeComponentId") int recipeComponentId) throws Exception{
-        return RecipeController.getInstance().getRecipe(recipeComponentId);
+    public Response getRecipeComponent(@PathParam("recipeComponentId") int recipeComponentId,
+                                       @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID) throws Exception{
+        return RecipeComponentController.getInstance().getRecipeComponent(recipeComponentId, recipeComponentIngredientID);
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateRecipeComponent(@QueryParam("recipeID") int recipeID,
-                                 @DefaultValue("null") @QueryParam("recipeName") String recipeName) throws Exception {
-        return RecipeController.getInstance().updateRecipe(recipeID, recipeName);
+                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID,
+                                          @QueryParam("recipeCompNonNetto") double recipeCompNonNetto,
+                                          @QueryParam("recipeCompTolerance") double recipeCompTolerance) throws Exception {
+        return RecipeComponentController.getInstance().updateRecipeComponent(recipeID, recipeCompIngredientID, recipeCompNonNetto, recipeCompTolerance);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addRecipeComponent(RecipeDTO recipeDTO) throws Exception{
-        return RecipeController.getInstance().addRecipe(recipeDTO);
+    public Response addRecipeComponent(RecipeComponentDTO recipeComponentDTO) throws Exception{
+        return RecipeComponentController.getInstance().addRecipeComponent(recipeComponentDTO);
     }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteRecipeComponent(int ID) throws Exception{
-        return RecipeController.getInstance().deleteRecipe(ID);
+    public Response deleteRecipeComponent(@QueryParam("recipeCompId") int recipeCompId,
+                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID) throws Exception{
+        return RecipeComponentController.getInstance().deleteRecipeComponent(recipeCompId, recipeCompIngredientID);
     }
 }
