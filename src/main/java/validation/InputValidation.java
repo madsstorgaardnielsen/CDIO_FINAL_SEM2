@@ -46,7 +46,6 @@ public class InputValidation {
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {
-        DecimalFormat df = new DecimalFormat("#.0000");
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         double amount = ingredientBatchDTO.getAmount();
@@ -108,10 +107,15 @@ public class InputValidation {
         int ingredientBatchId = productBatchDTO.getIngredientBatchId();
         double tara = productBatchDTO.getTaraSum();
         double netto = productBatchDTO.getNettoSum();
-        DecimalFormat df = new DecimalFormat("#.0000");
 
-        int taraDecimalLength = (df.format(tara).length() - 1);
-        int nettoDecimalLength = (df.format(netto).length() - 1);
+        String doubleToTextTara = Double.toString(Math.abs(tara));
+        int integerLengthTara = doubleToTextTara.indexOf('.');
+        int decimalLengthTara = doubleToTextTara.length()-integerLengthTara-1;
+
+        String doubleToTextNetto = Double.toString(Math.abs(netto));
+        int integerLengthNetto = doubleToTextNetto.indexOf('.');
+        int decimalLengthNetto = doubleToTextNetto.length()-integerLengthNetto-1;
+
 
         if (productBatchId < 1 || productBatchId > 99999999) {
             return false;
@@ -123,9 +127,12 @@ public class InputValidation {
             return false;
         } else if (ingredientBatchId < 1 || ingredientBatchId > 99999999) {
             return false;
-        } else if (taraDecimalLength != 4) {
+        } else if (decimalLengthNetto != 4) {
             return false;
-        } else return nettoDecimalLength == 4;
+        } else if (decimalLengthTara != 4) {
+            return false;
+        }
+        return true;
     }
 
     public boolean updateUserInputValidation(UserDTO userDTO) {
