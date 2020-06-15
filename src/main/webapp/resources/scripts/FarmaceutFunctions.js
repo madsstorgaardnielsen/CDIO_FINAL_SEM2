@@ -69,12 +69,12 @@ function getRecipes() { //gets existing Recipes from backend
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
+
     Agent.GET("rest/recipe", function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateRecipeHtml(this));
+            $("#tablebody").append(generateRecipeHtml(this));
         });
-        getRecipeIDFromRow(row);
+        getRecipeIDFromRow();
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -126,10 +126,10 @@ function getRecipeComponent(recipeId) {
 }
 
 
-function getRecipeIDFromRow(row) {
-    $(row).on('click', '.viewbtn', function () {
+function getRecipeIDFromRow() {
+    $("#container").on('click', '.viewbtn', function () {
         var row = $(this).closest('tr');
-        var recipeID = row.find(".RecipeID").text();
+        var recipeID = row.find(".recipeID").text();
 
         getRecipeComponent(recipeID);
     })
