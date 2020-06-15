@@ -15,6 +15,7 @@ import java.sql.SQLException;
 
 public class ProductBatchController {
 
+    private final ProductBatchDAO productBatchDAO;
     private static ProductBatchController instance;
 
     static {
@@ -25,7 +26,6 @@ public class ProductBatchController {
         }
     }
 
-    private final ProductBatchDAO productBatchDAO;
     private final InputValidation validation;
     private ProductBatchDTO productBatchDTO;
 

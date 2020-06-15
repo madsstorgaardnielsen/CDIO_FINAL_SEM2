@@ -5,6 +5,7 @@ import dto.idto.IProductBatchComponentDTO;
 public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     private int id;
     private int productBatchID;
+    private int ingredientID;
     private String ingredientName;
     private int ingredientBatchID; //
     private int laborantID; //
@@ -32,7 +33,9 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
         this.tolerance = tolerance;
         this.amount = amount;
     }
-
+    public void setIngredientID(int ingredientID){
+        this.ingredientID = ingredientID;
+    }
     public int getTerminal() {
         return terminal;
     }
@@ -120,4 +123,20 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     public void setBrutto(double brutto) {
         this.brutto = brutto;
     }
+
+    public String toString(){
+        String out = "ComponentID: " + id +
+                ", ProductBatchID: " + productBatchID +
+                ", IngredientID: "+ ingredientID +
+                ", IngredientName: " + ingredientName +
+                ", Amount: " + amount+
+                ", Tolerance: " + tolerance +
+                ", UserID" + laborantID+
+                ", Tara: " + tara+
+                ", Netto: " + netto +
+                ", Brutto: " + brutto+
+                ", Terminal: " + terminal;
+        return out;
+    }
+
 }

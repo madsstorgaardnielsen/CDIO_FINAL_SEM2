@@ -22,7 +22,6 @@ public class RecipeDAO implements IRecipeDAO {
             throwables.printStackTrace();
         }
     }
-
     private DBConnection database;
 
     public RecipeDAO() throws SQLException {

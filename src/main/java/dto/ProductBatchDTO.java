@@ -7,13 +7,24 @@ public class ProductBatchDTO implements IProductBatchDTO {
     int recipeId;
     int status;
     int userId;
-    int ingredientBatchId;
     String creationDate;
     String finishDate;
     double taraSum;
     double nettoSum;
     ArrayList<ProductBatchComponentDTO> components;
 
+    int ingredientBatchID;
+
+    public int getIngredientBatchId(){
+        return ingredientBatchID;
+    }
+
+    public void addComponent(ProductBatchComponentDTO comp){
+        components.add(comp);
+    }
+    public void setComponents(ArrayList<ProductBatchComponentDTO> components){
+        this.components = components;
+    }
     public double getTaraSum() {
         return taraSum;
     }
@@ -78,14 +89,6 @@ public class ProductBatchDTO implements IProductBatchDTO {
         this.userId = userId;
     }
 
-    public int getIngredientBatchId() {
-        return ingredientBatchId;
-    }
-
-    public void setIngredientBatchId(int ingredientBatchId) {
-        this.ingredientBatchId = ingredientBatchId;
-    }
-
     public ProductBatchDTO() {
     }
 
@@ -94,14 +97,27 @@ public class ProductBatchDTO implements IProductBatchDTO {
         this.recipeId = recipeId;
         this.status = status;
         this.userId = userId;
-        this.ingredientBatchId = ingredientBatchId;
     }
 
-    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId, int ingredientBatchId) {
+    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId) {
         this.productBatchId = productBatchId;
         this.recipeId = recipeId;
         this.status = status;
         this.userId = userId;
-        this.ingredientBatchId = ingredientBatchId;
+    }
+
+    public String toString(){
+        String out = "ProductBatchID: " +productBatchId+
+                ", recipeID: " + recipeId +
+                ", Produktionsleder ID: " + userId +
+                ", status: " + status +
+                ", Creation Date: " + creationDate +
+                ", Finish date: " + finishDate +
+                ", taraSum: " + taraSum +
+                ", nettoSum: " + nettoSum + "\n";
+        for(ProductBatchComponentDTO comp : components){
+            out += comp.toString()+ "\n";
+        }
+        return out;
     }
 }

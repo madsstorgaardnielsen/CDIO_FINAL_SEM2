@@ -29,7 +29,8 @@ public class ProductBatchAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBatch(@PathParam("batchID") int batchId){
-        return Response.ok().build(); ////ProductBatchController.getInstance().getProductBatch(batchId)
+
+        return ProductBatchController.getInstance().getProductBatch(batchId);
     }
 
     @Path("/afvejning/{batchID}/")
