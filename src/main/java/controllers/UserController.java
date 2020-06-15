@@ -33,7 +33,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public Response addUser(UserDTO userDTO) throws Exception {
+    public Response addUser(UserDTO userDTO) {
         if (validation.addUserInputValidation(userDTO)) {
             try {
                 userDAO.addUser(userDTO);
@@ -47,7 +47,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public Response getAllUsers() throws Exception {
+    public Response getAllUsers() {
         try {
             return Response.ok(userDAO.getAllUsers()).build();
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public Response getUser(String userId, String role) throws Exception {
+    public Response getUser(String userId, String role) {
         try {
             UserDTO user = userDAO.getUser(userId);
             if (validation.userValidation(user, role))

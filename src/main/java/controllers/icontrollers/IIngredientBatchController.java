@@ -3,26 +3,24 @@ package controllers.icontrollers;
 import controllers.IngredientBatchController;
 import dao.IngredientBatchDAO;
 import dto.IngredientBatchDTO;
+import dto.IngredientDTO;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IIngredientBatchController {
 
-    static IngredientBatchController getInstance() {
-        return null;
-    }
+    Response deleteIngredientBatch(int id);
 
-    void deleteIngredient(int id);
+    Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO);
 
-    void addIngredient(int batchId, int ingredientId, double amount);
+    Response updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
 
-    void updateIngredient(int batchId, int ingredientId, double amount);
+    Response getAllIngredientBatch();
 
-    ArrayList<IngredientBatchDTO> getAllIngredients() throws Exception;
-
-    IngredientBatchDTO getIngredient(int id) throws Exception;
+    Response getIngredientBatch(int id);
 
 }

@@ -1,9 +1,7 @@
 package controllers;
 
 import controllers.icontrollers.IRecipeController;
-import dao.RecipeComponentDAO;
 import dao.RecipeDAO;
-import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 import validation.InputValidation;
 
@@ -35,7 +33,7 @@ public class RecipeController implements IRecipeController {
         return instance;
     }
 
-    public Response deleteRecipe(int ID){
+    public Response deleteRecipe(int ID) {
         try {
             RecipeDAO.deleteRecipe(ID);
             return Response.ok().build();
@@ -44,8 +42,9 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response addRecipe(RecipeDTO recipeDTO){
-        if(validation.recipeInputValidation(recipeDTO)) {
+
+    public Response addRecipe(RecipeDTO recipeDTO) {
+        if (validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipe(RecipeDTO);
                 return Response.ok().build();
@@ -57,7 +56,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response addRecipeOnly(RecipeDTO recipeDTO){
+    public Response addRecipeOnly(RecipeDTO recipeDTO) {
         if(validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipeOnly(RecipeDTO);
@@ -70,7 +69,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response updateRecipe(int recipeID, String recipeName){
+    public Response updateRecipe(int recipeID, String recipeName) {
         RecipeDTO recipeDTO = new RecipeDTO(recipeID, recipeName);
         if (validation.recipeInputValidation(recipeDTO)) {
             try {
@@ -80,7 +79,7 @@ public class RecipeController implements IRecipeController {
                 return Response.serverError().build();
 
             }
-        }else {
+        } else {
             return Response.status(418, "Bad input").build();
         }
     }

@@ -5,27 +5,21 @@ import dao.IngredientDAO;
 import dto.IngredientDTO;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IIngredientController {
 
+    Response deleteIngredient(int id);
 
+    Response addIngredient(IngredientDTO ingredientDTO);
 
+    Response updateIngredient(int id, String name);
 
-    public static IngredientController getInstance() {
-        return null;
-    }
+    Response getAllIngredients() throws Exception;
 
-    public void deleteIngredient(int id);
-
-    public void addIngredient(int id, String name);
-
-    public void updateIngredient(int id, String name);
-
-    public ArrayList<IngredientDTO> getAllIngredients() throws Exception ;
-
-    public IngredientDTO getIngredient(int id) throws Exception ;
+    Response getIngredient(int id) throws Exception;
 
 }

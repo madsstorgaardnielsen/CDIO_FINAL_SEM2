@@ -26,8 +26,9 @@ public class InputValidation {
         //TODO: further validation
         if (!user.isActive())
             return false;
-        if (!user.getRole().equals(role))
+        if (!user.getRole().equals(role)) {
             return false;
+        }
         return true;
     }
 
@@ -38,7 +39,10 @@ public class InputValidation {
 
         if (id < 1 || id > 99999999) {
             return false;
-        } else return name.length() < 1 || name.length() > 20;
+        } else if (name.length() < 1 || name.length() > 20) {
+            return false;
+        } else
+            return true;
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {
@@ -46,7 +50,10 @@ public class InputValidation {
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         double amount = ingredientBatchDTO.getAmount();
-        int decimalLength = df.format(amount).length() - 2;
+        String doubleToText = Double.toString(Math.abs(amount));
+        int integerLength = doubleToText.indexOf('.');
+        int decimalLength = doubleToText.length()-integerLength-1;
+
 
         if (batchId < 1 || batchId > 99999999) {
             return false;
@@ -72,9 +79,9 @@ public class InputValidation {
         }
     }
 
-    // to do
-    public boolean recipeComponentInputValidation(RecipeComponentDTO recipeComponent) {
-        return true;
+    //TODO
+    public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
+        return false;
     }
 
     public boolean addUserInputValidation(UserDTO userDTO) {

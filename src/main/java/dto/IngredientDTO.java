@@ -4,6 +4,7 @@ import dto.idto.IIngredientDTO;
 
 public class IngredientDTO implements IIngredientDTO {
     int ingredientID;
+    String ingredientName;
 
     public IngredientDTO() {
     }
@@ -23,11 +24,6 @@ public class IngredientDTO implements IIngredientDTO {
     public void setIngredientName(String ingredientName) {
         this.ingredientName = ingredientName;
     }
-
-
-
-
-    String ingredientName;
 
     public IngredientDTO(int ingredientID, String ingredientName) {
         this.ingredientID = ingredientID;

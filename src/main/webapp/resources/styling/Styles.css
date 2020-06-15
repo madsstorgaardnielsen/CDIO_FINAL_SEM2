@@ -19,6 +19,13 @@ form {
     text-align: center;
 }
 
+.infocontainer {
+    margin: auto;
+    width: fit-content;
+    padding: 7px 0;
+    text-align: center;
+}
+
 .cont {
     text-align: center;
     width: 100%;

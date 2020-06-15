@@ -3,8 +3,10 @@ package controllers;
 import controllers.icontrollers.IIngredientController;
 import dao.IngredientDAO;
 import dto.IngredientDTO;
+import jdk.nashorn.internal.ir.ReturnNode;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -34,40 +36,58 @@ public class IngredientController implements IIngredientController {
         return instance;
     }
 
-    public void deleteIngredient(int id) {
+    public Response deleteIngredient(int id) {
         try {
             ingredientDAO.deleteIngredient(id);
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
         }
     }
 
-    public void addIngredient(int id, String name) {
+    public Response addIngredient(IngredientDTO ingredientDTO) {
+        if (validation.ingredientInputValidation(ingredientDTO))
+            try {
+                ingredientDAO.addIngredient(ingredientDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        else {
+            return Response.status(418, "Bad input").build();
+        }
+    }
+
+    public Response updateIngredient(int id, String name) {
         ingredientDTO = new IngredientDTO(id, name);
-        try {
-            ingredientDAO.addIngredient(ingredientDTO);
-        } catch (SQLException | IOException throwables) {
-            throwables.printStackTrace();
+        if (validation.ingredientInputValidation(ingredientDTO))
+            try {
+                ingredientDAO.updateIngredient(ingredientDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        else {
+            return Response.status(418, "Bad input").build();
         }
     }
 
-    public void updateIngredient(int id, String name) {
-        ingredientDTO = new IngredientDTO(id, name);
-
+    public Response getAllIngredients() {
         try {
-            ingredientDAO.updateIngredient(ingredientDTO);
-        } catch (SQLException | IOException throwables) {
-            throwables.printStackTrace();
+            ingredientDAO.getAllIngredients();
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
         }
     }
 
-    public ArrayList<IngredientDTO> getAllIngredients() throws Exception {
-        return ingredientDAO.getAllIngredients();
+    public Response getIngredient(int id) {
+        try {
+            ingredientDAO.getIngredient(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
-
-    public IngredientDTO getIngredient(int id) throws Exception {
-        return ingredientDAO.getIngredient(id);
-    }
-
 
 }
