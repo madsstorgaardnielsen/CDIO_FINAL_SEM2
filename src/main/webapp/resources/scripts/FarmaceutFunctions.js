@@ -112,14 +112,14 @@ function getRecipeComponent(recipeId) {
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
+
     Agent.GET('rest/recipe/' + recipeId + '/', function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateRecipeComponentHtml(this));
+            $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
+        listener;
+        listeneredit;
+        listenersave;
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
