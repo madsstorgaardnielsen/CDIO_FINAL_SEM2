@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.icontrollers.IRecipeComponentController;
 import controllers.icontrollers.IRecipeController;
 import dao.RecipeComponentDAO;
 import dao.RecipeDAO;
@@ -10,7 +11,7 @@ import validation.InputValidation;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
-public class RecipeComponentController implements controllers.icontrollers.RecipeComponentController {
+public class RecipeComponentController implements IRecipeComponentController {
     private static RecipeComponentController instance;
 
     static {
