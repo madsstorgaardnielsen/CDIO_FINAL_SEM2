@@ -146,7 +146,7 @@ public class RecipeDAO implements IRecipeDAO {
         try {
             while (rs.next()) {
                 recipeDTO = new RecipeDTO();
-                getRecipeInfo(rs, recipeDTO);
+                getRecipeOnlyInfo(rs, recipeDTO);
                 recipeList.add(recipeDTO);
             }
         } catch (SQLException e) {
