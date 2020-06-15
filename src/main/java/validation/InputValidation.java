@@ -78,7 +78,7 @@ public class InputValidation {
         }
     }
 
-    //TODO
+
     public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
         int recipeID = recipeDTO.getRecipeID();
         int ingredientId = recipeDTO.getIngredientID();
