@@ -4,7 +4,7 @@ import dto.RecipeComponentDTO;
 
 import javax.ws.rs.core.Response;
 
-public interface RecipeComponentController {
+public interface IRecipeComponentController {
     Response deleteRecipeComponent(int recipeID, int ingredientID);
 
     Response addRecipeComponent(RecipeComponentDTO recipeComponent);
