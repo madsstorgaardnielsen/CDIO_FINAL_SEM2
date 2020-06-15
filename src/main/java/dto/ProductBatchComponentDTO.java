@@ -18,7 +18,7 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     private static final long serialVersionUID = 4545864587995944260L;
 
     public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID, int ingredientID, int amount, int tolerance
-            ,int laborantID, double tara, double netto, double brutto, int terminal) {
+            ,int laborantID, double tara, double netto, double brutto, int terminal, String ingredientName) {
         this.id = id;
         this.productBatchID = productBatchID;
         this.ingredientBatchID = ingredientBatchID;
@@ -30,11 +30,22 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
         this.ingredientName = ingredientName;
         this.tolerance = tolerance;
         this.amount = amount;
+        this.ingredientID = ingredientID;
     }
 
     public ProductBatchComponentDTO() {
     }
 
+
+    @Override
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    @Override
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
 
     @Override
     public int getTerminal() {
