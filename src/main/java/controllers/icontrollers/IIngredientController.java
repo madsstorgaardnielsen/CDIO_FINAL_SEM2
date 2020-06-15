@@ -12,21 +12,14 @@ import java.util.ArrayList;
 
 public interface IIngredientController {
 
+    Response deleteIngredient(int id);
 
+    Response addIngredient(IngredientDTO ingredientDTO);
 
+    Response updateIngredient(int id, String name);
 
-    public static IngredientController getInstance() {
-        return null;
-    }
+    Response getAllIngredients() throws Exception;
 
-    public Response deleteIngredient(int id);
-
-    public Response addIngredient(IngredientDTO ingredientDTO);
-
-    public Response updateIngredient(int id, String name);
-
-    public Response getAllIngredients() throws Exception ;
-
-    public Response getIngredient(int id) throws Exception ;
+    Response getIngredient(int id) throws Exception;
 
 }

@@ -13,10 +13,6 @@ import java.util.ArrayList;
 
 public interface IIngredientBatchController {
 
-    static IngredientBatchController getInstance() {
-        return null;
-    }
-
     Response deleteIngredientBatch(int id);
 
     Response addIngredientBatch(IngredientDTO ingredientDTO);

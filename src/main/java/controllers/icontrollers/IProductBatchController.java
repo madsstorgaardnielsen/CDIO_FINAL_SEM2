@@ -6,9 +6,6 @@ import dto.IngredientBatchDTO;
 import java.util.ArrayList;
 
 public interface IProductBatchController {
-    static IngredientBatchController getInstance() {
-        return null;
-    }
 
     void deleteProductBatch(int id);
 

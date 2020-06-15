@@ -8,17 +8,14 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 public interface IRecipeController {
-    public static RecipeController getInstance() {
-        return null;
-    }
 
-    public Response deleteRecipe(int ID);
+    Response deleteRecipe(int ID);
 
-    public Response addRecipe(RecipeDTO recipeDTO) ;
+    Response addRecipe(RecipeDTO recipeDTO) ;
 
-    public Response updateRecipe(int recipeID, String recipeName);
+    Response updateRecipe(int recipeID, String recipeName);
 
-    public Response getAllRecipes() throws Exception ;
+    Response getAllRecipes() throws Exception ;
 
-    public Response getRecipe(int ID) throws Exception ;
+    Response getRecipe(int ID) throws Exception ;
 }

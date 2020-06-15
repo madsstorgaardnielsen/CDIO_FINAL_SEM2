@@ -38,7 +38,7 @@ public class ProductBatchController {
         return instance;
     }
 
-    public Response addProductBatch(int recipeID, int userID) throws Exception {
+    public Response addProductBatch(int recipeID, int userID) {
         productBatchDTO = new ProductBatchDTO(recipeID, userID);
         if (validation.productBatchInputValidation(productBatchDTO))
             try {
@@ -54,7 +54,7 @@ public class ProductBatchController {
         }
     }
 
-    public Response getProductBatch(int batchID) throws Exception {
+    public Response getProductBatch(int batchID) {
         try {
             return Response.ok(ProductBatchDAO.getInstance().getProductBatch(batchID)).build();
         } catch (Exception e) {
