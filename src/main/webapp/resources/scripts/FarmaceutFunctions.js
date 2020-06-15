@@ -86,8 +86,8 @@ function getRecipe() { //gets existing Recipes from backend
 function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
-        '<td class= name>' + recipe.name + '</td>' +
-        '<td class= viewbtn> <button class="viewbtn">View commponents</button></td>' +
+        '<td class= recipeName>' + recipe.recipeName + '</td>' +
+        '<td class= editbutton> <button class="viewbtn">View commponents</button></td>' +
         '</tr>'
 }
 
