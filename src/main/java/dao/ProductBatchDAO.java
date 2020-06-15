@@ -141,9 +141,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
             while(rs.next()){
                 getBatchInfo(rs,product);
             }
-            //get and set componenents:
-            product.setComponents(ProductBatchComponentDAO.getInstance().getCompByBatch(batchID));
-            System.out.println(product.toString()); //testing
+
             return product;
 
         } catch (Exception e) {

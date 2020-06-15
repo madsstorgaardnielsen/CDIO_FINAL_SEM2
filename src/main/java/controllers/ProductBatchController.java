@@ -56,7 +56,12 @@ public class ProductBatchController {
 
     public Response getProductBatch(int batchID) {
         try {
-            return Response.ok(ProductBatchDAO.getInstance().getProductBatch(batchID)).build();
+            //get batch
+            ProductBatchDTO productBatch = ProductBatchDAO.getInstance().getProductBatch(batchID);
+            //get and set componenents:
+            productBatch.setComponents(ProductBatchComponentDAO.getInstance().getCompByBatch(batchID));
+            System.out.println(productBatch.toString()); //testing
+            return Response.ok(productBatch).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

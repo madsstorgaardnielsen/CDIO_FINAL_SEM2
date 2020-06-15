@@ -25,6 +25,11 @@ public class ProductBatchDTO implements IProductBatchDTO {
     public void setComponents(ArrayList<ProductBatchComponentDTO> components){
         this.components = components;
     }
+
+    public ArrayList<ProductBatchComponentDTO> getComponents(){
+        return this.components;
+    }
+
     public double getTaraSum() {
         return taraSum;
     }
