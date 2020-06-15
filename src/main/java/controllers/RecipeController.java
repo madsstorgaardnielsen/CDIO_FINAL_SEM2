@@ -2,15 +2,11 @@ package controllers;
 
 import controllers.icontrollers.IRecipeController;
 import dao.RecipeDAO;
-import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 import validation.InputValidation;
 
-import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class RecipeController implements IRecipeController {
     private static RecipeController instance;
@@ -51,6 +47,19 @@ public class RecipeController implements IRecipeController {
         if (validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipe(RecipeDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        } else {
+            return Response.status(418, "Bad input").build();
+        }
+    }
+
+    public Response addRecipeOnly(RecipeDTO recipeDTO) {
+        if(validation.recipeInputValidation(recipeDTO)) {
+            try {
+                RecipeDAO.addRecipeOnly(RecipeDTO);
                 return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();

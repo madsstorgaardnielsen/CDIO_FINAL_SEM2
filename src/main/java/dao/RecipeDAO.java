@@ -50,20 +50,39 @@ public class RecipeDAO implements IRecipeDAO {
             throw new IOException("Something went wrong with addRecipe()");
         }
 
-        for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
-            PreparedStatement statement2 = database.callableStatement(addRecipeComponent);
-            statement2.setInt(1, recipe.getRecipeID());
-            statement2.setInt(2, recipe.getRecipeCompList().get(i).getIngredientID());
-            statement2.setDouble(3, recipe.getRecipeCompList().get(i).getNonNetto());
-            statement2.setDouble(4, recipe.getRecipeCompList().get(i).getTolerance());
+        if (recipe.getRecipeCompList().size() != 0) {
+            for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
+                PreparedStatement statement2 = database.callableStatement(addRecipeComponent);
+                statement2.setInt(1, recipe.getRecipeID());
+                statement2.setInt(2, recipe.getRecipeCompList().get(i).getIngredientID());
+                statement2.setDouble(3, recipe.getRecipeCompList().get(i).getNonNetto());
+                statement2.setDouble(4, recipe.getRecipeCompList().get(i).getTolerance());
 
-            try {
-                statement2.executeUpdate();
-                System.out.println("RecipeComponent successfully added to database");
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new IOException("Something went wrong with addRecipe()");
+                try {
+                    statement2.executeUpdate();
+                    System.out.println("RecipeComponent successfully added to database");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new IOException("Something went wrong with addRecipe()");
+                }
             }
+        }
+    }
+
+    public void addRecipeOnly(RecipeDTO recipe) throws IOException, SQLException {
+
+        String addRecipe = "{call AddRecipe(?,?)}";
+
+        PreparedStatement statement1 = database.callableStatement(addRecipe);
+        statement1.setInt(1, recipe.getRecipeID());
+        statement1.setString(2, recipe.getRecipeName());
+
+        try {
+            statement1.executeUpdate();
+            System.out.println("Recipe successfully added to database");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Something went wrong with addRecipe()");
         }
     }
 
@@ -127,6 +146,11 @@ public class RecipeDAO implements IRecipeDAO {
         recipeDTO.addToRecipeCompList(component);
     }
 
+    public void getRecipeOnlyInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException {
+        recipeDTO.setRecipeID(rs.getInt(1));
+        recipeDTO.setRecipeName(rs.getString(2));
+    }
+
     public RecipeDTO getRecipe(int ID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetRecipe(?)}");
         stmt.setInt(1, ID);
@@ -142,11 +166,19 @@ public class RecipeDAO implements IRecipeDAO {
         return recipe;
     }
 
-
-
-
-
-
-
+    public RecipeDTO getRecipeOnly(int ID) throws Exception {
+        CallableStatement stmt = database.callableStatement("{call GetRecipeOnly(?)}");
+        stmt.setInt(1, ID);
+        RecipeDTO recipe = new RecipeDTO();
+        ResultSet resultSet = stmt.executeQuery();
+        try {
+            while (resultSet.next()) {
+                getRecipeOnlyInfo(resultSet, recipe);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipe;
+    }
 }
 
