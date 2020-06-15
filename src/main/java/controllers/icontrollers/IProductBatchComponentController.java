@@ -1,20 +1,23 @@
 package controllers.icontrollers;
 
 import controllers.IngredientBatchController;
+import controllers.ProductBatchComponentController;
 import dto.IngredientBatchDTO;
 
+import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
 public interface IProductBatchComponentController {
 
-    void deleteProductBatchComponent(int id);
+    Response deleteProductBatchComponent(int id);
 
-    void addProductBatchComponent(int batchId, int ingredientId, double amount);
+    Response addProductBatchComponent(int batchId, int ingredientId, double amount);
 
-    void updateProductBatchComponent(int batchId, int ingredientId, double amount);
+    Response updateProductBatchComponent(int batchId, int ingredientId, double amount);
 
-    ArrayList<IngredientBatchDTO> getAllProductBatchComponents() throws Exception;
+    Response getAllProductBatchComponents() throws Exception;
 
-    IngredientBatchDTO getProductBatchComponents(int id) throws Exception;
+    Response getProductBatchComponents(int id) throws Exception;
 
+    Response getNextComponent(int batchID) throws Exception;
 }

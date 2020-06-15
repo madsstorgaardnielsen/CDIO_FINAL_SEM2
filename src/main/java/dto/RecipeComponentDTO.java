@@ -9,8 +9,7 @@ public class RecipeComponentDTO {
         this.tolerance = tolerance;
     }
 
-    public RecipeComponentDTO() {
-
+    public RecipeComponentDTO(){
     }
 
     private int recipeID;

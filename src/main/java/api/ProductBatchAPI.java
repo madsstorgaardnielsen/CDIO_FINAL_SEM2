@@ -40,10 +40,4 @@ public class ProductBatchAPI {
         return Response.ok().build(); //ProductBatchController.getInstance().setStatus();
     }
 
-    @Path("/afvejning/getproductbatchcomponent/{batchID}/")
-    @GET
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) {
-        return Response.ok().build(); //ProductBatchController.getInstance().getNextComponent(batchId);
-    }
 }
