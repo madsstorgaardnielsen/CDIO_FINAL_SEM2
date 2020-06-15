@@ -26,8 +26,9 @@ public class InputValidation {
         //TODO: further validation
         if (!user.isActive())
             return false;
-        if (!user.getRole().equals(role))
+        if (!user.getRole().equals(role)) {
             return false;
+        }
         return true;
     }
 

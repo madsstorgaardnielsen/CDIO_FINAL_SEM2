@@ -5,6 +5,7 @@ import dao.IngredientDAO;
 import dto.IngredientDTO;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,14 +19,14 @@ public interface IIngredientController {
         return null;
     }
 
-    public void deleteIngredient(int id);
+    public Response deleteIngredient(int id);
 
-    public void addIngredient(int id, String name);
+    public Response addIngredient(IngredientDTO ingredientDTO);
 
-    public void updateIngredient(int id, String name);
+    public Response updateIngredient(int id, String name);
 
-    public ArrayList<IngredientDTO> getAllIngredients() throws Exception ;
+    public Response getAllIngredients() throws Exception ;
 
-    public IngredientDTO getIngredient(int id) throws Exception ;
+    public Response getIngredient(int id) throws Exception ;
 
 }

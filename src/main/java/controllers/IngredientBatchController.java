@@ -3,8 +3,10 @@ package controllers;
 import controllers.icontrollers.IIngredientBatchController;
 import dao.IngredientBatchDAO;
 import dto.IngredientBatchDTO;
+import dto.IngredientDTO;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,39 +37,58 @@ public class IngredientBatchController implements IIngredientBatchController {
         return instance;
     }
 
-    public void deleteIngredientBatch(int id) {
+    public Response deleteIngredientBatch(int id) {
         try {
             ingredientBatchDAO.deleteIngredientBatch(id);
-        } catch (IOException | SQLException e) {
-            e.printStackTrace();
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
         }
     }
 
-    public void addIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
+    public Response addIngredientBatch(IngredientDTO ingredientDTO) {
+        if (validation.ingredientInputValidation(ingredientDTO)) {
+            try {
+                ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        } else {
+            return Response.status(418, "Bad input").build();
+        }
+    }
+
+    public Response updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
         ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
+        if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
+            try {
+                ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
+                return Response.ok().build();
+            } catch (Exception e) {
+                return Response.serverError().build();
+            }
+        } else {
+            return Response.status(418, "Bad input").build();
+        }
+
+    }
+
+    public Response getAllIngredientBatch() {
         try {
-            ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
-        } catch (SQLException | IOException throwables) {
-            throwables.printStackTrace();
+            ingredientBatchDAO.getAllIngredientBatch();
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
         }
     }
 
-    public void updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
-        ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
-
+    public Response getIngredientBatch(int id) {
         try {
-            ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
-        } catch (SQLException | IOException throwables) {
-            throwables.printStackTrace();
+            ingredientBatchDAO.getIngredientBatch(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
         }
     }
-
-    public ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception {
-        return ingredientBatchDAO.getAllIngredientBatch();
-    }
-
-    public IngredientBatchDTO getIngredientBatch(int id) throws Exception {
-        return ingredientBatchDAO.getIngredientBatch(id);
-    }
-
 }

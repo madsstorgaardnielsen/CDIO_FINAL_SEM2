@@ -3,8 +3,10 @@ package controllers.icontrollers;
 import controllers.IngredientBatchController;
 import dao.IngredientBatchDAO;
 import dto.IngredientBatchDTO;
+import dto.IngredientDTO;
 import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,14 +17,14 @@ public interface IIngredientBatchController {
         return null;
     }
 
-    void deleteIngredientBatch(int id);
+    Response deleteIngredientBatch(int id);
 
-    void addIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
+    Response addIngredientBatch(IngredientDTO ingredientDTO);
 
-    void updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
+    Response updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
 
-    ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception;
+    Response getAllIngredientBatch();
 
-    IngredientBatchDTO getIngredientBatch(int id) throws Exception;
+    Response getIngredientBatch(int id);
 
 }
