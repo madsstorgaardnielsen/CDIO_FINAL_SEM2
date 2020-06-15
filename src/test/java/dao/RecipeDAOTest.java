@@ -36,6 +36,28 @@ class RecipeDAOTest {
     }
 
     @Test
+    void addRecipeOnly() throws SQLException, IOException {
+        RecipeDAO recipeDAO = new RecipeDAO();
+        RecipeDTO recipeDTO = new RecipeDTO();
+        //RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
+        //RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 300.1, 4.2);
+
+        recipeDAO.deleteRecipe(99999999);
+        recipeDTO.setRecipeID(99999999);
+        recipeDTO.setRecipeName("TestRecipe");
+        //recipeDTO.addToRecipeCompList(recipeComponentDTO1);
+        //recipeDTO.addToRecipeCompList(recipeComponentDTO2);
+
+        try {
+            recipeDAO.addRecipeOnly(recipeDTO);
+            assertEquals(99999999, recipeDAO.getRecipeOnly(99999999).getRecipeID());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     void getAllRecipes() throws Exception {
         RecipeDAO recipeDAO = new RecipeDAO();
 
