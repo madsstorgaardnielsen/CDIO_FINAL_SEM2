@@ -119,7 +119,15 @@ class InputValidationTest {
         rp.setRecipeName("skateboard");
         rp.addToRecipeCompList(recipeComponentDTO);
 
-        iv.recipeInputValidation(rp);
+        assertTrue(iv.recipeInputValidation(rp));
+    }
+
+    @Test
+    void recipeComponentInputValidation() {
+        InputValidation iv = new InputValidation();
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(999, 1, 6.4444, 7.3333);
+        assertTrue(iv.recipeComponentInputValidation(recipeComponentDTO));
+
     }
 
  */
