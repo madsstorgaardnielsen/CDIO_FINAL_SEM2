@@ -27,7 +27,7 @@ public class RecipeAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addRecipe(RecipeDTO recipeDTO) throws Exception{
-        return RecipeController.getInstance().addRecipe(recipeDTO);
+        return RecipeController.getInstance().addRecipeOnly(recipeDTO);
     }
 
     @DELETE
@@ -43,7 +43,4 @@ public class RecipeAPI {
     public Response getRecipe(@PathParam("recipeId") int recipeId) throws Exception{
         return RecipeController.getInstance().getRecipe(recipeId);
     }
-
-
-
 }

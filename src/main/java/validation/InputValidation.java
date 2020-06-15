@@ -73,7 +73,7 @@ public class InputValidation {
     }
 
     // to do
-    public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
+    public boolean recipeComponentInputValidation(RecipeComponentDTO recipeComponent) {
         return true;
     }
 
