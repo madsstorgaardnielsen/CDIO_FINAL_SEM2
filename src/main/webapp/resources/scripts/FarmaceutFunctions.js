@@ -9,7 +9,7 @@ function addRecipeForm() { //gets recipe ID and Name form
         '</form>'
     );
 }
-//Tilføj en råvare funktion.
+//Titilføj en råvare funktion.
 function generateIngredient() {
     $("#header").text("Opret en recept");
     $("#container").html(
@@ -32,7 +32,7 @@ function addRecipe() { //adds the new recipe to backend
     var recipe = {};
     //recipe.userId = 0;
     recipe.RecipeID = $("#recipeID").val();
-    recipe.recipeName = $("#recipeName").val();
+    //recipe.recipeName = $("#recipeName").val();
     recipe.ingredientID = $("#ingredientID").val();
     recipe.nonNetto = $("#nonNetto").val();
     recipe.ingredientID = $("#tolerance").val();
@@ -70,7 +70,7 @@ function getRecipe() { //gets existing Recipes from backend
         '</table>'
     );
     var row;
-    Agent.GET("rest/recipes", function (data) {
+    Agent.GET("rest/recipe", function (data) {
         $.each(data, function () {
             row = $("#tablebody").append(generateRecipeHtml(this));
         });
@@ -91,31 +91,32 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
         '</tr>'
 }
 
-function getRecipeComponent(recipeID)
-function getUsers() { //gets existing users from backend
-    $("#header").text("Brugeroversigt");
-    $("#container").html(
-        '<table> <thead> <tr>' +
-        '<th>RecipeID</th>' +
-        '<th>ingredientID</th>' +
-        '<th>nonNetto</th>' +
-        '<th>tolerance</th>' +
-        '<th colspan="1"></th>' +
-        '</tr> </thead> ' +
-        '<tbody id="tablebody"></tbody> ' +
-        '</table>'
-    );
-    var row;
-    Agent.GET("rest/user", function (data) {
-        $.each(data, function () {
-            row = $("#tablebody").append(generateUserHtml(this));
+function getRecipeComponent(recipeID) {
+    function getUsers() { //gets existing users from backend
+        $("#header").text("Brugeroversigt");
+        $("#container").html(
+            '<table> <thead> <tr>' +
+            '<th>RecipeID</th>' +
+            '<th>ingredientID</th>' +
+            '<th>nonNetto</th>' +
+            '<th>tolerance</th>' +
+            '<th colspan="1"></th>' +
+            '</tr> </thead> ' +
+            '<tbody id="tablebody"></tbody> ' +
+            '</table>'
+        );
+        var row;
+        Agent.GET("rest/user", function (data) {
+            $.each(data, function () {
+                row = $("#tablebody").append(generateUserHtml(this));
+            });
+            listener(row);
+            listeneredit(row);
+            listenersave(row);
+        }, function (data) {
+            $("#container").html($(data.responseText).find("u").first().text());
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
-    }, function (data) {
-        $("#container").html($(data.responseText).find("u").first().text());
-    });
+    }
 }
 
 function listeneredit(row) {
