@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientBatchControllerTest {
-
+/*
     @Test
     void deleteIngredientBatch() {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
@@ -53,4 +53,6 @@ class IngredientBatchControllerTest {
         assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().getIngredientBatch(999).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
+
+ */
 }
