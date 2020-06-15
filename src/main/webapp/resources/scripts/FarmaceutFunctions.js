@@ -58,7 +58,7 @@ function addRecipe() { //adds the new recipe to backend
     })
 }
 
-function getRecipe() { //gets existing Recipes from backend
+function getRecipes() { //gets existing Recipes from backend
     $("#header").text("Recept oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
@@ -74,9 +74,7 @@ function getRecipe() { //gets existing Recipes from backend
         $.each(data, function () {
             row = $("#tablebody").append(generateRecipeHtml(this));
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
+        getRecipeIDFromRow(row);
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -87,42 +85,60 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= editbutton> <button class="viewbtn">View commponents</button></td>' +
+        '<td class= editbutton> <button class="viewbtn">View components</button></td>' +
         '</tr>'
 }
 
-function getRecipeComponent(recipeID) {
-    function getUsers() { //gets existing users from backend
-        $("#header").text("Brugeroversigt");
-        $("#container").html(
-            '<table> <thead> <tr>' +
-            '<th>RecipeID</th>' +
-            '<th>ingredientID</th>' +
-            '<th>nonNetto</th>' +
-            '<th>tolerance</th>' +
-            '<th colspan="1"></th>' +
-            '</tr> </thead> ' +
-            '<tbody id="tablebody"></tbody> ' +
-            '</table>'
-        );
-        var row;
-        Agent.GET("rest/user", function (data) {
-            $.each(data, function () {
-                row = $("#tablebody").append(generateUserHtml(this));
-            });
-            listener(row);
-            listeneredit(row);
-            listenersave(row);
-        }, function (data) {
-            $("#container").html($(data.responseText).find("u").first().text());
+function generateRecipeComponentHtml(recipeComponent) { //generates html to show in recipeTable
+    return '<tr> ' +
+        '<td class = recipeID>' + recipeComponent.recipeID + '</td>' +
+        '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
+        '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
+        '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
+        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '</tr>'
+}
+
+function getRecipeComponent(recipeId) {
+    $("#header").text("Komponent Oversigt");
+    $("#container").html(
+        '<table> <thead> <tr>' +
+        '<th>RecipeID</th>' +
+        '<th>ingredientID</th>' +
+        '<th>nonNetto</th>' +
+        '<th>tolerance</th>' +
+        '<th colspan="1"></th>' +
+        '</tr> </thead> ' +
+        '<tbody id="tablebody"></tbody> ' +
+        '</table>'
+    );
+    var row;
+    Agent.GET('rest/recipe/' + recipeId + '/', function (data) {
+        $.each(data, function () {
+            row = $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-    }
+        listener(row);
+        listeneredit(row);
+        listenersave(row);
+    }, function (data) {
+        $("#container").html($(data.responseText).find("u").first().text());
+    });
+}
+
+
+function getRecipeIDFromRow(row) {
+    $(row).on('click', '.viewbtn', function () {
+        var row = $(this).closest('tr');
+        var recipeID = row.find(".RecipeID").text();
+
+        getRecipeComponent(recipeID);
+    })
 }
 
 function listeneredit(row) {
     $(row).on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
-        var recipeID = row.find(".firstName").text();
+        var recipeID = row.find(".RecipeID").text();
         var recipeName = row.find(".recipeName").text();
 
 
