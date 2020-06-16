@@ -94,6 +94,15 @@ public class RecipeController implements IRecipeController {
         }
     }
 
+    public Response getAllRecipesOnly() throws Exception {
+        try {
+            return Response.ok(RecipeDAO.getAllRecipesOnly()).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
     public Response getRecipe(int ID) throws Exception {
         try {
             RecipeDTO recipe = RecipeDAO.getRecipe(ID);

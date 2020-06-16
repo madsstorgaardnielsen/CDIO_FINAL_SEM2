@@ -5,6 +5,8 @@ import dto.RecipeComponentDTO;
 import javax.ws.rs.core.Response;
 
 public interface IRecipeComponentController {
+    Response getAllRecipeComponentsFromID(int recipeID);
+
     Response deleteRecipeComponent(int recipeID, int ingredientID);
 
     Response addRecipeComponent(RecipeComponentDTO recipeComponent);

@@ -13,7 +13,7 @@ public class RecipeAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllRecipes() throws Exception{
-        return RecipeController.getInstance().getAllRecipes();
+        return RecipeController.getInstance().getAllRecipesOnly();
     }
 
     @PUT
