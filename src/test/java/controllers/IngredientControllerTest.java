@@ -1,8 +1,6 @@
 package controllers;
 
-import dao.IngredientBatchDAO;
 import dao.IngredientDAO;
-import dto.IngredientBatchDTO;
 import dto.IngredientDTO;
 import org.junit.jupiter.api.Test;
 
@@ -15,44 +13,41 @@ class IngredientControllerTest {
 
     @Test
     void deleteIngredient() {
-        IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().addIngredient(ibdto).toString());
+        IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
+
         IngredientController.getInstance().deleteIngredient(999);
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().getIngredient(999).toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient(999).toString());
     }
 
     @Test
     void addIngredient() {
-        IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().addIngredient(ibdto).toString());
+        IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
         IngredientController.getInstance().deleteIngredient(999);
     }
 
     @Test
     void updateIngredient() throws Exception {
-        IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
+        IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
         IngredientDAO ibdao = new IngredientDAO();
         ibdao.addIngredient(ibdto);
-        IngredientController.getInstance().updateIngredient(999,"TestSupplierUpdated");
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().updateIngredient(999,"TestSupplierUpdated").toString());
+        IngredientController.getInstance().updateIngredient(999, "TestSupplierUpdated");
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().updateIngredient(999, "TestSupplierUpdated").toString());
         IngredientController.getInstance().deleteIngredient(999);
     }
 
     @Test
     void getAllIngredients() {
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().getAllIngredients().toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getAllIngredients().toString());
     }
 
     @Test
     void getIngredient() throws Exception {
-        IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
+        IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
         IngredientDAO ibdao = new IngredientDAO();
         ibdao.addIngredient(ibdto);
-        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().getIngredient(999).toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient(999).toString());
         IngredientController.getInstance().deleteIngredient(999);
-
-
     }
-
-
 }

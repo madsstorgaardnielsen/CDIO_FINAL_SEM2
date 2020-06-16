@@ -111,7 +111,7 @@ public class ProductBatchDTO implements IProductBatchDTO {
         this.userId = userId;
     }
 
-    public String toString(){
+/*    public String toString(){
         String out = "ProductBatchID: " +productBatchId+
                 ", recipeID: " + recipeId +
                 ", Produktionsleder ID: " + userId +
@@ -124,5 +124,5 @@ public class ProductBatchDTO implements IProductBatchDTO {
             out += comp.toString()+ "\n";
         }
         return out;
-    }
+    }*/
 }
