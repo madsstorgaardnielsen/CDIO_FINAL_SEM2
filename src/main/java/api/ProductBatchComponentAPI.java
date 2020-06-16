@@ -16,7 +16,7 @@ public class ProductBatchComponentAPI {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateBatchComponent(ProductBatchComponentDTO batchComponent){
-        return Response.ok().build(); //ProductBatchComponentController.getInstance().updateBatchComponent(batchComponent);
+        return ProductBatchComponentController.getInstance().updateProductBatchComponent(batchComponent);
     }
 
     @Path("/{ID}/")

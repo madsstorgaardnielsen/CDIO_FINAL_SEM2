@@ -115,4 +115,20 @@ public class ProductBatchComponentDAO {
         comp.setIngredientName(rs.getString(10));
         return comp;
     }
+
+    public void updateProductBatchComponent(ProductBatchComponentDTO batchComponentDTO) throws SQLException {
+        CallableStatement stmt = database.callableStatement("{call UpdateProductBatchComponent(?,?,?,?,?,?)}");
+        stmt.setString(1, String.valueOf(batchComponentDTO.getId()));
+        stmt.setString(2, String.valueOf(batchComponentDTO.getIngredientBatchID()));
+        stmt.setString(3, String.valueOf(batchComponentDTO.getLaborantID()));
+        stmt.setString(4, String.valueOf(batchComponentDTO.getTara()));
+        stmt.setString(5, String.valueOf(batchComponentDTO.getNetto()));
+        stmt.setString(6, String.valueOf(batchComponentDTO.getTerminal()));
+
+        try {
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

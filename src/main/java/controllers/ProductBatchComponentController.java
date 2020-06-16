@@ -49,8 +49,13 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
     @Override
-    public Response updateProductBatchComponent(int batchId, int ingredientId, double amount) {
-        return Response.ok().build();
+    public Response updateProductBatchComponent(ProductBatchComponentDTO batchComponent) {
+        try {
+            ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
+            return
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
     @Override
