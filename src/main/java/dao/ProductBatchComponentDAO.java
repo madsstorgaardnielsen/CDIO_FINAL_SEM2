@@ -80,8 +80,9 @@ public class ProductBatchComponentDAO {
         componentDTO.setProductBatchID(rs.getInt(1));
         componentDTO.setIngredientName(rs.getString(3));
         componentDTO.setAmount(rs.getDouble(4));
-
+        componentDTO.setTolerance(rs.getDouble(5));
     }
+
     public ArrayList<ProductBatchComponentDTO> getCompByBatch(int batchID) throws SQLException, IOException {
         String statementString = "{call GetCompByBatch(?)}";
         statement = database.callableStatement(statementString);

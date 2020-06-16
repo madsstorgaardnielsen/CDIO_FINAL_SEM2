@@ -69,7 +69,6 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
             ArrayList<ProductBatchComponentDTO> list = ProductBatchComponentDAO.getInstance().getProductBatchComponent(batchID);
             for (ProductBatchComponentDTO componentDTO : list) {
                 if (componentDTO.getLaborantID() == 0) {
-
                     return Response.ok(componentDTO).build();
                 }
             }
