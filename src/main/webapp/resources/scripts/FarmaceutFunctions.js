@@ -223,3 +223,48 @@ function invertTextToBoolean(active) {
     else
         return true;
 }
+
+
+function addIngredientsform(){
+    $("#header").text("Råvare administration");
+    $("#container").html(
+        '<form action="javascript:generateIngredient()">' +
+        '<input type="text" placeholder="ingredient ID" id="ingredientID">' +
+        '<input type="text" placeholder="ingredient Name" id="ingrediantName">' +
+        '</select> <br>' +
+        '<button class="btn">Bekræft ID og navn</button>' +
+        '</form>'
+    );
+
+}
+
+function getIngredients() { //gets existing ingredienets from backend
+    $("#header").text("Recept oversigt");
+    $("#container").html(
+        '<table> <thead> <tr>' +
+        '<th>Ingredient ID</th>' +
+        '<th>Ingredient Name</th>' +
+        '<th colspan="1"></th>' +
+        '</tr> </thead> ' +
+        '<tbody id="tablebody"></tbody> ' +
+        '</table>'
+    );
+    var row;
+    Agent.GET("rest/ingredient", function (data) {
+        $.each(data, function () {
+            row = $("#tablebody").append(generateIngredientHtml(this));
+        });
+       }, function (data) {
+        $("#container").html($(data.responseText).find("u").first().text());
+    });
+}
+
+function generateIngredientHtml(ingredients) { //generates html to show in recipeTable
+    return '<tr> ' +
+        '<td class = ingredientID>' + ingredients.ingredientID + '</td>' +
+        '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
+        '<td class = editbutton> <button class="editbtn">IDK</button></td>' +
+        '</tr>'
+}
+
+
