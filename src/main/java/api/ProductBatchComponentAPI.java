@@ -26,18 +26,11 @@ public class ProductBatchComponentAPI {
         return Response.ok().build(); //ProductBatchComponentController.getInstance().getProductBatchComponent(ID);
     }
 
-    @Path("/{ID}/{tara}/")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response validateTara(@PathParam("ID") int ID, @PathParam("tara") double tara) {
-        return Response.ok().build(); //ProductBatchComponentController.getInstance().validateTara(ID, tara);
-    }
-
     @Path("/validateBatch/{ID}/{ingredientBatchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) {
-        return Response.ok().build(); //ProductBatchComponent.Controller.getInstance().validateIngredientBatch(ID, batchID);
+    public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) throws Exception {
+        return ProductBatchComponentController.getInstance().validateIngredientBatch(ID, batchID);
     }
 
     @Path("/afvejning/getproductbatchcomponent/{batchID}/")

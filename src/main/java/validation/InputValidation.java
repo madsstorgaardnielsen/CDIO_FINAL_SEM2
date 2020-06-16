@@ -1,5 +1,6 @@
 package validation;
 
+import dao.ProductBatchComponentDAO;
 import dto.*;
 
 import java.text.DecimalFormat;
@@ -183,5 +184,19 @@ public class InputValidation {
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;
+    }
+
+    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, RecipeComponentDTO recipe) {
+         double Netto = batchComponentDTO.getNetto();
+         double amount = recipe.getNonNetto();
+         double tolerance = recipe.getTolerance() * 0.01;
+         double upperbound = amount + (amount * tolerance);
+         double lowerbound = amount - (amount * tolerance);
+         return Netto <= upperbound && Netto >= lowerbound;
+    }
+
+    public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {
+        int ingredient = componentDTO.getIngredientID();
+        return ingredient == batch.getIngredientId();
     }
 }

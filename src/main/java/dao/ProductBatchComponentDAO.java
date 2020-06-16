@@ -114,7 +114,6 @@ public class ProductBatchComponentDAO {
         comp.setNetto(rs.getDouble(7));
         comp.setTerminal(rs.getInt(8));
         comp.setAmount(rs.getDouble(9));
-        comp.setIngredientName(rs.getString(10));
         return comp;
     }
 
@@ -132,5 +131,22 @@ public class ProductBatchComponentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ProductBatchComponentDTO getProductBatchComponentByID(int batchID) throws SQLException {
+        CallableStatement stmt = database.callableStatement("{call GetProductBatchComponentByID(?)}");
+
+        stmt.setString(1, String.valueOf(batchID));
+        ProductBatchComponentDTO batch = new ProductBatchComponentDTO();
+        try {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                batch = getComponentInfo(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return batch;
     }
 }

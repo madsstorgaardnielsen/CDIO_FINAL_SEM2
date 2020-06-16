@@ -188,4 +188,17 @@ public class ProductBatchDAO implements IProductBatchDAO {
             throw new IOException("Something went wrong with addProductBatch()");
         }
     }
+
+    public void setStatusDone(ProductBatchDTO batch) throws SQLException {
+        statement = database.callableStatement("{call SetStatusDone(?,?,?)}");
+        statement.setString(1, String.valueOf(batch.getProductBatchId()));
+        statement.setString(2, String.valueOf(batch.getTaraSum()));
+        statement.setString(3, String.valueOf(batch.getNettoSum()));
+
+        try {
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

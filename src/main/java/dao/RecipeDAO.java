@@ -185,11 +185,10 @@ public class RecipeDAO implements IRecipeDAO {
 
     public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetRecipeComponent}");
-        stmt.setString(1, String.valueOf(recipeID));
+        stmt.setString(1,String.valueOf(recipeID));
         stmt.setString(2, String.valueOf(ingredientID));
 
         RecipeComponentDTO componentDTO = new RecipeComponentDTO();
-        ;
         ResultSet rs = stmt.executeQuery();
         try {
             while (rs.next()) {
