@@ -124,6 +124,7 @@ public class RecipeComponentDAO {
         recipeComponentDTO.setIngredientID(rs.getInt(2));
         recipeComponentDTO.setTolerance(rs.getDouble(3));
         recipeComponentDTO.setNonNetto(rs.getDouble(4));
+        recipeComponentDTO.setIngredientName(rs.getString(5));
     }
 
     public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
