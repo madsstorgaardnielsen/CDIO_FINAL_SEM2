@@ -12,7 +12,8 @@ function getAllProducts() { //shows all productbatches
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
-        '<button id="adderbtn" class="viewbtn" onclick="addProductBatch()">Tilføj ny</button>'
+        '<div id="inputID"></div>' +
+        '<button class="viewbtn" style="width: 20%;" onclick="inputRecipeID()">Tilføj ny</button>'
     );
     var row;
     Agent.GET("rest/productBatch", function (data) {
@@ -101,9 +102,22 @@ function generateCompList(component) { //generates html for rows for each compon
         '</tr>'
 }
 
-function addProductBatch(){
-    var id = $("#container").attr("data-id");
+function inputRecipeID(){
+    $("#inputID").html('<input id="receptidinput" style="width:15%;" type="number" placeholder="Indsæt recept ID" name="receptid" required>' +
+        '<button type="submit" style="width:5%; display:inline;" onclick="addProductBatch()">Udfør</button>')
+}
 
+function addProductBatch(){
+    /*lortet virker ikke
+
+    var receptid_in =$("#receptidinput").val;
+    var userID = $("#container").attr("data-id");
+    Agent.POST("/rest/productBatch/"+receptid_in+"/"+userID+"/", userID ,function (data){
+        alert("produktbatch oprettet");
+    },function (data){
+        alert("fejl");
+    } )
+*/
 }
 
 function init() {

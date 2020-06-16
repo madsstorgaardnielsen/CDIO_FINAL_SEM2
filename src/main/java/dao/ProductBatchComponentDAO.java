@@ -39,10 +39,10 @@ public class ProductBatchComponentDAO {
 
     public void addComponentsByRecipe(RecipeDTO recipe, int batchID) throws SQLException, IOException {
         // making string for statement
-        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
+        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()) {
-            statementString += "(" + batchID + ", " + comp.getIngredientID() + "),";
+            statementString += "(" + batchID + ", " + comp.getIngredientID()+ ", " + comp.getNonNetto()+ "),";
         }
         statementString = statementString.substring(0, statementString.length() - 1);
         //System.out.println(statementString); //testing
@@ -88,7 +88,7 @@ public class ProductBatchComponentDAO {
         String statementString = "{call GetCompByBatch(?)}";
         statement = database.callableStatement(statementString);
         statement.setInt(1, batchID);
-        ArrayList<ProductBatchComponentDTO> components = new ArrayList<ProductBatchComponentDTO>();
+        ArrayList<ProductBatchComponentDTO> components = new ArrayList<>();
         try {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -114,6 +114,7 @@ public class ProductBatchComponentDAO {
         comp.setNetto(rs.getDouble(7));
         comp.setTerminal(rs.getInt(8));
         comp.setAmount(rs.getDouble(9));
+        comp.setIngredientName(rs.getString(10));
         return comp;
     }
 
