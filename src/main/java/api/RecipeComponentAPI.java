@@ -18,14 +18,21 @@ public class RecipeComponentAPI {
         return RecipeComponentController.getInstance().getAllRecipeComponents();
     }
 
-    @Path("/{recipeComponentId}/")
+    @Path("/{recipeId}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRecipeComponentsFromID(@PathParam("recipeId") int recipeId) throws Exception {
+        return RecipeComponentController.getInstance().getAllRecipeComponentsFromID(recipeId);
+    }
+
+/*    @Path("/{recipeComponentId}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeComponent(@PathParam("recipeComponentId") int recipeComponentId,
                                        @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID) throws Exception {
         return RecipeComponentController.getInstance().getRecipeComponent(recipeComponentId, recipeComponentIngredientID);
     }
-
+*/
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

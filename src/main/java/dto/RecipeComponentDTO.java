@@ -2,19 +2,30 @@ package dto;
 
 public class RecipeComponentDTO {
 
-    private static final long serialVersionUID = 4732984592846315285L;
-    private int recipeID;
-    private int ingredientID;
-    private double nonNetto;
-    private double tolerance;
     public RecipeComponentDTO(int recipeID, int ingredientID, double nonNetto, double tolerance) {
         this.recipeID = recipeID;
         this.ingredientID = ingredientID;
         this.nonNetto = nonNetto;
         this.tolerance = tolerance;
     }
-    public RecipeComponentDTO() {
+
+    public RecipeComponentDTO(int recipeID, int ingredientID, double nonNetto, double tolerance, String ingredient) {
+        this.recipeID = recipeID;
+        this.ingredientID = ingredientID;
+        this.nonNetto = nonNetto;
+        this.tolerance = tolerance;
+        this.ingredientName = ingredient;
     }
+
+    public RecipeComponentDTO(){
+    }
+
+    private int recipeID;
+    private int ingredientID;
+    private double nonNetto;
+    private double tolerance;
+    private String ingredientName;
+    private static final long serialVersionUID = 4732984592846315285L;
 
     @Override
     public String toString() {
@@ -49,6 +60,13 @@ public class RecipeComponentDTO {
         return tolerance;
     }
 
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
     public void setTolerance(double tolerance) {
         this.tolerance = tolerance;
     }

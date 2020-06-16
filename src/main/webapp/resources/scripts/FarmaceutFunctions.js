@@ -13,9 +13,9 @@ function addRecipeForm() { //gets recipe ID and Name form
 function generateIngredient() {
     $("#header").text("Opret en recept");
     $("#container").html(
-        '<form action="javascript:generateRow()">' +
+    '<form action="javascript:generateRow()">' +
 
-     '<tr>' +
+        '<tr>' +
         '<td class="table">' +
         '<td> <input  type="text" placeholder="råvare ID"> </td>' +
         '<td> <input  type="text" placeholder="non Netto vægt i gram"> </td>' +
@@ -24,8 +24,6 @@ function generateIngredient() {
         '</tr>' +
         '<button class="btn">Tilføj råvare</button>'+
         '</form>');
-
-
 }
 
 function addRecipe() { //adds the new recipe to backend
@@ -58,7 +56,7 @@ function addRecipe() { //adds the new recipe to backend
     })
 }
 
-function getRecipe() { //gets existing Recipes from backend
+function getRecipes() { //gets existing Recipes from backend
     $("#header").text("Recept oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
@@ -69,14 +67,12 @@ function getRecipe() { //gets existing Recipes from backend
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
-    Agent.GET("rest/recipes", function (data) {
+
+    Agent.GET("rest/recipe", function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateRecipeHtml(this));
+            $("#tablebody").append(generateRecipeHtml(this));
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
+        getRecipeIDFromRow();
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -86,18 +82,29 @@ function getRecipe() { //gets existing Recipes from backend
 function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
-        '<td class= name>' + recipe.name + '</td>' +
-        '<td class= viewbtn> <button class="viewbtn">View commponents</button></td>' +
+        '<td class= recipeName>' + recipe.recipeName + '</td>' +
+        '<td class= btncont> <button class="viewbtn">View components</button></td>' +
         '</tr>'
 }
 
-function getRecipeComponent(recipeID){}
-function getUsers() { //gets existing users from backend
-    $("#header").text("Brugeroversigt");
+function generateRecipeComponentHtml(recipeComponent) { //generates html to show in recipeTable
+    return '<tr> ' +
+        '<td class = recipeID>' + recipeComponent.recipeID + '</td>' +
+        '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
+        '<td class = ingredientName>' + recipeComponent.ingredientName + '</td>' +
+        '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
+        '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
+        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '</tr>'
+}
+
+function getRecipeComponent(recipeId) {
+    $("#header").text("Komponent Oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
         '<th>RecipeID</th>' +
         '<th>ingredientID</th>' +
+        '<th>ingredientName</th>' +
         '<th>nonNetto</th>' +
         '<th>tolerance</th>' +
         '<th colspan="1"></th>' +
@@ -105,30 +112,41 @@ function getUsers() { //gets existing users from backend
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
-    Agent.GET("rest/user", function (data) {
+
+    Agent.GET('rest/recipecomponent/' + recipeId + '/', function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateUserHtml(this));
+            $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
+        listener();
+        listeneredit();
+        listenersave();
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
 }
 
-function listeneredit(row) {
-    $(row).on('click', '.editbtn', function () {
-        var row = $(this).closest('tr');
-        var recipeID = row.find(".firstName").text();
-        var recipeName = row.find(".recipeName").text();
 
+function getRecipeIDFromRow() {
+    $("#container").on('click', '.viewbtn', function () {
+        var row = $(this).closest('tr');
+        var recipeID = row.find(".recipeID").text();
+
+        getRecipeComponent(recipeID);
+    })
+}
+
+function listeneredit() {
+    $("#container").on('click', '.editbtn', function () {
+        var row = $(this).closest('tr');
+        //var recipeID = row.find(".recipeID").text();
+        //var ingredientId = row.find(".ingredientId").text();
+        var nonNetto = row.find(".nonNetto").text();
+        var tolerance = row.find(".tolerance").text();
 
         row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
-        row.find(".recipeName").html('<input type="text" placeholder="' + recipeName + '" id="editrecipeName" data-orig="'+ recipeName +'">');
-
-
+        row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
+        row.find(".nonNetto").html('<input type="text" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
+        row.find(".tolerance").html('<input type="text" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
 }
@@ -206,3 +224,71 @@ function invertTextToBoolean(active) {
     else
         return true;
 }
+
+
+//functions for ingredients and htmlgeneration below
+
+function addIngredientform(){ // Opret en ingredients form
+    $("#header").text("Råvare administration");
+    $("#container").html(
+        '<form action="javascript:addIngredient()">' +
+        '<input type="text" placeholder="Ingredient ID" id="ingredientID">' +
+        '<input type="text" placeholder="Ingredient Name" id="ingredientName">' +
+        '</select> <br>' +
+        '<button class="btn">Bekræft ID og navn</button>' +
+        '</form>'
+    );
+
+}
+function addIngredient() { //adds the new ingredient to backend
+    var ingredient = {};
+    ingredient.ingredientID = $("#ingredientID").val();
+    ingredient.ingredientName = $("#ingredientName").val();
+
+    Agent.POST("rest/ingredient", ingredient, function () {
+        $("#container").html('' +
+            '<form action="Farmaceut.html">' +
+            '<div class="boxedText">Råvare oprettet</div>' +
+            '<button class="btn">Videre</button>' +
+            '</form>'
+        )
+    }, function (data) {
+        $("#error").remove();
+        console.log(data);
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Råvare ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>'
+        );
+    })
+}
+
+function getIngredient() { //gets existing ingredients from backend
+    $("#header").text("Råvare oversigt");
+    $("#container").html(
+        '<table> <thead> <tr>' +
+        '<th>Ingredient ID</th>' +
+        '<th>Ingredient Name</th>' +
+
+        '</tr> </thead> ' +
+        '<tbody id="tablebody"></tbody> ' +
+        '</table>'
+    );
+    var row;
+    Agent.GET("rest/ingredient", function (data) {
+        $.each(data, function () {
+            row = $("#tablebody").append(generateIngredientHtml(this));
+        });
+       }, function (data) {
+        $("#container").html($(data.responseText).find("u").first().text());
+    });
+}
+
+function generateIngredientHtml(ingredients) { //generates html to show in recipeTable
+    return '<tr> ' +
+        '<td class = ingredientID>' + ingredients.ingredientID + '</td>' +
+        '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
+        '</tr>'
+}
+
+
