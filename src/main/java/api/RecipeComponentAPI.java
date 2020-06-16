@@ -37,9 +37,9 @@ public class RecipeComponentAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateRecipeComponent(@QueryParam("recipeID") int recipeID,
-                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID,
-                                          @QueryParam("recipeCompNonNetto") double recipeCompNonNetto,
-                                          @QueryParam("recipeCompTolerance") double recipeCompTolerance) throws Exception {
+                                          @QueryParam("ingredientId") int recipeCompIngredientID,
+                                          @QueryParam("nonNetto") double recipeCompNonNetto,
+                                          @QueryParam("tolerance") double recipeCompTolerance) throws Exception {
         return RecipeComponentController.getInstance().updateRecipeComponent(recipeID, recipeCompIngredientID, recipeCompNonNetto, recipeCompTolerance);
     }
 

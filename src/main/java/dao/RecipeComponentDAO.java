@@ -55,18 +55,28 @@ public class RecipeComponentDAO {
 
         String updateRecipeComponent = "{call UpdateRecipeComponent(?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(updateRecipeComponent);
-        statement.setInt(1, recipe.getIngredientID());
+        statement.setInt(1, recipe.getRecipeID());
         statement.setInt(2, recipe.getIngredientID());
         statement.setDouble(3, recipe.getNonNetto());
         statement.setDouble(4, recipe.getTolerance());
         try {
             statement.executeUpdate();
-            System.out.println("Recipe successfully updated");
+            System.out.println("RecipeComponent successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
-            throw new IOException("Recipe could no be updated");
+            throw new IOException("RecipeComponent could no be updated");
         }
-        return recipe;
+
+        //TODO
+        //det her er muligvis noget rigtig bæ, men kan ikke få ingredient name med tilbage på en anden måde
+        RecipeComponentDTO recipe2 = null;
+        try {
+            recipe2 = getRecipeComponent(recipe.getRecipeID(), recipe.getIngredientID());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return recipe2;
     }
 
     public void deleteRecipeComponent(int recipeID, int ingredientID) throws IOException, SQLException {
@@ -122,8 +132,8 @@ public class RecipeComponentDAO {
     public void getRecipeComponentInfo(ResultSet rs, RecipeComponentDTO recipeComponentDTO) throws SQLException {
         recipeComponentDTO.setRecipeID(rs.getInt(1));
         recipeComponentDTO.setIngredientID(rs.getInt(2));
-        recipeComponentDTO.setTolerance(rs.getDouble(3));
-        recipeComponentDTO.setNonNetto(rs.getDouble(4));
+        recipeComponentDTO.setNonNetto(rs.getDouble(3));
+        recipeComponentDTO.setTolerance(rs.getDouble(4));
         recipeComponentDTO.setIngredientName(rs.getString(5));
     }
 

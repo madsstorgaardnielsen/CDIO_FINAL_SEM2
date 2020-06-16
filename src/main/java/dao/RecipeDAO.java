@@ -87,14 +87,11 @@ public class RecipeDAO implements IRecipeDAO {
 
     public RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException {
 
-        String updateRecipe = "{call UpdateRecipe(?,?,?,?,?)}";
+        String updateRecipe = "{call UpdateRecipe(?,?)}";
         for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
             PreparedStatement statement = database.callableStatement(updateRecipe);
             statement.setInt(1, recipe.getRecipeID());
             statement.setString(2, recipe.getRecipeName());
-            statement.setInt(3, recipe.getRecipeCompList().get(i).getIngredientID());
-            statement.setDouble(4, recipe.getRecipeCompList().get(i).getNonNetto());
-            statement.setDouble(5, recipe.getRecipeCompList().get(i).getTolerance());
             try {
                 statement.executeUpdate();
                 System.out.println("Recipe successfully updated");

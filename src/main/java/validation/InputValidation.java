@@ -93,7 +93,6 @@ public class InputValidation {
         int integerLengthTolerance = doubleToTextTolerance.indexOf('.');
         int decimalLengthTolerance = doubleToTextTolerance.length()-integerLengthTolerance-1;
 
-
         if (recipeID < 1 || recipeID > 99999999) {
             return false;
         } else if (ingredientId < 1 || ingredientId > 99999999) {

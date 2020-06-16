@@ -29,7 +29,7 @@ function generateIngredient() {
 function addRecipe() { //adds the new recipe to backend
     var recipe = {};
     //recipe.userId = 0;
-    recipe.RecipeID = $("#recipeID").val();
+    recipe.recipeID = $("#recipeID").val();
     recipe.recipeName = $("#recipeName").val();
     recipe.ingredientID = $("#ingredientID").val();
     recipe.nonNetto = $("#nonNetto").val();
@@ -140,46 +140,43 @@ function listeneredit() {
         var row = $(this).closest('tr');
         //var recipeID = row.find(".recipeID").text();
         //var ingredientId = row.find(".ingredientId").text();
+        //var ingredientName = row.find(".ingredientName").text();
         var nonNetto = row.find(".nonNetto").text();
         var tolerance = row.find(".tolerance").text();
 
-        row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
-        row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
+        //row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
+        //row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
+        //row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName" data-orig="'+ ingredientName +'">');
         row.find(".nonNetto").html('<input type="text" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
         row.find(".tolerance").html('<input type="text" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
-        row.find(".editbutton").html('<button class="savebtn">Gem</button>');
+        row.find(".editbtn").html('<button class="savebtn">Gem</button>');
     })
 }
 
-function listenersave(row) {
-    $(row).on('click', '.savebtn', function () {
+function listenersave() {
+    $("#container").on('click', '.savebtn', function () {
         var row = $(this).closest('tr');
-        var recipeID = row.find(".userId").text();
-        var recipeName = row.find("#editrecipeID").val();
+        var recipeID = row.find(".recipeID").text();
+        var ingredientId = row.find(".ingredientId").text();
+        var ingredientName = row.find(".ingredientName").text();
+        var nonNetto = row.find("#editnonNetto").val();
+        var tolerance = row.find("#edittolerance").val();
 
-
-        var origrecipeName = row.find("#editrecipeName").attr('data-orig');
-        var origingredientID = row.find("#editingredientID").attr('data-orig');
         var orignonNetto = row.find("#editnonNetto").attr('data-orig');
         var origtolerance = row.find("#edittolerance").attr('data-orig');
 
-        var params = "?userId=" + recipeID;
-        
-
-        if (recipeName !== "" && recipeName !== origrecipeName)
-            params = params + "&recipeName=" + recipeName;
-
-        if (ingredientID !== "" && ingredientID !== origingredientID)
-            params= params + "&ingredientID=" + ingredientID;
+        var params = "?recipeID=" + recipeID;
+            params = params + "&ingredientId=" + ingredientId;
+            params = params + "&ingredientName=" + ingredientName;
 
         if (nonNetto !== "" && nonNetto !== orignonNetto)
             params = params + "&nonNetto=" + nonNetto;
 
-        if (tolerance !== origtolerance)
+        if (tolerance !== "" && tolerance !== origtolerance)
             params = params + "&tolerance=" + tolerance;
 
-        Agent.PUT("rest/user" + params, null, function (data) {
-            row.replaceWith(generateRecipeHtml(data));
+        Agent.PUT("rest/recipecomponent" + params, null, function (data) {
+            row.replaceWith(generateRecipeComponentHtml(data));
         }, function (data) {
             window.alert("Ændringer ikke gemt: " + $(data.responseText).find("u").first().text());
             console.log(data)
