@@ -44,7 +44,7 @@ public class IngredientDAO implements IIngredientDAO {
         statement.setString(2, ingredient.getIngredientName());
 
         try {
-            statement.executeUpdate();
+            statement.execute();
             System.out.println("Ingredient successfully added to database");
         } catch (Exception e) {
             e.printStackTrace();

@@ -223,26 +223,50 @@ function invertTextToBoolean(active) {
 }
 
 
-function addIngredientsform(){
+//functions for ingredients and htmlgeneration below
+
+function addIngredientform(){ // Opret en ingredients form
     $("#header").text("Råvare administration");
     $("#container").html(
-        '<form action="javascript:generateIngredient()">' +
-        '<input type="text" placeholder="ingredient ID" id="ingredientID">' +
-        '<input type="text" placeholder="ingredient Name" id="ingrediantName">' +
+        '<form action="javascript:addIngredient()">' +
+        '<input type="text" placeholder="Ingredient ID" id="ingredientID">' +
+        '<input type="text" placeholder="Ingredient Name" id="ingredientName">' +
         '</select> <br>' +
         '<button class="btn">Bekræft ID og navn</button>' +
         '</form>'
     );
 
 }
+function addIngredient() { //adds the new ingredient to backend
+    var ingredient = {};
+    ingredient.ingredientID = $("#ingredientID").val();
+    ingredient.ingredientName = $("#ingredientName").val();
 
-function getIngredients() { //gets existing ingredienets from backend
-    $("#header").text("Recept oversigt");
+    Agent.POST("rest/ingredient", ingredient, function (data) {
+        $("#container").html('' +
+            '<form action="Farmaceut.html">' +
+            '<div class="boxedText">Råvare oprettet</div>' +
+            '<button class="btn">Videre</button>' +
+            '</form>'
+        )
+    }, function (data) {
+        $("#error").remove();
+        console.log(data);
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Råvare ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>'
+        );
+    })
+}
+
+function getIngredient() { //gets existing ingredients from backend
+    $("#header").text("Råvare oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
         '<th>Ingredient ID</th>' +
         '<th>Ingredient Name</th>' +
-        '<th colspan="1"></th>' +
+
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
@@ -261,7 +285,6 @@ function generateIngredientHtml(ingredients) { //generates html to show in recip
     return '<tr> ' +
         '<td class = ingredientID>' + ingredients.ingredientID + '</td>' +
         '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
-        '<td class = editbutton> <button class="editbtn">IDK</button></td>' +
         '</tr>'
 }
 
