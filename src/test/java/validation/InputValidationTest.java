@@ -82,7 +82,6 @@ class InputValidationTest {
         ProductBatchComponentDTO pbcd = new ProductBatchComponentDTO();
 
         pbd.setProductBatchId(1);
-        pbd.setIngredientBatchId(1);
         pbd.setRecipeId(1);
         pbd.setUserId(1);
         pbd.setStatus(1);
@@ -91,7 +90,6 @@ class InputValidationTest {
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(-1);
-        pbd.setIngredientBatchId(-1);
         pbd.setRecipeId(-1);
         pbd.setUserId(-1);
         pbd.setStatus(-1);
@@ -100,7 +98,6 @@ class InputValidationTest {
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(1000000000);
-        pbd.setIngredientBatchId(1000000000);
         pbd.setRecipeId(1000000000);
         pbd.setUserId(1000000000);
         pbd.setStatus(4);
@@ -119,6 +116,16 @@ class InputValidationTest {
         rp.setRecipeName("skateboard");
         rp.addToRecipeCompList(recipeComponentDTO);
 
-        iv.recipeInputValidation(rp);
+        assertTrue(iv.recipeInputValidation(rp));
     }
+
+    @Test
+    void recipeComponentInputValidation() {
+        InputValidation iv = new InputValidation();
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(999, 1, 6.4444, 7.3333);
+        assertTrue(iv.recipeComponentInputValidation(recipeComponentDTO));
+
+    }
+
+
 }

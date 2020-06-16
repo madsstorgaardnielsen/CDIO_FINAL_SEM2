@@ -13,9 +13,9 @@ function addRecipeForm() { //gets recipe ID and Name form
 function generateIngredient() {
     $("#header").text("Opret en recept");
     $("#container").html(
-        '<form action="javascript:generateRow()">' +
+    '<form action="javascript:generateRow()">' +
 
-     '<tr>' +
+        '<tr>' +
         '<td class="table">' +
         '<td> <input  type="text" placeholder="råvare ID"> </td>' +
         '<td> <input  type="text" placeholder="non Netto vægt i gram"> </td>' +
@@ -24,8 +24,6 @@ function generateIngredient() {
         '</tr>' +
         '<button class="btn">Tilføj råvare</button>'+
         '</form>');
-
-
 }
 
 function addRecipe() { //adds the new recipe to backend
@@ -69,12 +67,12 @@ function getRecipes() { //gets existing Recipes from backend
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
+
     Agent.GET("rest/recipe", function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateRecipeHtml(this));
+            $("#tablebody").append(generateRecipeHtml(this));
         });
-        getRecipeIDFromRow(row);
+        getRecipeIDFromRow();
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -85,7 +83,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= editbutton> <button class="viewbtn">View components</button></td>' +
+        '<td class= btncont> <button class="viewbtn">View components</button></td>' +
         '</tr>'
 }
 
@@ -95,7 +93,7 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
         '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
         '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
         '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
-        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '<td class = btncont> <button class="editbtn">Edit component</button></td>' +
         '</tr>'
 }
 
@@ -112,24 +110,24 @@ function getRecipeComponent(recipeId) {
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
     );
-    var row;
-    Agent.GET('rest/recipe/' + recipeId + '/', function (data) {
+
+    Agent.GET('rest/recipecomponent/' + recipeId + '/', function (data) {
         $.each(data, function () {
-            row = $("#tablebody").append(generateRecipeComponentHtml(this));
+            $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-        listener(row);
-        listeneredit(row);
-        listenersave(row);
+        listener;
+        listeneredit;
+        listenersave;
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
 }
 
 
-function getRecipeIDFromRow(row) {
-    $(row).on('click', '.viewbtn', function () {
+function getRecipeIDFromRow() {
+    $("#container").on('click', '.viewbtn', function () {
         var row = $(this).closest('tr');
-        var recipeID = row.find(".RecipeID").text();
+        var recipeID = row.find(".recipeID").text();
 
         getRecipeComponent(recipeID);
     })

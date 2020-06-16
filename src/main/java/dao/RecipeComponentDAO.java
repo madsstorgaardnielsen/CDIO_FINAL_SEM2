@@ -101,6 +101,24 @@ public class RecipeComponentDAO {
         return recipeComponentList;
     }
 
+    public ArrayList<RecipeComponentDTO> getAllRecipeComponentsFromID(int recipeID) throws Exception {
+        ArrayList<RecipeComponentDTO> recipeComponentList = new ArrayList<>();
+        CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponentsFromID(?)}");
+        stmt.setInt(1, recipeID);
+        ResultSet rs = stmt.executeQuery();
+        RecipeComponentDTO recipeComponentDTO;
+        try {
+            while (rs.next()) {
+                recipeComponentDTO = new RecipeComponentDTO();
+                getRecipeComponentInfo(rs, recipeComponentDTO);
+                recipeComponentList.add(recipeComponentDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recipeComponentList;
+    }
+
     public void getRecipeComponentInfo(ResultSet rs, RecipeComponentDTO recipeComponentDTO) throws SQLException {
         recipeComponentDTO.setRecipeID(rs.getInt(1));
         recipeComponentDTO.setIngredientID(rs.getInt(2));
@@ -111,7 +129,7 @@ public class RecipeComponentDAO {
     public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetRecipeComponent(?,?)}");
         stmt.setInt(1, recipeID);
-        stmt.setInt(1, ingredientID);
+        stmt.setInt(2, ingredientID);
         RecipeComponentDTO recipe = new RecipeComponentDTO();
         ResultSet resultSet = stmt.executeQuery();
         try {

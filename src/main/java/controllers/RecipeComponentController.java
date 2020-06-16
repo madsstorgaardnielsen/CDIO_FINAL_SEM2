@@ -1,11 +1,8 @@
 package controllers;
 
 import controllers.icontrollers.IRecipeComponentController;
-import controllers.icontrollers.IRecipeController;
 import dao.RecipeComponentDAO;
-import dao.RecipeDAO;
 import dto.RecipeComponentDTO;
-import dto.RecipeDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
@@ -51,7 +48,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         if (validation.recipeComponentInputValidation(recipeComponent)) {
             try {
                 RecipeComponentDAO.addRecipeComponent(recipeComponent);
-                return Response.ok().build();
+                return Response.ok(recipeComponent).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -65,7 +62,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(recipeID, ingredientID, nonNetto, tolerance);
         if (validation.recipeComponentInputValidation(recipeComponentDTO)) {
             try {
-                return Response.ok(RecipeComponentDAO.updateRecipeComponent(recipeComponentDTO)).build();
+                return Response.ok(recipeComponentDTO).build();
             } catch (Exception e) {
                 e.printStackTrace();
                 return Response.serverError().build();
@@ -87,15 +84,24 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response getRecipeComponent(int recipeID, int ingredientID) throws Exception {
+    public Response getAllRecipeComponentsFromID(int recipeID) {
         try {
-            RecipeComponentDTO recipe = RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
-            return Response.ok(recipe).build();
+            return Response.ok(RecipeComponentDAO.getAllRecipeComponentsFromID(recipeID)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Override
+    public Response getRecipeComponent(int recipeID, int ingredientID)  {
+        try {
+            RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
+            return Response.ok(RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID)).build();
 
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
         }
-
     }
 }

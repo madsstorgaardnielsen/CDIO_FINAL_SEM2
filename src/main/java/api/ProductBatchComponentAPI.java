@@ -1,5 +1,6 @@
 package api;
 
+import controllers.icontrollers.IProductBatchComponentController;
 import dto.ProductBatchComponentDTO;
 import controllers.ProductBatchComponentController;
 
@@ -37,5 +38,12 @@ public class ProductBatchComponentAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) {
         return Response.ok().build(); //ProductBatchComponent.Controller.getInstance().validateIngredientBatch(ID, batchID);
+    }
+
+    @Path("/afvejning/getproductbatchcomponent/{batchID}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) throws Exception{
+        return ProductBatchComponentController.getInstance().getNextComponent(batchId);
     }
 }

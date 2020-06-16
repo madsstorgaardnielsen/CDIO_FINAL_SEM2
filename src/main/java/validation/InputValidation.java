@@ -78,9 +78,32 @@ public class InputValidation {
         }
     }
 
-    //TODO
+
     public boolean recipeComponentInputValidation(RecipeComponentDTO recipeDTO) {
-        return false;
+        int recipeID = recipeDTO.getRecipeID();
+        int ingredientId = recipeDTO.getIngredientID();
+        double nonNetto = recipeDTO.getNonNetto();
+        double tolerance = recipeDTO.getTolerance();
+
+        String doubleToTextnonNetto = Double.toString(Math.abs(nonNetto));
+        int integerLengthnonNetto = doubleToTextnonNetto.indexOf('.');
+        int decimalLengthnonNetto = doubleToTextnonNetto.length()-integerLengthnonNetto-1;
+
+        String doubleToTextTolerance = Double.toString(Math.abs(tolerance));
+        int integerLengthTolerance = doubleToTextTolerance.indexOf('.');
+        int decimalLengthTolerance = doubleToTextTolerance.length()-integerLengthTolerance-1;
+
+
+        if (recipeID < 1 || recipeID > 99999999) {
+            return false;
+        } else if (ingredientId < 1 || ingredientId > 99999999) {
+            return false;
+        } else if (decimalLengthnonNetto != 4) {
+            return false;
+        } else if (decimalLengthTolerance != 4) {
+            return false;
+        }
+        return true;
     }
 
     public boolean addUserInputValidation(UserDTO userDTO) {

@@ -1,33 +1,81 @@
 package controllers;
 
 import controllers.icontrollers.IProductBatchComponentController;
+import dao.ProductBatchComponentDAO;
+import dao.ProductBatchDAO;
+import dao.RecipeDAO;
 import dto.IngredientBatchDTO;
+import dto.ProductBatchComponentDTO;
+import validation.InputValidation;
 
+import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductBatchComponentController implements IProductBatchComponentController {
-    @Override
-    public void deleteProductBatchComponent(int id) {
+    private static ProductBatchComponentController instance;
 
+    static {
+        try{
+            instance = new ProductBatchComponentController();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    InputValidation validation;
+    ProductBatchComponentDAO componentDAO;
+    ProductBatchComponentDTO componentDTO;
+
+    private ProductBatchComponentController() throws SQLException {
+        this.validation = new InputValidation();
+        this.componentDAO = new ProductBatchComponentDAO();
+        this.componentDTO = new ProductBatchComponentDTO();
+    }
+
+
+    public static ProductBatchComponentController getInstance(){
+        return instance;
     }
 
     @Override
-    public void addProductBatchComponent(int batchId, int ingredientId, double amount) {
-
+    public Response deleteProductBatchComponent(int id) {
+        return Response.ok().build();
     }
 
     @Override
-    public void updateProductBatchComponent(int batchId, int ingredientId, double amount) {
-
+    public Response addProductBatchComponent(int batchId, int ingredientId, double amount) {
+        return Response.ok().build();
     }
 
     @Override
-    public ArrayList<IngredientBatchDTO> getAllProductBatchComponents() throws Exception {
-        return null;
+    public Response updateProductBatchComponent(int batchId, int ingredientId, double amount) {
+        return Response.ok().build();
     }
 
     @Override
-    public IngredientBatchDTO getProductBatchComponents(int id) throws Exception {
-        return null;
+    public Response getAllProductBatchComponents() throws Exception {
+        return Response.ok(new ArrayList<IngredientBatchDTO>()).build();
+    }
+
+    @Override
+    public Response getProductBatchComponents(int id) throws Exception {
+        return Response.ok(new IngredientBatchDTO()).build();
+    }
+
+    @Override
+    public Response getNextComponent(int batchID) throws Exception {
+        try {
+            ArrayList<ProductBatchComponentDTO> list = ProductBatchComponentDAO.getInstance().getProductBatchComponent(batchID);
+            for (ProductBatchComponentDTO componentDTO : list) {
+                if (componentDTO.getLaborantID() == 0) {
+
+                    return Response.ok(componentDTO).build();
+                }
+            }
+            return Response.status(400, "ProductBatch er fuldt afvejet").build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 }
