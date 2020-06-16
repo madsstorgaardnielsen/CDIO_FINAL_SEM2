@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class UserDAO implements IUserDAO {
     private static IUserDAO instance;
-
     static {
         try {
             instance = new UserDAO();
@@ -38,11 +37,11 @@ public class UserDAO implements IUserDAO {
         String addUser = "{call addUser(?,?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(addUser);
 
-        statement.setString(1, user.getFirstName());
-        statement.setString(2, user.getLastName());
-        statement.setString(3, user.getInitials());
-        statement.setString(4, user.getRole());
-        statement.setInt(5, user.isActive() ? 1 : 0);
+        statement.setString(1,user.getFirstName());
+        statement.setString(2,user.getLastName());
+        statement.setString(3,user.getInitials());
+        statement.setString(4,user.getRole());
+        statement.setString(5,String.valueOf(user.isActive()? 1 : 0));
 
         try {
             statement.executeUpdate();
@@ -87,54 +86,35 @@ public class UserDAO implements IUserDAO {
         UserDTO user = new UserDTO();
         ResultSet resultSet = stmt.executeQuery();
         try {
-            while (resultSet.next()) {
+            while (resultSet.next()){
                 getUserInfo(resultSet, user);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return  user;
     }
-
-    public UserDTO getUserFromFirstNameLastName(String firstname, String lastname) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call getUserFromFirstNameLastName(?,?)}");
-        stmt.setString(1, firstname);
-        stmt.setString(2, lastname);
-
-        UserDTO user = new UserDTO();
-        ResultSet resultSet = stmt.executeQuery();
-        try {
-            while (resultSet.next()) {
-                getUserInfo(resultSet, user);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
 
     @Override
-    public UserDTO updateUser(UserDTO user) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?,?)}");
+    public UserDTO updateUser(UserDTO user) throws Exception{
+        CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?)}");
 
-        stmt.setInt(1, user.getUserId());
+        stmt.setString(1, String.valueOf(user.getUserId()));
         stmt.setString(2, user.getFirstName());
         stmt.setString(3, user.getLastName());
         stmt.setString(4, user.getInitials());
         stmt.setString(5, user.getRole());
-        stmt.setBoolean(6, user.getActive());
 
         ResultSet rs = stmt.executeQuery();
 
         try {
-            while (rs.next()) {
+            while (rs.next()){
                 getUserInfo(rs, user);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return  user;
     }
 
     @Override
@@ -142,33 +122,17 @@ public class UserDAO implements IUserDAO {
         CallableStatement stmt = database.callableStatement("{call UpdateActivity(?,?)}");
 
         stmt.setString(1, String.valueOf(user.getUserId()));
-        stmt.setString(2, String.valueOf(user.isActive() ? 1 : 0));
+        stmt.setString(2, String.valueOf(user.isActive()? 1:0));
 
         ResultSet rs = stmt.executeQuery();
 
         try {
-            while (rs.next()) {
+            while (rs.next()){
                 getUserInfo(rs, user);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
-    }
-
-    //for testing purposes
-    public void deleteUser(int id) throws IOException, SQLException {
-
-        String deleteUser = "{call DeleteUser(?)}";
-        PreparedStatement statement = database.callableStatement(deleteUser);
-        statement.setInt(1, id);
-
-        try {
-            statement.executeUpdate();
-            System.out.println("User successfully deleted");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("User could no be deleted");
-        }
+        return  user;
     }
 }

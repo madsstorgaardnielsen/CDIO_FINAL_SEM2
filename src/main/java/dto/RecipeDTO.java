@@ -6,42 +6,35 @@ import java.util.ArrayList;
 
 
 public class RecipeDTO implements IRecipeDTO {
-    private static final long serialVersionUID = 4732984592846315285L;
-    private int recipeID;
-    private String recipeName;
-    private ArrayList<RecipeComponentDTO> recipeCompList = new ArrayList<RecipeComponentDTO>();
-    public RecipeDTO(int recipeID, String recipeName, ArrayList<RecipeComponentDTO> recipeCompList) {
+    public RecipeDTO(int recipeID, String recipeName, ArrayList<RecipeComponentDTO> recipeCompList){
         this.recipeID = recipeID;
         this.recipeName = recipeName;
         this.recipeCompList = recipeCompList;
     }
-    public RecipeDTO(int recipeID, String recipeName) {
+
+    public RecipeDTO(int recipeID, String recipeName){
         this.recipeID = recipeID;
         this.recipeName = recipeName;
     }
+
     public RecipeDTO() {
 
     }
 
-    public String toString() {
-        return recipeID + " " + recipeName;
-    }
+    private int recipeID;
+    private String recipeName;
+    private ArrayList<RecipeComponentDTO> recipeCompList = new ArrayList<RecipeComponentDTO>();
+    private static final long serialVersionUID = 4732984592846315285L;
 
-    public int getRecipeID() {
-        return recipeID;
-    }
+    public String toString() {return recipeID+" "+recipeName;}
 
-    public void setRecipeID(int recipeID) {
-        this.recipeID = recipeID;
-    }
+    public int getRecipeID() {return recipeID;}
 
-    public String getRecipeName() {
-        return recipeName;
-    }
+    public void setRecipeID(int recipeID) {this.recipeID = recipeID;}
 
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
-    }
+    public String getRecipeName() {return recipeName;}
+
+    public void setRecipeName(String recipeName) {this.recipeName = recipeName;}
 
     public ArrayList<RecipeComponentDTO> getRecipeCompList() {
         return recipeCompList;

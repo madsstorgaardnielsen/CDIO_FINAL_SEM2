@@ -3,7 +3,6 @@ package controllers.icontrollers;
 import controllers.IngredientBatchController;
 import controllers.ProductBatchComponentController;
 import dto.IngredientBatchDTO;
-import dto.ProductBatchComponentDTO;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public interface IProductBatchComponentController {
 
     Response addProductBatchComponent(int batchId, int ingredientId, double amount);
 
-    Response updateProductBatchComponent(ProductBatchComponentDTO batchComponentDTO);
+    Response updateProductBatchComponent(int batchId, int ingredientId, double amount);
 
     Response getAllProductBatchComponents() throws Exception;
 

@@ -43,7 +43,7 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
         statement.setInt(2, ingredientBatch.getIngredientId());
         statement.setDouble(3, ingredientBatch.getAmount());
-        statement.setString(4, ingredientBatch.getSupplier());
+        statement.setString(4,ingredientBatch.getSupplier());
 
         try {
             statement.executeUpdate();
@@ -60,9 +60,9 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
         statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setInt(2, ingredientBatch.getIngredientId());
+        statement.setInt(2,ingredientBatch.getIngredientId());
         statement.setDouble(3, ingredientBatch.getAmount());
-        statement.setString(4, ingredientBatch.getSupplier());
+        statement.setString(4,ingredientBatch.getSupplier());
 
         try {
             statement.executeUpdate();

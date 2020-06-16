@@ -104,7 +104,7 @@ class RecipeDAOTest {
             recipeDAO.addRecipe(recipeDTO);
             assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
             recipeDAO.deleteRecipe(99999999);
-            assertNotEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
+            assertNotEquals(99999999,recipeDAO.getRecipe(99999999).getRecipeID());
         } catch (Exception e) {
             e.printStackTrace();
         }

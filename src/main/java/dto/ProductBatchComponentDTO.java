@@ -3,7 +3,6 @@ package dto;
 import dto.idto.IProductBatchComponentDTO;
 
 public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
-    private static final long serialVersionUID = 4545864587995944260L;
     private int id;
     private int productBatchID;
     private int ingredientID;
@@ -16,9 +15,10 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     private double amount;
     private double tolerance;
     private double brutto; //
+    private static final long serialVersionUID = 4545864587995944260L;
 
     public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID, int ingredientID, int amount, int tolerance
-            , int laborantID, double tara, double netto, double brutto, int terminal, String ingredientName) {
+            ,int laborantID, double tara, double netto, double brutto, int terminal, String ingredientName) {
         this.id = id;
         this.productBatchID = productBatchID;
         this.ingredientBatchID = ingredientBatchID;
@@ -123,13 +123,22 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     }
 
     @Override
-    public void setIngredientID(int ingredientID) {
-        this.ingredientID = ingredientID;
+    public double getAmount() {
+        return amount;
     }
 
     @Override
-    public double getAmount() {
-        return amount;
+    public double getTolerance() {
+        return tolerance;
+    }
+
+    public double getBrutto() {
+        return brutto;
+    }
+
+    @Override
+    public void setIngredientID(int ingredientID) {
+        this.ingredientID = ingredientID;
     }
 
     @Override
@@ -138,17 +147,8 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     }
 
     @Override
-    public double getTolerance() {
-        return tolerance;
-    }
-
-    @Override
     public void setTolerance(double tolerance) {
         this.tolerance = tolerance;
-    }
-
-    public double getBrutto() {
-        return brutto;
     }
 
     @Override
@@ -156,17 +156,17 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
         this.brutto = brutto;
     }
 
-    public String toString() {
+    public String toString(){
         String out = "ComponentID: " + id +
                 ", ProductBatchID: " + productBatchID +
-                ", IngredientID: " + ingredientID +
+                ", IngredientID: "+ ingredientID +
                 ", IngredientName: " + ingredientName +
-                ", Amount: " + amount +
+                ", Amount: " + amount+
                 ", Tolerance: " + tolerance +
-                ", UserID" + laborantID +
-                ", Tara: " + tara +
+                ", UserID" + laborantID+
+                ", Tara: " + tara+
                 ", Netto: " + netto +
-                ", Brutto: " + brutto +
+                ", Brutto: " + brutto+
                 ", Terminal: " + terminal;
         return out;
     }

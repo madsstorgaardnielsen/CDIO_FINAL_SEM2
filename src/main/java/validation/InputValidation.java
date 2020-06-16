@@ -1,6 +1,5 @@
 package validation;
 
-import dao.ProductBatchComponentDAO;
 import dto.*;
 
 import java.text.DecimalFormat;
@@ -23,13 +22,13 @@ public class InputValidation {
         return instance;
     }
 
-    public boolean userValidation(UserDTO user) {
+    public boolean userValidation(UserDTO user, String role) {
         //TODO: further validation
         if (!user.isActive())
             return false;
-        /*if (!user.getRole().equals(user.getRole())) {
+        if (!user.getRole().equals(role)) {
             return false;
-        }*/
+        }
         return true;
     }
 
@@ -52,7 +51,7 @@ public class InputValidation {
         double amount = ingredientBatchDTO.getAmount();
         String doubleToText = Double.toString(Math.abs(amount));
         int integerLength = doubleToText.indexOf('.');
-        int decimalLength = doubleToText.length() - integerLength - 1;
+        int decimalLength = doubleToText.length()-integerLength-1;
 
 
         if (batchId < 1 || batchId > 99999999) {
@@ -88,11 +87,11 @@ public class InputValidation {
 
         String doubleToTextnonNetto = Double.toString(Math.abs(nonNetto));
         int integerLengthnonNetto = doubleToTextnonNetto.indexOf('.');
-        int decimalLengthnonNetto = doubleToTextnonNetto.length() - integerLengthnonNetto - 1;
+        int decimalLengthnonNetto = doubleToTextnonNetto.length()-integerLengthnonNetto-1;
 
         String doubleToTextTolerance = Double.toString(Math.abs(tolerance));
         int integerLengthTolerance = doubleToTextTolerance.indexOf('.');
-        int decimalLengthTolerance = doubleToTextTolerance.length() - integerLengthTolerance - 1;
+        int decimalLengthTolerance = doubleToTextTolerance.length()-integerLengthTolerance-1;
 
         if (recipeID < 1 || recipeID > 99999999) {
             return false;
@@ -133,11 +132,11 @@ public class InputValidation {
 
         String doubleToTextTara = Double.toString(Math.abs(tara));
         int integerLengthTara = doubleToTextTara.indexOf('.');
-        int decimalLengthTara = doubleToTextTara.length() - integerLengthTara - 1;
+        int decimalLengthTara = doubleToTextTara.length()-integerLengthTara-1;
 
         String doubleToTextNetto = Double.toString(Math.abs(netto));
         int integerLengthNetto = doubleToTextNetto.indexOf('.');
-        int decimalLengthNetto = doubleToTextNetto.length() - integerLengthNetto - 1;
+        int decimalLengthNetto = doubleToTextNetto.length()-integerLengthNetto-1;
 
 
         if (productBatchId < 1 || productBatchId > 99999999) {
@@ -183,19 +182,5 @@ public class InputValidation {
             return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
         }
         return true;
-    }
-
-    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, RecipeComponentDTO recipe) {
-         double Netto = batchComponentDTO.getNetto();
-         double amount = recipe.getNonNetto();
-         double tolerance = recipe.getTolerance() * 0.01;
-         double upperbound = amount + (amount * tolerance);
-         double lowerbound = amount - (amount * tolerance);
-         return Netto <= upperbound && Netto >= lowerbound;
-    }
-
-    public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {
-        int ingredient = componentDTO.getIngredientID();
-        return ingredient == batch.getIngredientId();
     }
 }

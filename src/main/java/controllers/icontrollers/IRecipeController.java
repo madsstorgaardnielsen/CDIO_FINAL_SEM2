@@ -9,11 +9,11 @@ public interface IRecipeController {
 
     Response deleteRecipe(int ID);
 
-    Response addRecipe(RecipeDTO recipeDTO);
+    Response addRecipe(RecipeDTO recipeDTO) ;
 
     Response updateRecipe(int recipeID, String recipeName);
 
-    Response getAllRecipes() throws Exception;
+    Response getAllRecipes() throws Exception ;
 
-    Response getRecipe(int ID) throws Exception;
+    Response getRecipe(int ID) throws Exception ;
 }

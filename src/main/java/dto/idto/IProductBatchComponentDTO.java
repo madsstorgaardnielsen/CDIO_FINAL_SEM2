@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public interface IProductBatchComponentDTO extends Serializable {
 
-    String getIngredientName();
-
     void setIngredientName(String name);
+
+    String getIngredientName();
 
     int getId();
 
@@ -38,13 +38,13 @@ public interface IProductBatchComponentDTO extends Serializable {
 
     double getAmount();
 
-    void setAmount(double amount);
-
     double getTolerance();
 
-    void setTolerance(double tolerance);
-
     double getBrutto();
+
+    void setAmount(double amount);
+
+    void setTolerance(double tolerance);
 
     void setBrutto(double brutto);
 

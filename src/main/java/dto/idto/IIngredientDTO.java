@@ -6,9 +6,9 @@ public interface IIngredientDTO extends Serializable {
 
     int getIngredientID();
 
-    void setIngredientID(int ingredientID);
+    void setIngredientID(int ingredientID) ;
 
-    String getIngredientName();
+    String getIngredientName() ;
 
     void setIngredientName(String ingredientName);
 

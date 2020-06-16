@@ -9,16 +9,6 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
     double amount;
     String supplier;
 
-    public IngredientBatchDTO() {
-    }
-
-    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount, String supplier) {
-        this.ingredientBatchId = ingredientBatchId;
-        this.ingredientId = ingredientId;
-        this.amount = amount;
-        this.supplier = supplier;
-    }
-
     public String getSupplier() {
         return supplier;
     }
@@ -49,5 +39,15 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public IngredientBatchDTO() {
+    }
+
+    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount, String supplier) {
+        this.ingredientBatchId = ingredientBatchId;
+        this.ingredientId = ingredientId;
+        this.amount = amount;
+        this.supplier = supplier;
     }
 }

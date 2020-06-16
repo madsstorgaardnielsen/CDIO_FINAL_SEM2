@@ -84,11 +84,6 @@ public class UserDTO implements IUserDTO {
     }
 
     @Override
-    public boolean getActive() {
-        return active;
-    }
-
-    @Override
     public void setActive(String active) throws Exception {
         if (active.equals("true"))
             this.active = true;

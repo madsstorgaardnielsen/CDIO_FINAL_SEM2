@@ -23,7 +23,6 @@ function getRecipeName() {
     $("#container").attr('data-batchID', ''+ $("#batchID").val());
     var batchID = $("#container").attr('data-batchID');
     Agent.GET("rest/productBatch/"+ batchID +'/', function (data) {
-        $("#container").attr('data-recipeID', data.recipeId);
         Agent.GET("rest/recipe/"+ data.recipeId +'/', function (data) {
             $("#header").text("Recept navn");
             $("#container").html('' +
@@ -33,28 +32,17 @@ function getRecipeName() {
                 '</form>'
             );
         }, function (data) {
-            $("#error").remove();
-            console.log(data);
-            $("#container").append('' +
-                '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
-                '</div></div>'
-            );
+
         });
     }, function (data) {
-        $("#error").remove();
-        console.log(data);
-        $("#container").append('' +
-            '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
-            '</div></div>'
-        );
+
     });
 }
 
 function setStatus() {
     var batchID = $("#container").attr('data-batchID');
     Agent.GET("rest/productBatchComponent/afvejning/getproductbatchcomponent/"+ batchID +'/',function (data) {
+        if (data !== "done") {
             $("#header").text("Indtast Tara");
             $("#container").html('' +
                 '<div id="batchInfo" class="infocontainer">' +
@@ -72,16 +60,14 @@ function setStatus() {
                 '</form>' +
                 '</div>'
             );
-            $("#container").attr('data-compID', data.id);
-            $("#container").attr('data-ingredientID', data.ingredientID);
+            $("#container").attr('data-compID', data.id)
+        } else {
+            $("#container").html('' +
+                '<div class="boxedText">Produkt batch færdiggjort</div>'
+            )
+        }
     }, function (data) {
-        $("#error").remove();
-        console.log(data);
-        $("#container").append('' +
-            '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
-            '</div></div>'
-        );
+
     })
 }
 
@@ -89,13 +75,17 @@ function setTara() {
     var compID = $("#container").attr('data-compID');
     $("#container").attr('data-tara',''+ $("#tarainput").val());
     var tara = $("#container").attr('data-tara');
-    $("#header").text("Indtast raavarebatch");
-    $("#subcontainer").html('' +
-        '<form action="javascript:setRaavare()">' +
-        '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
-        '<button class="btn">Ok</button>' +
-        '</form>'
-    );
+    Agent.GET("rest/productBatchComponent/" + compID + "/" + tara +'/', function () {
+        $("#header").text("Indtast raavarebatch");
+        $("#subcontainer").html('' +
+            '<form action="javascript:setRaavare()">' +
+            '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
+            '<button class="btn">Ok</button>' +
+            '</form>'
+        )
+    }, function (data) {
+
+    })
 }
 
 function setRaavare() {
@@ -111,27 +101,23 @@ function setRaavare() {
             '</form>'
         )
     }, function (data) {
-        $("#error").remove();
-        console.log(data);
-        $("#container").append('' +
-            '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
-            '</div></div>'
-        );
+
     })
 }
 
 function setBrutto() {
     var batchcomp = {};
     batchcomp.id = $("#container").attr('data-compID');
+    batchcomp.productBatchID = $("#container").attr('data-batchID');
     batchcomp.ingredientBatchID = $("#container").attr('data-raavarebatch');
+    batchcomp.ingredientName = "null";
+    batchcomp.amount = 0;
+    batchcomp.tolerance = 0;
     batchcomp.laborantID = $("#container").attr('data-id');
     batchcomp.tara = $("#container").attr('data-tara');
+    batchcomp.netto = 0;
     batchcomp.brutto = $("#bruttoInput").val();
     batchcomp.terminal = 1;
-    batchcomp.productBatchID = $("#container").attr('data-recipeID');
-    batchcomp.ingredientID = $("#container").attr('data-ingredientID');
-
 
     Agent.PUT("rest/productBatchComponent", batchcomp, function () {
         $("#container").html('' +
@@ -141,13 +127,7 @@ function setBrutto() {
             '</form>'
         )
     }, function (data) {
-        $("#error").remove();
-        console.log(data);
-        $("#container").append('' +
-            '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
-            '</div></div>'
-        );
+        console.log(batchcomp);
     });
 }
 
