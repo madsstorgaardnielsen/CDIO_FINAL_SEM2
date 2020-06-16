@@ -11,8 +11,6 @@ import java.sql.SQLException;
 
 
 public class UserController implements IUserController {
-    private final InputValidation validation;
-    private final IUserDAO userDAO;
     private static IUserController instance;
 
     static {
@@ -22,6 +20,9 @@ public class UserController implements IUserController {
             throwables.printStackTrace();
         }
     }
+
+    private final InputValidation validation;
+    private final IUserDAO userDAO;
 
     private UserController() throws SQLException {
         this.userDAO = new UserDAO();
@@ -37,7 +38,7 @@ public class UserController implements IUserController {
         if (validation.addUserInputValidation(userDTO)) {
             try {
                 userDAO.addUser(userDTO);
-                return Response.ok().build();
+                return Response.ok(userDTO).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -81,14 +82,25 @@ public class UserController implements IUserController {
         }
     }
 
+    //used for testing purposes
+    public Response deleteUser(int id) {
+        try {
+            userDAO.deleteUser(id);
+            return Response.ok().build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
     @Override
     public Response getUser(String userId, String role) {
+
         try {
-            UserDTO user = userDAO.getUser(userId);
-            if (validation.userValidation(user, role))
-                return Response.ok(user).build();
-            else {
-                System.out.println(role + userId + user.getRole());
+
+            if (validation.userValidation(userDAO.getUser(userId))) {
+                return Response.ok(userDAO.getUser(userId)).build();
+            } else {
+                //System.out.println(role + userId + user.getRole());
                 return Response.status(400, "bruger har ikke adgang").build();
             }
         } catch (Exception e) {

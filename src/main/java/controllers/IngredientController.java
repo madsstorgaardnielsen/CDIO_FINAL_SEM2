@@ -49,7 +49,7 @@ public class IngredientController implements IIngredientController {
         if (validation.ingredientInputValidation(ingredientDTO))
             try {
                 ingredientDAO.addIngredient(ingredientDTO);
-                return Response.ok().build();
+                return Response.ok(ingredientDTO).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }

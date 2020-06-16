@@ -39,10 +39,10 @@ class IngredientBatchDAOTest {
         ibDTO.setSupplier("TestSupplier");
         ibDAO.addIngredientBatch(ibDTO);
 
-        assertEquals(5.5555,ibDAO.getIngredientBatch(99999999).getAmount());
+        assertEquals(5.5555, ibDAO.getIngredientBatch(99999999).getAmount());
         ibDTO.setAmount(6.6666);
         ibDAO.updateIngredientBatch(ibDTO);
-        assertEquals(6.6666,ibDAO.getIngredientBatch(99999999).getAmount());
+        assertEquals(6.6666, ibDAO.getIngredientBatch(99999999).getAmount());
 
     }
 
@@ -58,7 +58,7 @@ class IngredientBatchDAOTest {
             ibDAO.addIngredientBatch(ibDTO);
             assertEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
             ibDAO.deleteIngredientBatch(99999998);
-            assertNotEquals(99999998,ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
+            assertNotEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
         } catch (Exception e) {
             e.printStackTrace();
         }
