@@ -28,7 +28,9 @@ public class RecipeComponentDTO {
     private static final long serialVersionUID = 4732984592846315285L;
 
     @Override
-    public String toString() {return recipeID+" "+ingredientID+" "+nonNetto+" "+tolerance;}
+    public String toString() {
+        return recipeID + " " + ingredientID + " " + nonNetto + " " + tolerance;
+    }
 
     public int getRecipeID() {
         return recipeID;
@@ -38,17 +40,25 @@ public class RecipeComponentDTO {
         this.recipeID = recipeID;
     }
 
-    public int getIngredientID() {return ingredientID;}
+    public int getIngredientID() {
+        return ingredientID;
+    }
 
-    public void setIngredientID(int ingredientID) {this.ingredientID = ingredientID;}
+    public void setIngredientID(int ingredientID) {
+        this.ingredientID = ingredientID;
+    }
 
-    public double getNonNetto() {return nonNetto;}
+    public double getNonNetto() {
+        return nonNetto;
+    }
 
-    public void setNonNetto(double nonNetto) {this.nonNetto = nonNetto;}
+    public void setNonNetto(double nonNetto) {
+        this.nonNetto = nonNetto;
+    }
 
-    public double getTolerance() {return tolerance;}
-
-    public void setTolerance(double tolerance) {this.tolerance = tolerance;}
+    public double getTolerance() {
+        return tolerance;
+    }
 
     public String getIngredientName() {
         return ingredientName;
@@ -56,5 +66,8 @@ public class RecipeComponentDTO {
 
     public void setIngredientName(String ingredientName) {
         this.ingredientName = ingredientName;
+    }
+    public void setTolerance(double tolerance) {
+        this.tolerance = tolerance;
     }
 }

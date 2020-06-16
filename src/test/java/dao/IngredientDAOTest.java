@@ -55,7 +55,7 @@ class IngredientDAOTest {
             iDAO.addIngredient(iDTO);
             assertEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
             iDAO.deleteIngredient(99999999);
-            assertNotEquals(99999999,iDAO.getIngredient(99999999).getIngredientID());
+            assertNotEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
         } catch (Exception e) {
             e.printStackTrace();
         }
