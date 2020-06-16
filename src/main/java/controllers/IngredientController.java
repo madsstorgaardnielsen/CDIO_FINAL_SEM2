@@ -49,7 +49,7 @@ public class IngredientController implements IIngredientController {
         if (validation.ingredientInputValidation(ingredientDTO))
             try {
                 ingredientDAO.addIngredient(ingredientDTO);
-                return Response.ok().build();
+                return Response.ok(ingredientDTO).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -63,7 +63,7 @@ public class IngredientController implements IIngredientController {
         if (validation.ingredientInputValidation(ingredientDTO))
             try {
                 ingredientDAO.updateIngredient(ingredientDTO);
-                return Response.ok().build();
+                return Response.ok(ingredientDTO).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -75,7 +75,7 @@ public class IngredientController implements IIngredientController {
     public Response getAllIngredients() {
         try {
             ingredientDAO.getAllIngredients();
-            return Response.ok().build();
+            return Response.ok(ingredientDAO.getAllIngredients()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -84,7 +84,7 @@ public class IngredientController implements IIngredientController {
     public Response getIngredient(int id) {
         try {
             ingredientDAO.getIngredient(id);
-            return Response.ok().build();
+            return Response.ok(ingredientDAO.getIngredient(id)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

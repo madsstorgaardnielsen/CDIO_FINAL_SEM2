@@ -38,7 +38,7 @@ public class ProductBatchComponentDAO {
 
     public void addComponentsByRecipe(RecipeDTO recipe, int batchID) throws SQLException, IOException {
         // making string for statement
-        String statementString = "{call AddComponents(?,?)}";
+        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()){
             statementString += "(" + batchID + ", " + comp.getIngredientID() + "),";
@@ -56,7 +56,7 @@ public class ProductBatchComponentDAO {
     }
 
     public ArrayList<ProductBatchComponentDTO> getProductBatchComponent(int batchID) throws Exception{
-        CallableStatement stmt = database.callableStatement("{call GetProductBatchComponent(?)}");
+        CallableStatement stmt = database.callableStatement("{call GetBatchInformation(?)}");
         stmt.setString(1, String.valueOf(batchID));
 
         ArrayList<ProductBatchComponentDTO> list = new ArrayList<>();
@@ -76,28 +76,13 @@ public class ProductBatchComponentDAO {
     }
 
     private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException{
-        componentDTO.setId(rs.getInt(1));
-        componentDTO.setProductBatchID(rs.getInt(2));
-        componentDTO.setIngredientID(rs.getInt(3));
-        try {
-            componentDTO.setIngredientBatchID(rs.getInt(4));
-        } catch (NullPointerException ignored) {}
-        try {
-            componentDTO.setLaborantID(rs.getInt(5));
-        } catch (NullPointerException ignored) {}
-        try {
-            componentDTO.setTara(rs.getDouble(6));
-        } catch (NullPointerException ignored) {}
-        try {
-            componentDTO.setNetto(rs.getDouble(7));
-        } catch (NullPointerException ignored) {}
-        try {
-            componentDTO.setTerminal(rs.getInt(8));
-        } catch (NullPointerException ignored) {}
-        try {
-            componentDTO.setAmount(rs.getDouble(9));
-        } catch (NullPointerException ignored) {}
+        componentDTO.setId(rs.getInt(2));
+        componentDTO.setProductBatchID(rs.getInt(1));
+        componentDTO.setIngredientName(rs.getString(3));
+        componentDTO.setAmount(rs.getDouble(4));
+        componentDTO.setTolerance(rs.getDouble(5));
     }
+
     public ArrayList<ProductBatchComponentDTO> getCompByBatch(int batchID) throws SQLException, IOException {
         String statementString = "{call GetCompByBatch(?)}";
         statement = database.callableStatement(statementString);

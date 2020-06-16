@@ -9,7 +9,7 @@ function addRecipeForm() { //gets recipe ID and Name form
         '</form>'
     );
 }
-//Titilføj en råvare funktion.
+//Tilføj en råvare funktion.
 function generateIngredient() {
     $("#header").text("Opret en recept");
     $("#container").html(
@@ -30,7 +30,7 @@ function addRecipe() { //adds the new recipe to backend
     var recipe = {};
     //recipe.userId = 0;
     recipe.RecipeID = $("#recipeID").val();
-    //recipe.recipeName = $("#recipeName").val();
+    recipe.recipeName = $("#recipeName").val();
     recipe.ingredientID = $("#ingredientID").val();
     recipe.nonNetto = $("#nonNetto").val();
     recipe.ingredientID = $("#tolerance").val();

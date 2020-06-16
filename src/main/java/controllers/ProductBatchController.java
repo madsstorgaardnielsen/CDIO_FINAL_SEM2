@@ -40,18 +40,18 @@ public class ProductBatchController {
 
     public Response addProductBatch(int recipeID, int userID) {
         productBatchDTO = new ProductBatchDTO(recipeID, userID);
-        if (validation.productBatchInputValidation(productBatchDTO))
+        //if (validation.productBatchInputValidation(productBatchDTO))
             try {
                 int newBatchID = productBatchDAO.addProductBatch(recipeID, userID);
                 //add batch and get recipe and new batch id to make components.
                 ProductBatchComponentDAO.getInstance().addComponentsByRecipe(RecipeDAO.getInstance().getRecipe(recipeID), newBatchID);
-                return Response.ok().build();
+                return Response.ok(productBatchDTO).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
-        else {
+        /*else {
             return Response.status(418, "Bad input").build();
-        }
+        }*/
     }
 
     public Response getProductBatch(int batchID) {
@@ -60,7 +60,7 @@ public class ProductBatchController {
             ProductBatchDTO productBatch = ProductBatchDAO.getInstance().getProductBatch(batchID);
             //get and set componenents:
             productBatch.setComponents(ProductBatchComponentDAO.getInstance().getCompByBatch(batchID));
-            System.out.println(productBatch.toString()); //testing
+            //System.out.println(productBatch.toString()); //testing
             return Response.ok(productBatch).build();
         } catch (Exception e) {
             return Response.serverError().build();
