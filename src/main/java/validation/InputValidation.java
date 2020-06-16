@@ -22,13 +22,13 @@ public class InputValidation {
         return instance;
     }
 
-    public boolean userValidation(UserDTO user, String role) {
+    public boolean userValidation(UserDTO user) {
         //TODO: further validation
         if (!user.isActive())
             return false;
-        if (!user.getRole().equals(role)) {
+        /*if (!user.getRole().equals(user.getRole())) {
             return false;
-        }
+        }*/
         return true;
     }
 

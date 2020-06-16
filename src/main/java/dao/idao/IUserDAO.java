@@ -16,4 +16,8 @@ public interface IUserDAO {
     UserDTO updateUser(UserDTO user) throws Exception;
 
     UserDTO updateActivity(UserDTO user) throws Exception;
+
+    void deleteUser(int id) throws IOException, SQLException;
+
+    UserDTO getUserFromFirstNameLastName(String firstname, String lastname) throws Exception ;
 }

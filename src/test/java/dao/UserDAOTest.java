@@ -1,41 +1,34 @@
 package dao;
 
-import dto.RecipeDTO;
+import dto.IngredientDTO;
 import dto.UserDTO;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
-/*
+
     @Test
-    void addUser() throws SQLException {
-        UserDAO userDAO = new UserDAO();
-        UserDTO userDTO = new UserDTO();
+    void addUser() throws Exception {
+        UserDTO test = new UserDTO();
+        test.setFirstName("Test");
+        test.setLastName("Test");
+        test.setInitials("Test");
+        test.setActive(false);
+        test.setRole("Admin");
 
-        userDTO.setUserId(99999999);
-        userDTO.setActive(true);
-        userDTO.setFirstName("Test");
-        userDTO.setLastName("Testsen");
-        userDTO.setInitials("TT");
-        userDTO.setRole("Admin");
+        UserDAO.getInstance().addUser(test);
 
-        try {
-            userDAO.addUser(userDTO);
-            assertEquals(String.valueOf(99999999), userDAO.getUser("99999999").getUserId());
+        assertEquals("Test", UserDAO.getInstance().getUserFromFirstNameLastName("Test", "Test").getFirstName());
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
-    void getAllUsers() {
-        RecipeDAO recipeDAO = new RecipeDAO();
-
-        if (recipeDAO.getAllRecipes().size() > 1) {
+    void getAllUsers() throws Exception {
+        if (UserDAO.getInstance().getAllUsers().size() > 0) {
             assertTrue(true);
         } else {
             assertFalse(false);
@@ -43,40 +36,22 @@ class UserDAOTest {
     }
 
     @Test
-    void getUser() {
-        RecipeDAO recipeDAO = new RecipeDAO();
-        RecipeDTO recipeDTO = new RecipeDTO();
-
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
-        recipeDTO.setRecipeName("TestRecipe");
-        recipeDTO.setIngredientID(1);
-        recipeDTO.setNonNetto(2.22);
-        recipeDTO.setTolerance(3.33);
-
-        try {
-            recipeDAO.addRecipe(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    void getUser() throws Exception {
+        assertEquals(1, UserDAO.getInstance().getUser("1").getUserId());
     }
 
     @Test
     void updateUser() {
-        RecipeDAO recipeDAO = new RecipeDAO();
-        RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
-        recipeDTO.setRecipeName("TestRecipe");
-        recipeDTO.setIngredientID(1);
-        recipeDTO.setNonNetto(2.22);
-        recipeDTO.setTolerance(3.33);
         try {
-            recipeDAO.addRecipe(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
-            recipeDAO.deleteRecipe(99999999);
-            assertNotEquals(99999999,recipeDAO.getRecipe(99999999).getRecipeID());
+            UserDTO test;
+            test = UserDAO.getInstance().getUser("1");
+            test.setFirstName("PoulOpdateres");
+
+            UserDAO.getInstance().updateUser(test);
+
+            assertEquals("PoulOpdateres", UserDAO.getInstance().getUser("1").getFirstName());
+            test.setFirstName("Poul");
+            UserDAO.getInstance().updateUser(test);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,25 +59,36 @@ class UserDAOTest {
 
     @Test
     void updateActivity() {
-        RecipeDAO recipeDAO = new RecipeDAO();
-        RecipeDTO recipeDTO = new RecipeDTO();
-
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
-        recipeDTO.setRecipeName("TestRecipe");
-        recipeDTO.setIngredientID(1);
-        recipeDTO.setNonNetto(2.22);
-        recipeDTO.setTolerance(3.33);
-
         try {
-            recipeDAO.addRecipe(recipeDTO);
-            assertEquals("TestRecipe", recipeDAO.getRecipe(99999999).getRecipeName());
-            recipeDTO.setRecipeName("UpdatedName");
-            recipeDAO.updateRecipe(recipeDTO);
-            assertEquals("UpdatedName", recipeDAO.getRecipe(99999999).getRecipeName());
+            UserDTO test;
+            test = UserDAO.getInstance().getUser("1");
+            test.setActive(false);
+
+            UserDAO.getInstance().updateUser(test);
+
+            assertFalse(UserDAO.getInstance().getUser("1").getActive());
+            test.setActive(true);;
+            UserDAO.getInstance().updateUser(test);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    }*/
+
+    @Test
+    void deleteUser() throws Exception {
+
+        UserDTO test = new UserDTO();
+        test.setFirstName("Test");
+        test.setLastName("Test");
+        test.setInitials("Test");
+        test.setActive(false);
+        test.setRole("Admin");
+
+        UserDAO.getInstance().addUser(test);
+
+        assertEquals("Test", UserDAO.getInstance().getUserFromFirstNameLastName("Test", "Test").getFirstName());
+        test = UserDAO.getInstance().getUserFromFirstNameLastName("Test","Test");
+        UserDAO.getInstance().deleteUser(test.getUserId());
+
+    }
 }

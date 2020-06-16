@@ -27,6 +27,8 @@ public interface IUserDTO extends Serializable {
 
     void setActive(boolean active);
 
+    boolean getActive();
+
     void setActive(String active) throws Exception;
 
     boolean isActive();
