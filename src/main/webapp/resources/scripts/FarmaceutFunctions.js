@@ -91,9 +91,10 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
     return '<tr> ' +
         '<td class = recipeID>' + recipeComponent.recipeID + '</td>' +
         '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
+        '<td class = ingredientName>' + recipeComponent.ingredientName + '</td>' +
         '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
         '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
-        '<td class = btncont> <button class="editbtn">Edit component</button></td>' +
+        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
         '</tr>'
 }
 
@@ -103,6 +104,7 @@ function getRecipeComponent(recipeId) {
         '<table> <thead> <tr>' +
         '<th>RecipeID</th>' +
         '<th>ingredientID</th>' +
+        '<th>ingredientName</th>' +
         '<th>nonNetto</th>' +
         '<th>tolerance</th>' +
         '<th colspan="1"></th>' +
@@ -115,9 +117,9 @@ function getRecipeComponent(recipeId) {
         $.each(data, function () {
             $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-        listener;
-        listeneredit;
-        listenersave;
+        listener();
+        listeneredit();
+        listenersave();
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -133,17 +135,18 @@ function getRecipeIDFromRow() {
     })
 }
 
-function listeneredit(row) {
-    $(row).on('click', '.editbtn', function () {
+function listeneredit() {
+    $("#container").on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
-        var recipeID = row.find(".RecipeID").text();
-        var recipeName = row.find(".recipeName").text();
-
+        //var recipeID = row.find(".recipeID").text();
+        //var ingredientId = row.find(".ingredientId").text();
+        var nonNetto = row.find(".nonNetto").text();
+        var tolerance = row.find(".tolerance").text();
 
         row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
-        row.find(".recipeName").html('<input type="text" placeholder="' + recipeName + '" id="editrecipeName" data-orig="'+ recipeName +'">');
-
-
+        row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
+        row.find(".nonNetto").html('<input type="text" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
+        row.find(".tolerance").html('<input type="text" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
 }

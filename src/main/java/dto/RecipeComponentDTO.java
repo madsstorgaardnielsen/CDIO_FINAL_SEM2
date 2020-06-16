@@ -9,6 +9,14 @@ public class RecipeComponentDTO {
         this.tolerance = tolerance;
     }
 
+    public RecipeComponentDTO(int recipeID, int ingredientID, double nonNetto, double tolerance, String ingredient) {
+        this.recipeID = recipeID;
+        this.ingredientID = ingredientID;
+        this.nonNetto = nonNetto;
+        this.tolerance = tolerance;
+        this.ingredientName = ingredient;
+    }
+
     public RecipeComponentDTO(){
     }
 
@@ -16,6 +24,7 @@ public class RecipeComponentDTO {
     private int ingredientID;
     private double nonNetto;
     private double tolerance;
+    private String ingredientName;
     private static final long serialVersionUID = 4732984592846315285L;
 
     @Override
@@ -40,4 +49,12 @@ public class RecipeComponentDTO {
     public double getTolerance() {return tolerance;}
 
     public void setTolerance(double tolerance) {this.tolerance = tolerance;}
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
 }
