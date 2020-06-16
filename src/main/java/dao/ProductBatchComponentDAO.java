@@ -1,13 +1,19 @@
 package dao;
 
 import db.DBConnection;
+import dto.ProductBatchComponentDTO;
+import dto.ProductBatchComponentDTO;
+import dto.ProductBatchDTO;
 import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
 
 import java.io.IOException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProductBatchComponentDAO {
     private static ProductBatchComponentDAO instance;
@@ -47,5 +53,81 @@ public class ProductBatchComponentDAO {
             e.printStackTrace();
             throw new IOException("Something went wrong with addComponentsByRecipe()");
         }
+    }
+
+    public ArrayList<ProductBatchComponentDTO> getProductBatchComponent(int batchID) throws Exception{
+        CallableStatement stmt = database.callableStatement("{call GetProductBatchComponent(?)}");
+        stmt.setString(1, String.valueOf(batchID));
+
+        ArrayList<ProductBatchComponentDTO> list = new ArrayList<>();
+        ProductBatchComponentDTO componentDTO;
+        ResultSet resultSet = stmt.executeQuery();
+
+        try {
+            while (resultSet.next()) {
+                componentDTO = new ProductBatchComponentDTO();
+                getProductBatchComponentInfo(resultSet, componentDTO);
+                list.add(componentDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException{
+        componentDTO.setId(rs.getInt(1));
+        componentDTO.setProductBatchID(rs.getInt(2));
+        componentDTO.setIngredientID(rs.getInt(3));
+        try {
+            componentDTO.setIngredientBatchID(rs.getInt(4));
+        } catch (NullPointerException ignored) {}
+        try {
+            componentDTO.setLaborantID(rs.getInt(5));
+        } catch (NullPointerException ignored) {}
+        try {
+            componentDTO.setTara(rs.getDouble(6));
+        } catch (NullPointerException ignored) {}
+        try {
+            componentDTO.setNetto(rs.getDouble(7));
+        } catch (NullPointerException ignored) {}
+        try {
+            componentDTO.setTerminal(rs.getInt(8));
+        } catch (NullPointerException ignored) {}
+        try {
+            componentDTO.setAmount(rs.getDouble(9));
+        } catch (NullPointerException ignored) {}
+    }
+    public ArrayList<ProductBatchComponentDTO> getCompByBatch(int batchID) throws SQLException, IOException {
+        String statementString = "{call GetCompByBatch(?)}";
+        statement = database.callableStatement(statementString);
+        statement.setInt(1,batchID);
+        ArrayList<ProductBatchComponentDTO> components = new ArrayList<ProductBatchComponentDTO>();
+        try{
+            ResultSet rs = statement.executeQuery();
+            while(rs.next()){
+                components.add(getComponentInfo(rs));
+            }
+            return components;
+        } catch (Exception e){
+            e.printStackTrace();
+            throw new IOException("Something went wrong with getCompByBatch()");
+        }
+
+    }
+    private ProductBatchComponentDTO getComponentInfo(ResultSet rs) throws SQLException {
+        ProductBatchComponentDTO comp = new ProductBatchComponentDTO();
+
+        comp.setIngredientID(rs.getInt(1));
+        comp.setId(rs.getInt(2));
+        comp.setProductBatchID(rs.getInt(3));
+        comp.setIngredientBatchID(rs.getInt(4));
+        comp.setLaborantID(rs.getInt(5));
+        comp.setTara(rs.getDouble(6));
+        comp.setNetto(rs.getDouble(7));
+        comp.setTerminal(rs.getInt(8));
+        comp.setAmount(rs.getDouble(9));
+        comp.setIngredientName(rs.getString(10));
+        return comp;
     }
 }

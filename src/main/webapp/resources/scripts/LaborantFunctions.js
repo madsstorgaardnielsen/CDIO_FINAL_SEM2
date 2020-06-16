@@ -41,7 +41,7 @@ function getRecipeName() {
 
 function setStatus() {
     var batchID = $("#container").attr('data-batchID');
-    Agent.GET("rest/productBatch/afvejning/getproductbatchcomponent/"+ batchID +'/',function (data) {
+    Agent.GET("rest/productBatchComponent/afvejning/getproductbatchcomponent/"+ batchID +'/',function (data) {
         if (data !== "done") {
             $("#header").text("Indtast Tara");
             $("#container").html('' +

@@ -23,7 +23,8 @@ public class UserAPI {
                                @DefaultValue("null") @QueryParam("lastName") String lastName,
                                @DefaultValue("null") @QueryParam("initials") String initials,
                                @DefaultValue("null") @QueryParam("role") String role,
-                               @DefaultValue("null") @QueryParam("active") String active) throws Exception {
+                               @DefaultValue("null") @QueryParam("active") String active)
+            throws Exception {
         return UserController.getInstance().updateUser(userId, firstName, lastName, initials, role, active);
     }
 

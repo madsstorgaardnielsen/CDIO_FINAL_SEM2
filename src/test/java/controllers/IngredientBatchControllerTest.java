@@ -18,7 +18,7 @@ class IngredientBatchControllerTest {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999,1,999.9999,"TestSupplier");
         assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
-        assertEquals("OutboundJaxrsResponse{status=200, reason=OK, hasEntity=false, closed=false, buffered=false}",IngredientBatchController.getInstance().getIngredientBatch(999).toString());
+        assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().getIngredientBatch(999).toString());
     }
 
     @Test
@@ -53,4 +53,6 @@ class IngredientBatchControllerTest {
         assertEquals(Response.ok().build().toString(),IngredientBatchController.getInstance().getIngredientBatch(999).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
+
+
 }

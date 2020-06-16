@@ -59,7 +59,7 @@ public class RecipeController implements IRecipeController {
     public Response addRecipeOnly(RecipeDTO recipeDTO) {
         if(validation.recipeInputValidation(recipeDTO)) {
             try {
-                RecipeDAO.addRecipeOnly(RecipeDTO);
+                RecipeDAO.addRecipeOnly(recipeDTO);
                 return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
@@ -86,7 +86,8 @@ public class RecipeController implements IRecipeController {
 
     public Response getAllRecipes() throws Exception {
         try {
-            return Response.ok(RecipeDAO.getAllRecipes()).build();
+            RecipeDAO.getAllRecipes();
+            return Response.ok().build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();

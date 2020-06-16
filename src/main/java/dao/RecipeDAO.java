@@ -22,7 +22,6 @@ public class RecipeDAO implements IRecipeDAO {
             throwables.printStackTrace();
         }
     }
-
     private DBConnection database;
 
     public RecipeDAO() throws SQLException {
@@ -183,6 +182,22 @@ public class RecipeDAO implements IRecipeDAO {
         return recipe;
     }
 
+    public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
+        CallableStatement stmt = database.callableStatement("{call GetRecipeComponent}");
+        stmt.setString(1,String.valueOf(recipeID));
+        stmt.setString(2, String.valueOf(ingredientID));
+
+        RecipeComponentDTO componentDTO = new RecipeComponentDTO();;
+        ResultSet rs = stmt.executeQuery();
+        try {
+            while (rs.next()) {
+                getRecipeComponentInfo(rs, componentDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return componentDTO;
+    }
     public RecipeDTO getRecipeOnly(int ID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetRecipeOnly(?)}");
         stmt.setInt(1, ID);
@@ -197,5 +212,11 @@ public class RecipeDAO implements IRecipeDAO {
         }
         return recipe;
     }
-}
 
+    private void getRecipeComponentInfo(ResultSet rs, RecipeComponentDTO recipe)  throws SQLException{
+        recipe.setRecipeID(rs.getInt(1));
+        recipe.setIngredientID(rs.getInt(2));
+        recipe.setNonNetto(rs.getDouble(3));
+        recipe.setTolerance(rs.getDouble(4));
+    }
+}

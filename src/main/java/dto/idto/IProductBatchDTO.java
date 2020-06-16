@@ -36,7 +36,4 @@ public interface IProductBatchDTO extends Serializable {
 
     void setUserId(int userId);
 
-    int getIngredientBatchId();
-
-    void setIngredientBatchId(int ingredientBatchId);
 }

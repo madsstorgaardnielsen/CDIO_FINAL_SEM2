@@ -5,12 +5,14 @@ import dao.idao.IProductBatchDAO;
 import db.DBConnection;
 import dto.IngredientDTO;
 import dto.ProductBatchDTO;
+import dto.UserDTO;
 
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class ProductBatchDAO implements IProductBatchDAO {
@@ -36,7 +38,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
     public int addProductBatch(int recipeID, int userID) throws SQLException, IOException {
         String addProductBatchString = "{call AddProductBatch(?,?)}";
-        PreparedStatement statement = database.callableStatement(addProductBatchString);
+        statement = database.callableStatement(addProductBatchString);
 
         statement.setInt(1,recipeID);
         statement.setInt(2,userID);
@@ -53,22 +55,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
         }
     }
 
-    public ProductBatchDTO getProductBatch(int batchID) {
-        try {
-            PreparedStatement statement = database.callableStatement("{call GetProductBatch(?)}");
-            statement.setInt(1, batchID);
-            ProductBatchDTO batch = new ProductBatchDTO();
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                getBatchInfo(rs, batch);
-            }
-            return batch;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ProductBatchDTO();
-    }
-
     public void updateProductBatch(ProductBatchDTO productBatchDTO) throws IOException, SQLException {
 
         String updatetProductBatch = "{call UpdateProductBatch(?,?,?,?,?,?,?,?,?)}";
@@ -80,9 +66,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
         statement.setInt(4,productBatchDTO.getUserId());
         statement.setString(5,productBatchDTO.getCreationDate());
         statement.setString(6,productBatchDTO.getFinishDate());
-        statement.setInt(7,productBatchDTO.getIngredientBatchId());
-        statement.setDouble(8,productBatchDTO.getTaraSum());
-        statement.setDouble(9,productBatchDTO.getNettoSum());
+        statement.setDouble(7,productBatchDTO.getTaraSum());
+        statement.setDouble(8,productBatchDTO.getNettoSum());
 
         try {
             statement.executeUpdate();
@@ -139,6 +124,29 @@ public class ProductBatchDAO implements IProductBatchDAO {
             batch.setFinishDate(rs.getDate(6).toString());
         } catch (NullPointerException ignored) {
 
+        }
+        batch.setTaraSum(rs.getDouble(7));
+        batch.setNettoSum(rs.getDouble(8));
+    }
+
+    public ProductBatchDTO getProductBatch(int batchID) throws SQLException, IOException {
+        String getProductBatchString = "{call GetProductBatch(?)}";
+        statement = database.callableStatement(getProductBatchString);
+        statement.setInt(1,batchID);
+
+        try {
+            ResultSet rs = statement.executeQuery();
+            System.out.println("ProductBatch successfully returned from database");
+            ProductBatchDTO product = new ProductBatchDTO();
+            while(rs.next()){
+                getBatchInfo(rs,product);
+            }
+
+            return product;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Something went wrong with addProductBatch()");
         }
     }
 }

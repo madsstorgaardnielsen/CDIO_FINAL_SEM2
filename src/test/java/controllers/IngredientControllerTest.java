@@ -18,7 +18,7 @@ class IngredientControllerTest {
         IngredientDTO ibdto = new IngredientDTO(999,"TestSupplier");
         assertEquals(Response.ok().build().toString(),IngredientController.getInstance().addIngredient(ibdto).toString());
         IngredientController.getInstance().deleteIngredient(999);
-        assertEquals("OutboundJaxrsResponse{status=200, reason=OK, hasEntity=false, closed=false, buffered=false}",IngredientController.getInstance().getIngredient(999).toString());
+        assertEquals(Response.ok().build().toString(),IngredientController.getInstance().getIngredient(999).toString());
     }
 
     @Test

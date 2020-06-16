@@ -51,7 +51,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         if (validation.recipeComponentInputValidation(recipeComponent)) {
             try {
                 RecipeComponentDAO.addRecipeComponent(recipeComponent);
-                return Response.ok().build();
+                return Response.ok(recipeComponent).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -65,7 +65,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(recipeID, ingredientID, nonNetto, tolerance);
         if (validation.recipeComponentInputValidation(recipeComponentDTO)) {
             try {
-                return Response.ok(RecipeComponentDAO.updateRecipeComponent(recipeComponentDTO)).build();
+                return Response.ok(recipeComponentDTO).build();
             } catch (Exception e) {
                 e.printStackTrace();
                 return Response.serverError().build();
@@ -87,10 +87,10 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response getRecipeComponent(int recipeID, int ingredientID) throws Exception {
+    public Response getRecipeComponent(int recipeID, int ingredientID)  {
         try {
-            RecipeComponentDTO recipe = RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
-            return Response.ok(recipe).build();
+            RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
+            return Response.ok(RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID)).build();
 
         } catch (Exception e) {
             e.printStackTrace();
