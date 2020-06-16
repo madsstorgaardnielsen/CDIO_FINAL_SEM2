@@ -21,7 +21,7 @@ public class RecipeComponentAPI {
     @Path("/{recipeId}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipeComponentsFromID(@PathParam("recipeId") int recipeId) throws Exception{
+    public Response getRecipeComponentsFromID(@PathParam("recipeId") int recipeId) throws Exception {
         return RecipeComponentController.getInstance().getAllRecipeComponentsFromID(recipeId);
     }
 
