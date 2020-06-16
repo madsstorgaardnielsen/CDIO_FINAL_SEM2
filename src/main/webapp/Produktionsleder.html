@@ -8,6 +8,9 @@
 <script src="resources/AdminFunctions.js"></script>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 
+<script src="resources/scripts/ProductFunctions.js"></script>
+<script src="resources/scripts/RequestHandler.js"></script>
+
 
 <!-- generateRow in table-->
 <!-- loadRecipes-->
@@ -21,8 +24,8 @@
     <a class="homebtn" href="index.html">
         <img class="home" src="https://storage.cloud.google.com/sukkeregernimages/home.png?authuser=1" alt="index">
     </a>
-    <a class="shortcut" href="Admin.html">
-        <p class="text">Admin</p>
+    <a class="shortcut" href="Produktionsleder.html">
+        <p class="text">Produktionsleder</p>
     </a>
 </div>
 <h1 class="header" id="header">Vælg hvad du vil arbejde med</h1>
@@ -31,7 +34,7 @@
     <form action="Ingredientbatch.html">
         <button class="btn">Vis, Opret og rediger Råvare batch</button>
     </form>
-    <form action="Productbatch.html">
+    <form action="javascript:getAllProducts()">
         <button class="btn">Vis, Opret og rediger Produkt batch</button>
     </form>
 </div>

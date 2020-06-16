@@ -12,6 +12,12 @@ import javax.ws.rs.core.UriInfo;
 @Path("productBatch")
 public class ProductBatchAPI {
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllProductBatches() throws Exception {
+        return ProductBatchController.getInstance().getAllProductBatch();
+    }
+
     @Path("/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

@@ -12,6 +12,7 @@ import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProductBatchController {
 
@@ -65,5 +66,14 @@ public class ProductBatchController {
         } catch (Exception e) {
             return Response.serverError().build();
         }
+    }
+
+    public Response getAllProductBatch() throws Exception {
+        try{
+            return Response.ok(ProductBatchDAO.getInstance().getAllProductBatch()).build();
+        } catch(Exception e){
+            return Response.serverError().build();
+        }
+
     }
 }
