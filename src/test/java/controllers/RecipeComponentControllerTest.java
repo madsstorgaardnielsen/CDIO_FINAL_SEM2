@@ -21,57 +21,57 @@ class RecipeComponentControllerTest {
 
     @Test
     void deleteRecipeComponent() throws IOException, SQLException {
-        RecipeDTO rdto = new RecipeDTO(999,"TestRecipe");
+        RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
-        RecipeComponentDTO ibdto = new RecipeComponentDTO(999,1,99.9999,99.9999);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999,1)).build().toString(),RecipeComponentController.getInstance().addRecipeComponent(ibdto).toString());
-        RecipeComponentController.getInstance().deleteRecipeComponent(999,1);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999,1)).build().toString(),RecipeComponentController.getInstance().getRecipeComponent(999,1).toString());
+        RecipeComponentDTO ibdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().addRecipeComponent(ibdto).toString());
+        RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().getRecipeComponent(999, 1).toString());
         RecipeDAO.getInstance().deleteRecipe(999);
     }
 
     @Test
     void addRecipeComponent() throws IOException, SQLException {
-        RecipeDTO rdto = new RecipeDTO(999,"TestRecipe");
+        RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
-        RecipeComponentDTO rcdto = new RecipeComponentDTO(999,1,99.9999,99.9999);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999,1)).build().toString(),RecipeComponentController.getInstance().addRecipeComponent(rcdto).toString());
-        RecipeComponentController.getInstance().deleteRecipeComponent(999,1);
+        RecipeComponentDTO rcdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().addRecipeComponent(rcdto).toString());
+        RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
         RecipeDAO.getInstance().deleteRecipe(999);
     }
 
     @Test
     void updateRecipeComponent() throws IOException, SQLException {
-        RecipeDTO rdto = new RecipeDTO(999,"TestRecipe");
+        RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO rdao = new RecipeDAO();
         rdao.addRecipe(rdto);
 
-        RecipeComponentDTO rcdto = new RecipeComponentDTO(999,1,99.9999,99.9999);
+        RecipeComponentDTO rcdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
         RecipeComponentDAO rcdao = new RecipeComponentDAO();
 
         rcdao.addRecipeComponent(rcdto);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999,1)).build().toString(),RecipeComponentController.getInstance().updateRecipeComponent(999,1,999.9999,99.9999).toString());
-        RecipeComponentController.getInstance().deleteRecipeComponent(999,1);
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().updateRecipeComponent(999, 1, 999.9999, 99.9999).toString());
+        RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
         rdao.deleteRecipe(999);
     }
 
     @Test
     void getAllRecipeComponents() throws Exception {
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getAllRecipeComponents().toString()).build().toString(),RecipeComponentController.getInstance().getAllRecipeComponents().toString());
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getAllRecipeComponents().toString()).build().toString(), RecipeComponentController.getInstance().getAllRecipeComponents().toString());
     }
 
     @Test
     void getRecipeComponent() throws SQLException, IOException {
-        RecipeDTO rdto = new RecipeDTO(999,"TestRecipe");
+        RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO rdao = new RecipeDAO();
         rdao.addRecipe(rdto);
 
-        RecipeComponentDTO rcdto = new RecipeComponentDTO(999,1,99.9999,99.9999);
+        RecipeComponentDTO rcdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
         RecipeComponentDAO rcdao = new RecipeComponentDAO();
         rcdao.addRecipeComponent(rcdto);
 
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999,1)).build().toString(),RecipeComponentController.getInstance().getRecipeComponent(999,1).toString());
-        RecipeComponentController.getInstance().deleteRecipeComponent(999,1);
+        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().getRecipeComponent(999, 1).toString());
+        RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
         rdao.deleteRecipe(999);
     }
 }
