@@ -12,28 +12,28 @@ class UserControllerTest {
 
     @Test
     void addUser() throws Exception {
-        UserDTO test = new UserDTO(99999999,"test","test","test","Admin",false);
+        UserDTO test = new UserDTO(99999999, "test", "test", "test", "Admin", false);
         assertEquals(Response.ok(true).build().toString(), UserController.getInstance().addUser(test).toString());
         UserController.getInstance().deleteUser(99999999);
     }
 
     @Test
     void getAllUsers() throws Exception {
-        assertEquals(Response.ok(true).build().toString(),UserController.getInstance().getAllUsers().toString());
+        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().getAllUsers().toString());
     }
 
     @Test
     void updateUser() throws Exception {
 
-        UserController.getInstance().updateUser(99999999,"test","test","test","Admin","true");
+        UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "true");
 
-        assertEquals(Response.ok(true).build().toString(),UserController.getInstance().updateUser(99999999,"test","test","test","Admin","true").toString());
+        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "true").toString());
 
-        UserController.getInstance().updateUser(99999999,"test","test","test","Admin","false");
+        UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "false");
     }
 
     @Test
     void getUser() throws Exception {
-        assertEquals(Response.ok(true).build().toString(),UserController.getInstance().updateUser(99999999,"test","test","test","Admin","false").toString());
+        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "false").toString());
     }
 }

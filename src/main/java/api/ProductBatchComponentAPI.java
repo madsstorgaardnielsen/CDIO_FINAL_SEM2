@@ -15,7 +15,7 @@ public class ProductBatchComponentAPI {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateBatchComponent(ProductBatchComponentDTO batchComponent){
+    public Response updateBatchComponent(ProductBatchComponentDTO batchComponent) {
         return ProductBatchComponentController.getInstance().updateProductBatchComponent(batchComponent);
     }
 
@@ -43,7 +43,7 @@ public class ProductBatchComponentAPI {
     @Path("/afvejning/getproductbatchcomponent/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) throws Exception{
+    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) throws Exception {
         return ProductBatchComponentController.getInstance().getNextComponent(batchId);
     }
 }

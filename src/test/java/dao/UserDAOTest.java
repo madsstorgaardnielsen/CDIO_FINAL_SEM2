@@ -67,7 +67,8 @@ class UserDAOTest {
             UserDAO.getInstance().updateUser(test);
 
             assertFalse(UserDAO.getInstance().getUser("1").getActive());
-            test.setActive(true);;
+            test.setActive(true);
+            ;
             UserDAO.getInstance().updateUser(test);
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,7 +88,7 @@ class UserDAOTest {
         UserDAO.getInstance().addUser(test);
 
         assertEquals("Test", UserDAO.getInstance().getUserFromFirstNameLastName("Test", "Test").getFirstName());
-        test = UserDAO.getInstance().getUserFromFirstNameLastName("Test","Test");
+        test = UserDAO.getInstance().getUserFromFirstNameLastName("Test", "Test");
         UserDAO.getInstance().deleteUser(test.getUserId());
 
     }

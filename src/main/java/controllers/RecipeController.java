@@ -57,7 +57,7 @@ public class RecipeController implements IRecipeController {
     }
 
     public Response addRecipeOnly(RecipeDTO recipeDTO) {
-        if(validation.recipeInputValidation(recipeDTO)) {
+        if (validation.recipeInputValidation(recipeDTO)) {
             try {
                 RecipeDAO.addRecipeOnly(recipeDTO);
                 return Response.ok().build();

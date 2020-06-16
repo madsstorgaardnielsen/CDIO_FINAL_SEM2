@@ -1,5 +1,7 @@
 package dto;
+
 import dto.idto.IProductBatchDTO;
+
 import java.util.ArrayList;
 
 public class ProductBatchDTO implements IProductBatchDTO {
@@ -15,19 +17,37 @@ public class ProductBatchDTO implements IProductBatchDTO {
 
     int ingredientBatchID;
 
-    public int getIngredientBatchId(){
+    public ProductBatchDTO() {
+    }
+
+    public ProductBatchDTO(int recipeId, int userId) {
+        this.productBatchId = productBatchId;
+        this.recipeId = recipeId;
+        this.status = status;
+        this.userId = userId;
+    }
+
+    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId) {
+        this.productBatchId = productBatchId;
+        this.recipeId = recipeId;
+        this.status = status;
+        this.userId = userId;
+    }
+
+    public int getIngredientBatchId() {
         return ingredientBatchID;
     }
 
-    public void addComponent(ProductBatchComponentDTO comp){
+    public void addComponent(ProductBatchComponentDTO comp) {
         components.add(comp);
     }
-    public void setComponents(ArrayList<ProductBatchComponentDTO> components){
-        this.components = components;
+
+    public ArrayList<ProductBatchComponentDTO> getComponents() {
+        return this.components;
     }
 
-    public ArrayList<ProductBatchComponentDTO> getComponents(){
-        return this.components;
+    public void setComponents(ArrayList<ProductBatchComponentDTO> components) {
+        this.components = components;
     }
 
     public double getTaraSum() {
@@ -91,23 +111,6 @@ public class ProductBatchDTO implements IProductBatchDTO {
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public ProductBatchDTO() {
-    }
-
-    public ProductBatchDTO(int recipeId, int userId) {
-        this.productBatchId = productBatchId;
-        this.recipeId = recipeId;
-        this.status = status;
-        this.userId = userId;
-    }
-
-    public ProductBatchDTO(int productBatchId, int recipeId, int status, int userId) {
-        this.productBatchId = productBatchId;
-        this.recipeId = recipeId;
-        this.status = status;
         this.userId = userId;
     }
 

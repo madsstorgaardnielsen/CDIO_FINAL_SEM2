@@ -19,5 +19,5 @@ public interface IUserDAO {
 
     void deleteUser(int id) throws IOException, SQLException;
 
-    UserDTO getUserFromFirstNameLastName(String firstname, String lastname) throws Exception ;
+    UserDTO getUserFromFirstNameLastName(String firstname, String lastname) throws Exception;
 }

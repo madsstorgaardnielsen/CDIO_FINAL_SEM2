@@ -8,11 +8,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path ("recipe")
+@Path("recipe")
 public class RecipeAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllRecipes() throws Exception{
+    public Response getAllRecipes() throws Exception {
         return RecipeController.getInstance().getAllRecipes();
     }
 
@@ -20,19 +20,19 @@ public class RecipeAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateRecipe(@QueryParam("recipeID") int recipeID,
-                               @DefaultValue("null") @QueryParam("recipeName") String recipeName) throws Exception {
+                                 @DefaultValue("null") @QueryParam("recipeName") String recipeName) throws Exception {
         return RecipeController.getInstance().updateRecipe(recipeID, recipeName);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addRecipe(RecipeDTO recipeDTO) throws Exception{
+    public Response addRecipe(RecipeDTO recipeDTO) throws Exception {
         return RecipeController.getInstance().addRecipeOnly(recipeDTO);
     }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteRecipe(int ID) throws Exception{
+    public Response deleteRecipe(int ID) throws Exception {
         return RecipeController.getInstance().deleteRecipe(ID);
     }
 
@@ -40,7 +40,7 @@ public class RecipeAPI {
     @Path("/{recipeId}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getRecipe(@PathParam("recipeId") int recipeId) throws Exception{
+    public Response getRecipe(@PathParam("recipeId") int recipeId) throws Exception {
         return RecipeController.getInstance().getRecipe(recipeId);
     }
 }

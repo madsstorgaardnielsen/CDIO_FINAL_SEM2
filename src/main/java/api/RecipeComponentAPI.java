@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 public class RecipeComponentAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllRecipeComponents() throws Exception{
+    public Response getAllRecipeComponents() throws Exception {
         return RecipeComponentController.getInstance().getAllRecipeComponents();
     }
 
@@ -22,7 +22,7 @@ public class RecipeComponentAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getRecipeComponent(@PathParam("recipeComponentId") int recipeComponentId,
-                                       @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID) throws Exception{
+                                       @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID) throws Exception {
         return RecipeComponentController.getInstance().getRecipeComponent(recipeComponentId, recipeComponentIngredientID);
     }
 
@@ -38,14 +38,14 @@ public class RecipeComponentAPI {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addRecipeComponent(RecipeComponentDTO recipeComponentDTO) throws Exception{
+    public Response addRecipeComponent(RecipeComponentDTO recipeComponentDTO) throws Exception {
         return RecipeComponentController.getInstance().addRecipeComponent(recipeComponentDTO);
     }
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteRecipeComponent(@QueryParam("recipeCompId") int recipeCompId,
-                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID) throws Exception{
+                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID) throws Exception {
         return RecipeComponentController.getInstance().deleteRecipeComponent(recipeCompId, recipeCompIngredientID);
     }
 }

@@ -9,6 +9,11 @@ public class IngredientDTO implements IIngredientDTO {
     public IngredientDTO() {
     }
 
+    public IngredientDTO(int ingredientID, String ingredientName) {
+        this.ingredientID = ingredientID;
+        this.ingredientName = ingredientName;
+    }
+
     public int getIngredientID() {
         return ingredientID;
     }
@@ -22,11 +27,6 @@ public class IngredientDTO implements IIngredientDTO {
     }
 
     public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
-    }
-
-    public IngredientDTO(int ingredientID, String ingredientName) {
-        this.ingredientID = ingredientID;
         this.ingredientName = ingredientName;
     }
 

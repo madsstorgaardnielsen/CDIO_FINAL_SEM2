@@ -16,7 +16,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     private static ProductBatchComponentController instance;
 
     static {
-        try{
+        try {
             instance = new ProductBatchComponentController();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -34,7 +34,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
 
-    public static ProductBatchComponentController getInstance(){
+    public static ProductBatchComponentController getInstance() {
         return instance;
     }
 

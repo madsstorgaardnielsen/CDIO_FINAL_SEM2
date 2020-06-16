@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 public class UserAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsers() throws Exception{
+    public Response getAllUsers() throws Exception {
         return UserController.getInstance().getAllUsers();
     }
 
@@ -30,14 +30,14 @@ public class UserAPI {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(UserDTO userDTO) throws Exception{
+    public Response addUser(UserDTO userDTO) throws Exception {
         return UserController.getInstance().addUser(userDTO);
     }
 
     @Path("/{userId}/{role}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userId") String userId, @PathParam("role") String role) throws Exception{
+    public Response getUser(@PathParam("userId") String userId, @PathParam("role") String role) throws Exception {
         return UserController.getInstance().getUser(userId, role);
     }
 }

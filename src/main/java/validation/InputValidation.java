@@ -51,7 +51,7 @@ public class InputValidation {
         double amount = ingredientBatchDTO.getAmount();
         String doubleToText = Double.toString(Math.abs(amount));
         int integerLength = doubleToText.indexOf('.');
-        int decimalLength = doubleToText.length()-integerLength-1;
+        int decimalLength = doubleToText.length() - integerLength - 1;
 
 
         if (batchId < 1 || batchId > 99999999) {
@@ -87,11 +87,11 @@ public class InputValidation {
 
         String doubleToTextnonNetto = Double.toString(Math.abs(nonNetto));
         int integerLengthnonNetto = doubleToTextnonNetto.indexOf('.');
-        int decimalLengthnonNetto = doubleToTextnonNetto.length()-integerLengthnonNetto-1;
+        int decimalLengthnonNetto = doubleToTextnonNetto.length() - integerLengthnonNetto - 1;
 
         String doubleToTextTolerance = Double.toString(Math.abs(tolerance));
         int integerLengthTolerance = doubleToTextTolerance.indexOf('.');
-        int decimalLengthTolerance = doubleToTextTolerance.length()-integerLengthTolerance-1;
+        int decimalLengthTolerance = doubleToTextTolerance.length() - integerLengthTolerance - 1;
 
 
         if (recipeID < 1 || recipeID > 99999999) {
@@ -133,11 +133,11 @@ public class InputValidation {
 
         String doubleToTextTara = Double.toString(Math.abs(tara));
         int integerLengthTara = doubleToTextTara.indexOf('.');
-        int decimalLengthTara = doubleToTextTara.length()-integerLengthTara-1;
+        int decimalLengthTara = doubleToTextTara.length() - integerLengthTara - 1;
 
         String doubleToTextNetto = Double.toString(Math.abs(netto));
         int integerLengthNetto = doubleToTextNetto.indexOf('.');
-        int decimalLengthNetto = doubleToTextNetto.length()-integerLengthNetto-1;
+        int decimalLengthNetto = doubleToTextNetto.length() - integerLengthNetto - 1;
 
 
         if (productBatchId < 1 || productBatchId > 99999999) {

@@ -37,7 +37,7 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response deleteRecipeComponent(int recipeID, int ingredientID){
+    public Response deleteRecipeComponent(int recipeID, int ingredientID) {
         try {
             RecipeComponentDAO.deleteRecipeComponent(recipeID, ingredientID);
             return Response.ok().build();
@@ -47,7 +47,7 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response addRecipeComponent(RecipeComponentDTO recipeComponent){
+    public Response addRecipeComponent(RecipeComponentDTO recipeComponent) {
         if (validation.recipeComponentInputValidation(recipeComponent)) {
             try {
                 RecipeComponentDAO.addRecipeComponent(recipeComponent);
@@ -61,7 +61,7 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response updateRecipeComponent(int recipeID, int ingredientID, double nonNetto, double tolerance){
+    public Response updateRecipeComponent(int recipeID, int ingredientID, double nonNetto, double tolerance) {
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(recipeID, ingredientID, nonNetto, tolerance);
         if (validation.recipeComponentInputValidation(recipeComponentDTO)) {
             try {
@@ -71,7 +71,7 @@ public class RecipeComponentController implements IRecipeComponentController {
                 return Response.serverError().build();
 
             }
-        }else {
+        } else {
             return Response.status(418, "Bad input").build();
         }
     }
@@ -87,7 +87,7 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response getRecipeComponent(int recipeID, int ingredientID)  {
+    public Response getRecipeComponent(int recipeID, int ingredientID) {
         try {
             RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
             return Response.ok(RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID)).build();
