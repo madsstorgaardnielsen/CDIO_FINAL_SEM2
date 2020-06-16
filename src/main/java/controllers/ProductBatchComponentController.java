@@ -52,7 +52,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     public Response updateProductBatchComponent(ProductBatchComponentDTO batchComponent) {
         try {
             ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
-            return
+            return Response.ok().build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
