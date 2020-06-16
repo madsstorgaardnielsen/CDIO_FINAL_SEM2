@@ -242,7 +242,7 @@ function addIngredient() { //adds the new ingredient to backend
     ingredient.ingredientID = $("#ingredientID").val();
     ingredient.ingredientName = $("#ingredientName").val();
 
-    Agent.POST("rest/ingredient", ingredient, function (data) {
+    Agent.POST("rest/ingredient", ingredient, function () {
         $("#container").html('' +
             '<form action="Farmaceut.html">' +
             '<div class="boxedText">Råvare oprettet</div>' +
