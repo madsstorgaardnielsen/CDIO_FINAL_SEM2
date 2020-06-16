@@ -91,7 +91,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
         '</tr>'
 }
 
-function getRecipeComponent(recipeID)
+function getRecipeComponent(recipeID){}
 function getUsers() { //gets existing users from backend
     $("#header").text("Brugeroversigt");
     $("#container").html(
