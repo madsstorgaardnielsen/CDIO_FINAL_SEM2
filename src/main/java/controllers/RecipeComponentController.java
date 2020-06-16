@@ -1,11 +1,8 @@
 package controllers;
 
 import controllers.icontrollers.IRecipeComponentController;
-import controllers.icontrollers.IRecipeController;
 import dao.RecipeComponentDAO;
-import dao.RecipeDAO;
 import dto.RecipeComponentDTO;
-import dto.RecipeDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
@@ -87,6 +84,16 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
+    public Response getAllRecipeComponentsFromID(int recipeID) {
+        try {
+            return Response.ok(RecipeComponentDAO.getAllRecipeComponentsFromID(recipeID)).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
+
+    @Override
     public Response getRecipeComponent(int recipeID, int ingredientID)  {
         try {
             RecipeComponentDAO.getRecipeComponent(recipeID, ingredientID);
@@ -96,6 +103,5 @@ public class RecipeComponentController implements IRecipeComponentController {
             e.printStackTrace();
             return Response.serverError().build();
         }
-
     }
 }

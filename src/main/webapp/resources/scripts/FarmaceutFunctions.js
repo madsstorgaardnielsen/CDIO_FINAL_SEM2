@@ -13,9 +13,9 @@ function addRecipeForm() { //gets recipe ID and Name form
 function generateIngredient() {
     $("#header").text("Opret en recept");
     $("#container").html(
-        '<form action="javascript:generateRow()">' +
+    '<form action="javascript:generateRow()">' +
 
-     '<tr>' +
+        '<tr>' +
         '<td class="table">' +
         '<td> <input  type="text" placeholder="råvare ID"> </td>' +
         '<td> <input  type="text" placeholder="non Netto vægt i gram"> </td>' +
@@ -24,8 +24,6 @@ function generateIngredient() {
         '</tr>' +
         '<button class="btn">Tilføj råvare</button>'+
         '</form>');
-
-
 }
 
 function addRecipe() { //adds the new recipe to backend
@@ -113,7 +111,7 @@ function getRecipeComponent(recipeId) {
         '</table>'
     );
 
-    Agent.GET('rest/recipe/' + recipeId + '/', function (data) {
+    Agent.GET('rest/recipecomponent/' + recipeId + '/', function (data) {
         $.each(data, function () {
             $("#tablebody").append(generateRecipeComponentHtml(this));
         });
