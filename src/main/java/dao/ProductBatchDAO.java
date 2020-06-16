@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class ProductBatchDAO implements IProductBatchDAO {
     private static ProductBatchDAO instance;
+
     static {
         try {
             instance = new ProductBatchDAO();
@@ -40,8 +41,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
         String addProductBatchString = "{call AddProductBatch(?,?)}";
         statement = database.callableStatement(addProductBatchString);
 
-        statement.setInt(1,recipeID);
-        statement.setInt(2,userID);
+        statement.setInt(1, recipeID);
+        statement.setInt(2, userID);
 
         try {
             //adding batch while getting the new ID back
@@ -57,17 +58,17 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
     public void updateProductBatch(ProductBatchDTO productBatchDTO) throws IOException, SQLException {
 
-        String updatetProductBatch = "{call UpdateProductBatch(?,?,?,?,?,?,?,?,?)}";
+        String updatetProductBatch = "{call UpdateProductBatch(?,?,?,?,?,?,?,?)}";
         PreparedStatement statement = database.callableStatement(updatetProductBatch);
 
         statement.setInt(1, productBatchDTO.getProductBatchId());
         statement.setInt(2, productBatchDTO.getRecipeId());
         statement.setInt(3, productBatchDTO.getStatus());
-        statement.setInt(4,productBatchDTO.getUserId());
-        statement.setString(5,productBatchDTO.getCreationDate());
-        statement.setString(6,productBatchDTO.getFinishDate());
-        statement.setDouble(7,productBatchDTO.getTaraSum());
-        statement.setDouble(8,productBatchDTO.getNettoSum());
+        statement.setInt(4, productBatchDTO.getUserId());
+        statement.setString(5, productBatchDTO.getCreationDate());
+        statement.setString(6, productBatchDTO.getFinishDate());
+        statement.setDouble(7, productBatchDTO.getTaraSum());
+        statement.setDouble(8, productBatchDTO.getNettoSum());
 
         try {
             statement.executeUpdate();
@@ -112,7 +113,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
     }
 
 
-
     private void getBatchInfo(ResultSet rs, ProductBatchDTO batch) throws Exception {
         batch.setProductBatchId(rs.getInt(1));
         batch.setRecipeId(rs.getInt(2));
@@ -129,17 +129,54 @@ public class ProductBatchDAO implements IProductBatchDAO {
         batch.setNettoSum(rs.getDouble(8));
     }
 
+    public ProductBatchDTO getProductBatchFromRecipeIdUserId(int recipeId, int userId) throws SQLException, IOException {
+        String getProductBatchString = "{call GetProductBatchFromRecipeIdUserId(?,?)}";
+        statement = database.callableStatement(getProductBatchString);
+        statement.setInt(1, recipeId);
+        statement.setInt(2, userId);
+
+        try {
+            ResultSet rs = statement.executeQuery();
+            ProductBatchDTO product = new ProductBatchDTO();
+            while (rs.next()) {
+                getBatchInfo(rs, product);
+            }
+
+            return product;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Something went wrong retrieving batch from database");
+        }
+    }
+
+    public void deleteProductBatchWithRecipeIdUserId(int recipeId, int userId) throws IOException, SQLException {
+
+        String deleteIngredient = "{call DeleteProductBatchFromRecipeIdUserId(?,?)}";
+        PreparedStatement statement = database.callableStatement(deleteIngredient);
+        statement.setInt(1, recipeId);
+        statement.setInt(2, userId);
+
+        try {
+            statement.executeUpdate();
+            System.out.println("Product Batch successfully deleted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Product Batch could no be deleted");
+        }
+    }
+
     public ProductBatchDTO getProductBatch(int batchID) throws SQLException, IOException {
         String getProductBatchString = "{call GetProductBatch(?)}";
         statement = database.callableStatement(getProductBatchString);
-        statement.setInt(1,batchID);
+        statement.setInt(1, batchID);
 
         try {
             ResultSet rs = statement.executeQuery();
             System.out.println("ProductBatch successfully returned from database");
             ProductBatchDTO product = new ProductBatchDTO();
-            while(rs.next()){
-                getBatchInfo(rs,product);
+            while (rs.next()) {
+                getBatchInfo(rs, product);
             }
 
             return product;
