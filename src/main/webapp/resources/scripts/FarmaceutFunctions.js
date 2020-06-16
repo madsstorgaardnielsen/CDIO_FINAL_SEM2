@@ -83,7 +83,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= editbutton> <button class="viewbtn">View components</button></td>' +
+        '<td class= btncont> <button class="viewbtn">View components</button></td>' +
         '</tr>'
 }
 
@@ -93,7 +93,7 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
         '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
         '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
         '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
-        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '<td class = btncont> <button class="editbtn">Edit component</button></td>' +
         '</tr>'
 }
 
