@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class ProductBatchComponentDAO {
     private static ProductBatchComponentDAO instance;
+
     static {
         try {
             instance = new ProductBatchComponentDAO();
@@ -40,10 +41,10 @@ public class ProductBatchComponentDAO {
         // making string for statement
         String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
         //adding value set for each component
-        for (RecipeComponentDTO comp : recipe.getRecipeCompList()){
+        for (RecipeComponentDTO comp : recipe.getRecipeCompList()) {
             statementString += "(" + batchID + ", " + comp.getIngredientID() + "),";
         }
-        statementString = statementString.substring(0, statementString.length()-1);
+        statementString = statementString.substring(0, statementString.length() - 1);
         //System.out.println(statementString); //testing
         statement = database.prepareStatement(statementString);
         try {
@@ -55,7 +56,7 @@ public class ProductBatchComponentDAO {
         }
     }
 
-    public ArrayList<ProductBatchComponentDTO> getProductBatchComponent(int batchID) throws Exception{
+    public ArrayList<ProductBatchComponentDTO> getProductBatchComponent(int batchID) throws Exception {
         CallableStatement stmt = database.callableStatement("{call GetBatchInformation(?)}");
         stmt.setString(1, String.valueOf(batchID));
 
@@ -75,7 +76,7 @@ public class ProductBatchComponentDAO {
         return list;
     }
 
-    private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException{
+    private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException {
         componentDTO.setId(rs.getInt(2));
         componentDTO.setProductBatchID(rs.getInt(1));
         componentDTO.setIngredientName(rs.getString(3));
@@ -86,20 +87,21 @@ public class ProductBatchComponentDAO {
     public ArrayList<ProductBatchComponentDTO> getCompByBatch(int batchID) throws SQLException, IOException {
         String statementString = "{call GetCompByBatch(?)}";
         statement = database.callableStatement(statementString);
-        statement.setInt(1,batchID);
+        statement.setInt(1, batchID);
         ArrayList<ProductBatchComponentDTO> components = new ArrayList<ProductBatchComponentDTO>();
-        try{
+        try {
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 components.add(getComponentInfo(rs));
             }
             return components;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new IOException("Something went wrong with getCompByBatch()");
         }
 
     }
+
     private ProductBatchComponentDTO getComponentInfo(ResultSet rs) throws SQLException {
         ProductBatchComponentDTO comp = new ProductBatchComponentDTO();
 
@@ -118,12 +120,12 @@ public class ProductBatchComponentDAO {
 
     public void updateProductBatchComponent(ProductBatchComponentDTO batchComponentDTO) throws SQLException {
         CallableStatement stmt = database.callableStatement("{call UpdateProductBatchComponent(?,?,?,?,?,?)}");
-        stmt.setString(1, String.valueOf(batchComponentDTO.getId()));
-        stmt.setString(2, String.valueOf(batchComponentDTO.getIngredientBatchID()));
-        stmt.setString(3, String.valueOf(batchComponentDTO.getLaborantID()));
-        stmt.setString(4, String.valueOf(batchComponentDTO.getTara()));
-        stmt.setString(5, String.valueOf(batchComponentDTO.getNetto()));
-        stmt.setString(6, String.valueOf(batchComponentDTO.getTerminal()));
+        stmt.setInt(1, batchComponentDTO.getId());
+        stmt.setInt(2, batchComponentDTO.getIngredientBatchID());
+        stmt.setInt(3, batchComponentDTO.getLaborantID());
+        stmt.setDouble(4, batchComponentDTO.getTara());
+        stmt.setDouble(5, batchComponentDTO.getNetto());
+        stmt.setDouble(6, batchComponentDTO.getTerminal());
 
         try {
             stmt.executeUpdate();
