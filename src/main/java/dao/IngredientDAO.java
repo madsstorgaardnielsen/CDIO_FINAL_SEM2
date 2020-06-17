@@ -135,7 +135,6 @@ public class IngredientDAO implements IIngredientDAO {
             throw new DatabaseException();
         }
 
-
         return ingredient;
     }
 }
