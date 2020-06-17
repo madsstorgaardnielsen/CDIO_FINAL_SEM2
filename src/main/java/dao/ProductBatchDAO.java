@@ -201,4 +201,15 @@ public class ProductBatchDAO implements IProductBatchDAO {
             e.printStackTrace();
         }
     }
+
+    public void setStatus(int batchID) throws SQLException {
+        statement = database.callableStatement("{call SetStatus(?)}");
+        statement.setString(1, String.valueOf(batchID));
+
+        try {
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -185,13 +185,14 @@ public class InputValidation {
         return true;
     }
 
-    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, RecipeComponentDTO recipe) {
-         double Netto = batchComponentDTO.getNetto();
-         double amount = recipe.getNonNetto();
-         double tolerance = recipe.getTolerance() * 0.01;
+    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, ProductBatchComponentDTO batch) {
+         double netto = batchComponentDTO.getNetto();
+         double amount = batch.getAmount();
+         double tolerance = batch.getTolerance() * 0.01;
          double upperbound = amount + (amount * tolerance);
          double lowerbound = amount - (amount * tolerance);
-         return Netto <= upperbound && Netto >= lowerbound;
+
+         return netto <= upperbound && netto >= lowerbound;
     }
 
     public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {

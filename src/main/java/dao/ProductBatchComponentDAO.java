@@ -63,11 +63,10 @@ public class ProductBatchComponentDAO {
         ArrayList<ProductBatchComponentDTO> list = new ArrayList<>();
         ProductBatchComponentDTO componentDTO;
         ResultSet resultSet = stmt.executeQuery();
-
         try {
             while (resultSet.next()) {
                 componentDTO = new ProductBatchComponentDTO();
-                getProductBatchComponentInfo(resultSet, componentDTO);
+                getProductBatchComponentInfos(resultSet, componentDTO);
                 list.add(componentDTO);
             }
         } catch (SQLException e) {
@@ -76,12 +75,14 @@ public class ProductBatchComponentDAO {
         return list;
     }
 
-    private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException {
-        componentDTO.setId(rs.getInt(2));
+    private void getProductBatchComponentInfos(ResultSet rs, ProductBatchComponentDTO componentDTO) throws SQLException {
         componentDTO.setProductBatchID(rs.getInt(1));
-        componentDTO.setIngredientName(rs.getString(3));
-        componentDTO.setAmount(rs.getDouble(4));
-        componentDTO.setTolerance(rs.getDouble(5));
+        componentDTO.setId(rs.getInt(2));
+        componentDTO.setIngredientID(rs.getInt(3));
+        componentDTO.setAmount(rs.getDouble(5));
+        componentDTO.setTolerance(rs.getDouble(6));
+        componentDTO.setLaborantID(rs.getInt(8));
+        componentDTO.setIngredientName(rs.getString(9));
     }
 
     public ArrayList<ProductBatchComponentDTO> getCompByBatch(int batchID) throws SQLException, IOException {
@@ -105,9 +106,9 @@ public class ProductBatchComponentDAO {
     private ProductBatchComponentDTO getComponentInfo(ResultSet rs) throws SQLException {
         ProductBatchComponentDTO comp = new ProductBatchComponentDTO();
 
-        comp.setIngredientID(rs.getInt(1));
-        comp.setId(rs.getInt(2));
         comp.setProductBatchID(rs.getInt(3));
+        comp.setId(rs.getInt(2));
+        comp.setIngredientID(rs.getInt(1));
         comp.setIngredientBatchID(rs.getInt(4));
         comp.setLaborantID(rs.getInt(5));
         comp.setTara(rs.getDouble(6));
@@ -143,12 +144,28 @@ public class ProductBatchComponentDAO {
         try {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                batch = getComponentInfo(rs);
+                batch = getComponentInfos(rs);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return batch;
+    }
+
+    private ProductBatchComponentDTO getComponentInfos(ResultSet rs) throws SQLException {
+        ProductBatchComponentDTO comp = new ProductBatchComponentDTO();
+
+        comp.setProductBatchID(rs.getInt(2));
+        comp.setId(rs.getInt(1));
+        comp.setIngredientID(rs.getInt(3));
+        comp.setIngredientBatchID(rs.getInt(4));
+        comp.setLaborantID(rs.getInt(5));
+        comp.setTara(rs.getDouble(6));
+        comp.setNetto(rs.getDouble(7));
+        comp.setTerminal(rs.getInt(8));
+        comp.setAmount(rs.getDouble(9));
+        comp.setTolerance(rs.getDouble(10));
+        return comp;
     }
 }

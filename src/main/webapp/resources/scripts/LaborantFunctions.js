@@ -90,6 +90,7 @@ function setTara() {
     $("#container").attr('data-tara',''+ $("#tarainput").val());
     var tara = $("#container").attr('data-tara');
     $("#header").text("Indtast raavarebatch");
+    $(".errorcont").remove();
     $("#subcontainer").html('' +
         '<form action="javascript:setRaavare()">' +
         '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
@@ -104,6 +105,7 @@ function setRaavare() {
     var raavareBatch = $("#container").attr('data-raavareBatch');
     Agent.GET("rest/productBatchComponent/validateBatch/"+ compID +"/"+ raavareBatch +'/', function () {
         $("#header").text("Indtast brutto vægt");
+        $(".errorcont").remove();
         $("#subcontainer").html('' +
             '<form action="javascript:setBrutto()">' +
             '<input type="text" placeholder="Kg" id="bruttoInput">' +
@@ -111,7 +113,7 @@ function setRaavare() {
             '</form>'
         )
     }, function (data) {
-        $("#error").remove();
+        $(".errorcont").remove();
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
@@ -134,6 +136,7 @@ function setBrutto() {
 
 
     Agent.PUT("rest/productBatchComponent", batchcomp, function () {
+        $(".errorcont").remove();
         $("#container").html('' +
             '<form action="javascript:setStatus()">' +
             '<div class="boxedText">Afvejning gemt</div>' +

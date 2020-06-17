@@ -54,9 +54,9 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     @Override
     public Response updateProductBatchComponent(ProductBatchComponentDTO batchComponent) {
         try {
-            RecipeComponentDTO recipe = RecipeDAO.getInstance().getRecipeComponent(batchComponent.getProductBatchID(), batchComponent.getIngredientID());
+            ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(batchComponent.getId());
             batchComponent.setNetto(batchComponent.getBrutto() - batchComponent.getTara());
-            if (InputValidation.getInstance().validateAfvejning(batchComponent, recipe)) {
+            if (InputValidation.getInstance().validateAfvejning(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
                 return Response.ok().build();
             } else
@@ -83,6 +83,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
             ArrayList<ProductBatchComponentDTO> list = ProductBatchComponentDAO.getInstance().getProductBatchComponent(batchID);
             for (ProductBatchComponentDTO componentDTO : list) {
                 if (componentDTO.getLaborantID() == 0) {
+                    ProductBatchDAO.getInstance().setStatus(batchID);
                     return Response.ok(componentDTO).build();
                 }
             }
@@ -93,6 +94,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
                 for (ProductBatchComponentDTO componentDTO : ProductBatchComponentDAO.getInstance().getCompByBatch(batchID)) {
                     taraSum += componentDTO.getTara();
                     nettoSum += componentDTO.getNetto();
+                    System.out.println(componentDTO.getTara() + " " + componentDTO.getNetto());
                 }
                 batch.setTaraSum(taraSum);
                 batch.setNettoSum(nettoSum);
