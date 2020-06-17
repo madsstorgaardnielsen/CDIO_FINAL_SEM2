@@ -12,8 +12,9 @@ function getAllProducts() { //shows all productbatches
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
-        '<div id="inputID"></div>' +
-        '<button class="viewbtn" style="width: 20%;" onclick="inputRecipeID()">Tilføj ny</button>'
+        '<div class="infocontainer" id="inputID">' +
+        '<button class="confirmbtn" id="viewbtn">Tilføj ny</button>' +
+        '</div>'
     );
     var row;
     Agent.GET("rest/productBatch", function (data) {
@@ -102,9 +103,16 @@ function generateCompList(component) { //generates html for rows for each compon
         '</tr>'
 }
 
-function inputRecipeID(){
-    $("#inputID").html('<input id="receptidinput" style="width:15%;" type="number" placeholder="Indsæt recept ID" name="receptid" required>' +
-        '<button type="submit" style="width:5%; display:inline;" onclick="addProductBatch()">Udfør</button>')
+function listenerAdd() {
+    $("#container").on('click', "#viewbtn", function () {
+        $("#inputID").html('' +
+            '<form>' +
+            '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
+            '<br>' +
+            '<button class="btn" type="submit" onclick="addProductBatch()">Udfør</button>' +
+            '</form>'
+        )
+    })
 }
 
 function addProductBatch(){
@@ -132,4 +140,5 @@ function init() {
 }
 document.addEventListener('DOMContentLoaded', function () {
     init();
+    listenerAdd();
 });
