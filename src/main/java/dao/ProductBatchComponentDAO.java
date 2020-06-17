@@ -39,13 +39,13 @@ public class ProductBatchComponentDAO {
 
     public void addComponentsByRecipe(RecipeDTO recipe, int batchID) throws SQLException, IOException {
         // making string for statement
-        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
+        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount, tolerance) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()) {
-            statementString += "(" + batchID + ", " + comp.getIngredientID()+ ", " + comp.getNonNetto()+ "),";
+            statementString += "(" + batchID + ", " + comp.getIngredientID()+ ", " + comp.getNonNetto()+", " + comp.getTolerance()+ "),";
         }
         statementString = statementString.substring(0, statementString.length() - 1);
-        //System.out.println(statementString); //testing
+        System.out.println(statementString); //testing
         statement = database.prepareStatement(statementString);
         try {
             statement.executeUpdate();
@@ -114,7 +114,8 @@ public class ProductBatchComponentDAO {
         comp.setNetto(rs.getDouble(7));
         comp.setTerminal(rs.getInt(8));
         comp.setAmount(rs.getDouble(9));
-        comp.setIngredientName(rs.getString(10));
+        comp.setTolerance(rs.getDouble(10));
+        comp.setIngredientName(rs.getString(11));
         return comp;
     }
 
