@@ -21,9 +21,7 @@ public class ProductBatchDTO implements IProductBatchDTO {
     }
 
     public ProductBatchDTO(int recipeId, int userId) {
-        this.productBatchId = productBatchId;
         this.recipeId = recipeId;
-        this.status = status;
         this.userId = userId;
     }
 

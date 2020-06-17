@@ -103,29 +103,36 @@ function generateCompList(component) { //generates html for rows for each compon
         '</tr>'
 }
 
-function listenerAdd() {
+function listenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#viewbtn", function () {
         $("#inputID").html('' +
             '<form>' +
             '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
-            '<button class="btn" type="submit" onclick="addProductBatch()">Udfør</button>' +
+            '<button id="finishbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'
         )
     })
 }
+function listenerAdd1() {//when click udfør then add productbatch
+    $("#container").on('click', "#finishbtn", function () {
+        var receptidIn = $("#receptidinput").val();
+        var userID = $("#container").attr("data-id");
 
-function addProductBatch(){
-    /*lortet virker ikke
+        Agent.POST("/rest/productBatch/"+ receptidIn +"/"+userID+"/", null,function (data){
+            getAllProducts();
+        },function (data){
+            alert("fejl");
+        } )
 
-    var receptid_in =$("#receptidinput").val;
-    var userID = $("#container").attr("data-id");
-    Agent.POST("/rest/productBatch/"+receptid_in+"/"+userID+"/", userID ,function (data){
-        alert("produktbatch oprettet");
-    },function (data){
-        alert("fejl");
-    } )
-*/
+        $("#inputID").html('' +
+            '<form>' +
+            '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
+            '<br>' +
+            '<button id="viewbtn" class="btn" type="submit" >Udfør</button>' +
+            '</form>'
+        )
+    })
 }
 
 function init() {
@@ -141,4 +148,5 @@ function init() {
 document.addEventListener('DOMContentLoaded', function () {
     init();
     listenerAdd();
+    listenerAdd1();
 });
