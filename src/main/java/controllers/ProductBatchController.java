@@ -46,7 +46,7 @@ public class ProductBatchController {
             int newBatchID = productBatchDAO.addProductBatch(recipeID, userID);
             //add batch and get recipe and new batch id to make components.
             ProductBatchComponentDAO.getInstance().addComponentsByRecipe(RecipeDAO.getInstance().getRecipe(recipeID), newBatchID);
-            return Response.ok(productBatchDTO).build();
+            return Response.ok().build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
