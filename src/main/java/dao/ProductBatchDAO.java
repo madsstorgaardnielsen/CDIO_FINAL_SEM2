@@ -129,12 +129,12 @@ public class ProductBatchDAO implements IProductBatchDAO {
         batch.setNettoSum(rs.getDouble(8));
     }
 
-    public ProductBatchDTO getProductBatchFromRecipeIdUserId(int recipeId, int userId, int productBatchId) throws SQLException, IOException {
-        String getProductBatchString = "{call GetProductBatchFromRecipeIdUserIdProductBatchId(?,?,?)}";
+    public ProductBatchDTO getProductBatchFromRecipeIdUserId(int recipeId, int userId) throws SQLException, IOException {
+        String getProductBatchString = "{call GetProductBatchFromRecipeIdUserIdProductBatchId(?,?)}";
         statement = database.callableStatement(getProductBatchString);
         statement.setInt(1, recipeId);
         statement.setInt(2, userId);
-        statement.setInt(3, productBatchId);
+
 
 
         try {

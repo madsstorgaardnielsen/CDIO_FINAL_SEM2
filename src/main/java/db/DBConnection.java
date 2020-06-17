@@ -1,9 +1,12 @@
 package db;
 
+import controllers.IngredientBatchController;
+
 import java.io.IOException;
 import java.sql.*;
 
 public class DBConnection {
+
     private Connection connection;
 
     public DBConnection() throws SQLException {
