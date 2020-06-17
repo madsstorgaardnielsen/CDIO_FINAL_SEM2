@@ -59,10 +59,6 @@ public class UserController implements IUserController {
 
     @Override
     public Response updateUser(int userId, String firstName, String lastName, String initials, String role, String active) throws Exception {
-        if (firstName.equals("null") && lastName.equals("null") && initials.equals("null") && role.equals("null") && active.equals("null")) {
-            return Response.ok(userDAO.getUser(String.valueOf(userId))).build();
-        }
-
         UserDTO user = new UserDTO(userId, firstName, lastName, initials, role, true);
         if (!active.equals("null")) {
             user.setActive(active);

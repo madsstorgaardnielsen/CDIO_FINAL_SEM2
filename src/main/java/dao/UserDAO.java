@@ -116,14 +116,13 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public UserDTO updateUser(UserDTO user) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?,?)}");
+        CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,? )}");
 
         stmt.setInt(1, user.getUserId());
         stmt.setString(2, user.getFirstName());
         stmt.setString(3, user.getLastName());
         stmt.setString(4, user.getInitials());
         stmt.setString(5, user.getRole());
-        stmt.setBoolean(6, user.getActive());
 
         ResultSet rs = stmt.executeQuery();
 

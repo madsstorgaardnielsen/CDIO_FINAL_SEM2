@@ -94,11 +94,11 @@ function listeneredit(row) {
         var initials = row.find(".initials").text();
         var role = row.find(".role").text();
 
-        row.find(".firstName").html('<input type="text" placeholder="' + firstName + '" id="editfirstName" data-orig="'+ firstName +'">');
-        row.find(".lastName").html('<input type="text" placeholder="' + lastName + '" id="editlastName" data-orig="'+ lastName +'">');
-        row.find(".initials").html('<input type="text" placeholder="' + initials + '" id="editinitials" data-orig="'+ initials +'">');
+        row.find(".firstName").html('<input type="text" placeholder="' + firstName + '" id="editfirstName">');
+        row.find(".lastName").html('<input type="text" placeholder="' + lastName + '" id="editlastName">');
+        row.find(".initials").html('<input type="text" placeholder="' + initials + '" id="editinitials">');
         row.find(".role").html('' +
-            '<select id="editrole" data-orig="'+ role +'">' +
+            '<select id="editrole">' +
             '<option value="'+ role +'" selected hidden>'+ role +'</option>' +
             '<option value="Admin">Admin</option>' +
             '<option value="Farmaceut">Farmaceut</option>' +
@@ -119,24 +119,28 @@ function listenersave(row) {
         var initials = row.find("#editinitials").val();
         var role = row.find("#editrole").val();
 
-        var origfirstName = row.find("#editfirstName").attr('data-orig');
-        var origlastName = row.find("#editlastName").attr('data-orig');
-        var originitials = row.find("#editinitials").attr('data-orig');
-        var origrole = row.find("#editrole").attr('data-orig');
+        var origfirstName = row.find("#editfirstName").attr('placeholder');
+        var origlastName = row.find("#editlastName").attr('placeholder');
+        var originitials = row.find("#editinitials").attr('placeholder');
 
         var params = "?userId=" + userId;
 
-        if (firstName !== "" && firstName !== origfirstName)
+        if (firstName !== "")
             params = params + "&firstName=" + firstName;
+        else
+            params = params + "&firstName=" + origfirstName;
 
-        if (lastName !== "" && lastName !== origlastName)
-            params= params + "&lastName=" + lastName;
+        if (lastName !== "")
+            params = params + "&lastName=" + lastName;
+        else
+            params = params + "&lastName=" + origlastName;
 
-        if (initials !== "" && initials !== originitials)
+        if (initials !== "")
             params = params + "&initials=" + initials;
+        else
+            params = params + "&initials=" + originitials;
 
-        if (role !== origrole)
-            params = params + "&role=" + role;
+        params = params + "&role=" + role;
 
         Agent.PUT("rest/user" + params, null, function (data) {
             row.replaceWith(generateUserHtml(data));
