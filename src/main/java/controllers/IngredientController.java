@@ -6,6 +6,7 @@ import dto.IngredientDTO;
 import jdk.nashorn.internal.ir.ReturnNode;
 import validation.InputValidation;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -74,20 +75,14 @@ public class IngredientController implements IIngredientController {
 
     public Response getAllIngredients() {
         try {
-            ingredientDAO.getAllIngredients();
             return Response.ok(ingredientDAO.getAllIngredients()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
     }
 
-    public Response getIngredient(int id) {
-        try {
-            ingredientDAO.getIngredient(id);
-            return Response.ok(ingredientDAO.getIngredient(id)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
-        }
+    public Response getIngredient(int id)  {
+        return Response.ok(ingredientDAO.getIngredient(id)).build();
     }
 
 }
