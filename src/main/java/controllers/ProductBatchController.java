@@ -59,10 +59,13 @@ public class ProductBatchController {
         try {
             //get batch
             ProductBatchDTO productBatch = ProductBatchDAO.getInstance().getProductBatch(batchID);
-            //get and set componenents:
-            productBatch.setComponents(ProductBatchComponentDAO.getInstance().getCompByBatch(batchID));
-            //System.out.println(productBatch.toString()); //testing
-            return Response.ok(productBatch).build();
+            if (productBatch.getProductBatchId() != 0) {
+                //get and set componenents:
+                productBatch.setComponents(ProductBatchComponentDAO.getInstance().getCompByBatch(batchID));
+                //System.out.println(productBatch.toString()); //testing
+                return Response.ok(productBatch).build();
+            } else
+                return Response.status(418, "Produktbatch ikke oprettet").build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
