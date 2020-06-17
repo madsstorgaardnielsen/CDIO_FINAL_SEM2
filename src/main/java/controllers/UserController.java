@@ -38,7 +38,7 @@ public class UserController implements IUserController {
         if (validation.addUserInputValidation(userDTO)) {
             try {
                 userDAO.addUser(userDTO);
-                return Response.ok(userDTO).build();
+                return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }

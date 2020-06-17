@@ -15,20 +15,20 @@ class ProductBatchDAOTest {
     @Test
     void addProductBatch() throws IOException, SQLException {
         ProductBatchDAO.getInstance().addProductBatch(99999999, 1);
-        int recipeId = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,123).getRecipeId();
+        int recipeId = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getRecipeId();
         assertEquals(99999999, recipeId);
     }
 
     @Test
     void updateProductBatch() throws IOException, SQLException {
         ProductBatchDTO pbdto;
-        pbdto = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,95);
+        pbdto = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1);
 
         ProductBatchDAO pbdao = new ProductBatchDAO();
         pbdao.addProductBatch(99999999, 1);
         pbdto.setStatus(0);
         pbdao.updateProductBatch(pbdto);
-        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,95).getStatus());
+        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getStatus());
         ProductBatchDAO.getInstance().deleteProductBatchWithRecipeIdUserId(1, 1);
     }
 
@@ -37,9 +37,9 @@ class ProductBatchDAOTest {
 
         ProductBatchDAO pbdao = new ProductBatchDAO();
         pbdao.addProductBatch(99999999, 1);
-        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,99999999).getStatus());
+        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getStatus());
         ProductBatchDAO.getInstance().deleteProductBatchWithRecipeIdUserId(99999999, 1);
-        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,99999999).getStatus());
+        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getStatus());
 
     }
 
@@ -57,7 +57,7 @@ class ProductBatchDAOTest {
         ProductBatchDAO pbdao = new ProductBatchDAO();
         pbdao.addProductBatch(99999999, 1);
 
-        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1,99999999).getStatus());
+        assertEquals(0, ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getStatus());
         ProductBatchDAO.getInstance().deleteProductBatchWithRecipeIdUserId(99999999, 1);
     }
 }

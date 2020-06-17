@@ -50,7 +50,7 @@ public class IngredientBatchController implements IIngredientBatchController {
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
             try {
                 ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
-                return Response.ok(ingredientBatchDAO).build();
+                return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
@@ -64,7 +64,7 @@ public class IngredientBatchController implements IIngredientBatchController {
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
             try {
                 ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
-                return Response.ok(ingredientBatchDTO).build();
+                return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
