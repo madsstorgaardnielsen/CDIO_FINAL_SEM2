@@ -94,12 +94,12 @@ function generateCompList(component) { //generates html for rows for each compon
         '<td class = productBatchID>' + component.id + '</td>' +
         '<td class= ingredientName>' + component.ingredientName + '</td>' +
         '<td class= ingredientID>' + component.ingredientID + '</td>' +
-        '<td class= amount>' + component.amount + '</td>' +
-        '<td class= tolerance>' + component.tolerance + '</td>' +
+        '<td class= amount>' + component.amount + ' kg</td>' +
+        '<td class= tolerance>' + component.tolerance + ' %</td>' +
         '<td class= laborantID>' + component.laborantID + '</td>' +
         '<td class= ingredientBatchID>' + component.ingredientBatchID + '</td>' +
-        '<td class= tara>' + component.tara + '</td>' +
-        '<td class= netto>' + component.netto + '</td>' +
+        '<td class= tara>' + component.tara + ' kg</td>' +
+        '<td class= netto>' + component.netto + ' kg</td>' +
         '</tr>'
 }
 

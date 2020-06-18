@@ -123,7 +123,8 @@ public class ProductBatchComponentDAO {
             comp.setNetto(rs.getDouble(7));
             comp.setTerminal(rs.getInt(8));
             comp.setAmount(rs.getDouble(9));
-            comp.setIngredientName(rs.getString(10));
+            comp.setTolerance(rs.getDouble(10));
+            comp.setIngredientName(rs.getString(11));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();

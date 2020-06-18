@@ -122,6 +122,9 @@ public class ProductBatchDAO implements IProductBatchDAO {
             } catch (NullPointerException ignored) {
 
             }
+            if(batch.getFinishDate()==null){
+                batch.setFinishDate(" ");
+            }
             batch.setTaraSum(rs.getDouble(7));
             batch.setNettoSum(rs.getDouble(8));
         } catch (SQLException e) {
