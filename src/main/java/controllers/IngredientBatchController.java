@@ -13,21 +13,17 @@ import java.util.ArrayList;
 
 public class IngredientBatchController implements IIngredientBatchController {
 
-    private static IngredientBatchController instance;
+    private static final IngredientBatchController instance;
 
     static {
-        try {
-            instance = new IngredientBatchController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new IngredientBatchController();
     }
 
     private final InputValidation validation;
     private final IngredientBatchDAO ingredientBatchDAO;
     private IngredientBatchDTO ingredientBatchDTO;
 
-    private IngredientBatchController() throws SQLException {
+    private IngredientBatchController()  {
         this.ingredientBatchDAO = new IngredientBatchDAO();
         this.ingredientBatchDTO = new IngredientBatchDTO();
         this.validation = new InputValidation();
@@ -71,13 +67,11 @@ public class IngredientBatchController implements IIngredientBatchController {
         } else {
             return Response.status(418, "Bad input").build();
         }
-
     }
 
     public Response getAllIngredientBatch() {
         try {
-            ingredientBatchDAO.getAllIngredientBatch();
-            return Response.ok(ingredientBatchDAO).build();
+            return Response.ok(ingredientBatchDAO.getAllIngredientBatch()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -85,8 +79,7 @@ public class IngredientBatchController implements IIngredientBatchController {
 
     public Response getIngredientBatch(int id) {
         try {
-            ingredientBatchDAO.getIngredientBatch(id);
-            return Response.ok(ingredientBatchDAO).build();
+            return Response.ok( ingredientBatchDAO.getIngredientBatch(id)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

@@ -2,7 +2,7 @@ package dto.idto;
 
 import java.io.Serializable;
 
-public interface IRecipeDTO {
+public interface IRecipeDTO extends Serializable{
 
     String toString();
 

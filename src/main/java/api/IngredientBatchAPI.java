@@ -14,19 +14,19 @@ public class IngredientBatchAPI {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getIngredientBatch(@PathParam("id") int id) throws Exception {
+    public Response getIngredientBatch(@PathParam("id") int id) {
         return Response.ok(new IngredientBatchDAO().getIngredientBatch(id)).build();
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllIngredientBatch() throws Exception {
+    public Response getAllIngredientBatch() {
         return Response.ok(new IngredientBatchDAO().getAllIngredientBatch()).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) throws Exception {
+    public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
         IngredientBatchDAO.getInstance().addIngredientBatch(ingredientBatchDTO);
         return Response.ok().build();
     }
@@ -34,14 +34,14 @@ public class IngredientBatchAPI {
 
     @DELETE
     @Path("{id}")
-    public Response deleteIngredientBatch(@PathParam("id") int id) throws Exception {
+    public Response deleteIngredientBatch(@PathParam("id") int id) {
         IngredientBatchDAO.getInstance().deleteIngredientBatch(id);
         return Response.ok().build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateIngredientBatch(IngredientBatchDTO ingredientBatchDTO) throws Exception {
+    public Response updateIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
         IngredientBatchDAO.getInstance().updateIngredientBatch(ingredientBatchDTO);
         return Response.ok().build();
     }

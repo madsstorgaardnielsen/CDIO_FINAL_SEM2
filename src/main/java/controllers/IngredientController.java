@@ -6,27 +6,24 @@ import dto.IngredientDTO;
 import jdk.nashorn.internal.ir.ReturnNode;
 import validation.InputValidation;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IngredientController implements IIngredientController {
-    private static IngredientController instance;
+    private static final IngredientController instance;
 
     static {
-        try {
-            instance = new IngredientController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new IngredientController();
     }
 
     private final InputValidation validation;
     private final IngredientDAO ingredientDAO;
     private IngredientDTO ingredientDTO;
 
-    private IngredientController() throws SQLException {
+    private IngredientController() {
         this.ingredientDAO = new IngredientDAO();
         this.ingredientDTO = new IngredientDTO();
         this.validation = new InputValidation();
@@ -74,20 +71,13 @@ public class IngredientController implements IIngredientController {
 
     public Response getAllIngredients() {
         try {
-            ingredientDAO.getAllIngredients();
             return Response.ok(ingredientDAO.getAllIngredients()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
     }
 
-    public Response getIngredient(int id) {
-        try {
-            ingredientDAO.getIngredient(id);
-            return Response.ok(ingredientDAO.getIngredient(id)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
-        }
+    public Response getIngredient(int id)  {
+        return Response.ok(ingredientDAO.getIngredient(id)).build();
     }
-
 }
