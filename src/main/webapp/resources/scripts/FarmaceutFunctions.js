@@ -83,7 +83,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= btncont> <button class="viewbtn">View components</button></td>' +
+        '<td class= btncont> <button class="viewbtn">Se mere</button></td>' +
         '</tr>'
 }
 
@@ -110,7 +110,10 @@ function getRecipeComponent(recipeId) {
         '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
-        '</table>'
+        '</table>' +
+        '<div class="infocontainer" id="inputID">' +
+        '<button class="confirmbtn" id="addbtn">Tilføj ny</button>' +
+        '</div>'
     );
 
     Agent.GET('rest/recipecomponent/' + recipeId + '/', function (data) {
@@ -120,6 +123,8 @@ function getRecipeComponent(recipeId) {
         listener();
         listeneredit();
         listenersave();
+        componentlistenerAdd();
+        componentlistenerAdd1()
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -200,6 +205,46 @@ function listener(row) {
             console.log(data)
         })
     });
+}
+
+
+function componentlistenerAdd() {//shows line to add new batch by recipe id
+    $("#container").on('click', "#addbtn", function () {
+        $("#inputID").html('' +
+            '<form>' +
+            '<input id="ingredientIdInput" type="text" placeholder="Indsæt ingredient ID" >' +
+            '<input id="nonNettoInput" type="text" placeholder="Indsæt nonNetto" >' +
+            '<input id="toleranceInput" type="text" placeholder="Indsæt tolerance" >' +
+            '<br>' +
+            '<button id="finishcompbtn" class="btn" type="submit" >Udfør</button>' +
+            '</form>'
+        )
+    })
+}
+
+function componentlistenerAdd1() {
+    $("#container").on('click', "#finishcompbtn", function () {
+        var recipecomponent = {};
+
+        var row = $(this).closest('tr');
+        recipecomponent.recipeID =  row.find(".recipeID").text();
+        recipecomponent.ingredientID = $("#ingredientIdInput").val();
+        recipecomponent.nonNetto = $("#nonNettoInput").val();
+        recipecomponent.tolerance = $("#toleranceInput").val();
+
+
+        Agent.POST("rest/recipecomponent", recipecomponent, function () {
+            getRecipeComponent(recipecomponent.recipeID)
+        }, function (data) {
+            $("#error").remove();
+            console.log(data);
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">' +
+                'Component ikke tilføjet: ' + $(data.responseText).find("u").first().text() +
+                '</div></div>'
+            );
+        })
+    })
 }
 
 function booleanToBtn(active) { //generates text according to users active state
