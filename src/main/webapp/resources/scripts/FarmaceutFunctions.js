@@ -149,7 +149,8 @@ function listeneredit() {
         //row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName" data-orig="'+ ingredientName +'">');
         row.find(".nonNetto").html('<input type="text" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
         row.find(".tolerance").html('<input type="text" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
-        row.find(".editbtn").html('<button class="savebtn">Gem</button>');
+        row.find(".editbutton").empty();
+        row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
 }
 
@@ -162,20 +163,24 @@ function listenersave() {
         var nonNetto = row.find("#editnonNetto").val();
         var tolerance = row.find("#edittolerance").val();
 
-        var orignonNetto = row.find("#editnonNetto").attr('data-orig');
-        var origtolerance = row.find("#edittolerance").attr('data-orig');
+        var orignonNetto = row.find("#editnonNetto").attr('placeholder');
+        var origtolerance = row.find("#edittolerance").attr('placeholder');
 
         var params = "?recipeID=" + recipeID;
             params = params + "&ingredientId=" + ingredientId;
             params = params + "&ingredientName=" + ingredientName;
 
-        if (nonNetto !== "" && nonNetto !== orignonNetto)
+        if (nonNetto !== "")
             params = params + "&nonNetto=" + nonNetto;
+        else
+            params = params + "&nonNetto=" + orignonNetto;
 
-        if (tolerance !== "" && tolerance !== origtolerance)
+        if (tolerance !== "")
             params = params + "&tolerance=" + tolerance;
+        else
+            params = params + "&tolerance=" + origtolerance;
 
-        Agent.PUT("rest/recipecomponent" + params, null, function (data) {
+                Agent.PUT("rest/recipecomponent" + params, null, function (data) {
             row.replaceWith(generateRecipeComponentHtml(data));
         }, function (data) {
             window.alert("Ændringer ikke gemt: " + $(data.responseText).find("u").first().text());
