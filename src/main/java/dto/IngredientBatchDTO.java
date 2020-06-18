@@ -1,6 +1,7 @@
 package dto;
 
 import dto.idto.IIngredientBatchDTO;
+import org.glassfish.jersey.server.model.Routed;
 
 import java.math.BigDecimal;
 
@@ -50,5 +51,12 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String toString(){
+        return "ibID: " + ingredientBatchId + "\n" +
+                "iID: " + ingredientId + "\n" +
+                "amount: " + Math.abs(amount) + "\n" +
+                "supplier: " + supplier;
     }
 }

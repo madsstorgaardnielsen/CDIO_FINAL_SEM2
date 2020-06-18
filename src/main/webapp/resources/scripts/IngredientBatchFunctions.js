@@ -37,7 +37,7 @@ function genIngBatchList(ingredientBatch) { //generates html to show in IB list
 function listenerAdd2() {//shows line to add new batch
     $("#container").on('click', "#addnewib", function () {
         $("#container").html('' +
-            '<form>' +
+            '<form action="javascript:saveBatch()">' +
             '<input id="ibidinput" type="text" placeholder="Råvare Batch ID" name="ibid" required>' +
             '<input id="ingidinput" type="text" placeholder="Råvare ID" name="ingid" required>'+
             '<input id="amountinput" type="text" placeholder="Mængde i kg" name="amount" required>' +
@@ -74,8 +74,7 @@ function genIngList(ingredient){
     )
 }
 
-function listenerAdd3() {//when click udfør then add productbatch
-    $("#container").on('click', "#finishibbtn", function () {
+function saveBatch() {//when click udfør then add productbatch
         var ibdto = {};
         ibdto.ingredientBatchId = $("#ibidinput").val();
         ibdto.ingredientId =  $("#ingidinput").val();
@@ -83,15 +82,13 @@ function listenerAdd3() {//when click udfør then add productbatch
         ibdto.supplier = $("#supplierinput").val();
 
         Agent.POST("/rest/ingredientbatch", ibdto,function (){
-            alert("Råvare batch oprettet med ID: "+ $("#ibidinput").val());
+            window.alert("Råvare batch oprettet med ID: "+ $("#ibidinput").val());
             getAllIngredientBatch();
         },function (){
             alert("fejl");
         } );
-    })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     listenerAdd2();
-    listenerAdd3()
 });
