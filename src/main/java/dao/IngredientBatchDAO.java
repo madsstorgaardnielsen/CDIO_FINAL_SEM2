@@ -99,6 +99,7 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
             ingredientBatchDTO.setIngredientId(rs.getInt(2));
             ingredientBatchDTO.setAmount(rs.getString(3));
+            ingredientBatchDTO.setSupplier(rs.getString(4));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
