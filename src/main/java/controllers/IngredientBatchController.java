@@ -67,7 +67,6 @@ public class IngredientBatchController implements IIngredientBatchController {
         } else {
             return Response.status(418, "Bad input").build();
         }
-
     }
 
     public Response getAllIngredientBatch() {

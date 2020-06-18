@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider;
 public class DatabaseConnectionExceptionMapper implements ExceptionMapper<DatabaseConnectionException> {
     @Override
     public Response toResponse(DatabaseConnectionException e) {
-        return Response.status(Response.Status.NOT_FOUND).entity("Database connection error: "+e.getMessage()).build();
+        return Response.status(Response.Status.NOT_FOUND).entity("Database connection error: "+e.getMessage()+
+                "Cause: "+e.getCause()).build();
     }
 }

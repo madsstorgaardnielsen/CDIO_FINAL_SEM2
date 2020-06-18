@@ -80,5 +80,4 @@ public class IngredientController implements IIngredientController {
     public Response getIngredient(int id)  {
         return Response.ok(ingredientDAO.getIngredient(id)).build();
     }
-
 }
