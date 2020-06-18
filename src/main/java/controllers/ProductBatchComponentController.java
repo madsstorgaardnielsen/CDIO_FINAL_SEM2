@@ -51,7 +51,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
         try {
             ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(batchComponent.getId());
             batchComponent.setNetto(batchComponent.getBrutto() - batchComponent.getTara());
-            if (InputValidation.getInstance().validateAfvejning(batchComponent, batch)) {
+            if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
                 return Response.ok().build();
             } else

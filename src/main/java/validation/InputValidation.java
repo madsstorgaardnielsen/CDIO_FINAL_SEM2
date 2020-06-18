@@ -189,6 +189,14 @@ public class InputValidation {
         double lowerbound = amount - (amount * tolerance);
         return Netto <= upperbound && Netto >= lowerbound;
     }
+    public boolean validateAfvejning2(ProductBatchComponentDTO batchComponentDTO, ProductBatchComponentDTO productBatchComponentDTO) {
+        double Netto = batchComponentDTO.getNetto();
+        double amount = productBatchComponentDTO.getNetto();
+        double tolerance = productBatchComponentDTO.getTolerance() * 0.01;
+        double upperbound = amount + (amount * tolerance);
+        double lowerbound = amount - (amount * tolerance);
+        return Netto <= upperbound && Netto >= lowerbound;
+    }
 
     public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {
         int ingredient = componentDTO.getIngredientID();
