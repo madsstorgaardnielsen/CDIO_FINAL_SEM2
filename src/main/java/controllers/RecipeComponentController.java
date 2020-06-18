@@ -44,7 +44,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         if (validation.recipeComponentInputValidation(recipeComponent)) {
             try {
                 RecipeComponentDAO.addRecipeComponent(recipeComponent);
-                return Response.ok(recipeComponent).build();
+                return Response.ok().build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
