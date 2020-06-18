@@ -26,7 +26,7 @@ public class ProductBatchComponentDAO {
     PreparedStatement statement;
     private DBConnection database;
 
-    public ProductBatchComponentDAO()  {
+    public ProductBatchComponentDAO() {
         database = new DBConnection();
     }
 
