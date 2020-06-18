@@ -3,6 +3,13 @@ package dto;
 import dto.idto.IUserDTO;
 
 public class UserDTO implements IUserDTO {
+    private static final long serialVersionUID = 4545864587995944260L;
+    private int userId;
+    private String firstName;
+    private String lastName;
+    private String initials;
+    private String role;
+    private boolean active;
     public UserDTO(int userId, String firstName, String lastName, String initials, String role, boolean active) {
         this.userId = userId;
         this.firstName = firstName;
@@ -11,21 +18,12 @@ public class UserDTO implements IUserDTO {
         this.role = role;
         this.active = active;
     }
-
     public UserDTO() {
     }
 
-    private int userId;
-    private String firstName;
-    private String lastName;
-    private String initials;
-    private String role;
-    private boolean active;
-    private static final long serialVersionUID = 4545864587995944260L;
-
     @Override
     public String toString() {
-        return userId+" "+firstName+" "+lastName;
+        return userId + " " + firstName + " " + lastName;
     }
 
     @Override
@@ -79,29 +77,27 @@ public class UserDTO implements IUserDTO {
     }
 
     @Override
-    public void setActive(boolean active){
-        this.active = active;
-    }
-
-    @Override
     public boolean getActive() {
         return active;
     }
 
     @Override
-    public void setActive(String active) throws Exception {
+    public boolean isActive() {
+        return active;
+    }
+
+    @Override
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    @Override
+    public void setActive(String active) {
         if (active.equals("true"))
             this.active = true;
         else {
             if (active.equals("false"))
                 this.active = false;
-            else
-                throw new Exception();
         }
-    }
-
-    @Override
-    public boolean isActive() {
-        return active;
     }
 }

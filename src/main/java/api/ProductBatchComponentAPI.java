@@ -29,7 +29,7 @@ public class ProductBatchComponentAPI {
     @Path("/validateBatch/{ID}/{ingredientBatchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) throws Exception {
+    public Response validateIngredientBatch(@PathParam("ID") int ID, @PathParam("ingredientBatchID") int batchID) {
         return ProductBatchComponentController.getInstance().validateIngredientBatch(ID, batchID);
     }
 

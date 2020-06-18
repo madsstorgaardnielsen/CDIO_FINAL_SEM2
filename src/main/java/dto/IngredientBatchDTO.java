@@ -1,18 +1,19 @@
 package dto;
 
-import dao.idao.IIngredientBatchDAO;
 import dto.idto.IIngredientBatchDTO;
+
+import java.math.BigDecimal;
 
 public class IngredientBatchDTO implements IIngredientBatchDTO {
     int ingredientBatchId;
     int ingredientId;
-    double amount;
+    String amount;
     String supplier;
 
     public IngredientBatchDTO() {
     }
 
-    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, double amount, String supplier) {
+    public IngredientBatchDTO(int ingredientBatchId, int ingredientId, String amount, String supplier) {
         this.ingredientBatchId = ingredientBatchId;
         this.ingredientId = ingredientId;
         this.amount = amount;
@@ -43,11 +44,11 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
         this.ingredientId = ingredientId;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 }

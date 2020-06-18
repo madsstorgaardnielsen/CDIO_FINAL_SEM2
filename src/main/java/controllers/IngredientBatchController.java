@@ -55,7 +55,7 @@ public class IngredientBatchController implements IIngredientBatchController {
         }
     }
 
-    public Response updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier) {
+    public Response updateIngredientBatch(int batchId, int ingredientId, String amount, String supplier) {
         ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
             try {

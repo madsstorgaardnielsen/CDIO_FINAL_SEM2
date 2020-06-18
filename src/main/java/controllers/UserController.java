@@ -54,11 +54,15 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public Response updateUser(int userId, String firstName, String lastName, String initials, String role, String active) throws Exception {
+    public Response updateUser(int userId, String firstName, String lastName, String initials, String role, String active) {
         UserDTO user = new UserDTO(userId, firstName, lastName, initials, role, true);
         if (!active.equals("null")) {
             user.setActive(active);
-            user = userDAO.updateActivity(user);
+            try {
+                user = userDAO.updateActivity(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return Response.ok(user).build();
         }
 

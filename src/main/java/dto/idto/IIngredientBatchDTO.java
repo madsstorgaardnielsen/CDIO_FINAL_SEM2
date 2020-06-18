@@ -1,6 +1,7 @@
 package dto.idto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public interface IIngredientBatchDTO extends Serializable {
     String getSupplier();
@@ -15,8 +16,8 @@ public interface IIngredientBatchDTO extends Serializable {
 
     void setIngredientId(int ingredientId);
 
-    double getAmount();
+    String getAmount();
 
-    void setAmount(double amount);
+    void setAmount(String amount);
 
 }

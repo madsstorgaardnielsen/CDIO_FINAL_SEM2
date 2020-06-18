@@ -17,7 +17,7 @@ public interface IIngredientBatchController {
 
     Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO);
 
-    Response updateIngredientBatch(int batchId, int ingredientId, double amount, String supplier);
+    Response updateIngredientBatch(int batchId, int ingredientId, String amount, String supplier);
 
     Response getAllIngredientBatch();
 

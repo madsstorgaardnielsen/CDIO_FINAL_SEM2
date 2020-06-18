@@ -42,7 +42,7 @@ public class IngredientBatchAPI {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateIngredientBatch(@QueryParam("ingredientId") int batchId,
                                           @QueryParam("ingredientName") int ingredientId,
-                                          @QueryParam("ingredientName") double ingredientAmount,
+                                          @QueryParam("ingredientName") String ingredientAmount,
                                           @QueryParam("ingredientName") String ingredientSupplier) {
         return IngredientBatchController.getInstance().updateIngredientBatch(batchId,ingredientId,ingredientAmount,ingredientSupplier);
     }

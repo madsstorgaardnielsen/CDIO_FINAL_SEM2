@@ -30,14 +30,14 @@ public class UserAPI {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addUser(UserDTO userDTO) throws Exception {
+    public Response addUser(UserDTO userDTO) {
         return UserController.getInstance().addUser(userDTO);
     }
 
     @Path("/{userId}/{role}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getUser(@PathParam("userId") String userId, @PathParam("role") String role) throws Exception {
+    public Response getUser(@PathParam("userId") String userId, @PathParam("role") String role) {
         return UserController.getInstance().getUser(userId, role);
     }
 }

@@ -1,6 +1,5 @@
 package validation;
 
-import dao.ProductBatchComponentDAO;
 import dto.*;
 
 import java.text.DecimalFormat;
@@ -43,12 +42,13 @@ public class InputValidation {
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {
+        DecimalFormat fourDecimals = new DecimalFormat("#.0000");
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
-        double amount = ingredientBatchDTO.getAmount();
-        String doubleToText = Double.toString(Math.abs(amount));
-        int integerLength = doubleToText.indexOf('.');
-        int decimalLength = doubleToText.length() - integerLength - 1;
+        String amount = ingredientBatchDTO.getAmount();
+        //String doubleToText = Double.toString(Math.abs(amount));
+        int integerLength = amount.indexOf('.');
+        int decimalLength = amount.length() - integerLength - 1;
 
 
         if (batchId < 1 || batchId > 99999999) {

@@ -11,6 +11,8 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 //TODO implement inputvalidation class
@@ -46,12 +48,13 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
     }
 
     private void setIngredientInfo(IngredientBatchDTO ingredientBatch, String updateIngredientBatch) {
+        DecimalFormat nf = new DecimalFormat("#.####");
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
         try {
             statement.setInt(1, ingredientBatch.getIngredientBatchId());
             statement.setInt(2, ingredientBatch.getIngredientId());
-            statement.setDouble(3, ingredientBatch.getAmount());
+            statement.setString(3, ingredientBatch.getAmount());
             statement.setString(4, ingredientBatch.getSupplier());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -95,10 +98,11 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
     }
 
     public void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) {
+        DecimalFormat nf = new DecimalFormat("#.####");
         try {
             ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
             ingredientBatchDTO.setIngredientId(rs.getInt(2));
-            ingredientBatchDTO.setAmount(rs.getDouble(3));
+            ingredientBatchDTO.setAmount(rs.getString(3));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();

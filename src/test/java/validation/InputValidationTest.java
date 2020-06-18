@@ -35,17 +35,17 @@ class InputValidationTest {
         IngredientBatchDTO ingredientBatchDTO = new IngredientBatchDTO();
         ingredientBatchDTO.setIngredientBatchId(2);
         ingredientBatchDTO.setIngredientId(2);
-        ingredientBatchDTO.setAmount(5.2222);
+        ingredientBatchDTO.setAmount("5.2222");
         assertTrue(iv.ingredientBatchInputValidation(ingredientBatchDTO));
 
         ingredientBatchDTO.setIngredientBatchId(-1);
         ingredientBatchDTO.setIngredientId(-1);
-        ingredientBatchDTO.setAmount(2.333);
+        ingredientBatchDTO.setAmount("2.333");
         assertFalse(iv.ingredientBatchInputValidation(ingredientBatchDTO));
 
         ingredientBatchDTO.setIngredientBatchId(100000000);
         ingredientBatchDTO.setIngredientId(100000000);
-        ingredientBatchDTO.setAmount(5);
+        ingredientBatchDTO.setAmount("5");
         assertFalse(iv.ingredientBatchInputValidation(ingredientBatchDTO));
 
 
