@@ -98,6 +98,5 @@ public class RecipeComponentController implements IRecipeComponentController {
             e.printStackTrace();
             return Response.serverError().build();
         }
-
     }
 }

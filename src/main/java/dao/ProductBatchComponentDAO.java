@@ -26,7 +26,7 @@ public class ProductBatchComponentDAO {
     PreparedStatement statement;
     private DBConnection database;
 
-    public ProductBatchComponentDAO()  {
+    public ProductBatchComponentDAO() {
         database = new DBConnection();
     }
 
@@ -105,10 +105,7 @@ public class ProductBatchComponentDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return components;
-
-
     }
 
     private ProductBatchComponentDTO getComponentInfo(ResultSet rs) {
@@ -149,7 +146,7 @@ public class ProductBatchComponentDAO {
     }
 
     public ProductBatchComponentDTO getProductBatchComponentByID(int batchID) {
-        ProductBatchComponentDTO batch = null;
+        ProductBatchComponentDTO batch;
         try {
             CallableStatement stmt = database.callableStatement("{call GetProductBatchComponentByID(?)}");
             stmt.setInt(1, batchID);

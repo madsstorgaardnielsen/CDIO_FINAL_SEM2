@@ -28,10 +28,8 @@ public class IngredientBatchAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
-        //System.out.println(ingredientBatchDTO.toString()); //testing
         return IngredientBatchController.getInstance().addIngredientBatch(ingredientBatchDTO);
     }
-
 
     @DELETE
     @Path("{id}")
@@ -45,7 +43,7 @@ public class IngredientBatchAPI {
                                           @QueryParam("ingredientName") int ingredientId,
                                           @QueryParam("ingredientName") String ingredientAmount,
                                           @QueryParam("ingredientName") String ingredientSupplier) {
-        return IngredientBatchController.getInstance().updateIngredientBatch(batchId,ingredientId,ingredientAmount,ingredientSupplier);
+        return IngredientBatchController.getInstance().updateIngredientBatch(batchId, ingredientId, ingredientAmount, ingredientSupplier);
     }
 
     @Path("/byIngredient/{ingredientID}/")
@@ -54,7 +52,4 @@ public class IngredientBatchAPI {
     public Response getIngredientBatchByIngredient(@PathParam("ingredientID") int ID) throws Exception {
         return IngredientBatchController.getInstance().getIngredientBatchByIngredientID(ID);
     }
-
-
-
 }

@@ -25,12 +25,11 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     ProductBatchComponentDAO componentDAO;
     ProductBatchComponentDTO componentDTO;
 
-    private ProductBatchComponentController()  {
+    private ProductBatchComponentController() {
         this.validation = new InputValidation();
         this.componentDAO = new ProductBatchComponentDAO();
         this.componentDTO = new ProductBatchComponentDTO();
     }
-
 
     public static ProductBatchComponentController getInstance() {
         return instance;
@@ -63,7 +62,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
     @Override
-    public Response getAllProductBatchComponents()  {
+    public Response getAllProductBatchComponents() {
         return Response.ok(new ArrayList<IngredientBatchDTO>()).build();
     }
 
@@ -73,7 +72,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
     @Override
-    public Response getNextComponent(int batchID){
+    public Response getNextComponent(int batchID) {
         try {
             ArrayList<ProductBatchComponentDTO> list = ProductBatchComponentDAO.getInstance().getProductBatchComponent(batchID);
             for (ProductBatchComponentDTO componentDTO : list) {

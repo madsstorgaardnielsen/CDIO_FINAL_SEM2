@@ -23,7 +23,7 @@ public class IngredientBatchController implements IIngredientBatchController {
     private final IngredientBatchDAO ingredientBatchDAO;
     private IngredientBatchDTO ingredientBatchDTO;
 
-    private IngredientBatchController()  {
+    private IngredientBatchController() {
         this.ingredientBatchDAO = new IngredientBatchDAO();
         this.ingredientBatchDTO = new IngredientBatchDTO();
         this.validation = new InputValidation();
@@ -79,7 +79,7 @@ public class IngredientBatchController implements IIngredientBatchController {
 
     public Response getIngredientBatch(int id) {
         try {
-            return Response.ok( ingredientBatchDAO.getIngredientBatch(id)).build();
+            return Response.ok(ingredientBatchDAO.getIngredientBatch(id)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

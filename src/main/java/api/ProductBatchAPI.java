@@ -27,7 +27,7 @@ public class ProductBatchAPI {
 
     @Path("/{recipeID}/{userID}/")
     @POST
-    public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID){
+    public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID) {
         return ProductBatchController.getInstance().addProductBatch(recipeID, userID);
     }
 
@@ -35,7 +35,6 @@ public class ProductBatchAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBatch(@PathParam("batchID") int batchId) {
-
         return ProductBatchController.getInstance().getProductBatch(batchId);
     }
 
@@ -45,5 +44,4 @@ public class ProductBatchAPI {
     public Response setStatus(@PathParam("batchID") int batchId) {
         return Response.ok().build(); //ProductBatchController.getInstance().setStatus();
     }
-
 }

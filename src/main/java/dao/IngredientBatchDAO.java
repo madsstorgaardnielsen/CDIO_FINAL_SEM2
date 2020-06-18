@@ -142,5 +142,4 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         }
         return list;
     }
-
 }

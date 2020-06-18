@@ -68,11 +68,10 @@ public class ProductBatchController {
     }
 
     public Response getAllProductBatch() {
-        try{
+        try {
             return Response.ok(ProductBatchDAO.getInstance().getAllProductBatch()).build();
-        } catch(Exception e){
+        } catch (Exception e) {
             return Response.serverError().build();
         }
-
     }
 }
