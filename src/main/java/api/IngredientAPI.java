@@ -1,13 +1,11 @@
 package api;
 
 import controllers.IngredientController;
-import dao.IngredientDAO;
 import dto.IngredientDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 import java.sql.SQLException;
 
 @Path("ingredient")
@@ -45,6 +43,4 @@ public class IngredientAPI {
     public Response deleteIngredient(@PathParam("id") int id) {
         return IngredientController.getInstance().deleteIngredient(id);
     }
-
-
 }

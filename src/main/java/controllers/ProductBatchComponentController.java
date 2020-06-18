@@ -12,25 +12,20 @@ import dto.RecipeComponentDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductBatchComponentController implements IProductBatchComponentController {
-    private static ProductBatchComponentController instance;
+    private static final ProductBatchComponentController instance;
 
     static {
-        try {
-            instance = new ProductBatchComponentController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new ProductBatchComponentController();
     }
 
     InputValidation validation;
     ProductBatchComponentDAO componentDAO;
     ProductBatchComponentDTO componentDTO;
 
-    private ProductBatchComponentController() throws SQLException {
+    private ProductBatchComponentController()  {
         this.validation = new InputValidation();
         this.componentDAO = new ProductBatchComponentDAO();
         this.componentDTO = new ProductBatchComponentDTO();
@@ -56,7 +51,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
         try {
             ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(batchComponent.getId());
             batchComponent.setNetto(batchComponent.getBrutto() - batchComponent.getTara());
-            if (InputValidation.getInstance().validateAfvejning(batchComponent, batch)) {
+            if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
                 return Response.ok().build();
             } else
@@ -68,17 +63,17 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
     @Override
-    public Response getAllProductBatchComponents() throws Exception {
+    public Response getAllProductBatchComponents()  {
         return Response.ok(new ArrayList<IngredientBatchDTO>()).build();
     }
 
     @Override
-    public Response getProductBatchComponents(int id) throws Exception {
+    public Response getProductBatchComponents(int id) {
         return Response.ok(new IngredientBatchDTO()).build();
     }
 
     @Override
-    public Response getNextComponent(int batchID) throws Exception {
+    public Response getNextComponent(int batchID){
         try {
             ArrayList<ProductBatchComponentDTO> list = ProductBatchComponentDAO.getInstance().getProductBatchComponent(batchID);
             for (ProductBatchComponentDTO componentDTO : list) {
@@ -107,7 +102,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
         }
     }
 
-    public Response validateIngredientBatch(int ID, int batchID) throws Exception{
+    public Response validateIngredientBatch(int ID, int batchID) {
         ProductBatchComponentDTO componentDTO = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(ID);
         IngredientBatchDTO ingredientBatchDTO = IngredientBatchDAO.getInstance().getIngredientBatch(batchID);
         if (InputValidation.getInstance().validateIngredientBatch(ingredientBatchDTO, componentDTO))

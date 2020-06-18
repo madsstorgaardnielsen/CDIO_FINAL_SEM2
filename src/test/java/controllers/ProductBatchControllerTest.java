@@ -10,7 +10,7 @@ class ProductBatchControllerTest {
 
     @Test
     void addProductBatch() {
-        assertEquals(Response.ok(true).build().toString(), ProductBatchController.getInstance().addProductBatch(1, 1).toString());
+        assertEquals(Response.ok().build().toString(), ProductBatchController.getInstance().addProductBatch(1, 1).toString());
     }
 
     @Test

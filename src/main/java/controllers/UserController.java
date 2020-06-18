@@ -11,20 +11,16 @@ import java.sql.SQLException;
 
 
 public class UserController implements IUserController {
-    private static IUserController instance;
+    private static final IUserController instance;
 
     static {
-        try {
-            instance = new UserController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new UserController();
     }
 
     private final InputValidation validation;
     private final IUserDAO userDAO;
 
-    private UserController() throws SQLException {
+    private UserController() {
         this.userDAO = new UserDAO();
         this.validation = new InputValidation();
     }

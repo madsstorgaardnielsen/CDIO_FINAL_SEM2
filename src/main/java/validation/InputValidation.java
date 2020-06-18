@@ -9,11 +9,7 @@ public class InputValidation {
     private static InputValidation instance;
 
     static {
-        try {
-            instance = new InputValidation();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        instance = new InputValidation();
     }
 
     public InputValidation() {
@@ -185,14 +181,21 @@ public class InputValidation {
         return true;
     }
 
-    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, ProductBatchComponentDTO batch) {
-         double netto = batchComponentDTO.getNetto();
-         double amount = batch.getAmount();
-         double tolerance = batch.getTolerance() * 0.01;
-         double upperbound = amount + (amount * tolerance);
-         double lowerbound = amount - (amount * tolerance);
-
-         return netto <= upperbound && netto >= lowerbound;
+    public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, RecipeComponentDTO recipe) {
+        double Netto = batchComponentDTO.getNetto();
+        double amount = recipe.getNonNetto();
+        double tolerance = recipe.getTolerance() * 0.01;
+        double upperbound = amount + (amount * tolerance);
+        double lowerbound = amount - (amount * tolerance);
+        return Netto <= upperbound && Netto >= lowerbound;
+    }
+    public boolean validateAfvejning2(ProductBatchComponentDTO batchComponentDTO, ProductBatchComponentDTO productBatchComponentDTO) {
+        double Netto = batchComponentDTO.getNetto();
+        double amount = productBatchComponentDTO.getNetto();
+        double tolerance = productBatchComponentDTO.getTolerance() * 0.01;
+        double upperbound = amount + (amount * tolerance);
+        double lowerbound = amount - (amount * tolerance);
+        return Netto <= upperbound && Netto >= lowerbound;
     }
 
     public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {

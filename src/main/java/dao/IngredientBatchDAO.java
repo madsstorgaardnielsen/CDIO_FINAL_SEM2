@@ -1,5 +1,6 @@
 package dao;
 
+import dao.exceptions.DatabaseException;
 import dao.idao.IIngredientBatchDAO;
 import dao.idao.IIngredientDAO;
 import db.DBConnection;
@@ -18,17 +19,13 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
     private static IngredientBatchDAO instance;
 
     static {
-        try {
-            instance = new IngredientBatchDAO();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new IngredientBatchDAO();
     }
 
     PreparedStatement statement;
     private DBConnection database;
 
-    public IngredientBatchDAO() throws SQLException {
+    public IngredientBatchDAO() {
         database = new DBConnection();
     }
 
@@ -36,65 +33,55 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         return instance;
     }
 
-    public void addIngredientBatch(IngredientBatchDTO ingredientBatch) throws SQLException, IOException {
-
+    public void addIngredientBatch(IngredientBatchDTO ingredientBatch) {
         String addIngredientBatch = "{call AddIngredientBatch(?,?,?,?)}";
-        PreparedStatement statement = database.callableStatement(addIngredientBatch);
-        statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setInt(2, ingredientBatch.getIngredientId());
-        statement.setDouble(3, ingredientBatch.getAmount());
-        statement.setString(4, ingredientBatch.getSupplier());
-
-        try {
-            statement.executeUpdate();
-            System.out.println("Ingredient batch successfully added to database");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Ingredient batch could no be added");
-        }
+        setIngredientInfo(ingredientBatch, addIngredientBatch);
+        System.out.println("Ingredient batch successfully added to database");
     }
 
-    public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws IOException, SQLException {
-
+    public void updateIngredientBatch(IngredientBatchDTO ingredientBatch) {
         String updateIngredientBatch = "{call UpdateIngredientBatch(?,?,?,?)}";
+        setIngredientInfo(ingredientBatch, updateIngredientBatch);
+        System.out.println("Ingredient batch successfully updated");
+    }
+
+    private void setIngredientInfo(IngredientBatchDTO ingredientBatch, String updateIngredientBatch) {
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
 
-        statement.setInt(1, ingredientBatch.getIngredientBatchId());
-        statement.setInt(2, ingredientBatch.getIngredientId());
-        statement.setDouble(3, ingredientBatch.getAmount());
-        statement.setString(4, ingredientBatch.getSupplier());
-
         try {
+            statement.setInt(1, ingredientBatch.getIngredientBatchId());
+            statement.setInt(2, ingredientBatch.getIngredientId());
+            statement.setDouble(3, ingredientBatch.getAmount());
+            statement.setString(4, ingredientBatch.getSupplier());
             statement.executeUpdate();
-            System.out.println("Ingredient batch successfully updated");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new IOException("Ingredient batch could no be updated");
+            throw new DatabaseException();
         }
     }
 
-    public void deleteIngredientBatch(int id) throws IOException, SQLException {
-
-        String deleteIngredientBatch = "{call DeleteIngredientBatch(?)}";
-        PreparedStatement statement = database.callableStatement(deleteIngredientBatch);
-        statement.setInt(1, id);
-
+    public void deleteIngredientBatch(int id) {
         try {
+            String deleteIngredientBatch = "{call DeleteIngredientBatch(?)}";
+            PreparedStatement statement = database.callableStatement(deleteIngredientBatch);
+            statement.setInt(1, id);
+
             statement.executeUpdate();
             System.out.println("Ingredient batch successfully deleted");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new IOException("Ingredient batch could no be deleted");
+            System.out.println("Ingredient batch could no be deleted");
+            throw new DatabaseException();
         }
     }
 
-
-    public ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception {
+    public ArrayList<IngredientBatchDTO> getAllIngredientBatch() {
         ArrayList<IngredientBatchDTO> ingredientBatchList = new ArrayList<>();
-        CallableStatement stmt = database.callableStatement("{call GetAllIngredientBatch}");
-        ResultSet rs = stmt.executeQuery();
-        IngredientBatchDTO ingredientBatchDTO;
         try {
+            CallableStatement stmt = database.callableStatement("{call GetAllIngredientBatch}");
+            ResultSet rs = stmt.executeQuery();
+            IngredientBatchDTO ingredientBatchDTO;
+
             while (rs.next()) {
                 ingredientBatchDTO = new IngredientBatchDTO();
                 getIngredientBatchInfo(rs, ingredientBatchDTO);
@@ -102,28 +89,36 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
         return ingredientBatchList;
     }
 
-    public void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) throws SQLException {
-        ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
-        ingredientBatchDTO.setIngredientId(rs.getInt(2));
-        ingredientBatchDTO.setAmount(rs.getDouble(3));
-        ingredientBatchDTO.setSupplier(rs.getString(4));
+    public void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) {
+        try {
+            ingredientBatchDTO.setIngredientBatchId(rs.getInt(1));
+            ingredientBatchDTO.setIngredientId(rs.getInt(2));
+            ingredientBatchDTO.setAmount(rs.getDouble(3));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
     }
 
-    public IngredientBatchDTO getIngredientBatch(int ID) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call GetIngredientBatch(?)}");
-        stmt.setInt(1, ID);
-        IngredientBatchDTO ingredientBatch = new IngredientBatchDTO();
-        ResultSet resultSet = stmt.executeQuery();
+    public IngredientBatchDTO getIngredientBatch(int ID) {
+        IngredientBatchDTO ingredientBatch;
         try {
+            CallableStatement stmt = database.callableStatement("{call GetIngredientBatch(?)}");
+            stmt.setInt(1, ID);
+            ingredientBatch = new IngredientBatchDTO();
+            ResultSet resultSet = stmt.executeQuery();
+
             while (resultSet.next()) {
                 getIngredientBatchInfo(resultSet, ingredientBatch);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
         return ingredientBatch;
     }

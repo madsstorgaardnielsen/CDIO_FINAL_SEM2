@@ -9,21 +9,17 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 public class RecipeComponentController implements IRecipeComponentController {
-    private static RecipeComponentController instance;
+    private static final RecipeComponentController instance;
 
     static {
-        try {
-            instance = new RecipeComponentController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new RecipeComponentController();
     }
 
     private final InputValidation validation;
     private final RecipeComponentDAO RecipeComponentDAO;
     private RecipeComponentDTO RecipeComponentDTO;
 
-    private RecipeComponentController() throws SQLException {
+    private RecipeComponentController() {
         this.RecipeComponentDAO = new RecipeComponentDAO();
         this.RecipeComponentDTO = new RecipeComponentDTO();
         this.validation = new InputValidation();
@@ -62,7 +58,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(recipeID, ingredientID, nonNetto, tolerance);
         if (validation.recipeComponentInputValidation(recipeComponentDTO)) {
             try {
-                return Response.ok().build();
+                return Response.ok(RecipeComponentDAO.updateRecipeComponent(recipeComponentDTO)).build();
             } catch (Exception e) {
                 e.printStackTrace();
                 return Response.serverError().build();
@@ -73,7 +69,7 @@ public class RecipeComponentController implements IRecipeComponentController {
     }
 
     @Override
-    public Response getAllRecipeComponents() throws Exception {
+    public Response getAllRecipeComponents() {
         try {
             return Response.ok(RecipeComponentDAO.getAllRecipeComponents()).build();
         } catch (Exception e) {
