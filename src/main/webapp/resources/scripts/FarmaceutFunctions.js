@@ -100,6 +100,7 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
 
 function getRecipeComponent(recipeId) {
     $("#header").text("Komponent Oversigt");
+    $("#container").attr('data-recipeId', recipeId);
     $("#container").html(
         '<table> <thead> <tr>' +
         '<th>RecipeID</th>' +
@@ -216,7 +217,7 @@ function listener(row) {
 function componentlistenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#addbtn", function () {
         $("#inputID").html('' +
-            '<form>' +
+            '<form action="javascript:saveComponent()">' +
             '<input id="ingredientIdInput" type="text" placeholder="Indsæt ingredient ID" >' +
             '<input id="nonNettoInput" type="text" placeholder="Indsæt nonNetto" >' +
             '<input id="toleranceInput" type="text" placeholder="Indsæt tolerance" >' +
@@ -227,12 +228,10 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
     })
 }
 
-function componentlistenerAdd1() {
-    $("#container").on('click', "#finishcompbtn", function () {
+function saveComponent() {
         var recipecomponent = {};
 
-        var row = $(this).closest('tr');
-        recipecomponent.recipeID =  row.find(".recipeID").text();
+        recipecomponent.recipeID =  $("#container").attr('data.recipeId');
         recipecomponent.ingredientID = $("#ingredientIdInput").val();
         recipecomponent.nonNetto = $("#nonNettoInput").val();
         recipecomponent.tolerance = $("#toleranceInput").val();
@@ -249,7 +248,6 @@ function componentlistenerAdd1() {
                 '</div></div>'
             );
         })
-    })
 }
 
 function booleanToBtn(active) { //generates text according to users active state
