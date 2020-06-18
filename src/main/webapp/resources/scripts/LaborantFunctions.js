@@ -10,6 +10,31 @@ function init() {
 }
 
 function getPID() {
+    Agent.GET("rest/productBatch", function (data) {
+        $("#optionsbox").html('' +
+            '<table class="optionstable"><thead><tr>' +
+            '<th>Productbatch ID</th>' +
+            '<th>Recept ID</th>' +
+            '</tr></thead>' +
+            '<tbody id="tablebody"></tbody>' +
+            '</table>'
+        );
+        $.each(data, function () {
+            $("#tablebody").append('' +
+                '<tr>' +
+                '<td>'+ this.productBatchId +'</td>' +
+                '<td>'+ this.recipeId +'</td>'+
+                '</tr>'
+            )
+        });
+
+    }, function (data) {
+        $("#optionsbox").html('' +
+            '<div class="boxedText" id="error">'
+            + $(data.responseText).find("u").first().text() +
+            '</div>'
+        )
+    });
     $("#header").text("Indtast produktbatch ID");
     $("#container").html('' +
         '<form action="javascript:getRecipeName()">' +
@@ -22,6 +47,7 @@ function getPID() {
 function getRecipeName() {
     $("#container").attr('data-batchID', ''+ $("#batchID").val());
     var batchID = $("#container").attr('data-batchID');
+    $("#optionsbox").empty();
     Agent.GET("rest/productBatch/"+ batchID +'/', function (data) {
         $("#container").attr('data-recipeID', data.recipeId);
         Agent.GET("rest/recipe/"+ data.recipeId +'/', function (data) {
@@ -89,6 +115,32 @@ function setTara() {
     var compID = $("#container").attr('data-compID');
     $("#container").attr('data-tara',''+ $("#tarainput").val());
     var tara = $("#container").attr('data-tara');
+
+    Agent.GET("rest/ingredientbatch/byIngredient/" + $("#container").attr('data-ingredientID'), function (data) {
+        $("#optionsbox").html('' +
+            '<table class="optionstable"><thead><tr>' +
+            '<th>Ingredientbatch ID</th>' +
+            '<th>Ingredient ID</th>' +
+            '</tr></thead>' +
+            '<tbody id="tablebody"></tbody>' +
+            '</table>'
+        );
+        $.each(data, function () {
+            $("#tablebody").append('' +
+                '<tr>' +
+                '<td>'+ this.ingredientBatchId +'</td>' +
+                '<td>'+ this.ingredientId +'</td>'+
+                '</tr>'
+            )
+        });
+    }, function (data) {
+        $("#optionsbox").html('' +
+            '<div class="boxedText" id="error">'
+            + $(data.responseText).find("u").first().text() +
+            '</div>'
+        )
+    });
+
     $("#header").text("Indtast raavarebatch");
     $(".errorcont").remove();
     $("#subcontainer").html('' +
@@ -103,6 +155,7 @@ function setRaavare() {
     var compID = $("#container").attr('data-compID');
     $("#container").attr('data-raavareBatch',''+ $("#raavarebatchinput").val());
     var raavareBatch = $("#container").attr('data-raavareBatch');
+    $("#optionsbox").empty();
     Agent.GET("rest/productBatchComponent/validateBatch/"+ compID +"/"+ raavareBatch +'/', function () {
         $("#header").text("Indtast brutto vægt");
         $(".errorcont").remove();

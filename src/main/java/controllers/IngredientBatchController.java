@@ -84,4 +84,14 @@ public class IngredientBatchController implements IIngredientBatchController {
             return Response.serverError().build();
         }
     }
+
+    public Response getIngredientBatchByIngredientID(int ID) throws Exception {
+        try {
+            ArrayList<IngredientBatchDTO> list = IngredientBatchDAO.getInstance().getIngredientBatchByIngredientID(ID);
+            return Response.ok(list).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().build();
+        }
+    }
 }

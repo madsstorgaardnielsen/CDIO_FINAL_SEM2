@@ -47,5 +47,13 @@ public class IngredientBatchAPI {
         return IngredientBatchController.getInstance().updateIngredientBatch(batchId,ingredientId,ingredientAmount,ingredientSupplier);
     }
 
+    @Path("/byIngredient/{ingredientID}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getIngredientBatchByIngredient(@PathParam("ingredientID") int ID) throws Exception {
+        return IngredientBatchController.getInstance().getIngredientBatchByIngredientID(ID);
+    }
+
+
 
 }
