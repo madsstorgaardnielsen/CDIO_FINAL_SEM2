@@ -62,7 +62,7 @@ public class RecipeComponentController implements IRecipeComponentController {
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(recipeID, ingredientID, nonNetto, tolerance);
         if (validation.recipeComponentInputValidation(recipeComponentDTO)) {
             try {
-                return Response.ok().build();
+                return Response.ok(RecipeComponentDAO.updateRecipeComponent(recipeComponentDTO)).build();
             } catch (Exception e) {
                 e.printStackTrace();
                 return Response.serverError().build();
