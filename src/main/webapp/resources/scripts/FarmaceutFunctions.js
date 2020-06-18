@@ -1,24 +1,24 @@
 function addRecipeForm() { //gets recipe ID and Name form
-    $("#header").text("Opret en recept");
+    $("#header").text("Opret Recept");
     $("#container").html(
         '<form action="javascript:generateIngredient()">' +
-        '<input type="text" placeholder="Recipe ID" id="RecipeID">' +
-        '<input type="text" placeholder="Recipe Name" id="recipeName">' +
+        '<input type="text" placeholder="Recept ID" id="RecipeID">' +
+        '<input type="text" placeholder="Recept Navn" id="recipeName">' +
         '</select> <br>' +
-        '<button class="btn">bekræft ID og navn</button>' +
+        '<button class="btn">Gem</button>' +
         '</form>'
     );
 }
 //Tilføj en råvare funktion.
 function generateIngredient() {
-    $("#header").text("Opret en recept");
+    $("#header").text("Opret Recept");
     $("#container").html(
     '<form action="javascript:generateRow()">' +
 
         '<tr>' +
         '<td class="table">' +
-        '<td> <input  type="text" placeholder="råvare ID"> </td>' +
-        '<td> <input  type="text" placeholder="non Netto vægt i gram"> </td>' +
+        '<td> <input  type="text" placeholder="Råvare ID"> </td>' +
+        '<td> <input  type="text" placeholder="Nominel Netto vægt i gram"> </td>' +
         '<td> <input  type="text" placeholder="Tolerance"> </td>' +
         '<td> <button> class="btn" Bekræft </button> </td>' +
         '</tr>' +
@@ -61,7 +61,7 @@ function getRecipes() { //gets existing Recipes from backend
     $("#container").html(
         '<table> <thead> <tr>' +
         '<th>Recept ID</th>' +
-        '<th>Recept Name</th>' +
+        '<th>Recept Navn</th>' +
         '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
@@ -92,9 +92,9 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
         '<td class = recipeID>' + recipeComponent.recipeID + '</td>' +
         '<td class = ingredientId>' + recipeComponent.ingredientID + '</td>' +
         '<td class = ingredientName>' + recipeComponent.ingredientName + '</td>' +
-        '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
-        '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
-        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '<td class = nonNetto>' + recipeComponent.nonNetto + ' kg</td>' +
+        '<td class = tolerance>' + recipeComponent.tolerance + ' %</td>' +
+        '<td class = editbutton> <button class="editbtn">Rediger komponent</button></td>' +
         '</tr>'
 }
 
@@ -103,11 +103,11 @@ function getRecipeComponent(recipeId) {
     $("#container").attr('data-recipeId', recipeId);
     $("#container").html(
         '<table> <thead> <tr>' +
-        '<th>RecipeID</th>' +
-        '<th>ingredientID</th>' +
-        '<th>ingredientName</th>' +
-        '<th>nonNetto</th>' +
-        '<th>tolerance</th>' +
+        '<th>Recept ID</th>' +
+        '<th>Råvare ID</th>' +
+        '<th>Råvare navn</th>' +
+        '<th>Nominel Netto</th>' +
+        '<th>Tolerance</th>' +
         '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
@@ -218,9 +218,9 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#addbtn", function () {
         $("#inputID").html('' +
             '<form action="javascript:saveComponent()">' +
-            '<input id="ingredientIdInput" type="text" placeholder="Indsæt ingredient ID" >' +
-            '<input id="nonNettoInput" type="text" placeholder="Indsæt nonNetto" >' +
-            '<input id="toleranceInput" type="text" placeholder="Indsæt tolerance" >' +
+            '<input id="ingredientIdInput" type="text" placeholder="Ingredient ID" >' +
+            '<input id="nonNettoInput" type="text" placeholder="Nominel Netto" >' +
+            '<input id="toleranceInput" type="text" placeholder="Tolerance" >' +
             '<br>' +
             '<button id="finishcompbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'
@@ -277,10 +277,10 @@ function addIngredientform(){ // Opret en ingredients form
     $("#header").text("Råvare administration");
     $("#container").html(
         '<form action="javascript:addIngredient()">' +
-        '<input type="text" placeholder="Ingredient ID" id="ingredientID">' +
-        '<input type="text" placeholder="Ingredient Name" id="ingredientName">' +
+        '<input type="text" placeholder="Råvare ID" id="ingredientID">' +
+        '<input type="text" placeholder="Råvare Navn" id="ingredientName">' +
         '</select> <br>' +
-        '<button class="btn">Bekræft ID og navn</button>' +
+        '<button class="btn">Gem</button>' +
         '</form>'
     );
 
@@ -312,8 +312,8 @@ function getIngredient() { //gets existing ingredients from backend
     $("#header").text("Råvare oversigt");
     $("#container").html(
         '<table> <thead> <tr>' +
-        '<th>Ingredient ID</th>' +
-        '<th>Ingredient Name</th>' +
+        '<th>Råvare ID</th>' +
+        '<th>Råvare Navn</th>' +
 
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +

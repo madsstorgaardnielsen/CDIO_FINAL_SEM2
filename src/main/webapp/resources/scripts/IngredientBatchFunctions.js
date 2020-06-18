@@ -29,12 +29,12 @@ function genIngBatchList(ingredientBatch) { //generates html to show in IB list
     return '<tr> ' +
         '<td class = ingredientBatchID>' + ingredientBatch.ingredientBatchId + '</td>' +
         '<td class= ingredientID>' + ingredientBatch.ingredientId + '</td>' +
-        '<td class= ibAmount>' + ingredientBatch.amount + '</td>' +
+        '<td class= ibAmount>' + ingredientBatch.amount + ' kg</td>' +
         '<td class= supplier>' + ingredientBatch.supplier + '</td>' +
         '</tr>'
 }
 
-function listenerAdd2() {//shows line to add new batch
+function listenerAdd2() { //shows line to add new batch
     $("#container").on('click', "#addnewib", function () {
         $("#container").html('' +
             '<form action="javascript:saveBatch()">' +
