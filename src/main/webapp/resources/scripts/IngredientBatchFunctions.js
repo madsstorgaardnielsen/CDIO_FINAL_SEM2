@@ -44,9 +44,10 @@ function listenerAdd2() {//shows line to add new batch
             '<input id="supplierinput" type="text" placeholder="Leverandør" name="supplier">'+
             '<br>' +
             '<button id="finishibbtn" class="btn">Udfør</button>' +
-            '</form>'+
-            '<br>'+
-            '<table> <thead>' +
+            '</form>'
+        );
+        $("#optionsbox").html('' +
+            '<table class="optionstable"> <thead>' +
             '<tr>' +
             '<td>Råvare ID</td>' +
             '<td>Råvare navn</td>' +
@@ -54,10 +55,9 @@ function listenerAdd2() {//shows line to add new batch
             '<tbody id="inglistbody"></tbody>' +
             '</table>'
         );
-        var row;
         Agent.GET("rest/ingredient", function (data) {
             $.each(data, function () {
-                row = $("#tablebody").append(genIngList(this));
+                $("#inglistbody").append(genIngList(this));
             });
 
         }, function (data) {
