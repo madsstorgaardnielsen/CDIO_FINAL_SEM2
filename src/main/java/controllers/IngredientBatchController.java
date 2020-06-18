@@ -71,8 +71,7 @@ public class IngredientBatchController implements IIngredientBatchController {
 
     public Response getAllIngredientBatch() {
         try {
-            ingredientBatchDAO.getAllIngredientBatch();
-            return Response.ok(ingredientBatchDAO).build();
+            return Response.ok(ingredientBatchDAO.getAllIngredientBatch()).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
@@ -80,8 +79,7 @@ public class IngredientBatchController implements IIngredientBatchController {
 
     public Response getIngredientBatch(int id) {
         try {
-            ingredientBatchDAO.getIngredientBatch(id);
-            return Response.ok(ingredientBatchDAO).build();
+            return Response.ok( ingredientBatchDAO.getIngredientBatch(id)).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }
