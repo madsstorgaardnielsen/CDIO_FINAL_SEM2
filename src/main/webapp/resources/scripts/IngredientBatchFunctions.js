@@ -86,7 +86,8 @@ function saveBatch() {//when click udfør then add productbatch
                 '<form action="javascript:getAllIngredientBatch()">' +
                 '<div class="boxedText">Råvarebatch oprettet</div>' +
                 '<button class="btn">Videre</button>' +
-                '</form>')
+                '</form>');
+            $("#optionsbox").html('');
         },function (){
             alert("fejl");
         } );
