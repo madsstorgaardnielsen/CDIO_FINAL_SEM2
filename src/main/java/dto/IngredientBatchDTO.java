@@ -2,6 +2,7 @@ package dto;
 
 import dao.idao.IIngredientBatchDAO;
 import dto.idto.IIngredientBatchDTO;
+import org.glassfish.jersey.server.model.Routed;
 
 public class IngredientBatchDTO implements IIngredientBatchDTO {
     int ingredientBatchId;
@@ -49,5 +50,12 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String toString(){
+        return "ibID: " + ingredientBatchId + "\n" +
+                "iID: " + ingredientId + "\n" +
+                "amount: " + Math.abs(amount) + "\n" +
+                "supplier: " + supplier;
     }
 }

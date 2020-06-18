@@ -28,6 +28,7 @@ public class IngredientBatchAPI {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
+        System.out.println(ingredientBatchDTO.toString()); //testing
         return IngredientBatchController.getInstance().addIngredientBatch(ingredientBatchDTO);
     }
 
