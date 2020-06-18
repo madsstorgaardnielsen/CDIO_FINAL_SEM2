@@ -82,8 +82,11 @@ function saveBatch() {//when click udfør then add productbatch
         ibdto.supplier = $("#supplierinput").val();
 
         Agent.POST("/rest/ingredientbatch", ibdto,function (){
-            window.alert("Råvare batch oprettet med ID: "+ $("#ibidinput").val());
-            getAllIngredientBatch();
+            $("#container").html('' +
+                '<form action="javascript:getAllIngredientBatch()">' +
+                '<div class="boxedText">Råvarebatch oprettet</div>' +
+                '<button class="btn">Videre</button>' +
+                '</form>')
         },function (){
             alert("fejl");
         } );
