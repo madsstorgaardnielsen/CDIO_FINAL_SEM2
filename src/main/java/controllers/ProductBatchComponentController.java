@@ -89,7 +89,6 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
                 for (ProductBatchComponentDTO componentDTO : ProductBatchComponentDAO.getInstance().getCompByBatch(batchID)) {
                     taraSum += componentDTO.getTara();
                     nettoSum += componentDTO.getNetto();
-                    System.out.println(componentDTO.getTara() + " " + componentDTO.getNetto());
                 }
                 batch.setTaraSum(taraSum);
                 batch.setNettoSum(nettoSum);
