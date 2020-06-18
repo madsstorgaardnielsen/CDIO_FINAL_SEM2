@@ -10,6 +10,7 @@
     box-shadow: 1px 1px 1px #888888;
     transition-duration: 0.1s;
     width: 100%;
+    display: block;
 }
 
 .confirmbtn {
@@ -24,6 +25,22 @@
     box-shadow: 1px 1px 1px #888888;
     transition-duration: 0.1s;
     width: 300px;
+}
+
+.optionsbox {
+    text-align: left;
+    width: fit-content;
+    position: absolute;
+    top: 70px;
+    left: 10px;
+}
+
+.optionstable {
+    border: 1px solid black;
+    margin: 0;
+    width: 300px;
+    table-layout: fixed;
+    border-collapse: collapse;
 }
 
 form {
@@ -42,8 +59,8 @@ form {
 
 .cont {
     text-align: center;
-    width: 100%;
-    margin: auto;
+    width: fit-content;
+   margin: auto auto auto auto;
 }
 
 .header {
@@ -64,7 +81,6 @@ input, select {
     border: 1px solid rgba(0, 0, 0, .15);
     border-radius: .25rem;
     margin: auto auto 10px auto;
-    display: inline-block;
     box-sizing: border-box;
 }
 

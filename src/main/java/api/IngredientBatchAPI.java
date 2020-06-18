@@ -1,5 +1,6 @@
 package api;
 
+import controllers.IngredientBatchController;
 import dao.IngredientBatchDAO;
 import dao.IngredientDAO;
 import dto.IngredientBatchDTO;
@@ -45,6 +46,14 @@ public class IngredientBatchAPI {
         IngredientBatchDAO.getInstance().updateIngredientBatch(ingredientBatchDTO);
         return Response.ok().build();
     }
+
+    @Path("/byIngredient/{ingredientID}/")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getIngredientBatchByIngredient(@PathParam("ingredientID") int ID) throws Exception {
+        return IngredientBatchController.getInstance().getIngredientBatchByIngredientID(ID);
+    }
+
 
 
 }

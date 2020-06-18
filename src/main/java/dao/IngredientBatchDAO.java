@@ -128,4 +128,23 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         return ingredientBatch;
     }
 
+    public ArrayList<IngredientBatchDTO> getIngredientBatchByIngredientID(int ID) throws SQLException {
+        statement = database.callableStatement("{call GetBatchByIngredient(?)}");
+        statement.setInt(1, ID);
+        IngredientBatchDTO batch;
+        ArrayList<IngredientBatchDTO> list = new ArrayList<>();
+        ResultSet rs = statement.executeQuery();
+
+        try {
+            while (rs.next()) {
+                batch = new IngredientBatchDTO();
+                getIngredientBatchInfo(rs, batch);
+                list.add(batch);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
