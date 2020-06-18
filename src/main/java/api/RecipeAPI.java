@@ -8,7 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path ("recipe")
+@Path("recipe")
 public class RecipeAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,7 +35,6 @@ public class RecipeAPI {
     public Response deleteRecipe(int ID) {
         return RecipeController.getInstance().deleteRecipe(ID);
     }
-
 
     @Path("/{recipeId}/")
     @GET

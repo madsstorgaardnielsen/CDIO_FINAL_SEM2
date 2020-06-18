@@ -78,10 +78,9 @@ public class IngredientDAO implements IIngredientDAO {
         }
     }
 
-
     public ArrayList<IngredientDTO> getAllIngredients() {
         ArrayList<IngredientDTO> ingredientList = new ArrayList<>();
-        IngredientDTO ingredientDTO ;
+        IngredientDTO ingredientDTO;
         try {
             CallableStatement stmt = database.callableStatement("{call GetAllIngredients}");
             ResultSet rs = stmt.executeQuery();

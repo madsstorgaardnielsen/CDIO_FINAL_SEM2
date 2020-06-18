@@ -53,7 +53,7 @@ public class RecipeComponentDAO {
         return recipe2;
     }
 
-    private void getRecipeInfo(RecipeComponentDTO recipe, String updateRecipeComponent){
+    private void getRecipeInfo(RecipeComponentDTO recipe, String updateRecipeComponent) {
         try {
             PreparedStatement statement = database.callableStatement(updateRecipeComponent);
             statement.setInt(1, recipe.getRecipeID());
@@ -81,7 +81,6 @@ public class RecipeComponentDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
     }
 
     public ArrayList<RecipeComponentDTO> getAllRecipeComponents() {

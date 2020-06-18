@@ -26,7 +26,7 @@ public class ProductBatchComponentDAO {
     PreparedStatement statement;
     private DBConnection database;
 
-    public ProductBatchComponentDAO()  {
+    public ProductBatchComponentDAO() {
         database = new DBConnection();
     }
 
@@ -54,7 +54,7 @@ public class ProductBatchComponentDAO {
     }
 
     public ArrayList<ProductBatchComponentDTO> getProductBatchComponent(int batchID) {
-        ArrayList<ProductBatchComponentDTO> list = null;
+        ArrayList<ProductBatchComponentDTO> list;
         try {
             CallableStatement stmt = database.callableStatement("{call GetBatchInformation(?)}");
             stmt.setString(1, String.valueOf(batchID));
@@ -78,11 +78,14 @@ public class ProductBatchComponentDAO {
 
     private void getProductBatchComponentInfo(ResultSet rs, ProductBatchComponentDTO componentDTO) {
         try {
-            componentDTO.setId(rs.getInt(2));
             componentDTO.setProductBatchID(rs.getInt(1));
-            componentDTO.setIngredientName(rs.getString(3));
-            componentDTO.setAmount(rs.getDouble(4));
-            componentDTO.setTolerance(rs.getDouble(5));
+            componentDTO.setId(rs.getInt(2));
+            componentDTO.setIngredientID(rs.getInt(3));
+            componentDTO.setAmount(rs.getDouble(5));
+            componentDTO.setTolerance(rs.getDouble(6));
+            componentDTO.setLaborantID(rs.getInt(8));
+            componentDTO.setIngredientName(rs.getString(9));
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -123,7 +126,8 @@ public class ProductBatchComponentDAO {
             comp.setNetto(rs.getDouble(7));
             comp.setTerminal(rs.getInt(8));
             comp.setAmount(rs.getDouble(9));
-            comp.setIngredientName(rs.getString(10));
+            comp.setTolerance(rs.getDouble(10));
+            comp.setIngredientName(rs.getString(11));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -148,14 +152,14 @@ public class ProductBatchComponentDAO {
     }
 
     public ProductBatchComponentDTO getProductBatchComponentByID(int batchID) {
-        ProductBatchComponentDTO batch = null;
+        ProductBatchComponentDTO batch = new ProductBatchComponentDTO();
         try {
             CallableStatement stmt = database.callableStatement("{call GetProductBatchComponentByID(?)}");
             stmt.setInt(1, batchID);
-            batch = new ProductBatchComponentDTO();
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                batch = getComponentInfo(rs);
+                getComponentInfos(rs, batch);
+
             }
 
         } catch (SQLException e) {
@@ -163,5 +167,23 @@ public class ProductBatchComponentDAO {
             throw new DatabaseException();
         }
         return batch;
+    }
+
+    private void getComponentInfos(ResultSet rs, ProductBatchComponentDTO comp) {
+        try {
+            comp.setId(rs.getInt(1));
+            comp.setProductBatchID(rs.getInt(2));
+            comp.setIngredientID(rs.getInt(3));
+            comp.setIngredientBatchID(rs.getInt(4));
+            comp.setLaborantID(rs.getInt(5));
+            comp.setTara(rs.getDouble(6));
+            comp.setNetto(rs.getDouble(7));
+            comp.setTerminal(rs.getInt(8));
+            comp.setAmount(rs.getDouble(9));
+            comp.setTolerance(rs.getDouble(10));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
     }
 }
