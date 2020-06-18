@@ -1,5 +1,6 @@
 package api;
 
+import controllers.IngredientBatchController;
 import dao.IngredientBatchDAO;
 import dao.IngredientDAO;
 import dto.IngredientBatchDTO;
@@ -15,35 +16,35 @@ public class IngredientBatchAPI {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getIngredientBatch(@PathParam("id") int id) {
-        return Response.ok(new IngredientBatchDAO().getIngredientBatch(id)).build();
+        return IngredientBatchController.getInstance().getIngredientBatch(id);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllIngredientBatch() {
-        return Response.ok(new IngredientBatchDAO().getAllIngredientBatch()).build();
+        return IngredientBatchController.getInstance().getAllIngredientBatch();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
-        IngredientBatchDAO.getInstance().addIngredientBatch(ingredientBatchDTO);
-        return Response.ok().build();
+        return IngredientBatchController.getInstance().addIngredientBatch(ingredientBatchDTO);
     }
 
 
     @DELETE
     @Path("{id}")
     public Response deleteIngredientBatch(@PathParam("id") int id) {
-        IngredientBatchDAO.getInstance().deleteIngredientBatch(id);
-        return Response.ok().build();
+        return IngredientBatchController.getInstance().deleteIngredientBatch(id);
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
-        IngredientBatchDAO.getInstance().updateIngredientBatch(ingredientBatchDTO);
-        return Response.ok().build();
+    public Response updateIngredientBatch(@QueryParam("ingredientId") int batchId,
+                                          @QueryParam("ingredientName") int ingredientId,
+                                          @QueryParam("ingredientName") double ingredientAmount,
+                                          @QueryParam("ingredientName") String ingredientSupplier) {
+        return IngredientBatchController.getInstance().updateIngredientBatch(batchId,ingredientId,ingredientAmount,ingredientSupplier);
     }
 
 
