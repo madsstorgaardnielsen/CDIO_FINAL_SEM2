@@ -1,5 +1,6 @@
 package dao;
 
+import dao.exceptions.DatabaseException;
 import db.DBConnection;
 import dto.RecipeComponentDTO;
 import dto.RecipeDTO;
@@ -15,16 +16,12 @@ public class RecipeComponentDAO {
     private static RecipeComponentDAO instance;
 
     static {
-        try {
-            instance = new RecipeComponentDAO();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new RecipeComponentDAO();
     }
 
     private DBConnection database;
 
-    public RecipeComponentDAO() throws SQLException {
+    public RecipeComponentDAO() {
         database = new DBConnection();
     }
 
@@ -32,74 +29,73 @@ public class RecipeComponentDAO {
         return instance;
     }
 
-    public void addRecipeComponent(RecipeComponentDTO recipeComponent) throws IOException, SQLException {
-
-        String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
-
-        PreparedStatement statement = database.callableStatement(addRecipeComponent);
-        statement.setInt(1, recipeComponent.getRecipeID());
-        statement.setInt(2, recipeComponent.getIngredientID());
-        statement.setDouble(3, recipeComponent.getNonNetto());
-        statement.setDouble(4, recipeComponent.getTolerance());
+    public void addRecipeComponent(RecipeComponentDTO recipeComponent) {
 
         try {
+            String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
+            PreparedStatement statement = database.callableStatement(addRecipeComponent);
+            statement.setInt(1, recipeComponent.getRecipeID());
+            statement.setInt(2, recipeComponent.getIngredientID());
+            statement.setDouble(3, recipeComponent.getNonNetto());
+            statement.setDouble(4, recipeComponent.getTolerance());
+
             statement.executeUpdate();
             System.out.println("RecipeComponent successfully added to database");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new IOException("Something went wrong with addRecipe()");
+            throw new DatabaseException();
         }
+
     }
 
-    public RecipeComponentDTO updateRecipeComponent(RecipeComponentDTO recipe) throws IOException, SQLException {
-
-        String updateRecipeComponent = "{call UpdateRecipeComponent(?,?,?,?)}";
-        PreparedStatement statement = database.callableStatement(updateRecipeComponent);
-        statement.setInt(1, recipe.getRecipeID());
-        statement.setInt(2, recipe.getIngredientID());
-        statement.setDouble(3, recipe.getNonNetto());
-        statement.setDouble(4, recipe.getTolerance());
+    public RecipeComponentDTO updateRecipeComponent(RecipeComponentDTO recipe) {
+        RecipeComponentDTO recipe2;
         try {
+            String updateRecipeComponent = "{call UpdateRecipeComponent(?,?,?,?)}";
+            PreparedStatement statement = database.callableStatement(updateRecipeComponent);
+            statement.setInt(1, recipe.getRecipeID());
+            statement.setInt(2, recipe.getIngredientID());
+            statement.setDouble(3, recipe.getNonNetto());
+            statement.setDouble(4, recipe.getTolerance());
+
             statement.executeUpdate();
             System.out.println("RecipeComponent successfully updated");
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("RecipeComponent could no be updated");
-        }
 
-        //TODO
-        //det her er muligvis noget rigtig bæ, men kan ikke få ingredient name med tilbage på en anden måde
-        RecipeComponentDTO recipe2 = null;
-        try {
+            //TODO
+            //det her er muligvis noget rigtig bæ, men kan ikke få ingredient name med tilbage på en anden måde
             recipe2 = getRecipeComponent(recipe.getRecipeID(), recipe.getIngredientID());
+
         } catch (Exception e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
-
         return recipe2;
     }
 
-    public void deleteRecipeComponent(int recipeID, int ingredientID) throws IOException, SQLException {
-
-        String deleteRecipeComponent = "{call DeleteRecipeComponent(?,?)}";
-        PreparedStatement statement = database.callableStatement(deleteRecipeComponent);
-        statement.setInt(1, recipeID);
-        statement.setInt(2, ingredientID);
+    public void deleteRecipeComponent(int recipeID, int ingredientID) {
         try {
+            String deleteRecipeComponent = "{call DeleteRecipeComponent(?,?)}";
+            PreparedStatement statement = database.callableStatement(deleteRecipeComponent);
+            statement.setInt(1, recipeID);
+            statement.setInt(2, ingredientID);
+
             statement.executeUpdate();
             System.out.println("Recipe successfully deleted");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new IOException("Recipe could no be deleted");
+            throw new DatabaseException();
         }
+
     }
 
-    public ArrayList<RecipeComponentDTO> getAllRecipeComponents() throws Exception {
-        ArrayList<RecipeComponentDTO> recipeComponentList = new ArrayList<>();
-        CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponents}");
-        ResultSet rs = stmt.executeQuery();
-        RecipeComponentDTO recipeComponentDTO;
+    public ArrayList<RecipeComponentDTO> getAllRecipeComponents() {
+        ArrayList<RecipeComponentDTO> recipeComponentList;
         try {
+            recipeComponentList = new ArrayList<>();
+            CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponents}");
+            ResultSet rs = stmt.executeQuery();
+            RecipeComponentDTO recipeComponentDTO;
+
             while (rs.next()) {
                 recipeComponentDTO = new RecipeComponentDTO();
                 getRecipeComponentInfo(rs, recipeComponentDTO);
@@ -107,17 +103,20 @@ public class RecipeComponentDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
         return recipeComponentList;
     }
 
-    public ArrayList<RecipeComponentDTO> getAllRecipeComponentsFromID(int recipeID) throws Exception {
-        ArrayList<RecipeComponentDTO> recipeComponentList = new ArrayList<>();
-        CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponentsFromID(?)}");
-        stmt.setInt(1, recipeID);
-        ResultSet rs = stmt.executeQuery();
-        RecipeComponentDTO recipeComponentDTO;
+    public ArrayList<RecipeComponentDTO> getAllRecipeComponentsFromID(int recipeID) {
+        ArrayList<RecipeComponentDTO> recipeComponentList;
         try {
+            recipeComponentList = new ArrayList<>();
+            CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponentsFromID(?)}");
+            stmt.setInt(1, recipeID);
+            ResultSet rs = stmt.executeQuery();
+            RecipeComponentDTO recipeComponentDTO;
+
             while (rs.next()) {
                 recipeComponentDTO = new RecipeComponentDTO();
                 getRecipeComponentInfo(rs, recipeComponentDTO);
@@ -125,30 +124,40 @@ public class RecipeComponentDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
+
         return recipeComponentList;
     }
 
-    public void getRecipeComponentInfo(ResultSet rs, RecipeComponentDTO recipeComponentDTO) throws SQLException {
-        recipeComponentDTO.setRecipeID(rs.getInt(1));
-        recipeComponentDTO.setIngredientID(rs.getInt(2));
-        recipeComponentDTO.setNonNetto(rs.getDouble(3));
-        recipeComponentDTO.setTolerance(rs.getDouble(4));
-        recipeComponentDTO.setIngredientName(rs.getString(5));
+    public void getRecipeComponentInfo(ResultSet rs, RecipeComponentDTO recipeComponentDTO) {
+        try {
+            recipeComponentDTO.setRecipeID(rs.getInt(1));
+            recipeComponentDTO.setIngredientID(rs.getInt(2));
+            recipeComponentDTO.setNonNetto(rs.getDouble(3));
+            recipeComponentDTO.setTolerance(rs.getDouble(4));
+            recipeComponentDTO.setIngredientName(rs.getString(5));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
     }
 
-    public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) throws Exception {
-        CallableStatement stmt = database.callableStatement("{call GetRecipeComponent(?,?)}");
-        stmt.setInt(1, recipeID);
-        stmt.setInt(2, ingredientID);
-        RecipeComponentDTO recipe = new RecipeComponentDTO();
-        ResultSet resultSet = stmt.executeQuery();
+    public RecipeComponentDTO getRecipeComponent(int recipeID, int ingredientID) {
+        RecipeComponentDTO recipe;
         try {
+            CallableStatement stmt = database.callableStatement("{call GetRecipeComponent(?,?)}");
+            stmt.setInt(1, recipeID);
+            stmt.setInt(2, ingredientID);
+            recipe = new RecipeComponentDTO();
+            ResultSet resultSet = stmt.executeQuery();
+
             while (resultSet.next()) {
                 getRecipeComponentInfo(resultSet, recipe);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
         return recipe;
     }

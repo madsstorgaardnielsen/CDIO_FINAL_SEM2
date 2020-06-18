@@ -16,18 +16,14 @@ public class IngredientController implements IIngredientController {
     private static IngredientController instance;
 
     static {
-        try {
-            instance = new IngredientController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new IngredientController();
     }
 
     private final InputValidation validation;
     private final IngredientDAO ingredientDAO;
     private IngredientDTO ingredientDTO;
 
-    private IngredientController() throws SQLException {
+    private IngredientController() {
         this.ingredientDAO = new IngredientDAO();
         this.ingredientDTO = new IngredientDTO();
         this.validation = new InputValidation();

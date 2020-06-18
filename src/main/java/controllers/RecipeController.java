@@ -12,18 +12,14 @@ public class RecipeController implements IRecipeController {
     private static RecipeController instance;
 
     static {
-        try {
-            instance = new RecipeController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new RecipeController();
     }
 
     private final InputValidation validation;
     private final RecipeDAO RecipeDAO;
     private RecipeDTO RecipeDTO;
 
-    private RecipeController() throws SQLException {
+    private RecipeController() {
         this.RecipeDAO = new RecipeDAO();
         this.RecipeDTO = new RecipeDTO();
         this.validation = new InputValidation();
@@ -84,7 +80,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response getAllRecipes() throws Exception {
+    public Response getAllRecipes() {
         try {
             RecipeDAO.getAllRecipes();
             return Response.ok().build();
@@ -94,7 +90,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response getAllRecipesOnly() throws Exception {
+    public Response getAllRecipesOnly() {
         try {
             return Response.ok(RecipeDAO.getAllRecipesOnly()).build();
         } catch (Exception e) {
@@ -103,7 +99,7 @@ public class RecipeController implements IRecipeController {
         }
     }
 
-    public Response getRecipe(int ID) throws Exception {
+    public Response getRecipe(int ID) {
         try {
             RecipeDTO recipe = RecipeDAO.getRecipe(ID);
             return Response.ok(recipe).build();
@@ -112,6 +108,5 @@ public class RecipeController implements IRecipeController {
             e.printStackTrace();
             return Response.serverError().build();
         }
-
     }
 }

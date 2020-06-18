@@ -16,18 +16,14 @@ public class IngredientBatchController implements IIngredientBatchController {
     private static IngredientBatchController instance;
 
     static {
-        try {
-            instance = new IngredientBatchController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new IngredientBatchController();
     }
 
     private final InputValidation validation;
     private final IngredientBatchDAO ingredientBatchDAO;
     private IngredientBatchDTO ingredientBatchDTO;
 
-    private IngredientBatchController() throws SQLException {
+    private IngredientBatchController()  {
         this.ingredientBatchDAO = new IngredientBatchDAO();
         this.ingredientBatchDTO = new IngredientBatchDTO();
         this.validation = new InputValidation();

@@ -21,13 +21,13 @@ public class ProductBatchAPI {
     @Path("/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getProductBatch(@PathParam("batchID") int batchID) throws Exception {
+    public Response getProductBatch(@PathParam("batchID") int batchID) {
         return ProductBatchController.getInstance().getProductBatch(batchID);
     }
 
     @Path("/{recipeID}/{userID}/")
     @POST
-    public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID) throws Exception {
+    public Response addBatch(@PathParam("recipeID") int recipeID, @PathParam("userID") int userID){
         return ProductBatchController.getInstance().addProductBatch(recipeID, userID);
     }
 

@@ -19,18 +19,14 @@ public class ProductBatchController {
     private static ProductBatchController instance;
 
     static {
-        try {
-            instance = new ProductBatchController();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        instance = new ProductBatchController();
     }
 
     private final ProductBatchDAO productBatchDAO;
     private final InputValidation validation;
     private ProductBatchDTO productBatchDTO;
 
-    private ProductBatchController() throws SQLException {
+    private ProductBatchController() {
         this.productBatchDAO = new ProductBatchDAO();
         validation = new InputValidation();
     }
@@ -71,7 +67,7 @@ public class ProductBatchController {
         }
     }
 
-    public Response getAllProductBatch() throws Exception {
+    public Response getAllProductBatch() {
         try{
             return Response.ok(ProductBatchDAO.getInstance().getAllProductBatch()).build();
         } catch(Exception e){

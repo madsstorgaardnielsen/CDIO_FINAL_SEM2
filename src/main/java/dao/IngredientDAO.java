@@ -26,12 +26,7 @@ public class IngredientDAO implements IIngredientDAO {
     private DBConnection database;
 
     public IngredientDAO() {
-        try {
-            database = new DBConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DatabaseConnectionException();
-        }
+        database = new DBConnection();
     }
 
     public static IngredientDAO getInstance() {
