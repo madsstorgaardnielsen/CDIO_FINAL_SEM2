@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductBatchComponentDAO {
-    private static ProductBatchComponentDAO instance;
+    private static final ProductBatchComponentDAO instance;
 
     static {
         instance = new ProductBatchComponentDAO();

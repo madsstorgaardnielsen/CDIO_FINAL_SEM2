@@ -9,11 +9,7 @@ public class InputValidation {
     private static InputValidation instance;
 
     static {
-        try {
-            instance = new InputValidation();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        instance = new InputValidation();
     }
 
     public InputValidation() {
@@ -69,7 +65,6 @@ public class InputValidation {
         int ID = recipeDTO.getRecipeID();
         String recipeName = recipeDTO.getRecipeName();
 
-
         if (ID < 1 || ID > 99999999) {
             return false;
         } else if (recipeName.length() < 2 || recipeName.length() > 20) {
@@ -86,7 +81,7 @@ public class InputValidation {
         double nonNetto = recipeDTO.getNonNetto();
         double tolerance = recipeDTO.getTolerance();
 
-        String doubleToTextnonNetto = Double.toString(Math.abs(nonNetto));
+        String doubleToTextnonNetto = getDecimalLength(nonNetto);
         int integerLengthnonNetto = doubleToTextnonNetto.indexOf('.');
         int decimalLengthnonNetto = doubleToTextnonNetto.length() - integerLengthnonNetto - 1;
 
@@ -104,6 +99,10 @@ public class InputValidation {
             return false;
         }
         return true;
+    }
+
+    private String getDecimalLength(double nonNetto) {
+        return Double.toString(Math.abs(nonNetto));
     }
 
     public boolean addUserInputValidation(UserDTO userDTO) {
@@ -186,12 +185,12 @@ public class InputValidation {
     }
 
     public boolean validateAfvejning(ProductBatchComponentDTO batchComponentDTO, RecipeComponentDTO recipe) {
-         double Netto = batchComponentDTO.getNetto();
-         double amount = recipe.getNonNetto();
-         double tolerance = recipe.getTolerance() * 0.01;
-         double upperbound = amount + (amount * tolerance);
-         double lowerbound = amount - (amount * tolerance);
-         return Netto <= upperbound && Netto >= lowerbound;
+        double Netto = batchComponentDTO.getNetto();
+        double amount = recipe.getNonNetto();
+        double tolerance = recipe.getTolerance() * 0.01;
+        double upperbound = amount + (amount * tolerance);
+        double lowerbound = amount - (amount * tolerance);
+        return Netto <= upperbound && Netto >= lowerbound;
     }
 
     public boolean validateIngredientBatch(IngredientBatchDTO batch, ProductBatchComponentDTO componentDTO) {

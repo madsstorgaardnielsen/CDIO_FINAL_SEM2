@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IngredientController implements IIngredientController {
-    private static IngredientController instance;
+    private static final IngredientController instance;
 
     static {
         instance = new IngredientController();

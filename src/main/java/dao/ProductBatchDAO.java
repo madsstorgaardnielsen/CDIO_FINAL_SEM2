@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.ArrayList;
 
 public class ProductBatchDAO implements IProductBatchDAO {
-    private static ProductBatchDAO instance;
+    private static final ProductBatchDAO instance;
 
     static {
         instance = new ProductBatchDAO();
@@ -51,7 +51,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
     }
 
     public void updateProductBatch(ProductBatchDTO productBatchDTO) {
@@ -89,9 +88,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
     }
-
 
     public ArrayList<ProductBatchDTO> getAllProductBatch() {
         ArrayList<ProductBatchDTO> productBatchList = new ArrayList<>();
@@ -111,7 +108,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
         }
         return productBatchList;
     }
-
 
     private void getBatchInfo(ResultSet rs, ProductBatchDTO batch) {
         try {
@@ -136,7 +132,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
     public ProductBatchDTO getProductBatchFromRecipeIdUserId(int recipeId, int userId) {
         String getProductBatchString = "{call GetProductBatchFromRecipeIdUserIdProductBatchId(?,?)}";
-        ProductBatchDTO product = null;
+        ProductBatchDTO product;
         try {
             statement = database.callableStatement(getProductBatchString);
             statement.setInt(1, recipeId);
@@ -155,10 +151,10 @@ public class ProductBatchDAO implements IProductBatchDAO {
     }
 
     public void deleteProductBatchWithRecipeIdUserId(int recipeId, int userId) {
-
         try {
             String deleteIngredient = "{call DeleteProductBatchFromRecipeIdUserId(?,?)}";
             PreparedStatement statement = database.callableStatement(deleteIngredient);
+
             statement.setInt(1, recipeId);
             statement.setInt(2, userId);
 
@@ -172,7 +168,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
     public ProductBatchDTO getProductBatch(int batchID) {
         String getProductBatchString = "{call GetProductBatch(?)}";
-        ProductBatchDTO product = null;
+        ProductBatchDTO product;
         try {
             statement = database.callableStatement(getProductBatchString);
             statement.setInt(1, batchID);
@@ -187,7 +183,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return product;
     }
 

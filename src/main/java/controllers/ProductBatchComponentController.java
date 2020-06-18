@@ -12,11 +12,10 @@ import dto.RecipeComponentDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ProductBatchComponentController implements IProductBatchComponentController {
-    private static ProductBatchComponentController instance;
+    private static final ProductBatchComponentController instance;
 
     static {
         instance = new ProductBatchComponentController();

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class IngredientBatchController implements IIngredientBatchController {
 
-    private static IngredientBatchController instance;
+    private static final IngredientBatchController instance;
 
     static {
         instance = new IngredientBatchController();

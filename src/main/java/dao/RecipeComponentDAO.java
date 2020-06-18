@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecipeComponentDAO {
-    private static RecipeComponentDAO instance;
+    private static final RecipeComponentDAO instance;
 
     static {
         instance = new RecipeComponentDAO();
@@ -30,35 +30,16 @@ public class RecipeComponentDAO {
     }
 
     public void addRecipeComponent(RecipeComponentDTO recipeComponent) {
-
-        try {
-            String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
-            PreparedStatement statement = database.callableStatement(addRecipeComponent);
-            statement.setInt(1, recipeComponent.getRecipeID());
-            statement.setInt(2, recipeComponent.getIngredientID());
-            statement.setDouble(3, recipeComponent.getNonNetto());
-            statement.setDouble(4, recipeComponent.getTolerance());
-
-            statement.executeUpdate();
-            System.out.println("RecipeComponent successfully added to database");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new DatabaseException();
-        }
-
+        String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
+        getRecipeInfo(recipeComponent, addRecipeComponent);
+        System.out.println("RecipeComponent successfully added to database");
     }
 
     public RecipeComponentDTO updateRecipeComponent(RecipeComponentDTO recipe) {
         RecipeComponentDTO recipe2;
         try {
             String updateRecipeComponent = "{call UpdateRecipeComponent(?,?,?,?)}";
-            PreparedStatement statement = database.callableStatement(updateRecipeComponent);
-            statement.setInt(1, recipe.getRecipeID());
-            statement.setInt(2, recipe.getIngredientID());
-            statement.setDouble(3, recipe.getNonNetto());
-            statement.setDouble(4, recipe.getTolerance());
-
-            statement.executeUpdate();
+            getRecipeInfo(recipe, updateRecipeComponent);
             System.out.println("RecipeComponent successfully updated");
 
             //TODO
@@ -70,6 +51,21 @@ public class RecipeComponentDAO {
             throw new DatabaseException();
         }
         return recipe2;
+    }
+
+    private void getRecipeInfo(RecipeComponentDTO recipe, String updateRecipeComponent){
+        try {
+            PreparedStatement statement = database.callableStatement(updateRecipeComponent);
+            statement.setInt(1, recipe.getRecipeID());
+            statement.setInt(2, recipe.getIngredientID());
+            statement.setDouble(3, recipe.getNonNetto());
+            statement.setDouble(4, recipe.getTolerance());
+
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
     }
 
     public void deleteRecipeComponent(int recipeID, int ingredientID) {
@@ -126,7 +122,6 @@ public class RecipeComponentDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return recipeComponentList;
     }
 

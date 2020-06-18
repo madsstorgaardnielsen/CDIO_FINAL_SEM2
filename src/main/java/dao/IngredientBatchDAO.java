@@ -16,7 +16,7 @@ import java.util.ArrayList;
 //TODO implement inputvalidation class
 public class IngredientBatchDAO implements IIngredientBatchDAO {
 
-    private static IngredientBatchDAO instance;
+    private static final IngredientBatchDAO instance;
 
     static {
         instance = new IngredientBatchDAO();
@@ -43,7 +43,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         String updateIngredientBatch = "{call UpdateIngredientBatch(?,?,?,?)}";
         setIngredientInfo(ingredientBatch, updateIngredientBatch);
         System.out.println("Ingredient batch successfully updated");
-
     }
 
     private void setIngredientInfo(IngredientBatchDTO ingredientBatch, String updateIngredientBatch) {
@@ -74,9 +73,7 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             System.out.println("Ingredient batch could no be deleted");
             throw new DatabaseException();
         }
-
     }
-
 
     public ArrayList<IngredientBatchDTO> getAllIngredientBatch() {
         ArrayList<IngredientBatchDTO> ingredientBatchList = new ArrayList<>();
@@ -94,7 +91,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return ingredientBatchList;
     }
 
@@ -124,7 +120,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return ingredientBatch;
     }
 

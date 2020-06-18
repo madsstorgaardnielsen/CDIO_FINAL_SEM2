@@ -16,7 +16,7 @@ import java.util.ArrayList;
 //TODO implement inputvalidation class
 public class IngredientDAO implements IIngredientDAO {
 
-    private static IngredientDAO instance;
+    private static final IngredientDAO instance;
 
     static {
         instance = new IngredientDAO();
@@ -81,8 +81,7 @@ public class IngredientDAO implements IIngredientDAO {
 
     public ArrayList<IngredientDTO> getAllIngredients() {
         ArrayList<IngredientDTO> ingredientList = new ArrayList<>();
-        IngredientDTO ingredientDTO = null;
-
+        IngredientDTO ingredientDTO ;
         try {
             CallableStatement stmt = database.callableStatement("{call GetAllIngredients}");
             ResultSet rs = stmt.executeQuery();
@@ -110,7 +109,6 @@ public class IngredientDAO implements IIngredientDAO {
 
     public IngredientDTO getIngredient(int ID) {
         IngredientDTO ingredient = null;
-
         try {
             CallableStatement stmt = database.callableStatement("{call GetIngredient(?)}");
             stmt.setInt(1, ID);
@@ -129,7 +127,6 @@ public class IngredientDAO implements IIngredientDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return ingredient;
     }
 }

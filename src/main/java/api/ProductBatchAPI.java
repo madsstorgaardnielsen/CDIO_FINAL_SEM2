@@ -14,7 +14,7 @@ public class ProductBatchAPI {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllProductBatches() throws Exception {
+    public Response getAllProductBatches() {
         return ProductBatchController.getInstance().getAllProductBatch();
     }
 

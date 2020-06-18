@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserDAO implements IUserDAO {
-    private static IUserDAO instance;
+    private static final UserDAO instance;
 
     static {
         instance = new UserDAO();
@@ -99,7 +99,6 @@ public class UserDAO implements IUserDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return user;
     }
 

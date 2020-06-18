@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 public class RecipeComponentController implements IRecipeComponentController {
-    private static RecipeComponentController instance;
+    private static final RecipeComponentController instance;
 
     static {
         instance = new RecipeComponentController();

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RecipeDAO implements IRecipeDAO {
-    private static RecipeDAO instance;
+    private static final RecipeDAO instance;
 
     static {
         instance = new RecipeDAO();

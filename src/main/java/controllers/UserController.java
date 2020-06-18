@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 
 public class UserController implements IUserController {
-    private static IUserController instance;
+    private static final IUserController instance;
 
     static {
         instance = new UserController();
