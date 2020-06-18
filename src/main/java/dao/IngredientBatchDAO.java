@@ -1,5 +1,6 @@
 package dao;
 
+import dao.exceptions.DatabaseException;
 import dao.idao.IIngredientBatchDAO;
 import dao.idao.IIngredientDAO;
 import db.DBConnection;

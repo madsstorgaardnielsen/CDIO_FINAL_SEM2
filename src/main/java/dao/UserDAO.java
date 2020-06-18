@@ -121,12 +121,10 @@ public class UserDAO implements IUserDAO {
         return user;
     }
 
-
     @Override
     public UserDTO updateUser(UserDTO user) {
         try {
             CallableStatement stmt = database.callableStatement("{call UpdateUser(?,?,?,?,?,?)}");
-
             stmt.setInt(1, user.getUserId());
             stmt.setString(2, user.getFirstName());
             stmt.setString(3, user.getLastName());
@@ -134,8 +132,6 @@ public class UserDAO implements IUserDAO {
             stmt.setString(5, user.getRole());
             stmt.setBoolean(6, user.getActive());
             ResultSet rs = stmt.executeQuery();
-
-        try {
             while (rs.next()) {
                 getUserInfo(rs, user);
             }
@@ -173,7 +169,7 @@ public class UserDAO implements IUserDAO {
             System.out.println("User successfully deleted");
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new IOException("User could no be deleted");
+            throw new DatabaseException();
         }
     }
 }

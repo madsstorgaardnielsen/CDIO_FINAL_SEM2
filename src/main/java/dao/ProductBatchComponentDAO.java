@@ -140,8 +140,6 @@ public class ProductBatchComponentDAO {
             stmt.setDouble(4, batchComponentDTO.getTara());
             stmt.setDouble(5, batchComponentDTO.getNetto());
             stmt.setDouble(6, batchComponentDTO.getTerminal());
-
-        try {
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
