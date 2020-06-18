@@ -231,7 +231,7 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
 function saveComponent() {
         var recipecomponent = {};
 
-        recipecomponent.recipeID =  $("#container").attr('data.recipeId');
+        recipecomponent.recipeID =  $("#container").attr('data-recipeId');
         recipecomponent.ingredientID = $("#ingredientIdInput").val();
         recipecomponent.nonNetto = $("#nonNettoInput").val();
         recipecomponent.tolerance = $("#toleranceInput").val();
