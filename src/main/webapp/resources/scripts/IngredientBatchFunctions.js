@@ -12,7 +12,7 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
-        '<button class="confirmbtn" id="addnewib">Tilføj råvare batch</button>'
+        '<button class="confirmbtn" id="addnewib">Opret råvare batch</button>'
     );
     var row;
     Agent.GET("rest/ingredientbatch", function (data) {
@@ -42,7 +42,7 @@ function listenerAdd2() { //shows line to add new batch
             '<form action="javascript:saveBatch()">' +
             '<input id="ibidinput" type="number" placeholder="Råvare Batch ID" name="ibid" required>' +
             '<input id="ingidinput" type="number" placeholder="Råvare ID" name="ingid" required>'+
-            '<input id="amountinput" type="number" placeholder="Mængde i kg" name="amount" required>' +
+            '<input id="amountinput" type="number" placeholder="Mængde i kg" name="amount" step="0.01" min="0" required>' +
             '<input id="supplierinput" type="text" placeholder="Leverandør" name="supplier">'+
             '<br>' +
             '<button id="finishibbtn" class="btn">Udfør</button>' +

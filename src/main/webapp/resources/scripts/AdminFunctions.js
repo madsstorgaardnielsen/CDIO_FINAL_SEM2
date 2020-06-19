@@ -12,7 +12,7 @@ function addUserForm() { //gets user credentials for new user from admin user
         '<option value="Produktionsleder">Produktionsleder</option>' +
         '<option value="Laborant">Laborant</option> ' +
         '</select> <br>' +
-        '<button class="btn">Opret</button>' +
+        '<button class="btn">Opret bruger</button>' +
         '</form>'
     );
 }

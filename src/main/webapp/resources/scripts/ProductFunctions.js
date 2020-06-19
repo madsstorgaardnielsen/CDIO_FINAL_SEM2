@@ -13,7 +13,7 @@ function getAllProducts() { //shows all productbatches
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
         '<div class="infocontainer" id="inputID">' +
-        '<button class="confirmbtn" id="viewbtn">Tilføj product batch</button>' +
+        '<button class="confirmbtn" id="viewbtn">Opret produkt batch</button>' +
         '</div>'
     );
     $("#optionsbox").html('');

@@ -20,7 +20,7 @@ function addRecipe() { //adds the new recipe to backend
         $("#container").html('' +
             '<form action="Farmaceut.html">' +
             '<div class="boxedText">Recept oprettet</div>' +
-            '<div class="boxedText">Du kan tilføje flere råvare til recepten inde i redigerens menuen</div>' +
+            '<div class="boxedText">Du kan tilføje komponenter i Vis/Rediger under farmaceut menuen</div>' +
             '<button class="btn">Videre</button>' +
             '</form>'
         )
@@ -279,7 +279,7 @@ function addIngredientform(){ // Opret en råvare form
         '<input type="number" placeholder="Råvare ID" id="ingredientID">' +
         '<input type="text" placeholder="Råvare Navn" id="ingredientName">' +
         '</select> <br>' +
-        '<button class="btn">Gem</button>' +
+        '<button class="btn">Opret råvare</button>' +
         '</form>'
     );
 

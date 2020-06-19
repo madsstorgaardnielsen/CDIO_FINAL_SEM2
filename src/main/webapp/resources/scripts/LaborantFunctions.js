@@ -38,7 +38,7 @@ function getPID() {
     $("#header").text("Indtast Produktbatch ID");
     $("#container").html('' +
         '<form action="javascript:getRecipeName()">' +
-        '<input type="number" placeholder="Nr." id="batchID">' +
+        '<input type="number" placeholder="Nr." id="batchID" step="0.01" min="0">' +
         '<button class="btn">Ok</button>' +
         '</form>'
     )
@@ -93,7 +93,7 @@ function setStatus() {
                 '</div>' +
                 '<div id="subcontainer">' +
                 '<form action="javascript:setTara()">' +
-                '<input type="number" placeholder="kg" id="tarainput">' +
+                '<input type="number" placeholder="kg" id="tarainput" step="0.01" min="0">' +
                 '<button class="btn">Ok</button>' +
                 '</form>' +
                 '</div>'
@@ -161,7 +161,7 @@ function setRaavare() {
         $(".errorcont").remove();
         $("#subcontainer").html('' +
             '<form action="javascript:setBrutto()">' +
-            '<input type="number" placeholder="Kg" id="bruttoInput">' +
+            '<input type="number" placeholder="Kg" id="bruttoInput" step="0.01" min="0">' +
             '<button class="btn">Ok</button>' +
             '</form>'
         )
