@@ -53,7 +53,7 @@ public class IngredientBatchController implements IIngredientBatchController {
         } else {
             if (!validation.idInputValidation(ingredientBatchDTO.getIngredientBatchId())) {
                 return Response.status(418, "Forkert input<br> Indtastet batchid: " + ingredientBatchDTO.getIngredientBatchId() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.ingredientAmountValidation(ingredientBatchDTO.getAmount())) {
+            } else if (!validation.ingredientIdValidation(ingredientBatchDTO.getIngredientId())) {
                 return Response.status(418, "Forkert input<br> Indtastet råvare id: " + ingredientBatchDTO.getIngredientId() + "<br> Id skal ligge i intervallet 1-99999999").build();
             } else {
                 return Response.status(418, "Forkert input <br>Indtastet mængde: " + ingredientBatchDTO.getAmount() + "<br> Mængden skal indskrives med 4 decimaler").build();
