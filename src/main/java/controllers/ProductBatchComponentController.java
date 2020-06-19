@@ -93,7 +93,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
                 batch.setNettoSum(nettoSum);
                 ProductBatchDAO.getInstance().setStatusDone(batch);
             }
-            return Response.status(400, "ProductBatch er fuldt afvejet").build();
+            return Response.status(400, "Productbatch er fuldt afvejet").build();
         } catch (Exception e) {
             e.printStackTrace();
             return Response.serverError().build();
@@ -106,6 +106,6 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
         if (InputValidation.getInstance().validateIngredientBatch(ingredientBatchDTO, componentDTO))
             return Response.ok().build();
         else
-            return Response.status(418, "IngrediensBatch matcher ikke ingrediens").build();
+            return Response.status(418, "Råvatebatch matcher ikke Råvare").build();
     }
 }
