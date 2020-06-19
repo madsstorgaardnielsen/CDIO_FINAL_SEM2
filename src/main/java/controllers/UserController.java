@@ -39,10 +39,7 @@ public class UserController implements IUserController {
                 return Response.serverError().build();
             }
         } else {
-            if (!validation.nameValidation(userDTO.getFirstName()) || !validation.nameValidation(userDTO.getLastName())) {
-                return Response.status(418, "Forkert input<br> Indtastet navn: " + userDTO.getFirstName() + " " + userDTO.getLastName() + "<br> Indtast venligst kun bogstaver").build();
-            } else
-                return Response.status(418, "Forkert input<br> Indtastet initialer: " + userDTO.getInitials() + "<br> Indtast venligst kun bogstaver").build();
+            return Response.status(418, "Forkert input<br> Indtast venligst kun bogstaver").build();
         }
     }
 

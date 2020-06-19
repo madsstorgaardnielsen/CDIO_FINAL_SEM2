@@ -2,7 +2,7 @@ function addRecipeForm() { //gets recipe ID and Name form
     $("#header").text("Opret Recept");
     $("#container").html(
         '<form action="javascript:generateIngredient()">' +
-        '<input type="number" placeholder="Recept ID" id="RecipeID">' +
+        '<input type="number" placeholder="Recept ID" id="RecipeID" step="0.01" min="0">' +
         '<input type="text" placeholder="Recept Navn" id="recipeName">' +
         '</select> <br>' +
         '<button class="btn">Gem</button>' +
@@ -18,8 +18,8 @@ function generateIngredient() {
         '<tr>' +
         '<td class="table">' +
         '<td> <input  type="number" placeholder="Råvare ID"> </td>' +
-        '<td> <input  type="number" placeholder="Nominel Netto vægt i gram"> </td>' +
-        '<td> <input  type="number" placeholder="Tolerance"> </td>' +
+        '<td> <input  type="number" placeholder="Nominel Netto vægt i gram" step="0.01" min="0"> </td>' +
+        '<td> <input  type="number" placeholder="Tolerance" step="0.01" min="0"> </td>' +
         '<td> <button> class="btn" Bekræft </button> </td>' +
         '</tr>' +
         '<button class="btn">Tilføj råvare</button>'+
@@ -94,8 +94,8 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
         '<td class = ingredientName>' + recipeComponent.ingredientName + '</td>' +
         '<td class = nonNetto>' + recipeComponent.nonNetto + ' kg</td>' +
         '<td class = tolerance>' + recipeComponent.tolerance + ' %</td>' +
-        '<td class = editbutton> <button class="editbtn">Rediger Komponent</button></td>' +
-        '<td class = deletebutton> <button class="delbtn">Slet Komponent</button></td>' +
+        '<td class = editbutton> <button class="editbtn">Rediger</button></td>' +
+        '<td class = deletebutton> <button class="delbtn">Slet</button></td>' +
         '</tr>'
 }
 
@@ -155,8 +155,8 @@ function listeneredit() {
         //row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
         //row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
         //row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName" data-orig="'+ ingredientName +'">');
-        row.find(".nonNetto").html('<input type="number" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'">');
-        row.find(".tolerance").html('<input type="number" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'">');
+        row.find(".nonNetto").html('<input type="number" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'" step="0.01" min="0">');
+        row.find(".tolerance").html('<input type="number" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'" step="0.01" min="0">');
         row.find(".editbutton").empty();
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
@@ -238,9 +238,9 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#addbtn", function () {
         $("#inputID").html('' +
             '<form action="javascript:saveComponent()">' +
-            '<input id="ingredientIdInput" type="number" placeholder="Ingredient ID" >' +
-            '<input id="nonNettoInput" type="number" placeholder="Nominel Netto" >' +
-            '<input id="toleranceInput" type="number" placeholder="Tolerance" >' +
+            '<input id="ingredientIdInput" type="number" placeholder="Råvare ID" >' +
+            '<input id="nonNettoInput" type="number" placeholder="Nominel Netto" step="0.01" min="0">' +
+            '<input id="toleranceInput" type="number" placeholder="Tolerance" step="0.01" min="0">' +
             '<br>' +
             '<button id="finishcompbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'

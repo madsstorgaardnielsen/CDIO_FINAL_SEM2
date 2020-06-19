@@ -78,7 +78,7 @@ public class InputValidation {
     public boolean nameValidation(String input) {
         char[] chars = input.toCharArray();
         for (char c : chars) {
-            if(!Character.isLetter(c)) {
+            if (!Character.isLetter(c)) {
                 return false;
             }
         }
@@ -95,7 +95,7 @@ public class InputValidation {
         return batchId >= 1 && batchId <= 99999999;
     }*/
 
-    public boolean idValidation(int id ) {
+    public boolean idValidation(int id) {
         return id >= 1 && id <= 99999999;
     }
 
@@ -153,8 +153,16 @@ public class InputValidation {
             return false;
         } else if (initials.length() < 2 || initials.length() > 4) {
             return false;
-        } else
-            return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
+        } else if (!nameValidation(firstName)) {
+            return false;
+        } else if (!nameValidation(lastName)) {
+            return false;
+        } else if (!nameValidation(initials)) {
+            return false;
+        } else if (!(role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder"))) {
+            return false;
+        }
+        return true;
     }
 
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
