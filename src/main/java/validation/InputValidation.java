@@ -18,14 +18,28 @@ public class InputValidation {
         return instance;
     }
 
-    public boolean userValidation(UserDTO user) {
-        //TODO: further validation
+    public boolean userValidation(UserDTO user, String role) {
         if (!user.isActive())
             return false;
-        /*if (!user.getRole().equals(user.getRole())) {
-            return false;
-        }*/
-        return true;
+
+        String userRole = user.getRole();
+
+        if (userRole.equals("Admin"))
+            return userRole.equals(role);
+
+
+        if (userRole.equals("Farmaceut"))
+            return role.equals("Farmaceut") || role.equals("Produktionsleder") || role.equals("Laborant");
+
+
+        if (userRole.equals("Produktionsleder"))
+            return role.equals("Produktionsleder") || role.equals("Laborant");
+
+
+        if (userRole.equals("Laborant"))
+            return userRole.equals(role);
+
+        return false;
     }
 
     public boolean ingredientInputValidation(IngredientDTO ingredientDTO) {

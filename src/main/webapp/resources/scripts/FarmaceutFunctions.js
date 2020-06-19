@@ -335,5 +335,3 @@ function generateIngredientHtml(ingredients) { //generates html to show in recip
         '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
         '</tr>'
 }
-
-

@@ -2,10 +2,36 @@ function getMID(role) { //gets the employee number from user
     $("#header").text("Indtast NR");
     $("#container").html(
         '<form action="javascript:displayName()">' +
-        '<input type="text" placeholder="Nr." id="MID" data-role="'+ role +'">' +
+        '<input type="text" placeholder="Nr." id="MID" data-role="' + role + '">' +
         '<button class="btn">OK</button>' +
         '</form>'
     );
+
+    $("#optionsbox").html('' +
+        '<table class="optionstable"><thead><tr>' +
+        '<th>UserID</th>' +
+        '<th>User role</th>' +
+        '</tr></thead>' +
+        '<tbody id="tablebody"></tbody>' +
+        '</table>'
+    );
+
+    Agent.GET("rest/user", function (data) {
+        $.each(data, function () {
+            $("#tablebody").append('' +
+                '<tr>' +
+                '<td>' + this.userId + '</td>' +
+                '<td>' + this.role + '</td>' +
+                '</tr>'
+            )
+        }, function (data) {
+            $("#optionsbox").html('' +
+                '<div class="boxedText" id="error">'
+                + $(data.responseText).find("u").first().text() +
+                '</div>'
+            )
+        });
+    });
 }
 
 function displayName() { //gets the information about the user from the backend
@@ -22,7 +48,13 @@ function displayName() { //gets the information about the user from the backend
             '</form>'
         );
     }, function (data) {
-        $("#container").html(data.responseText);
+        $("#error").remove();
+        console.log(data);
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>'
+        );
     })
 }
 

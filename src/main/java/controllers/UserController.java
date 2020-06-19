@@ -93,7 +93,7 @@ public class UserController implements IUserController {
 
         try {
 
-            if (validation.userValidation(userDAO.getUser(userId))) {
+            if (validation.userValidation(userDAO.getUser(userId), role)) {
                 return Response.ok(userDAO.getUser(userId)).build();
             } else {
                 //System.out.println(role + userId + user.getRole());
