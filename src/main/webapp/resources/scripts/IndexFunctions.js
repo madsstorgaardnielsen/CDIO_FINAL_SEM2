@@ -9,8 +9,8 @@ function getMID(role) { //gets the employee number from user
 
     $("#optionsbox").html('' +
         '<table class="optionstable"><thead><tr>' +
-        '<th>UserID</th>' +
-        '<th>User role</th>' +
+        '<th>Bruger ID</th>' +
+        '<th>Rolle</th>' +
         '</tr></thead>' +
         '<tbody id="tablebody"></tbody>' +
         '</table>'
