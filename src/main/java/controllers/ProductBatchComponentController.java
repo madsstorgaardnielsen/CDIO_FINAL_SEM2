@@ -52,7 +52,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
             batchComponent.setNetto(batchComponent.getBrutto() - batchComponent.getTara());
             if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
-                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batch.getIngredientBatchID(), batch.getNetto());
+                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(), batchComponent.getNetto());
                 return Response.ok().build();
             } else
                 return Response.status(418, "difference større end tolerance").build();

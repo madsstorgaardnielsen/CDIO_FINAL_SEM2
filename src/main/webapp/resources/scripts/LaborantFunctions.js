@@ -120,7 +120,7 @@ function setTara() {
         $("#optionsbox").html('' +
             '<table class="optionstable"><thead><tr>' +
             '<th>Ingredientbatch ID</th>' +
-            '<th>Ingredient ID</th>' +
+            '<th>Ingredient amount</th>' +
             '</tr></thead>' +
             '<tbody id="tablebody"></tbody>' +
             '</table>'
