@@ -16,6 +16,7 @@ function getAllProducts() { //shows all productbatches
         '<button class="confirmbtn" id="viewbtn">Tilføj ny</button>' +
         '</div>'
     );
+    $("#optionsbox").html('');
     var row;
     Agent.GET("rest/productBatch", function (data) {
         $.each(data, function () {
@@ -111,37 +112,54 @@ function generateCompList(component) { //generates html for rows for each compon
         '</tr>'
 }
 
-function listenerAdd() {//shows line to add new batch by recipe id
+function listenerAdd() {//creates page for adding product batch
     $("#container").on('click', "#viewbtn", function () {
-        $("#inputID").html('' +
-            '<form>' +
+        $("#header").text("Tilføj ny produkt batch");
+        $("#container").html('' +
+            '<form action="javascript:confirmAddPB()">' +
             '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
             '<button id="finishbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'
-        )
+        );
+        $("#optionsbox").html( //setup start of table for recipes
+                    '<table class="optionstable"> <thead> <tr>' +
+                    '<th>Recept ID</th>' +
+                    '<th>Recept Navn</th>' +
+                    '</tr> </thead> ' +
+                    '<tbody id="opttablebody"></tbody> ' +
+                    '</table>'
+                );
+
+        Agent.GET("rest/recipe", function (data) { //gets all recipes and makes a table from it
+            $.each(data, function () {
+                $("#opttablebody").append(generateRecipeHtml1(this));
+            });
+        }, function (data) {
+            $("#container").html($(data.responseText).find("u").first().text());
+        });
     })
 }
-function listenerAdd1() {//when click udfør then add productbatch
-    $("#container").on('click', "#finishbtn", function () {
+function generateRecipeHtml1(recipe) { //generates html to show in recipeTable
+    return '<tr> ' +
+        '<td class = recipeID>' + recipe.recipeID + '</td>' +
+        '<td class= recipeName>' + recipe.recipeName + '</td>' +
+        '</tr>'
+}
+
+//when click udfør then add productbatch
+function confirmAddPB() { // triggered when click "#finishbtn"
         var receptidIn = $("#receptidinput").val();
         var userID = $("#container").attr("data-id");
 
         Agent.POST("/rest/productBatch/"+ receptidIn +"/"+userID+"/", null,function (data){
-            getAllProducts();
+            $("#header").html ('<h1>Produkt batch tilføjet!</h1>')
+            $("#container").html('<button class="btn" onclick="getAllProducts()">Videre</button>')
         },function (data){
-            alert("fejl");
-        } )
+            alert("Kan ikke oprette produkt batch ud fra dette recept id");
+        } );
+    }
 
-        $("#inputID").html('' +
-            '<form>' +
-            '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
-            '<br>' +
-            '<button id="viewbtn" class="btn" type="submit" >Udfør</button>' +
-            '</form>'
-        )
-    })
-}
 
 function init() {
     if (document.location.search !== '') {
@@ -156,5 +174,4 @@ function init() {
 document.addEventListener('DOMContentLoaded', function () {
     init();
     listenerAdd();
-    listenerAdd1();
 });
