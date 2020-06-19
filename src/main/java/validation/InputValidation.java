@@ -75,6 +75,21 @@ public class InputValidation {
         return true;
     }
 
+    public boolean ingredientAmountValidation(String amount) {
+        int integerLength = amount.indexOf('.');
+        int decimalLength = amount.length() - integerLength - 1;
+        return decimalLength == 4;
+    }
+
+    public boolean idInputValidation(int batchId) {
+        return batchId >= 1 && batchId <= 99999999;
+    }
+
+    public boolean ingredientIdValidation(int ingredientId ) {
+        return ingredientId >= 1 && ingredientId <= 99999999;
+    }
+
+
     public boolean recipeInputValidation(RecipeDTO recipeDTO) {
         int ID = recipeDTO.getRecipeID();
         String recipeName = recipeDTO.getRecipeName();

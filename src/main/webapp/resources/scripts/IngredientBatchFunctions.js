@@ -88,8 +88,14 @@ function saveBatch() {//when click udfør then add productbatch
                 '<button class="btn">Videre</button>' +
                 '</form>');
             $("#optionsbox").html('');
-        },function (){
-            alert("fejl");
+        },function (data){
+            $("#error").remove();
+            console.log(data);
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">'+
+                'Fejl: '+ $(data.responseText).find("u").first().text() +
+                '</div></div>'
+            );
         } );
 }
 
