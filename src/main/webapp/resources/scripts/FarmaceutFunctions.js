@@ -1,5 +1,5 @@
 function addRecipeForm() { //gets recipe ID and Name form
-    $("#header").text("Opret Recept og dens første komponent");
+    $("#header").text("Opret Recept");
     $("#container").html(
         '<form action="javascript:addRecipe()">' +
         '<input type="text" placeholder="Recept ID" id="recipeID">' +
@@ -62,7 +62,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= btncont> <button class="viewbtn">Se mere</button></td>' +
+        '<td class= btncont> <button class="viewbtn">Rediger komponenter</button></td>' +
         '</tr>'
 }
 
