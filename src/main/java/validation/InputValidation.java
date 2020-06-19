@@ -119,36 +119,12 @@ public class InputValidation {
     }
 
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {
-        int productBatchId = productBatchDTO.getProductBatchId();
         int recipeId = productBatchDTO.getRecipeId();
-        int status = productBatchDTO.getStatus();
         int userId = productBatchDTO.getUserId();
-        int ingredientBatchId = productBatchDTO.getIngredientBatchId();
-        double tara = productBatchDTO.getTaraSum();
-        double netto = productBatchDTO.getNettoSum();
 
-        String doubleToTextTara = Double.toString(Math.abs(tara));
-        int integerLengthTara = doubleToTextTara.indexOf('.');
-        int decimalLengthTara = doubleToTextTara.length() - integerLengthTara - 1;
-
-        String doubleToTextNetto = Double.toString(Math.abs(netto));
-        int integerLengthNetto = doubleToTextNetto.indexOf('.');
-        int decimalLengthNetto = doubleToTextNetto.length() - integerLengthNetto - 1;
-
-
-        if (productBatchId < 1 || productBatchId > 99999999) {
-            return false;
-        } else if (recipeId < 1 || recipeId > 99999999) {
-            return false;
-        } else if (status < 1 || status > 3) {
+        if (recipeId < 1 || recipeId > 99999999) {
             return false;
         } else if (userId < 1 || userId > 99999999) {
-            return false;
-        } else if (ingredientBatchId < 1 || ingredientBatchId > 99999999) {
-            return false;
-        } else if (decimalLengthNetto != 4) {
-            return false;
-        } else if (decimalLengthTara != 4) {
             return false;
         }
         return true;

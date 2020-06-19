@@ -35,7 +35,7 @@ function getPID() {
             '</div>'
         )
     });
-    $("#header").text("Indtast produktbatch ID");
+    $("#header").text("Indtast Produktbatch ID");
     $("#container").html('' +
         '<form action="javascript:getRecipeName()">' +
         '<input type="text" placeholder="Nr." id="batchID">' +
@@ -141,7 +141,7 @@ function setTara() {
         )
     });
 
-    $("#header").text("Indtast raavarebatch");
+    $("#header").text("Indtast Råvarebatch");
     $(".errorcont").remove();
     $("#subcontainer").html('' +
         '<form action="javascript:setRaavare()">' +
