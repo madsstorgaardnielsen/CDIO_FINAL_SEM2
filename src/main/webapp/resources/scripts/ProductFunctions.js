@@ -19,9 +19,9 @@ function getAllProducts() { //shows all productbatches
     var row;
     Agent.GET("rest/productBatch", function (data) {
         $.each(data, function () {
-            if(this.status == 0){ this.status = "Startet";}
-            if(this.status == 1){ this.status = "Under produktion";}
-            if(this.status == 2){this.status = "Afsluttet"}
+            if(this.status === 0){ this.status = "Startet";}
+            if(this.status === 1){ this.status = "Under produktion";}
+            if(this.status === 2){this.status = "Afsluttet"}
             row = $("#tablebody").append(generateProductBatchList(this));
         });
 
@@ -71,9 +71,9 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         '</table>'
     );
     Agent.GET("/rest/productBatch/"+productBatchID+"/", function (data) {
-        if(data.status == 0){ data.status = "Startet";}
-        if(data.status == 1){ data.status = "Under produktion";}
-        if(data.status == 2){ data.status = "Afsluttet";}
+        if(data.status === 0){ data.status = "Startet";}
+        if(data.status === 1){ data.status = "Under produktion";}
+        if(data.status === 2){ data.status = "Afsluttet";}
         $("#batchtable").append(generateProductBatchHeader(data));
         $.each(data.components, function(){
             $("#tablebody").append(generateCompList(this));
@@ -115,7 +115,7 @@ function listenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#viewbtn", function () {
         $("#inputID").html('' +
             '<form>' +
-            '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
+            '<input id="receptidinput" type="number" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
             '<button id="finishbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'
@@ -135,7 +135,7 @@ function listenerAdd1() {//when click udfør then add productbatch
 
         $("#inputID").html('' +
             '<form>' +
-            '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
+            '<input id="receptidinput" type="number" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
             '<button id="viewbtn" class="btn" type="submit" >Udfør</button>' +
             '</form>'

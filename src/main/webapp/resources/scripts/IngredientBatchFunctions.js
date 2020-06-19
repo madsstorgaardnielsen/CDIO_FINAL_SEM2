@@ -40,9 +40,9 @@ function listenerAdd2() { //shows line to add new batch
         '<br>');
         $("#container").html('' +
             '<form action="javascript:saveBatch()">' +
-            '<input id="ibidinput" type="text" placeholder="Råvare Batch ID" name="ibid" required>' +
-            '<input id="ingidinput" type="text" placeholder="Råvare ID" name="ingid" required>'+
-            '<input id="amountinput" type="text" placeholder="Mængde i kg" name="amount" required>' +
+            '<input id="ibidinput" type="number" placeholder="Råvare Batch ID" name="ibid" required>' +
+            '<input id="ingidinput" type="number" placeholder="Råvare ID" name="ingid" required>'+
+            '<input id="amountinput" type="number" placeholder="Mængde i kg" name="amount" required>' +
             '<input id="supplierinput" type="text" placeholder="Leverandør" name="supplier">'+
             '<br>' +
             '<button id="finishibbtn" class="btn">Udfør</button>' +
