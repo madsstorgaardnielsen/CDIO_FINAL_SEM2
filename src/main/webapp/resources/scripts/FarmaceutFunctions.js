@@ -4,9 +4,6 @@ function addRecipeForm() { //gets recipe ID and Name form
         '<form action="javascript:addRecipe()">' +
         '<input type="text" placeholder="Recept ID" id="recipeID">' +
         '<input type="text" placeholder="Recept Navn" id="recipeName">' +
-        '<input type="text" placeholder="Råvare ID" id="ingredientID">' +
-        '<input type="text" placeholder="Nominel Netto" id="nonNetto">' +
-        '<input type="text" placeholder="Tolerance" id="tolerance">' +
         '<button class="btn">Opret Recepten</button>' +
         '</form>'
     );
@@ -17,12 +14,6 @@ function addRecipe() { //adds the new recipe to backend
     var recipe = {};
     recipe.recipeID = $("#recipeID").val();
     recipe.recipeName = $("#recipeName").val();
-    recipe.recipeCompList = {};
-    var recipeCom
-
-    recipe.recipeCompList.ingredientID = $("#ingredientID").val();
-    recipe.recipeCompList.nonNetto = $("#nonNetto").val();
-    recipe.recipeCompList.tolerance = $("#tolerance").val();
 
 //url skal ændres herunder
     Agent.POST("rest/recipe", recipe, function (data) {
