@@ -135,7 +135,7 @@ function listeneredit() {
         //row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
         //row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName" data-orig="'+ ingredientName +'">');
         row.find(".nonNetto").html('<input type="number" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'" step="0.0001" min="0">');
-        row.find(".tolerance").html('<input type="number" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'" step="000.01" min="0">');
+        row.find(".tolerance").html('<input type="number" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'" step="0.0001" min="0">');
         row.find(".editbutton").empty();
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
     })
