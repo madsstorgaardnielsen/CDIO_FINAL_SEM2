@@ -46,9 +46,8 @@ public class ProductBatchController {
             } catch (Exception e) {
                 return Response.serverError().build();
             }
-        }
-        else{
-                return Response.status(418, "Bad input").build();
+        } else {
+            return Response.status(418, "Bad input").build();
         }
     }
 

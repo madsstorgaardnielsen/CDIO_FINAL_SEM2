@@ -322,7 +322,7 @@ function addIngredient() { //adds the new ingredient to backend
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Råvare ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            'Fejl: '+ $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })

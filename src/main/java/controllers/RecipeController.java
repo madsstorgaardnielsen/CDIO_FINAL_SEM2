@@ -6,7 +6,6 @@ import dto.RecipeDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 
 public class RecipeController implements IRecipeController {
     private static final RecipeController instance;
@@ -47,7 +46,11 @@ public class RecipeController implements IRecipeController {
                 return Response.serverError().build();
             }
         } else {
-            return Response.status(418, "Bad input").build();
+            if (!validation.idValidation(recipeDTO.getRecipeID())) {
+                return Response.status(418, "Forkert input<br> Indtastet Recept id: " + recipeDTO.getRecipeID() + "<br> Id skal ligge i intervallet 1-99999999").build();
+            } else
+                return Response.status(418, "Forkert input<br> Indtastet Recept navn: " + recipeDTO.getRecipeName() + "<br> Indtast venligst kun bogstaver").build();
+
         }
     }
 
@@ -60,7 +63,10 @@ public class RecipeController implements IRecipeController {
                 return Response.serverError().build();
             }
         } else {
-            return Response.status(418, "Bad input").build();
+            if (!validation.idValidation(recipeDTO.getRecipeID())) {
+                return Response.status(418, "Forkert input<br> Indtastet Recept id: " + recipeDTO.getRecipeID() + "<br> Id skal ligge i intervallet 1-99999999").build();
+            } else
+                return Response.status(418, "Forkert input<br> Indtastet Recept navn: " + recipeDTO.getRecipeName() + "<br> Indtast venligst kun bogstaver").build();
         }
     }
 
@@ -75,7 +81,10 @@ public class RecipeController implements IRecipeController {
 
             }
         } else {
-            return Response.status(418, "Bad input").build();
+            if (!validation.idValidation(recipeDTO.getRecipeID())) {
+                return Response.status(418, "Forkert input<br> Indtastet Recept id: " + recipeDTO.getRecipeID() + "<br> Id skal ligge i intervallet 1-99999999").build();
+            } else
+                return Response.status(418, "Forkert input<br> Indtastet Recept navn: " + recipeDTO.getRecipeName() + "<br> Indtast venligst kun bogstaver").build();
         }
     }
 
