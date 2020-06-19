@@ -18,12 +18,14 @@ function getMID(role) { //gets the employee number from user
 
     Agent.GET("rest/user", function (data) {
         $.each(data, function () {
-            $("#tablebody").append('' +
-                '<tr>' +
-                '<td>' + this.userId + '</td>' +
-                '<td>' + this.role + '</td>' +
-                '</tr>'
-            )
+            if (this.role === role) {
+                $("#tablebody").append('' +
+                    '<tr>' +
+                    '<td>' + this.userId + '</td>' +
+                    '<td>' + this.role + '</td>' +
+                    '</tr>'
+                )
+            }
         }, function (data) {
             $("#optionsbox").html('' +
                 '<div class="boxedText" id="error">'
