@@ -94,7 +94,7 @@ function getRecipeComponent(recipeId) {
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
         '<div class="infocontainer" id="inputID">' +
-        '<button class="confirmbtn" id="addbtn">Tilføj ny</button>' +
+        '<button class="confirmbtn" id="addbtn">Tilføj komponent</button>' +
         '</div>'
     );
 

@@ -12,7 +12,7 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
-        '<button class="confirmbtn" id="addnewib">Tilføj ny</button>'
+        '<button class="confirmbtn" id="addnewib">Tilføj råvare batch</button>'
     );
     var row;
     Agent.GET("rest/ingredientbatch", function (data) {
@@ -36,7 +36,7 @@ function genIngBatchList(ingredientBatch) { //generates html to show in IB list
 
 function listenerAdd2() { //shows line to add new batch
     $("#container").on('click', "#addnewib", function () {
-        $("#header").html('Tilføj ny råvare batch'+
+        $("#header").html('Tilføj råvare batch'+
         '<br>');
         $("#container").html('' +
             '<form action="javascript:saveBatch()">' +

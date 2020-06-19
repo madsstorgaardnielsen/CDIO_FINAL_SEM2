@@ -13,7 +13,7 @@ function getAllProducts() { //shows all productbatches
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
         '<div class="infocontainer" id="inputID">' +
-        '<button class="confirmbtn" id="viewbtn">Tilføj ny</button>' +
+        '<button class="confirmbtn" id="viewbtn">Tilføj product batch</button>' +
         '</div>'
     );
     $("#optionsbox").html('');
@@ -114,7 +114,7 @@ function generateCompList(component) { //generates html for rows for each compon
 
 function listenerAdd() {//creates page for adding product batch
     $("#container").on('click', "#viewbtn", function () {
-        $("#header").text("Tilføj ny produkt batch");
+        $("#header").text("Tilføj produkt batch");
         $("#container").html('' +
             '<form action="javascript:confirmAddPB()">' +
             '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
