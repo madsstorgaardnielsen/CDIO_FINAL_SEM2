@@ -1,47 +1,35 @@
 function addRecipeForm() { //gets recipe ID and Name form
-    $("#header").text("Opret Recept");
+    $("#header").text("Opret Recept og dens første komponent");
     $("#container").html(
-        '<form action="javascript:generateIngredient()">' +
-        '<input type="text" placeholder="Recept ID" id="RecipeID">' +
+        '<form action="javascript:addRecipe()">' +
+        '<input type="text" placeholder="Recept ID" id="recipeID">' +
         '<input type="text" placeholder="Recept Navn" id="recipeName">' +
-        '</select> <br>' +
-        '<button class="btn">Gem</button>' +
+        '<input type="text" placeholder="Råvare ID" id="ingredientID">' +
+        '<input type="text" placeholder="Nominel Netto" id="nonNetto">' +
+        '<input type="text" placeholder="Tolerance" id="tolerance">' +
+        '<button class="btn">Opret Recepten</button>' +
         '</form>'
     );
 }
-//Tilføj en råvare funktion.
-function generateIngredient() {
-    $("#header").text("Opret Recept");
-    $("#container").html(
-    '<form action="javascript:generateRow()">' +
 
-        '<tr>' +
-        '<td class="table">' +
-        '<td> <input  type="text" placeholder="Råvare ID"> </td>' +
-        '<td> <input  type="text" placeholder="Nominel Netto vægt i gram"> </td>' +
-        '<td> <input  type="text" placeholder="Tolerance"> </td>' +
-        '<td> <button> class="btn" Bekræft </button> </td>' +
-        '</tr>' +
-        '<button class="btn">Tilføj råvare</button>'+
-        '</form>');
-}
 
 function addRecipe() { //adds the new recipe to backend
     var recipe = {};
-    //recipe.userId = 0;
     recipe.recipeID = $("#recipeID").val();
     recipe.recipeName = $("#recipeName").val();
-    recipe.ingredientID = $("#ingredientID").val();
-    recipe.nonNetto = $("#nonNetto").val();
-    recipe.ingredientID = $("#tolerance").val();
+    recipe.recipeCompList = {};
+    var recipeCom
 
-    //skal måske fjernes
-    recipe.active = true;
+    recipe.recipeCompList.ingredientID = $("#ingredientID").val();
+    recipe.recipeCompList.nonNetto = $("#nonNetto").val();
+    recipe.recipeCompList.tolerance = $("#tolerance").val();
+
 //url skal ændres herunder
     Agent.POST("rest/recipe", recipe, function (data) {
         $("#container").html('' +
             '<form action="Farmaceut.html">' +
             '<div class="boxedText">Recept oprettet</div>' +
+            '<div class="boxedText">Du kan tilføje flere råvare til recepten inde i redigerens menuen</div>' +
             '<button class="btn">Videre</button>' +
             '</form>'
         )
@@ -293,7 +281,7 @@ function invertTextToBoolean(active) {
 
 //functions for ingredients and htmlgeneration below
 
-function addIngredientform(){ // Opret en ingredients form
+function addIngredientform(){ // Opret en råvare form
     $("#header").text("Råvare administration");
     $("#container").html(
         '<form action="javascript:addIngredient()">' +
