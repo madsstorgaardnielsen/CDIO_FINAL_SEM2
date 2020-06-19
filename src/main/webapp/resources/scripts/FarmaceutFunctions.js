@@ -94,7 +94,8 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
         '<td class = ingredientName>' + recipeComponent.ingredientName + '</td>' +
         '<td class = nonNetto>' + recipeComponent.nonNetto + '</td>' +
         '<td class = tolerance>' + recipeComponent.tolerance + '</td>' +
-        '<td class = editbutton> <button class="editbtn">Edit component</button></td>' +
+        '<td class = editbutton> <button class="editbtn">Edit Component</button></td>' +
+        '<td class = deletebutton> <button class="delbtn">Delete Component</button></td>' +
         '</tr>'
 }
 
@@ -108,6 +109,7 @@ function getRecipeComponent(recipeId) {
         '<th>ingredientName</th>' +
         '<th>nonNetto</th>' +
         '<th>tolerance</th>' +
+        '<th colspan="1"></th>' +
         '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
@@ -124,8 +126,8 @@ function getRecipeComponent(recipeId) {
         listener();
         listeneredit();
         listenersave();
+        listenerdelete();
         componentlistenerAdd();
-        componentlistenerAdd1()
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -186,7 +188,7 @@ function listenersave() {
         else
             params = params + "&tolerance=" + origtolerance;
 
-                Agent.PUT("rest/recipecomponent" + params, null, function (data) {
+        Agent.PUT("rest/recipecomponent" + params, null, function (data) {
             row.replaceWith(generateRecipeComponentHtml(data));
         }, function (data) {
             window.alert("Ændringer ikke gemt: " + $(data.responseText).find("u").first().text());
@@ -196,7 +198,25 @@ function listenersave() {
     })
 }
 
+function listenerdelete() {
+    $("#container").on('click', '.delbtn', function () {
+        var row = $(this).closest('tr');
 
+        var recipeID = row.find(".recipeID").text();
+        var ingredientId = row.find(".ingredientId").text();
+
+        var params = "?recipeID=" + recipeID;
+        params = params + "&ingredientId=" + ingredientId;
+
+        Agent.DELETE("rest/recipecomponent" + params, null, function (data) {
+            getRecipeComponent(recipeID)
+        }, function (data) {
+            window.alert("Data blev ikke slettet: " + $(data.responseText).find("u").first().text());
+            console.log(data)
+        })
+
+    })
+}
 
 function listener(row) {
     $(row).on('click', '.toglebtn', function () {

@@ -51,8 +51,8 @@ public class RecipeComponentAPI {
 
     @DELETE
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deleteRecipeComponent(@QueryParam("recipeCompId") int recipeCompId,
-                                          @QueryParam("recipeCompIngredientID") int recipeCompIngredientID) {
+    public Response deleteRecipeComponent(@QueryParam("recipeID") int recipeCompId,
+                                          @QueryParam("ingredientId") int recipeCompIngredientID) {
         return RecipeComponentController.getInstance().deleteRecipeComponent(recipeCompId, recipeCompIngredientID);
     }
 }
