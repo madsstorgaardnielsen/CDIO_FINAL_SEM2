@@ -99,6 +99,15 @@ input, select {
     box-sizing: border-box;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .boxedText {
     text-align: center;
     margin: auto auto 10px;
