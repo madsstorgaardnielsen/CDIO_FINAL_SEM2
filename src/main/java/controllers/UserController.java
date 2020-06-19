@@ -39,7 +39,7 @@ public class UserController implements IUserController {
                 return Response.serverError().build();
             }
         } else {
-            return Response.status(418, "Bad input").build();
+            return Response.status(418, "Forkert input<br> Indtast venligst kun bogstaver").build();
         }
     }
 
@@ -74,7 +74,12 @@ public class UserController implements IUserController {
                 return Response.serverError().build();
             }
         } else {
-            return Response.status(418, "Bad input").build();
+            if (!validation.idValidation(userId)) {
+                return Response.status(418, "Forkert input<br> Indtastet bruger id: " + userId + "<br> Id skal ligge i intervallet 1-99999999").build();
+            } else if (!validation.nameValidation(firstName) || !validation.nameValidation(lastName)) {
+                return Response.status(418, "Forkert input<br> Indtastet navn: " + firstName + " " + lastName + "<br> Indtast venligst kun bogstaver").build();
+            } else
+                return Response.status(418, "Forkert input<br> Indtastet initialer: " + initials + "<br> Indtast venligst kun bogstaver").build();
         }
     }
 
@@ -93,7 +98,7 @@ public class UserController implements IUserController {
 
         try {
 
-            if (validation.userValidation(userDAO.getUser(userId))) {
+            if (validation.userValidation(userDAO.getUser(userId), role)) {
                 return Response.ok(userDAO.getUser(userId)).build();
             } else {
                 //System.out.println(role + userId + user.getRole());

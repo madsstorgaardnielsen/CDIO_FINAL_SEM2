@@ -1,11 +1,39 @@
 function getMID(role) { //gets the employee number from user
-    $("#header").text("Indtast ID");
+    $("#header").text("Indtast bruger ID");
     $("#container").html(
         '<form action="javascript:displayName()">' +
-        '<input type="text" placeholder="Nr." id="MID" data-role="'+ role +'">' +
+        '<input type="number" placeholder="Nr." id="MID" data-role="' + role + '">' +
         '<button class="btn">OK</button>' +
         '</form>'
     );
+
+    $("#optionsbox").html('' +
+        '<table class="optionstable"><thead><tr>' +
+        '<th>Bruger ID</th>' +
+        '<th>Rolle</th>' +
+        '</tr></thead>' +
+        '<tbody id="tablebody"></tbody>' +
+        '</table>'
+    );
+
+    Agent.GET("rest/user", function (data) {
+        $.each(data, function () {
+            if (this.role === role) {
+                $("#tablebody").append('' +
+                    '<tr>' +
+                    '<td>' + this.userId + '</td>' +
+                    '<td>' + this.role + '</td>' +
+                    '</tr>'
+                )
+            }
+        }, function (data) {
+            $("#optionsbox").html('' +
+                '<div class="boxedText" id="error">'
+                + $(data.responseText).find("u").first().text() +
+                '</div>'
+            )
+        });
+    });
 }
 
 function displayName() { //gets the information about the user from the backend
@@ -13,16 +41,22 @@ function displayName() { //gets the information about the user from the backend
     var role = $("#MID").attr("data-role");
 
     Agent.GET('rest/user/' + ID + '/' + role + "/", function (data) {
-        $("#header").text("Velkommen");
+        $("#header").text("Logget ind som: ");
         next(ID)
         $("#container").html(
             '<form action="'+ role +'.html">' +
-            '<div class="boxedText">'+ data.firstName + ' ' + data.lastName +'</div>' +
+            '<div class="boxedText">'+role+ ', '+ data.firstName + ' ' + data.lastName +'</div>' +
             '<button class="btn">Videre</button> ' +
             '</form>'
         );
     }, function (data) {
-        $("#container").html(data.responseText);
+        $("#error").remove();
+        console.log(data);
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>'
+        );
     })
 }
 

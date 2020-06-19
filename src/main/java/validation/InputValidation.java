@@ -18,14 +18,28 @@ public class InputValidation {
         return instance;
     }
 
-    public boolean userValidation(UserDTO user) {
-        //TODO: further validation
+    public boolean userValidation(UserDTO user, String role) {
         if (!user.isActive())
             return false;
-        /*if (!user.getRole().equals(user.getRole())) {
-            return false;
-        }*/
-        return true;
+
+        String userRole = user.getRole();
+
+        if (userRole.equals("Admin"))
+            return userRole.equals(role);
+
+
+        if (userRole.equals("Farmaceut"))
+            return role.equals("Farmaceut") || role.equals("Produktionsleder") || role.equals("Laborant");
+
+
+        if (userRole.equals("Produktionsleder"))
+            return role.equals("Produktionsleder") || role.equals("Laborant");
+
+
+        if (userRole.equals("Laborant"))
+            return userRole.equals(role);
+
+        return false;
     }
 
     public boolean ingredientInputValidation(IngredientDTO ingredientDTO) {
@@ -60,6 +74,31 @@ public class InputValidation {
         }
         return true;
     }
+
+    public boolean nameValidation(String input) {
+        char[] chars = input.toCharArray();
+        for (char c : chars) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean decimalValidation(String amount) {
+        int integerLength = amount.indexOf('.');
+        int decimalLength = amount.length() - integerLength - 1;
+        return decimalLength == 4;
+    }
+
+/*    public boolean idValidation(int batchId) {
+        return batchId >= 1 && batchId <= 99999999;
+    }*/
+
+    public boolean idValidation(int id) {
+        return id >= 1 && id <= 99999999;
+    }
+
 
     public boolean recipeInputValidation(RecipeDTO recipeDTO) {
         int ID = recipeDTO.getRecipeID();
@@ -114,8 +153,16 @@ public class InputValidation {
             return false;
         } else if (initials.length() < 2 || initials.length() > 4) {
             return false;
-        } else
-            return role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder");
+        } else if (!nameValidation(firstName)) {
+            return false;
+        } else if (!nameValidation(lastName)) {
+            return false;
+        } else if (!nameValidation(initials)) {
+            return false;
+        } else if (!(role.equals("Admin") || role.equals("Laborant") || role.equals("Farmaceut") || role.equals("Produktionsleder"))) {
+            return false;
+        }
+        return true;
     }
 
     public boolean productBatchInputValidation(ProductBatchDTO productBatchDTO) {

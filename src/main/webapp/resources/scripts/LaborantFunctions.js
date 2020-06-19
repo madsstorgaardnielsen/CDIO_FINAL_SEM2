@@ -38,7 +38,7 @@ function getPID() {
     $("#header").text("Indtast Produktbatch ID");
     $("#container").html('' +
         '<form action="javascript:getRecipeName()">' +
-        '<input type="text" placeholder="Nr." id="batchID">' +
+        '<input type="number" placeholder="Nr." id="batchID">' +
         '<button class="btn">Ok</button>' +
         '</form>'
     )
@@ -93,7 +93,7 @@ function setStatus() {
                 '</div>' +
                 '<div id="subcontainer">' +
                 '<form action="javascript:setTara()">' +
-                '<input type="text" placeholder="kg" id="tarainput">' +
+                '<input type="number" placeholder="kg" id="tarainput">' +
                 '<button class="btn">Ok</button>' +
                 '</form>' +
                 '</div>'
@@ -120,7 +120,7 @@ function setTara() {
         $("#optionsbox").html('' +
             '<table class="optionstable"><thead><tr>' +
             '<th>Ingredientbatch ID</th>' +
-            '<th>Ingredient ID</th>' +
+            '<th>Ingredient amount</th>' +
             '</tr></thead>' +
             '<tbody id="tablebody"></tbody>' +
             '</table>'
@@ -129,7 +129,7 @@ function setTara() {
             $("#tablebody").append('' +
                 '<tr>' +
                 '<td>'+ this.ingredientBatchId +'</td>' +
-                '<td>'+ this.ingredientId +'</td>'+
+                '<td>'+ this.amount +'</td>'+
                 '</tr>'
             )
         });
@@ -145,7 +145,7 @@ function setTara() {
     $(".errorcont").remove();
     $("#subcontainer").html('' +
         '<form action="javascript:setRaavare()">' +
-        '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
+        '<input type="number" placeholder="Nr." id="raavarebatchinput">' +
         '<button class="btn">Ok</button>' +
         '</form>'
     );
@@ -161,7 +161,7 @@ function setRaavare() {
         $(".errorcont").remove();
         $("#subcontainer").html('' +
             '<form action="javascript:setBrutto()">' +
-            '<input type="text" placeholder="Kg" id="bruttoInput">' +
+            '<input type="number" placeholder="Kg" id="bruttoInput">' +
             '<button class="btn">Ok</button>' +
             '</form>'
         )
