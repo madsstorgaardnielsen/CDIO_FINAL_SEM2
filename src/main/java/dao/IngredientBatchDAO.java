@@ -142,4 +142,16 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         }
         return list;
     }
+
+    public void subtractFromIngredientAmount(int Id, Double netto) throws SQLException{
+        statement = database.callableStatement("{call SubtractFromIngredientAmount(?,?)}");
+        statement.setInt(1, Id);
+        statement.setDouble(2, netto);
+
+        try {
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
