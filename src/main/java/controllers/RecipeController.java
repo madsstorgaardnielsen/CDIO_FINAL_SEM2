@@ -60,6 +60,7 @@ public class RecipeController implements IRecipeController {
                 RecipeDAO.addRecipeOnly(recipeDTO);
                 return Response.ok().build();
             } catch (Exception e) {
+                e.printStackTrace();
                 return Response.serverError().build();
             }
         } else {
