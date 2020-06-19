@@ -203,4 +203,9 @@ tr:nth-child(even) {
 #confirmbutton:hover {
     background-color: red;
 }
+@media print{
+    #printbtn{
+        visibility: hidden;
+    }
+}
 
