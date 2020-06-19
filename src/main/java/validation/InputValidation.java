@@ -75,31 +75,6 @@ public class InputValidation {
         return true;
     }
 
-    public boolean nameValidation(String input) {
-        char[] chars = input.toCharArray();
-        for (char c : chars) {
-            if(!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean decimalValidation(String amount) {
-        int integerLength = amount.indexOf('.');
-        int decimalLength = amount.length() - integerLength - 1;
-        return decimalLength == 4;
-    }
-
-/*    public boolean idValidation(int batchId) {
-        return batchId >= 1 && batchId <= 99999999;
-    }*/
-
-    public boolean idValidation(int id ) {
-        return id >= 1 && id <= 99999999;
-    }
-
-
     public boolean recipeInputValidation(RecipeDTO recipeDTO) {
         int ID = recipeDTO.getRecipeID();
         String recipeName = recipeDTO.getRecipeName();

@@ -6,6 +6,7 @@ import dto.RecipeComponentDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 public class RecipeComponentController implements IRecipeComponentController {
     private static final RecipeComponentController instance;
@@ -48,14 +49,7 @@ public class RecipeComponentController implements IRecipeComponentController {
                 return Response.serverError().build();
             }
         } else {
-            if (!validation.idValidation(recipeComponent.getRecipeID())) {
-                return Response.status(418, "Forkert input<br> Indtastet Recept id: " + recipeComponent.getRecipeID() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.idValidation(recipeComponent.getIngredientID())) {
-                return Response.status(418, "Forkert input<br> Indtastet Råvare id: " + recipeComponent.getIngredientID() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.decimalValidation(String.valueOf(recipeComponent.getNonNetto()))) {
-                return Response.status(418, "Forkert input <br>Indtastet Nominel netto: " + recipeComponent.getNonNetto() + "<br> Nominel netto skal indskrives med 4 decimaler").build();
-            } else
-                return Response.status(418, "Forkert input<br> Indtastet tolerance: " + recipeComponent.getTolerance() + "<br> Tolerance skal indskrives med 4 decimaler").build();
+            return Response.status(418, "Bad input").build();
         }
     }
 
@@ -70,14 +64,7 @@ public class RecipeComponentController implements IRecipeComponentController {
                 return Response.serverError().build();
             }
         } else {
-            if (!validation.idValidation(recipeID)) {
-                return Response.status(418, "Forkert input<br> Indtastet Recept id: " + recipeID + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.idValidation(ingredientID)) {
-                return Response.status(418, "Forkert input<br> Indtastet Råvare id: " + ingredientID + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.decimalValidation(String.valueOf(nonNetto))) {
-                return Response.status(418, "Forkert input <br>Indtastet Nominel netto: " + nonNetto + "<br> Nominel netto skal indskrives med 4 decimaler").build();
-            } else
-                return Response.status(418, "Forkert input<br> Indtastet tolerance: " + tolerance + "<br> Tolerance skal indskrives med 4 decimaler").build();
+            return Response.status(418, "Bad input").build();
         }
     }
 

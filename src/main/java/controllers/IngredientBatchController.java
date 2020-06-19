@@ -3,9 +3,12 @@ package controllers;
 import controllers.icontrollers.IIngredientBatchController;
 import dao.IngredientBatchDAO;
 import dto.IngredientBatchDTO;
+import dto.IngredientDTO;
 import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IngredientBatchController implements IIngredientBatchController {
@@ -48,14 +51,7 @@ public class IngredientBatchController implements IIngredientBatchController {
                 return Response.serverError().build();
             }
         } else {
-            if (!validation.idValidation(ingredientBatchDTO.getIngredientBatchId())) {
-                return Response.status(418, "Forkert input<br> Indtastet batchid: " + ingredientBatchDTO.getIngredientBatchId() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.idValidation(ingredientBatchDTO.getIngredientId())) {
-                return Response.status(418, "Forkert input<br> Indtastet råvare id: " + ingredientBatchDTO.getIngredientId() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else if (!validation.nameValidation(ingredientBatchDTO.getSupplier())) {
-                return Response.status(418, "Forkert input <br>Indtastet leverandør: " + ingredientBatchDTO.getAmount() + "<br> Indtast venligst kun bostaver").build();
-            } else
-                return Response.status(418, "Forkert input <br>Indtastet mængde: " + ingredientBatchDTO.getAmount() + "<br> Mængden skal indskrives med 4 decimaler").build();
+            return Response.status(418, "Bad input").build();
         }
     }
 

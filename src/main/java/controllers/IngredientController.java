@@ -3,9 +3,14 @@ package controllers;
 import controllers.icontrollers.IIngredientController;
 import dao.IngredientDAO;
 import dto.IngredientDTO;
+import jdk.nashorn.internal.ir.ReturnNode;
 import validation.InputValidation;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class IngredientController implements IIngredientController {
     private static final IngredientController instance;
@@ -46,10 +51,7 @@ public class IngredientController implements IIngredientController {
                 return Response.serverError().build();
             }
         else {
-            if (!validation.idValidation(ingredientDTO.getIngredientID())) {
-                return Response.status(418, "Forkert input<br> Indtastet Råvare id: " + ingredientDTO.getIngredientID() + "<br> Id skal ligge i intervallet 1-99999999").build();
-            } else
-                return Response.status(418, "Forkert input<br> Indtastet råvare navn: " + ingredientDTO.getIngredientName() + "<br> Indtast venligst kun bogstaver").build();
+            return Response.status(418, "Bad input").build();
         }
     }
 
