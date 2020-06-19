@@ -153,7 +153,7 @@ function confirmAddPB() { // triggered when click "#finishbtn"
         var userID = $("#container").attr("data-id");
 
         Agent.POST("/rest/productBatch/"+ receptidIn +"/"+userID+"/", null,function (data){
-            $("#header").html ('<h1>Produkt batch tilføjet!</h1>')
+            $("#header").text("Produkt batch tilføjet!");
             $("#container").html('<button class="btn" onclick="getAllProducts()">Videre</button>')
         },function (data){
             alert("Kan ikke oprette produkt batch ud fra dette recept id");
