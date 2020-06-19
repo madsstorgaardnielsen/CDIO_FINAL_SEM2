@@ -45,7 +45,7 @@ function listenerAdd2() { //shows line to add new batch
             '<input id="amountinput" type="number" placeholder="Mængde i kg" name="amount" step="0.0001" min="0" required>' +
             '<input id="supplierinput" type="text" placeholder="Leverandør" name="supplier">'+
             '<br>' +
-            '<button id="finishibbtn" class="btn">Udfør</button>' +
+            '<button id="finishibbtn" class="btn">Tilføj</button>' +
             '</form>'
         );
         $("#optionsbox").html('<h2>Råvarer</h2>' +

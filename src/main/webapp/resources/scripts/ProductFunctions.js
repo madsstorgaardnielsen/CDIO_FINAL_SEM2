@@ -119,7 +119,7 @@ function listenerAdd() {//creates page for adding product batch
             '<form action="javascript:confirmAddPB()">' +
             '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
-            '<button id="finishbtn" class="btn" type="submit" >Udfør</button>' +
+            '<button id="finishbtn" class="btn" type="submit" >Tilføj</button>' +
             '</form>'
         );
         $("#optionsbox").html( //setup start of table for recipes

@@ -221,7 +221,7 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
             '<input id="nonNettoInput" type="number" placeholder="Nominel Netto" step="0.0001" min="0">' +
             '<input id="toleranceInput" type="number" placeholder="Tolerance" step="0.0001" min="0">' +
             '<br>' +
-            '<button id="finishcompbtn" class="btn" type="submit" >Udfør</button>' +
+            '<button id="finishcompbtn" class="btn" type="submit" >Tilføj</button>' +
             '</form>'
         )
     })
