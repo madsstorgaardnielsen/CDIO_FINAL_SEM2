@@ -54,7 +54,7 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         '</table>'+
         '<H3>Komponenter</H3>'+
         '<table> <thead> <tr>' +
-        '<th>Produkt batch komponenet ID</th>' +
+        '<th>Produktbatch komponenet ID</th>' +
         '<th>Råvare</th>' +
         '<th>Råvare ID</th>' +
         '<th>Mængde</th>' +

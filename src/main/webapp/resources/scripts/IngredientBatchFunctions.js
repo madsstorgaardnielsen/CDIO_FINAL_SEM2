@@ -34,7 +34,7 @@ function genIngBatchList(ingredientBatch) { //generates html to show in IB list
         '</tr>'
 }
 
-function listenerAdd2() {//shows line to add new batch
+function listenerAdd2() { //shows line to add new batch
     $("#container").on('click', "#addnewib", function () {
         $("#container").html('' +
             '<form action="javascript:saveBatch()">' +

@@ -76,7 +76,7 @@ public class RecipeComponentDAO {
             statement.setInt(2, ingredientID);
 
             statement.executeUpdate();
-            System.out.println("Recipe successfully deleted");
+            System.out.println("RecipeComponent successfully deleted");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();

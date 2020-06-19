@@ -36,3 +36,14 @@ Agent.PUT = function (URL, data, success, error) {
         error: error
     })
 };
+
+Agent.DELETE = function (URL, data, success, error) {
+    $.ajax({
+        url: URL,
+        method: 'DELETE',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: success,
+        error: error
+    })
+};
