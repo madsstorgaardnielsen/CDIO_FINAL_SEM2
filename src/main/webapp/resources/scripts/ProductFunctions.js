@@ -19,6 +19,9 @@ function getAllProducts() { //shows all productbatches
     var row;
     Agent.GET("rest/productBatch", function (data) {
         $.each(data, function () {
+            if(this.status == 0){ this.status = "Startet";}
+            if(this.status == 1){ this.status = "Under produktion";}
+            if(this.status == 2){this.status = "Afsluttet"}
             row = $("#tablebody").append(generateProductBatchList(this));
         });
 
@@ -68,10 +71,15 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         '</table>'
     );
     Agent.GET("/rest/productBatch/"+productBatchID+"/", function (data) {
-        $("#batchtable").append(generateProductBatchHeader(data))
+        if(data.status == 0){ data.status = "Startet";}
+        if(data.status == 1){ data.status = "Under produktion";}
+        if(data.status == 2){ data.status = "Afsluttet";}
+        $("#batchtable").append(generateProductBatchHeader(data));
         $.each(data.components, function(){
             $("#tablebody").append(generateCompList(this));
-        })
+        });
+        $("#tablebody").append('<br>'+
+            '<button class="confirmbtn" id="printbtn" onclick="window.print()">Print produkt batch</button>');
     }, function (data){
         $("#container").html($(data.responseText).find("u").first().text());
 

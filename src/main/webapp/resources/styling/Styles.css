@@ -1,4 +1,19 @@
-.btn, .toglebtn, .editbtn, .savebtn, .viewbtn, .delbtn {
+.btn, .toglebtn, .editbtn, .savebtn, .viewbtn{
+    background-color: #008CBA;
+    border: 1px solid black;
+    color: #F7F7F7;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px #888888;
+    transition-duration: 0.1s;
+    width: 100%;
+    display: block;
+}
+
+.delbtn {
     background-color: #008CBA;
     border: 1px solid black;
     color: #F7F7F7;
@@ -187,5 +202,10 @@ tr:nth-child(even) {
 }
 #confirmbutton:hover {
     background-color: red;
+}
+@media print{
+    #printbtn{
+        visibility: hidden;
+    }
 }
 

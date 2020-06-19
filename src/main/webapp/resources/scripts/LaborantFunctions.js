@@ -129,7 +129,7 @@ function setTara() {
             $("#tablebody").append('' +
                 '<tr>' +
                 '<td>'+ this.ingredientBatchId +'</td>' +
-                '<td>'+ this.ingredientId +'</td>'+
+                '<td>'+ this.amount +'</td>'+
                 '</tr>'
             )
         });
