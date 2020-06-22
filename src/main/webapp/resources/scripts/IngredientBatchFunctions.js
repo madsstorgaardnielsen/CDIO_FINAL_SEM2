@@ -95,7 +95,7 @@ function saveBatch() {//when click udfør then add productbatch
             console.log(data);
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Fejl: '+ $(data.responseText).find("u").first().text() +
+                $(data.responseText).find("u").first().text() +
                 '</div></div>'
             );
         } );

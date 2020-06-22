@@ -105,7 +105,7 @@ function setStatus() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })
@@ -170,7 +170,7 @@ function setRaavare() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })
@@ -201,7 +201,7 @@ function setBrutto() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     });
