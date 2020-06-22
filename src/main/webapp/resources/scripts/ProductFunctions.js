@@ -27,7 +27,11 @@ function getAllProducts() { //shows all productbatches
         });
 
     }, function (data) {
-        $("#container").html($(data.responseText).find("u").first().text());
+        $("#error").remove();
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>');
     });
 }
 
@@ -82,8 +86,11 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         $("#tablebody").append('<br>'+
             '<button class="confirmbtn" id="printbtn" onclick="window.print()">Print produkt batch</button>');
     }, function (data){
-        $("#container").html($(data.responseText).find("u").first().text());
-
+        $("#error").remove();
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>');
     });
 }
 
@@ -136,7 +143,11 @@ function listenerAdd() {//creates page for adding product batch
                 $("#opttablebody").append(generateRecipeHtml1(this));
             });
         }, function (data) {
-            $("#container").html($(data.responseText).find("u").first().text());
+            $("#error").remove();
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">'+
+                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                '</div></div>');
         });
     })
 }
@@ -157,6 +168,11 @@ function confirmAddPB() { // triggered when click "#finishbtn"
             $("#container").html('<button class="btn" onclick="getAllProducts()">Videre</button>')
         },function (data){
             alert("Kan ikke oprette produkt batch ud fra dette recept id");
+            $("#error").remove();
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">'+
+                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                '</div></div>');
         } );
     }
 
