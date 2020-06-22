@@ -1,4 +1,4 @@
-package validation;
+package resources;
 
 import dto.*;
 import org.junit.jupiter.api.Test;

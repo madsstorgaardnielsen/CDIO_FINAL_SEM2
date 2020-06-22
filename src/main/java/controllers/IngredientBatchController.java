@@ -3,7 +3,7 @@ package controllers;
 import controllers.icontrollers.IIngredientBatchController;
 import dao.IngredientBatchDAO;
 import dto.IngredientBatchDTO;
-import validation.InputValidation;
+import resources.InputValidation;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;

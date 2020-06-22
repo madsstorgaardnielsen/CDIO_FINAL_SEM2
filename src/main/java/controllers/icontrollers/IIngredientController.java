@@ -1,14 +1,8 @@
 package controllers.icontrollers;
 
-import controllers.IngredientController;
-import dao.IngredientDAO;
 import dto.IngredientDTO;
-import validation.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public interface IIngredientController {
 
