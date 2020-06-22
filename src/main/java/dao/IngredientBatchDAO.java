@@ -6,6 +6,7 @@ import dao.idao.IIngredientDAO;
 import db.DBConnection;
 import dto.IngredientBatchDTO;
 
+import javax.ws.rs.NotFoundException;
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -107,15 +108,19 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
     }
 
     public IngredientBatchDTO getIngredientBatch(int ID) {
-        IngredientBatchDTO ingredientBatch;
+        IngredientBatchDTO ingredientBatch = null;
         try {
             CallableStatement stmt = database.callableStatement("{call GetIngredientBatch(?)}");
             stmt.setInt(1, ID);
-            ingredientBatch = new IngredientBatchDTO();
             ResultSet resultSet = stmt.executeQuery();
 
             while (resultSet.next()) {
+                ingredientBatch = new IngredientBatchDTO();
                 getIngredientBatchInfo(resultSet, ingredientBatch);
+            }
+
+            if (ingredientBatch == null) {
+                throw new NotFoundException();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -124,14 +129,16 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         return ingredientBatch;
     }
 
-    public ArrayList<IngredientBatchDTO> getIngredientBatchByIngredientID(int ID) throws SQLException {
-        statement = database.callableStatement("{call GetBatchByIngredient(?)}");
-        statement.setInt(1, ID);
-        IngredientBatchDTO batch;
-        ArrayList<IngredientBatchDTO> list = new ArrayList<>();
-        ResultSet rs = statement.executeQuery();
-
+    public ArrayList<IngredientBatchDTO> getIngredientBatchByIngredientID(int ID) {
+        ArrayList<IngredientBatchDTO> list = null;
         try {
+            statement = database.callableStatement("{call GetBatchByIngredient(?)}");
+            statement.setInt(1, ID);
+            IngredientBatchDTO batch;
+            list = new ArrayList<>();
+            ResultSet rs = statement.executeQuery();
+
+
             while (rs.next()) {
                 batch = new IngredientBatchDTO();
                 getIngredientBatchInfo(rs, batch);
@@ -139,19 +146,22 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
+
         return list;
     }
 
-    public void subtractFromIngredientAmount(int Id, Double netto) throws SQLException{
-        statement = database.callableStatement("{call SubtractFromIngredientAmount(?,?)}");
-        statement.setInt(1, Id);
-        statement.setDouble(2, netto);
-
+    public void subtractFromIngredientAmount(int Id, Double netto) {
         try {
+            statement = database.callableStatement("{call SubtractFromIngredientAmount(?,?)}");
+            statement.setInt(1, Id);
+            statement.setDouble(2, netto);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DatabaseException();
         }
+
     }
 }

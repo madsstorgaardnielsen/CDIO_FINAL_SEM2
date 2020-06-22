@@ -38,11 +38,10 @@ public class IngredientBatchAPI {
     }
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateIngredientBatch(@QueryParam("ingredientId") int batchId,
-                                          @QueryParam("ingredientName") int ingredientId,
-                                          @QueryParam("ingredientName") String ingredientAmount,
-                                          @QueryParam("ingredientName") String ingredientSupplier) {
+    public Response updateIngredientBatch(@QueryParam("batchId") int batchId,
+                                          @QueryParam("ingredientId") int ingredientId,
+                                          @QueryParam("ingredientAmount") String ingredientAmount,
+                                          @QueryParam("ingredientSupplier") String ingredientSupplier) {
         return IngredientBatchController.getInstance().updateIngredientBatch(batchId, ingredientId, ingredientAmount, ingredientSupplier);
     }
 

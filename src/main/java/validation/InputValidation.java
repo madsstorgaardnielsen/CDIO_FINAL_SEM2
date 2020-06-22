@@ -56,14 +56,11 @@ public class InputValidation {
     }
 
     public boolean ingredientBatchInputValidation(IngredientBatchDTO ingredientBatchDTO) {
-        DecimalFormat fourDecimals = new DecimalFormat("#.0000");
         int batchId = ingredientBatchDTO.getIngredientBatchId();
         int ingredientId = ingredientBatchDTO.getIngredientId();
         String amount = ingredientBatchDTO.getAmount();
-        //String doubleToText = Double.toString(Math.abs(amount));
         int integerLength = amount.indexOf('.');
         int decimalLength = amount.length() - integerLength - 1;
-
 
         if (batchId < 1 || batchId > 99999999) {
             return false;
@@ -71,8 +68,8 @@ public class InputValidation {
             return false;
         } else if (decimalLength != 4) {
             return false;
-        }
-        return true;
+        } else
+            return nameValidation(ingredientBatchDTO.getSupplier());
     }
 
     public boolean nameValidation(String input) {

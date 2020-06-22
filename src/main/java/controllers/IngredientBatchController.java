@@ -31,22 +31,14 @@ public class IngredientBatchController implements IIngredientBatchController {
     }
 
     public Response deleteIngredientBatch(int id) {
-        try {
-            ingredientBatchDAO.deleteIngredientBatch(id);
-            return Response.ok().build();
-        } catch (Exception e) {
-            return Response.serverError().build();
-        }
+        ingredientBatchDAO.deleteIngredientBatch(id);
+        return Response.ok().build();
     }
 
     public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
-            try {
-                ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
-                return Response.ok().build();
-            } catch (Exception e) {
-                return Response.serverError().build();
-            }
+            ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
+            return Response.ok().build();
         } else {
             if (!validation.idValidation(ingredientBatchDTO.getIngredientBatchId())) {
                 return Response.status(418, "Forkert input<br> Indtastet batchid: " + ingredientBatchDTO.getIngredientBatchId() + "<br> Id skal ligge i intervallet 1-99999999").build();
@@ -62,40 +54,23 @@ public class IngredientBatchController implements IIngredientBatchController {
     public Response updateIngredientBatch(int batchId, int ingredientId, String amount, String supplier) {
         ingredientBatchDTO = new IngredientBatchDTO(batchId, ingredientId, amount, supplier);
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
-            try {
-                ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
-                return Response.ok().build();
-            } catch (Exception e) {
-                return Response.serverError().build();
-            }
+            ingredientBatchDAO.updateIngredientBatch(ingredientBatchDTO);
+            return Response.ok().build();
         } else {
             return Response.status(418, "Bad input").build();
         }
     }
 
     public Response getAllIngredientBatch() {
-        try {
-            return Response.ok(ingredientBatchDAO.getAllIngredientBatch()).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
-        }
+        return Response.ok(ingredientBatchDAO.getAllIngredientBatch()).build();
     }
 
     public Response getIngredientBatch(int id) {
-        try {
-            return Response.ok(ingredientBatchDAO.getIngredientBatch(id)).build();
-        } catch (Exception e) {
-            return Response.serverError().build();
-        }
+        return Response.ok(ingredientBatchDAO.getIngredientBatch(id)).build();
     }
 
-    public Response getIngredientBatchByIngredientID(int ID) throws Exception {
-        try {
-            ArrayList<IngredientBatchDTO> list = IngredientBatchDAO.getInstance().getIngredientBatchByIngredientID(ID);
-            return Response.ok(list).build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.serverError().build();
-        }
+    public Response getIngredientBatchByIngredientID(int ID) {
+        ArrayList<IngredientBatchDTO> list = IngredientBatchDAO.getInstance().getIngredientBatchByIngredientID(ID);
+        return Response.ok(list).build();
     }
 }
