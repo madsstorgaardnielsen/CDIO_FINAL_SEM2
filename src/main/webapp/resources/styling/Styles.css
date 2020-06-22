@@ -50,6 +50,13 @@
     left: 10px;
 }
 
+#options {
+    text-align: center;
+    margin: auto;
+    display: block;
+    width: fit-content;
+}
+
 .optionstable {
     border: 1px solid black;
     margin: 0;

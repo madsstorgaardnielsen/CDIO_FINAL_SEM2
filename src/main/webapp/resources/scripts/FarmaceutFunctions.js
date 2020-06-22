@@ -125,19 +125,14 @@ function getRecipeIDFromRow() {
 function listeneredit() {
     $("#container").on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
-        //var recipeID = row.find(".recipeID").text();
-        //var ingredientId = row.find(".ingredientId").text();
-        //var ingredientName = row.find(".ingredientName").text();
         var nonNetto = row.find(".nonNetto").text();
         var tolerance = row.find(".tolerance").text();
 
-        //row.find(".recipeID").html('<input type="text" placeholder="' + recipeID + '" id="editrecipeID" data-orig="'+ recipeID +'">');
-        //row.find(".ingredientId").html('<input type="text" placeholder="' + ingredientId + '" id="editingredientId" data-orig="'+ ingredientId +'">');
-        //row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName" data-orig="'+ ingredientName +'">');
         row.find(".nonNetto").html('<input type="number" placeholder="' + nonNetto + '" id="editnonNetto" data-orig="'+ nonNetto +'" step="0.0001" min="0">');
         row.find(".tolerance").html('<input type="number" placeholder="' + tolerance + '" id="edittolerance" data-orig="'+ tolerance +'" step="0.0001" min="0">');
         row.find(".editbutton").empty();
         row.find(".editbutton").html('<button class="savebtn">Gem</button>');
+
     })
 }
 
@@ -215,6 +210,35 @@ function listener(row) {
 
 function componentlistenerAdd() {//shows line to add new batch by recipe id
     $("#container").on('click', "#addbtn", function () {
+        Agent.GET("rest/ingredient", function (data) {
+            $("body").append('' +
+                '<div id="options">' +
+                '<table class="optionstable"><thead><tr>' +
+                '<th>Råvare ID</th>' +
+                '<th>Råvare Navn</th>' +
+                '</tr></thead>' +
+                '<tbody id="tablebod"></tbody>' +
+                '</table>' +
+                '</div>'
+            );
+
+            $.each(data, function () {
+                $("#tablebod").append('' +
+                    '<tr>' +
+                    '<td>'+ this.ingredientID +'</td>' +
+                    '<td>'+ this.ingredientName +'</td>'+
+                    '</tr>'
+                )
+            });
+
+        }, function (data) {
+            $("#optionsbox").html('' +
+                '<div class="boxedText" id="error">'
+                + $(data.responseText).find("u").first().text() +
+                '</div>'
+            )
+        });
+
         $("#inputID").html('' +
             '<form action="javascript:saveComponent()">' +
             '<input id="ingredientIdInput" type="number" placeholder="Råvare ID" >' +
