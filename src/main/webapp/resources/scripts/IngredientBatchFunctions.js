@@ -21,7 +21,11 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         });
 
     }, function (data) {
-        $("#container").html($(data.responseText).find("u").first().text());
+        $("#error").remove();
+        $("#container").append('' +
+            '<div class="errorcont"><div class="boxedText" id="error">'+
+            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            '</div></div>');
     });
 }
 
@@ -63,7 +67,11 @@ function listenerAdd2() { //shows line to add new batch
             });
 
         }, function (data) {
-            $("#container").html($(data.responseText).find("u").first().text());
+            $("#error").remove();
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">'+
+                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                '</div></div>');
         });
     })
 }
