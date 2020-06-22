@@ -38,7 +38,7 @@ function getPID() {
     $("#header").text("Indtast Produktbatch ID");
     $("#container").html('' +
         '<form action="javascript:getRecipeName()">' +
-        '<input type="text" placeholder="Nr." id="batchID">' +
+        '<input type="number" placeholder="Nr." id="batchID" step="0.0001" min="0">' +
         '<button class="btn">Ok</button>' +
         '</form>'
     )
@@ -93,7 +93,7 @@ function setStatus() {
                 '</div>' +
                 '<div id="subcontainer">' +
                 '<form action="javascript:setTara()">' +
-                '<input type="text" placeholder="kg" id="tarainput">' +
+                '<input type="number" placeholder="kg" id="tarainput" step="0.0001" min="0">' +
                 '<button class="btn">Ok</button>' +
                 '</form>' +
                 '</div>'
@@ -105,7 +105,7 @@ function setStatus() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })
@@ -145,7 +145,7 @@ function setTara() {
     $(".errorcont").remove();
     $("#subcontainer").html('' +
         '<form action="javascript:setRaavare()">' +
-        '<input type="text" placeholder="Nr." id="raavarebatchinput">' +
+        '<input type="number" placeholder="Nr." id="raavarebatchinput">' +
         '<button class="btn">Ok</button>' +
         '</form>'
     );
@@ -161,7 +161,7 @@ function setRaavare() {
         $(".errorcont").remove();
         $("#subcontainer").html('' +
             '<form action="javascript:setBrutto()">' +
-            '<input type="text" placeholder="Kg" id="bruttoInput">' +
+            '<input type="number" placeholder="Kg" id="bruttoInput" step="0.0001" min="0">' +
             '<button class="btn">Ok</button>' +
             '</form>'
         )
@@ -170,7 +170,7 @@ function setRaavare() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })
@@ -201,7 +201,7 @@ function setBrutto() {
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     });

@@ -2,7 +2,7 @@ function getMID(role) { //gets the employee number from user
     $("#header").text("Indtast bruger ID");
     $("#container").html(
         '<form action="javascript:displayName()">' +
-        '<input type="text" placeholder="Nr." id="MID" data-role="' + role + '">' +
+        '<input type="number" placeholder="Nr." id="MID" data-role="' + role + '">' +
         '<button class="btn">OK</button>' +
         '</form>'
     );
@@ -54,7 +54,7 @@ function displayName() { //gets the information about the user from the backend
         console.log(data);
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Fejl: '+ $(data.responseText).find("u").first().text() +
+            $(data.responseText).find("u").first().text() +
             '</div></div>'
         );
     })

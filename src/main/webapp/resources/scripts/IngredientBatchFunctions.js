@@ -12,7 +12,7 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
-        '<button class="confirmbtn" id="addnewib">Tilføj ny</button>'
+        '<button class="confirmbtn" id="addnewib">Opret råvare batch</button>'
     );
     var row;
     Agent.GET("rest/ingredientbatch", function (data) {
@@ -36,16 +36,16 @@ function genIngBatchList(ingredientBatch) { //generates html to show in IB list
 
 function listenerAdd2() { //shows line to add new batch
     $("#container").on('click', "#addnewib", function () {
-        $("#header").html('Tilføj ny råvare batch'+
+        $("#header").html('Tilføj råvare batch'+
         '<br>');
         $("#container").html('' +
             '<form action="javascript:saveBatch()">' +
-            '<input id="ibidinput" type="text" placeholder="Råvare Batch ID" name="ibid" required>' +
-            '<input id="ingidinput" type="text" placeholder="Råvare ID" name="ingid" required>'+
-            '<input id="amountinput" type="text" placeholder="Mængde i kg" name="amount" required>' +
+            '<input id="ibidinput" type="number" placeholder="Råvare Batch ID" name="ibid" required>' +
+            '<input id="ingidinput" type="number" placeholder="Råvare ID" name="ingid" required>'+
+            '<input id="amountinput" type="number" placeholder="Mængde i kg" name="amount" step="0.0001" min="0" required>' +
             '<input id="supplierinput" type="text" placeholder="Leverandør" name="supplier">'+
             '<br>' +
-            '<button id="finishibbtn" class="btn">Udfør</button>' +
+            '<button id="finishibbtn" class="btn">Tilføj</button>' +
             '</form>'
         );
         $("#optionsbox").html('<h2>Råvarer</h2>' +
@@ -95,7 +95,7 @@ function saveBatch() {//when click udfør then add productbatch
             console.log(data);
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Fejl: '+ $(data.responseText).find("u").first().text() +
+                $(data.responseText).find("u").first().text() +
                 '</div></div>'
             );
         } );

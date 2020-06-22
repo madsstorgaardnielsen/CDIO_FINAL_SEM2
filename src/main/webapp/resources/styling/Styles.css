@@ -50,6 +50,13 @@
     left: 10px;
 }
 
+#options {
+    text-align: center;
+    margin: auto;
+    display: block;
+    width: fit-content;
+}
+
 .optionstable {
     border: 1px solid black;
     margin: 0;
@@ -97,6 +104,15 @@ input, select {
     border-radius: .25rem;
     margin: auto auto 10px auto;
     box-sizing: border-box;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .boxedText {

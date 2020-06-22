@@ -13,16 +13,16 @@ function getAllProducts() { //shows all productbatches
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
         '<div class="infocontainer" id="inputID">' +
-        '<button class="confirmbtn" id="viewbtn">Tilføj ny</button>' +
+        '<button class="confirmbtn" id="viewbtn">Opret produkt batch</button>' +
         '</div>'
     );
     $("#optionsbox").html('');
     var row;
     Agent.GET("rest/productBatch", function (data) {
         $.each(data, function () {
-            if(this.status == 0){ this.status = "Startet";}
-            if(this.status == 1){ this.status = "Under produktion";}
-            if(this.status == 2){this.status = "Afsluttet"}
+            if(this.status === 0){ this.status = "Startet";}
+            if(this.status === 1){ this.status = "Under produktion";}
+            if(this.status === 2){this.status = "Afsluttet"}
             row = $("#tablebody").append(generateProductBatchList(this));
         });
 
@@ -72,9 +72,9 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         '</table>'
     );
     Agent.GET("/rest/productBatch/"+productBatchID+"/", function (data) {
-        if(data.status == 0){ data.status = "Startet";}
-        if(data.status == 1){ data.status = "Under produktion";}
-        if(data.status == 2){ data.status = "Afsluttet";}
+        if(data.status === 0){ data.status = "Startet";}
+        if(data.status === 1){ data.status = "Under produktion";}
+        if(data.status === 2){ data.status = "Afsluttet";}
         $("#batchtable").append(generateProductBatchHeader(data));
         $.each(data.components, function(){
             $("#tablebody").append(generateCompList(this));
@@ -114,12 +114,12 @@ function generateCompList(component) { //generates html for rows for each compon
 
 function listenerAdd() {//creates page for adding product batch
     $("#container").on('click', "#viewbtn", function () {
-        $("#header").text("Tilføj ny produkt batch");
+        $("#header").text("Tilføj produkt batch");
         $("#container").html('' +
             '<form action="javascript:confirmAddPB()">' +
             '<input id="receptidinput" type="text" placeholder="Indsæt recept ID" name="receptid" required>' +
             '<br>' +
-            '<button id="finishbtn" class="btn" type="submit" >Udfør</button>' +
+            '<button id="finishbtn" class="btn" type="submit" >Tilføj</button>' +
             '</form>'
         );
         $("#optionsbox").html( //setup start of table for recipes
@@ -174,4 +174,5 @@ function init() {
 document.addEventListener('DOMContentLoaded', function () {
     init();
     listenerAdd();
+    listenerAdd1();
 });
