@@ -100,6 +100,7 @@ function setStatus() {
             );
             $("#container").attr('data-compID', data.id);
             $("#container").attr('data-ingredientID', data.ingredientID);
+            $("#container").attr('data-ingredientName', data.ingredientName);
     }, function (data) {
         $("#error").remove();
         console.log(data);
@@ -118,9 +119,10 @@ function setTara() {
 
     Agent.GET("rest/ingredientbatch/byIngredient/" + $("#container").attr('data-ingredientID'), function (data) {
         $("#optionsbox").html('' +
+            '<div class="boxedText">Råvarebatch af type: '+ $("#container").attr("data-ingredientName") +'</div>' +
             '<table class="optionstable"><thead><tr>' +
-            '<th>Ingredientbatch ID</th>' +
-            '<th>Ingredient amount</th>' +
+            '<th>Råvarebatch ID</th>' +
+            '<th>Råvare mængde</th>' +
             '</tr></thead>' +
             '<tbody id="tablebody"></tbody>' +
             '</table>'
@@ -129,7 +131,7 @@ function setTara() {
             $("#tablebody").append('' +
                 '<tr>' +
                 '<td>'+ this.ingredientBatchId +'</td>' +
-                '<td>'+ this.amount +'</td>'+
+                '<td>'+ this.amount +' kg</td>'+
                 '</tr>'
             )
         });

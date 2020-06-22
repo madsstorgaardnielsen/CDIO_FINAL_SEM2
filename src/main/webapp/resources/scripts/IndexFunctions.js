@@ -18,7 +18,7 @@ function getMID(role) { //gets the employee number from user
 
     Agent.GET("rest/user", function (data) {
         $.each(data, function () {
-            if (this.role === role) {
+            if (this.role === role && this.active === true) {
                 $("#tablebody").append('' +
                     '<tr>' +
                     '<td>' + this.userId + '</td>' +
