@@ -128,4 +128,23 @@ public class IngredientDAO implements IIngredientDAO {
         }
         return ingredient;
     }
+
+    public IngredientDTO getIngredient2(int ID) {
+        IngredientDTO ingredient;
+        try {
+            CallableStatement stmt = database.callableStatement("{call GetIngredient(?)}");
+            stmt.setInt(1, ID);
+            ResultSet resultSet = stmt.executeQuery();
+            ingredient = new IngredientDTO();
+
+            while (resultSet.next()) {
+                getIngredientInfo(resultSet, ingredient);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
+        return ingredient;
+    }
 }

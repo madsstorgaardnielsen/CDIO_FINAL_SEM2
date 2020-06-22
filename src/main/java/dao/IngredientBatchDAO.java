@@ -129,6 +129,25 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
         return ingredientBatch;
     }
 
+    public IngredientBatchDTO getIngredientBatch2(int ID) {
+        IngredientBatchDTO ingredientBatch;
+        try {
+            CallableStatement stmt = database.callableStatement("{call GetIngredientBatch(?)}");
+            stmt.setInt(1, ID);
+            ResultSet resultSet = stmt.executeQuery();
+            ingredientBatch = new IngredientBatchDTO();
+
+            while (resultSet.next()) {
+                getIngredientBatchInfo(resultSet, ingredientBatch);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
+        return ingredientBatch;
+    }
+
     public ArrayList<IngredientBatchDTO> getIngredientBatchByIngredientID(int ID) {
         ArrayList<IngredientBatchDTO> list = null;
         try {
