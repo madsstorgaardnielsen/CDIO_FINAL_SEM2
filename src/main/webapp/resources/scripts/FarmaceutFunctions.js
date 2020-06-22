@@ -260,7 +260,7 @@ function saveComponent() {
         recipecomponent.tolerance = $("#toleranceInput").val();
 
 
-        Agent.POST("rest/recipecomponent", recipecomponent, function () {
+        Agent.POST("rest/ingredient", function () {
             getRecipeComponent(recipecomponent.recipeID)
         }, function (data) {
             $("#error").remove();
@@ -337,7 +337,7 @@ function getIngredient() { //gets existing ingredients from backend
         '<table> <thead> <tr>' +
         '<th>Råvare ID</th>' +
         '<th>Råvare Navn</th>' +
-
+        '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>'
@@ -347,6 +347,9 @@ function getIngredient() { //gets existing ingredients from backend
         $.each(data, function () {
             row = $("#tablebody").append(generateIngredientHtml(this));
         });
+        listenerIngredient();
+        listenereditIngredient();
+        listenersaveIngredient();
        }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -356,7 +359,46 @@ function generateIngredientHtml(ingredients) { //generates html to show in recip
     return '<tr> ' +
         '<td class = ingredientID>' + ingredients.ingredientID + '</td>' +
         '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
+        '<td class = editbutton> <button class="editbtn">Rediger</button></td>' +
         '</tr>'
+}
+
+
+function listenereditIngredient() {
+    $("#container").on('click', '.editbtn', function () {
+        var row = $(this).closest('tr');
+        var ingredientName = row.find(".ingredientName").text();
+        row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName">');
+
+        row.find(".editbutton").empty();
+        row.find(".editbutton").html('<button class="savebtn">Gem</button>');
+
+    })
+}
+
+function listenersaveIngredient(row) {
+    $("#container").on('click', '.savebtn', function () {
+        var row = $(this).closest('tr');
+        var ingredientId = row.find("#editingredientId").text();
+        var ingredientName = row.find("#editingredientName").text();
+
+
+        var params = "?ingredientId=" + ingredientId;
+
+        if (ingredientName !== "")
+            params = params + "&ingredientName=" + ingredientName;
+        else
+            params = params + "&ingredientName=" + ingredientName;
+
+        Agent.PUT("rest/ingredient" + params, null, function (data) {
+            row.replaceWith(generateIngredientHtml(data));
+        }, function (data) {
+            window.alert("Ændringer ikke gemt: " + $(data.responseText).find("u").first().text());
+            console.log(data)
+        })
+
+    })
+
 }
 
 
