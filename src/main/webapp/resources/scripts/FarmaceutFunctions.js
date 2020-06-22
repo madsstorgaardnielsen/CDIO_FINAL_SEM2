@@ -4,7 +4,7 @@ function addRecipeForm() { //gets recipe ID and Name form
         '<form action="javascript:addRecipe()">' +
         '<input type="text" placeholder="Recept ID" id="recipeID">' +
         '<input type="text" placeholder="Recept Navn" id="recipeName">' +
-        '<button class="btn">Opret Recepten</button>' +
+        '<button class="btn">Opret Recept</button>' +
         '</form>'
     );
 }
@@ -62,7 +62,7 @@ function generateRecipeHtml(recipe) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = recipeID>' + recipe.recipeID + '</td>' +
         '<td class= recipeName>' + recipe.recipeName + '</td>' +
-        '<td class= btncont> <button class="viewbtn">Rediger komponenter</button></td>' +
+        '<td class= btncont> <button class="viewbtn">Tilføj/fjern komponenter</button></td>' +
         '</tr>'
 }
 
