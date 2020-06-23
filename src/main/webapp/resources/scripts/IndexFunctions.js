@@ -44,7 +44,7 @@ function displayName() { //gets the information about the user from the backend
         $("#header").text("Logget ind som: ");
         next(ID)
         $("#container").html(
-            '<form action="html/'+ role +'.html">' +
+            '<form action="'+ role +'.html">' +
             '<div class="boxedText">'+role+ ', '+ data.firstName + ' ' + data.lastName +'</div>' +
             '<button class="btn">Videre</button> ' +
             '</form>'

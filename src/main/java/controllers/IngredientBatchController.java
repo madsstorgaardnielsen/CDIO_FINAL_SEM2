@@ -43,14 +43,15 @@ public class IngredientBatchController implements IIngredientBatchController {
         IngredientDTO ingredient = IngredientDAO.getInstance().getIngredient2(ingredientBatchDTO.getIngredientId());
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
             if (ingredientBatch.getIngredientBatchId() != 0) {
-                return Response.status(418, "Råvare batch ID: " + ingredientBatchDTO.getIngredientBatchId() + " Eksisterer, prøv venligst et andet ID").build();
+                return Response.status(418, "Råvare batch ID: " +
+                        ingredientBatchDTO.getIngredientBatchId() + " Eksisterer, prøv venligst et andet ID").build();
             } else if (ingredient.getIngredientID() == 0) {
-                return Response.status(418, "Råvare ID: "+ingredientBatchDTO.getIngredientId()+" eksisterer ikke.").build();
+                return Response.status(418, "Råvare ID: "+
+                        ingredientBatchDTO.getIngredientId()+" eksisterer ikke.").build();
             } else {
                 ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
                 return Response.ok().build();
             }
-
         } else {
             if (!validation.idValidation(ingredientBatchDTO.getIngredientBatchId())) {
                 return Response.status(418, "Forkert input<br> Indtastet batchid: "
