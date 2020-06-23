@@ -223,5 +223,8 @@ tr:nth-child(even) {
     #printbtn{
         visibility: hidden;
     }
+    .navbar{
+        visibility: hidden;
+    }
 }
 

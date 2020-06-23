@@ -62,7 +62,7 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         '</table>'+
         '<H3>Komponenter</H3>'+
         '<table> <thead> <tr>' +
-        '<th>Produktbatch komponenet ID</th>' +
+        '<th>PB Komp ID</th>' +
         '<th>Råvare</th>' +
         '<th>Råvare ID</th>' +
         '<th>Mængde</th>' +
@@ -107,7 +107,7 @@ function generateProductBatchHeader(productBatch) { //generates the "header" tab
 
 function generateCompList(component) { //generates html for rows for each component
     return '<tr> ' +
-        '<td class = productBatchID>' + component.id + '</td>' +
+        '<td class = productBatchCompID>' + component.id + '</td>' +
         '<td class= ingredientName>' + component.ingredientName + '</td>' +
         '<td class= ingredientID>' + component.ingredientID + '</td>' +
         '<td class= amount>' + component.amount + ' kg</td>' +
