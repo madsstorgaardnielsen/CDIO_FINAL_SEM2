@@ -29,26 +29,27 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public Response addUser(UserDTO userDTO) {
-        if (validation.addUserInputValidation(userDTO)) {
+    public Response addUser(UserDTO userDTO) { //validates input values and sends data to be stored
+        if (validation.addUserInputValidation(userDTO)) { //validation of data
             try {
-                userDAO.addUser(userDTO);
-                return Response.ok().build();
+                userDAO.addUser(userDTO); //send data to database handler
+                return Response.ok().build(); //response ok when things go good
             } catch (Exception e) {
-                return Response.serverError().build();
+                return Response.serverError().build(); //response server error if things go wrong server side
             }
         } else {
+            //response bad input when input data dont match restrictions
             return Response.status(418, "Forkert input<br> Indtast venligst kun bogstaver").build();
         }
     }
 
     @Override
-    public Response getAllUsers() {
+    public Response getAllUsers() { //fetches data for all users in the database
         try {
-            return Response.ok(userDAO.getAllUsers()).build();
+            return Response.ok(userDAO.getAllUsers()).build(); //fetch users and include in response as data
         } catch (Exception e) {
             e.printStackTrace();
-            return Response.serverError().build();
+            return Response.serverError().build(); //response server error if things go wrong server side
         }
     }
 
