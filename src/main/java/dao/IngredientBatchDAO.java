@@ -80,7 +80,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             CallableStatement stmt = database.callableStatement("{call GetAllIngredientBatch}");
             ResultSet rs = stmt.executeQuery();
             IngredientBatchDTO ingredientBatchDTO;
-
             while (rs.next()) {
                 ingredientBatchDTO = new IngredientBatchDTO();
                 getIngredientBatchInfo(rs, ingredientBatchDTO);
@@ -111,7 +110,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             CallableStatement stmt = database.callableStatement("{call GetIngredientBatch(?)}");
             stmt.setInt(1, ID);
             ResultSet resultSet = stmt.executeQuery();
-
             while (resultSet.next()) {
                 ingredientBatch = new IngredientBatchDTO();
                 getIngredientBatchInfo(resultSet, ingredientBatch);
@@ -153,8 +151,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             IngredientBatchDTO batch;
             list = new ArrayList<>();
             ResultSet rs = statement.executeQuery();
-
-
             while (rs.next()) {
                 batch = new IngredientBatchDTO();
                 getIngredientBatchInfo(rs, batch);

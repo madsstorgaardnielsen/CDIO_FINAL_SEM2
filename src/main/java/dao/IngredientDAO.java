@@ -41,10 +41,8 @@ public class IngredientDAO implements IIngredientDAO {
             PreparedStatement statement = database.callableStatement(addIngredient);
             statement.setInt(1, ingredient.getIngredientID());
             statement.setString(2, ingredient.getIngredientName());
-
             statement.execute();
             System.out.println("Ingredient successfully added to database");
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -56,16 +54,12 @@ public class IngredientDAO implements IIngredientDAO {
         try {
             String updateIngredient = "{call UpdateIngredient(?,?)}";
             CallableStatement statement = database.callableStatement(updateIngredient);
-
             statement.setInt(1, ingredient.getIngredientID());
             statement.setString(2, ingredient.getIngredientName());
-
             ResultSet rs = statement.executeQuery();
-
-            while(rs.next()){
+            while (rs.next()) {
                 getIngredientInfo(rs, ingredientDTO);
             }
-
             System.out.println("Ingredient successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,16 +115,13 @@ public class IngredientDAO implements IIngredientDAO {
             CallableStatement stmt = database.callableStatement("{call GetIngredient(?)}");
             stmt.setInt(1, ID);
             ResultSet resultSet = stmt.executeQuery();
-
             while (resultSet.next()) {
                 ingredient = new IngredientDTO();
                 getIngredientInfo(resultSet, ingredient);
             }
-
             if (ingredient == null) {
                 throw new NotFoundException();
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -145,11 +136,9 @@ public class IngredientDAO implements IIngredientDAO {
             stmt.setInt(1, ID);
             ResultSet resultSet = stmt.executeQuery();
             ingredient = new IngredientDTO();
-
             while (resultSet.next()) {
                 getIngredientInfo(resultSet, ingredient);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();

@@ -47,13 +47,7 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     public Response updateProductBatchComponent(ProductBatchComponentDTO batchComponent) {
         try {
             ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(batchComponent.getId());
-            /*double result = batchComponent.getBrutto() - batchComponent.getTara() - batch.getAmount();
-            if (result < 0) {
-                return Response.status(418, "Lagerbeholdning af: " + batch.getIngredientName() + " er: " + batch.getAmount() + ", dette er ikke tilstrækkeligt til denne recept.").build();
-            } else */
-
             batchComponent.setNetto(String.valueOf(Double.parseDouble(batchComponent.getBrutto()) - Double.parseDouble(batchComponent.getTara())));
-
             if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
                 IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(), Double.parseDouble(batchComponent.getNetto()));

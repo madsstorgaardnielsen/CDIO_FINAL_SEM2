@@ -43,7 +43,7 @@ public class IngredientController implements IIngredientController {
                 ingredientDAO.addIngredient(ingredientDTO);
                 return Response.ok().build();
             } catch (Exception e) {
-                return Response.status(418,"Det indtastede id: "+ingredientDTO.getIngredientID()+" eksisterer i databasen, prøv igen.").build();
+                return Response.status(418, "Det indtastede id: " + ingredientDTO.getIngredientID() + " eksisterer i databasen, prøv igen.").build();
             }
         else {
             if (!validation.idValidation(ingredientDTO.getIngredientID())) {
@@ -57,8 +57,7 @@ public class IngredientController implements IIngredientController {
         ingredientDTO = new IngredientDTO(id, name);
         if (validation.ingredientInputValidation(ingredientDTO))
             try {
-
-               IngredientDTO ingredient = ingredientDAO.updateIngredient(ingredientDTO);
+                IngredientDTO ingredient = ingredientDAO.updateIngredient(ingredientDTO);
                 return Response.ok(ingredient).build();
             } catch (Exception e) {
                 return Response.serverError().build();

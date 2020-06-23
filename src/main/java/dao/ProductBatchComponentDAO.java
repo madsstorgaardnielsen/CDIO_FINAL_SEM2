@@ -39,7 +39,7 @@ public class ProductBatchComponentDAO {
         String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount, tolerance) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()) {
-            statementString += "(" + batchID + ", " + comp.getIngredientID() + ", " + comp.getNonNetto() + ", " + comp.getTolerance() +"),";
+            statementString += "(" + batchID + ", " + comp.getIngredientID() + ", " + comp.getNonNetto() + ", " + comp.getTolerance() + "),";
         }
         statementString = statementString.substring(0, statementString.length() - 1);
         //System.out.println(statementString); //testing
@@ -58,12 +58,9 @@ public class ProductBatchComponentDAO {
         try {
             CallableStatement stmt = database.callableStatement("{call GetBatchInformation(?)}");
             stmt.setString(1, String.valueOf(batchID));
-
             list = new ArrayList<>();
             ProductBatchComponentDTO componentDTO;
             ResultSet resultSet = stmt.executeQuery();
-
-
             while (resultSet.next()) {
                 componentDTO = new ProductBatchComponentDTO();
                 getProductBatchComponentInfo(resultSet, componentDTO);
@@ -85,7 +82,6 @@ public class ProductBatchComponentDAO {
             componentDTO.setTolerance(rs.getDouble(6));
             componentDTO.setLaborantID(rs.getInt(8));
             componentDTO.setIngredientName(rs.getString(9));
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -99,7 +95,6 @@ public class ProductBatchComponentDAO {
             statement = database.callableStatement(statementString);
             statement.setInt(1, batchID);
             components = new ArrayList<>();
-
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 components.add(getComponentInfo(rs));
@@ -108,10 +103,7 @@ public class ProductBatchComponentDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return components;
-
-
     }
 
     private ProductBatchComponentDTO getComponentInfo(ResultSet rs) {
@@ -128,7 +120,6 @@ public class ProductBatchComponentDAO {
             comp.setAmount(rs.getDouble(9));
             comp.setTolerance(rs.getDouble(10));
             comp.setIngredientName(rs.getString(11));
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -160,9 +151,7 @@ public class ProductBatchComponentDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 getComponentInfos(rs, batch);
-
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();

@@ -31,18 +31,14 @@ public class RecipeDAO implements IRecipeDAO {
     }
 
     public void addRecipe(RecipeDTO recipe) {
-
         String addRecipe = "{call AddRecipe(?,?)}";
         String addRecipeComponent = "{call AddRecipeComponent(?,?,?,?)}";
-
         try {
             PreparedStatement statement1 = database.callableStatement(addRecipe);
             statement1.setInt(1, recipe.getRecipeID());
             statement1.setString(2, recipe.getRecipeName());
-
             statement1.executeUpdate();
             System.out.println("Recipe successfully added to database");
-
             if (recipe.getRecipeCompList().size() != 0) {
                 for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
                     PreparedStatement statement2 = database.callableStatement(addRecipeComponent);
@@ -50,7 +46,6 @@ public class RecipeDAO implements IRecipeDAO {
                     statement2.setInt(2, recipe.getRecipeCompList().get(i).getIngredientID());
                     statement2.setDouble(3, recipe.getRecipeCompList().get(i).getNonNetto());
                     statement2.setDouble(4, recipe.getRecipeCompList().get(i).getTolerance());
-
                     statement2.executeUpdate();
                     System.out.println("RecipeComponent successfully added to database");
                 }
@@ -67,7 +62,6 @@ public class RecipeDAO implements IRecipeDAO {
             PreparedStatement statement1 = database.callableStatement(addRecipe);
             statement1.setInt(1, recipe.getRecipeID());
             statement1.setString(2, recipe.getRecipeName());
-
             statement1.executeUpdate();
             System.out.println("Recipe successfully added to database");
         } catch (SQLException e) {
@@ -77,7 +71,6 @@ public class RecipeDAO implements IRecipeDAO {
     }
 
     public RecipeDTO updateRecipe(RecipeDTO recipe) {
-
         try {
             String updateRecipe = "{call UpdateRecipe(?,?)}";
             for (int i = 0; i < recipe.getRecipeCompList().size(); i++) {
@@ -95,12 +88,10 @@ public class RecipeDAO implements IRecipeDAO {
     }
 
     public void deleteRecipe(int ID) {
-
         try {
             String deleteRecipe = "{call DeleteRecipe(?)}";
             PreparedStatement statement = database.callableStatement(deleteRecipe);
             statement.setInt(1, ID);
-
             statement.executeUpdate();
             System.out.println("Recipe successfully deleted");
         } catch (SQLException e) {
@@ -115,7 +106,6 @@ public class RecipeDAO implements IRecipeDAO {
             CallableStatement stmt = database.callableStatement("{call GetAllRecipes}");
             ResultSet rs = stmt.executeQuery();
             RecipeDTO recipeDTO;
-
             while (rs.next()) {
                 recipeDTO = new RecipeDTO();
                 getRecipeInfo(rs, recipeDTO);
@@ -151,7 +141,6 @@ public class RecipeDAO implements IRecipeDAO {
         try {
             recipeDTO.setRecipeID(rs.getInt(1));
             recipeDTO.setRecipeName(rs.getString(2));
-
             RecipeComponentDTO component = new RecipeComponentDTO(rs.getInt(1), rs.getInt(3), rs.getDouble(4), rs.getDouble(5));
             recipeDTO.addToRecipeCompList(component);
         } catch (SQLException e) {
@@ -204,7 +193,6 @@ public class RecipeDAO implements IRecipeDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
         return componentDTO;
     }
 
@@ -215,7 +203,6 @@ public class RecipeDAO implements IRecipeDAO {
             stmt.setInt(1, ID);
             recipe = new RecipeDTO();
             ResultSet resultSet = stmt.executeQuery();
-
             while (resultSet.next()) {
                 getRecipeOnlyInfo(resultSet, recipe);
             }

@@ -46,8 +46,8 @@ public class IngredientBatchController implements IIngredientBatchController {
                 return Response.status(418, "Råvare batch ID: " +
                         ingredientBatchDTO.getIngredientBatchId() + " Eksisterer, prøv venligst et andet ID").build();
             } else if (ingredient.getIngredientID() == 0) {
-                return Response.status(418, "Råvare ID: "+
-                        ingredientBatchDTO.getIngredientId()+" eksisterer ikke.").build();
+                return Response.status(418, "Råvare ID: " +
+                        ingredientBatchDTO.getIngredientId() + " eksisterer ikke.").build();
             } else {
                 ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
                 return Response.ok().build();

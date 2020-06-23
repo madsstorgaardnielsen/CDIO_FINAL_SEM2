@@ -41,11 +41,7 @@ public class RecipeComponentDAO {
             String updateRecipeComponent = "{call UpdateRecipeComponent(?,?,?,?)}";
             getRecipeInfo(recipe, updateRecipeComponent);
             System.out.println("RecipeComponent successfully updated");
-
-            //TODO
-            //det her er muligvis noget rigtig bæ, men kan ikke få ingredient name med tilbage på en anden måde
             recipe2 = getRecipeComponent(recipe.getRecipeID(), recipe.getIngredientID());
-
         } catch (Exception e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -60,7 +56,6 @@ public class RecipeComponentDAO {
             statement.setInt(2, recipe.getIngredientID());
             statement.setDouble(3, recipe.getNonNetto());
             statement.setDouble(4, recipe.getTolerance());
-
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,7 +69,6 @@ public class RecipeComponentDAO {
             PreparedStatement statement = database.callableStatement(deleteRecipeComponent);
             statement.setInt(1, recipeID);
             statement.setInt(2, ingredientID);
-
             statement.executeUpdate();
             System.out.println("RecipeComponent successfully deleted");
         } catch (SQLException e) {
@@ -90,7 +84,6 @@ public class RecipeComponentDAO {
             CallableStatement stmt = database.callableStatement("{call GetAllRecipeComponents}");
             ResultSet rs = stmt.executeQuery();
             RecipeComponentDTO recipeComponentDTO;
-
             while (rs.next()) {
                 recipeComponentDTO = new RecipeComponentDTO();
                 getRecipeComponentInfo(rs, recipeComponentDTO);
@@ -111,7 +104,6 @@ public class RecipeComponentDAO {
             stmt.setInt(1, recipeID);
             ResultSet rs = stmt.executeQuery();
             RecipeComponentDTO recipeComponentDTO;
-
             while (rs.next()) {
                 recipeComponentDTO = new RecipeComponentDTO();
                 getRecipeComponentInfo(rs, recipeComponentDTO);

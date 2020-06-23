@@ -38,10 +38,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
         String addProductBatchString = "{call AddProductBatch(?,?)}";
         try {
             statement = database.callableStatement(addProductBatchString);
-
             statement.setInt(1, recipeID);
             statement.setInt(2, userID);
-
             //adding batch while getting the new ID back
             ResultSet rs = statement.executeQuery();
             System.out.println("ProductBatch successfully added to database");
@@ -57,7 +55,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
         try {
             String updatetProductBatch = "{call UpdateProductBatch(?,?,?,?,?,?,?,?)}";
             PreparedStatement statement = database.callableStatement(updatetProductBatch);
-
             statement.setInt(1, productBatchDTO.getProductBatchId());
             statement.setInt(2, productBatchDTO.getRecipeId());
             statement.setInt(3, productBatchDTO.getStatus());
@@ -66,14 +63,12 @@ public class ProductBatchDAO implements IProductBatchDAO {
             statement.setString(6, productBatchDTO.getFinishDate());
             statement.setString(7, productBatchDTO.getTaraSum());
             statement.setString(8, productBatchDTO.getNettoSum());
-
             statement.executeUpdate();
             System.out.println("Product Batch successfully updated");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
     }
 
     public void deleteProductBatch(int id) {
@@ -81,7 +76,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
             String deleteIngredient = "{call DeleteProductBatch(?)}";
             PreparedStatement statement = database.callableStatement(deleteIngredient);
             statement.setInt(1, id);
-
             statement.executeUpdate();
             System.out.println("Product Batch successfully deleted");
         } catch (SQLException e) {
@@ -96,7 +90,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
             CallableStatement stmt = database.callableStatement("{call GetAllProductBatch}");
             ResultSet rs = stmt.executeQuery();
             ProductBatchDTO productBatchDTO;
-
             while (rs.next()) {
                 productBatchDTO = new ProductBatchDTO();
                 getBatchInfo(rs, productBatchDTO);
@@ -116,11 +109,9 @@ public class ProductBatchDAO implements IProductBatchDAO {
             batch.setStatus(rs.getInt(3));
             batch.setUserId(rs.getInt(4));
             batch.setCreationDate(rs.getDate(5).toString());
-
             try {
                 batch.setFinishDate(rs.getDate(6).toString());
             } catch (NullPointerException ignored) {
-
             }
             if (batch.getFinishDate() == null) {
                 batch.setFinishDate(" ");
@@ -140,7 +131,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
             statement = database.callableStatement(getProductBatchString);
             statement.setInt(1, recipeId);
             statement.setInt(2, userId);
-
             ResultSet rs = statement.executeQuery();
             product = new ProductBatchDTO();
             while (rs.next()) {
@@ -157,10 +147,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
         try {
             String deleteIngredient = "{call DeleteProductBatchFromRecipeIdUserId(?,?)}";
             PreparedStatement statement = database.callableStatement(deleteIngredient);
-
             statement.setInt(1, recipeId);
             statement.setInt(2, userId);
-
             statement.executeUpdate();
             System.out.println("Product Batch successfully deleted");
         } catch (SQLException e) {
@@ -175,7 +163,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
         try {
             statement = database.callableStatement(getProductBatchString);
             statement.setInt(1, batchID);
-
             ResultSet rs = statement.executeQuery();
             System.out.println("ProductBatch successfully returned from database");
             product = new ProductBatchDTO();
@@ -205,7 +192,6 @@ public class ProductBatchDAO implements IProductBatchDAO {
     public void setStatus(int batchID) throws SQLException {
         statement = database.callableStatement("{call SetStatus(?)}");
         statement.setInt(1, batchID);
-
         try {
             statement.execute();
         } catch (SQLException e) {

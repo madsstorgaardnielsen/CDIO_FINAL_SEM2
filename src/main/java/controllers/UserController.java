@@ -65,7 +65,6 @@ public class UserController implements IUserController {
             }
             return Response.ok(user).build();
         }
-
         if (validation.updateUserInputValidation(user)) {
             try {
                 return Response.ok(userDAO.updateUser(user)).build();
@@ -95,9 +94,7 @@ public class UserController implements IUserController {
 
     @Override
     public Response getUser(String userId, String role) {
-
         try {
-
             if (validation.userValidation(userDAO.getUser(userId), role)) {
                 return Response.ok(userDAO.getUser(userId)).build();
             } else {
