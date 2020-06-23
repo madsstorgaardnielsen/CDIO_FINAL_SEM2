@@ -48,7 +48,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
 
     private void setIngredientInfo(IngredientBatchDTO ingredientBatch, String updateIngredientBatch) {
         PreparedStatement statement = database.callableStatement(updateIngredientBatch);
-
         try {
             statement.setInt(1, ingredientBatch.getIngredientBatchId());
             statement.setInt(2, ingredientBatch.getIngredientId());
@@ -66,7 +65,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             String deleteIngredientBatch = "{call DeleteIngredientBatch(?)}";
             PreparedStatement statement = database.callableStatement(deleteIngredientBatch);
             statement.setInt(1, id);
-
             statement.executeUpdate();
             System.out.println("Ingredient batch successfully deleted");
         } catch (SQLException e) {
