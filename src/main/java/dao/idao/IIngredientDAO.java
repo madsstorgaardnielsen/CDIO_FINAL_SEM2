@@ -20,7 +20,7 @@ public interface IIngredientDAO {
 
     void addIngredient(IngredientDTO ingredient) throws SQLException, IOException;
 
-    void updateIngredient(IngredientDTO ingredient) throws IOException, SQLException;
+    IngredientDTO updateIngredient(IngredientDTO ingredient) throws IOException, SQLException;
 
     void deleteIngredient(int id) throws IOException, SQLException;
 

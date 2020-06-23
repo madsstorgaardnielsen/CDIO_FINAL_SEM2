@@ -1,5 +1,6 @@
 package dao;
 
+import com.mysql.cj.protocol.Resultset;
 import dao.exceptions.DatabaseConnectionException;
 import dao.exceptions.DatabaseException;
 import dao.idao.IIngredientDAO;
@@ -12,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 //TODO implement inputvalidation class
 public class IngredientDAO implements IIngredientDAO {
@@ -49,20 +51,27 @@ public class IngredientDAO implements IIngredientDAO {
         }
     }
 
-    public void updateIngredient(IngredientDTO ingredient) {
+    public IngredientDTO updateIngredient(IngredientDTO ingredient) {
+        IngredientDTO ingredientDTO = new IngredientDTO();
         try {
             String updateIngredient = "{call UpdateIngredient(?,?)}";
-            PreparedStatement statement = database.callableStatement(updateIngredient);
+            CallableStatement statement = database.callableStatement(updateIngredient);
 
             statement.setInt(1, ingredient.getIngredientID());
             statement.setString(2, ingredient.getIngredientName());
 
-            statement.executeUpdate();
+            ResultSet rs = statement.executeQuery();
+
+            while(rs.next()){
+                getIngredientInfo(rs, ingredientDTO);
+            }
+
             System.out.println("Ingredient successfully updated");
         } catch (Exception e) {
             e.printStackTrace();
             throw new NotFoundException();
         }
+        return ingredientDTO;
     }
 
     public void deleteIngredient(int id) {

@@ -25,6 +25,7 @@ public class IngredientAPI {
     }
 
     @PUT
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateIngredient(@QueryParam("ingredientId") int ingredientId,
                                      @DefaultValue("null") @QueryParam("ingredientName") String ingredientName) {
