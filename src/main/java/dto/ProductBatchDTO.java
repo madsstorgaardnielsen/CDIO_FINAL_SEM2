@@ -11,8 +11,8 @@ public class ProductBatchDTO implements IProductBatchDTO {
     int userId;
     String creationDate;
     String finishDate;
-    double taraSum;
-    double nettoSum;
+    String taraSum;
+    String nettoSum;
     ArrayList<ProductBatchComponentDTO> components;
 
     int ingredientBatchID;
@@ -48,19 +48,19 @@ public class ProductBatchDTO implements IProductBatchDTO {
         this.components = components;
     }
 
-    public double getTaraSum() {
+    public String getTaraSum() {
         return taraSum;
     }
 
-    public void setTaraSum(double taraSum) {
+    public void setTaraSum(String taraSum) {
         this.taraSum = taraSum;
     }
 
-    public double getNettoSum() {
+    public String getNettoSum() {
         return nettoSum;
     }
 
-    public void setNettoSum(double nettoSum) {
+    public void setNettoSum(String nettoSum) {
         this.nettoSum = nettoSum;
     }
 

@@ -122,8 +122,8 @@ public class ProductBatchComponentDAO {
             comp.setProductBatchID(rs.getInt(3));
             comp.setIngredientBatchID(rs.getInt(4));
             comp.setLaborantID(rs.getInt(5));
-            comp.setTara(rs.getDouble(6));
-            comp.setNetto(rs.getDouble(7));
+            comp.setTara(rs.getString(6));
+            comp.setNetto(rs.getString(7));
             comp.setTerminal(rs.getInt(8));
             comp.setAmount(rs.getDouble(9));
             comp.setTolerance(rs.getDouble(10));
@@ -142,8 +142,8 @@ public class ProductBatchComponentDAO {
             stmt.setInt(1, batchComponentDTO.getId());
             stmt.setInt(2, batchComponentDTO.getIngredientBatchID());
             stmt.setInt(3, batchComponentDTO.getLaborantID());
-            stmt.setDouble(4, batchComponentDTO.getTara());
-            stmt.setDouble(5, batchComponentDTO.getNetto());
+            stmt.setString(4, batchComponentDTO.getTara());
+            stmt.setString(5, batchComponentDTO.getNetto());
             stmt.setDouble(6, batchComponentDTO.getTerminal());
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -177,8 +177,8 @@ public class ProductBatchComponentDAO {
             comp.setIngredientID(rs.getInt(3));
             comp.setIngredientBatchID(rs.getInt(4));
             comp.setLaborantID(rs.getInt(5));
-            comp.setTara(rs.getDouble(6));
-            comp.setNetto(rs.getDouble(7));
+            comp.setTara(rs.getString(6));
+            comp.setNetto(rs.getString(7));
             comp.setTerminal(rs.getInt(8));
             comp.setAmount(rs.getDouble(9));
             comp.setTolerance(rs.getDouble(10));

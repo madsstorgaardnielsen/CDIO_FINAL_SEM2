@@ -106,6 +106,15 @@ function generateProductBatchHeader(productBatch) { //generates the "header" tab
 }
 
 function generateCompList(component) { //generates html for rows for each component
+    var tara;
+    var netto;
+    if (component.tara === null || component.netto === null) {
+        tara = 0;
+        netto = 0;
+    } else {
+        tara = component.tara;
+        netto = component.tara;
+    }
     return '<tr> ' +
         '<td class = productBatchID>' + component.id + '</td>' +
         '<td class= ingredientName>' + component.ingredientName + '</td>' +
@@ -114,9 +123,9 @@ function generateCompList(component) { //generates html for rows for each compon
         '<td class= tolerance>' + component.tolerance + ' %</td>' +
         '<td class= laborantID>' + component.laborantID + '</td>' +
         '<td class= ingredientBatchID>' + component.ingredientBatchID + '</td>' +
-        '<td class= tara>' + component.tara + ' kg</td>' +
-        '<td class= netto>' + component.netto + ' kg</td>' +
-        '</tr>'
+        '<td class= tara>' + tara + ' kg</td>' +
+        '<td class= netto>' + netto + ' kg</td>' +
+        '</tr>';
 }
 
 function listenerAdd() {//creates page for adding product batch

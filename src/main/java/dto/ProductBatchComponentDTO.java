@@ -10,15 +10,15 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     private String ingredientName;
     private int ingredientBatchID; //
     private int laborantID; //
-    private double tara; //
-    private double netto;
+    private String tara; //
+    private String netto;
     private int terminal; //
     private double amount;
     private double tolerance;
-    private double brutto; //
+    private String brutto; //
 
     public ProductBatchComponentDTO(int id, int productBatchID, int ingredientBatchID, int ingredientID, int amount, int tolerance
-            , int laborantID, double tara, double netto, double brutto, int terminal, String ingredientName) {
+            , int laborantID, String tara, String netto, String brutto, int terminal, String ingredientName) {
         this.id = id;
         this.productBatchID = productBatchID;
         this.ingredientBatchID = ingredientBatchID;
@@ -98,22 +98,22 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
     }
 
     @Override
-    public double getTara() {
+    public String getTara() {
         return tara;
     }
 
     @Override
-    public void setTara(double tara) {
+    public void setTara(String tara) {
         this.tara = tara;
     }
 
     @Override
-    public double getNetto() {
+    public String getNetto() {
         return netto;
     }
 
     @Override
-    public void setNetto(double netto) {
+    public void setNetto(String netto) {
         this.netto = netto;
     }
 
@@ -147,12 +147,12 @@ public class ProductBatchComponentDTO implements IProductBatchComponentDTO {
         this.tolerance = tolerance;
     }
 
-    public double getBrutto() {
+    public String getBrutto() {
         return brutto;
     }
 
     @Override
-    public void setBrutto(double brutto) {
+    public void setBrutto(String brutto) {
         this.brutto = brutto;
     }
 

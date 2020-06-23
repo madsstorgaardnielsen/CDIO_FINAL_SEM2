@@ -64,8 +64,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
             statement.setInt(4, productBatchDTO.getUserId());
             statement.setString(5, productBatchDTO.getCreationDate());
             statement.setString(6, productBatchDTO.getFinishDate());
-            statement.setDouble(7, productBatchDTO.getTaraSum());
-            statement.setDouble(8, productBatchDTO.getNettoSum());
+            statement.setString(7, productBatchDTO.getTaraSum());
+            statement.setString(8, productBatchDTO.getNettoSum());
 
             statement.executeUpdate();
             System.out.println("Product Batch successfully updated");
@@ -125,8 +125,8 @@ public class ProductBatchDAO implements IProductBatchDAO {
             if (batch.getFinishDate() == null) {
                 batch.setFinishDate(" ");
             }
-            batch.setTaraSum(rs.getDouble(7));
-            batch.setNettoSum(rs.getDouble(8));
+            batch.setTaraSum(rs.getString(7));
+            batch.setNettoSum(rs.getString(8));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DatabaseException();
@@ -192,9 +192,9 @@ public class ProductBatchDAO implements IProductBatchDAO {
     public void setStatusDone(ProductBatchDTO batch) {
         try {
             statement = database.callableStatement("{call SetStatusDone(?,?,?)}");
-            statement.setString(1, String.valueOf(batch.getProductBatchId()));
-            statement.setString(2, String.valueOf(batch.getTaraSum()));
-            statement.setString(3, String.valueOf(batch.getNettoSum()));
+            statement.setInt(1, batch.getProductBatchId());
+            statement.setString(2, batch.getTaraSum());
+            statement.setString(3, batch.getNettoSum());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -204,7 +204,7 @@ public class ProductBatchDAO implements IProductBatchDAO {
 
     public void setStatus(int batchID) throws SQLException {
         statement = database.callableStatement("{call SetStatus(?)}");
-        statement.setString(1, String.valueOf(batchID));
+        statement.setInt(1, batchID);
 
         try {
             statement.execute();

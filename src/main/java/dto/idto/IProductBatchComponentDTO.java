@@ -24,13 +24,13 @@ public interface IProductBatchComponentDTO extends Serializable {
 
     void setLaborantID(int laborantID);
 
-    double getTara();
+    String getTara();
 
-    void setTara(double tara);
+    void setTara(String tara);
 
-    double getNetto();
+    String getNetto();
 
-    void setNetto(double netto);
+    void setNetto(String netto);
 
     int getIngredientID();
 
@@ -44,9 +44,9 @@ public interface IProductBatchComponentDTO extends Serializable {
 
     void setTolerance(double tolerance);
 
-    double getBrutto();
+    String getBrutto();
 
-    void setBrutto(double brutto);
+    void setBrutto(String brutto);
 
     int getTerminal();
 

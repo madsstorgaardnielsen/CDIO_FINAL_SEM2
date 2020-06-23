@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public interface IProductBatchDTO extends Serializable {
 
-    double getTaraSum();
+    String getTaraSum();
 
-    void setTaraSum(double tara);
+    void setTaraSum(String tara);
 
-    double getNettoSum();
+    String getNettoSum();
 
-    void setNettoSum(double netto);
+    void setNettoSum(String netto);
 
     String getFinishDate();
 

@@ -202,7 +202,7 @@ public class InputValidation {
     }
 
     public boolean validateAfvejning2(ProductBatchComponentDTO batchComponentDTO, ProductBatchComponentDTO productBatchComponentDTO) {
-        double Netto = batchComponentDTO.getNetto();
+        double Netto = Double.parseDouble(batchComponentDTO.getNetto());
         double amount = productBatchComponentDTO.getAmount();
         double tolerance = productBatchComponentDTO.getTolerance() * 0.01;
         double upperbound = amount + (amount * tolerance);

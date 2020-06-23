@@ -52,11 +52,11 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
                 return Response.status(418, "Lagerbeholdning af: " + batch.getIngredientName() + " er: " + batch.getAmount() + ", dette er ikke tilstrækkeligt til denne recept.").build();
             } else */
 
-            batchComponent.setNetto(batchComponent.getBrutto() - batchComponent.getTara());
+            batchComponent.setNetto(String.valueOf(Double.parseDouble(batchComponent.getBrutto()) - Double.parseDouble(batchComponent.getTara())));
 
             if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
-                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(), batchComponent.getNetto());
+                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(), Double.parseDouble(batchComponent.getNetto()));
                 return Response.ok().build();
             } else
                 return Response.status(418, "difference større end tolerance").build();
@@ -91,11 +91,11 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
                 double taraSum = 0;
                 double nettoSum = 0;
                 for (ProductBatchComponentDTO componentDTO : ProductBatchComponentDAO.getInstance().getCompByBatch(batchID)) {
-                    taraSum += componentDTO.getTara();
-                    nettoSum += componentDTO.getNetto();
+                    taraSum += Double.parseDouble(componentDTO.getTara());
+                    nettoSum += Double.parseDouble(componentDTO.getNetto());
                 }
-                batch.setTaraSum(taraSum);
-                batch.setNettoSum(nettoSum);
+                batch.setTaraSum(String.valueOf(taraSum));
+                batch.setNettoSum(String.valueOf(nettoSum));
                 ProductBatchDAO.getInstance().setStatusDone(batch);
             }
             return Response.status(400, "Productbatch er fuldt afvejet").build();
