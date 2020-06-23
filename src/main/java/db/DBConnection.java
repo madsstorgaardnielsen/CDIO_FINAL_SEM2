@@ -20,8 +20,9 @@ public class DBConnection {
             String jdbcUrl = "jdbc:mysql://" + host + ":" + port + "/" + database + "?user=" + username + "&password=" + password;
 
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcUrl);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new DatabaseConnectionException();
         }
