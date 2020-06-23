@@ -18,6 +18,8 @@ function addUserForm() { //gets user credentials for new user from admin user
 }
 
 function addUser() { //adds the new user to backend
+
+    //create the UserDTO object
     var user = {};
     user.userId = 0;
     user.firstName = $("#firstName").val();
@@ -26,14 +28,17 @@ function addUser() { //adds the new user to backend
     user.role = $("#roller").val();
     user.active = true;
 
-    Agent.POST("rest/user", user, function (data) {
+    //send the post request to the UserAPI
+    Agent.POST("rest/user", user, function (data) { //in case of response ok
+        //change the html to tell the user the update succeeded
         $("#container").html('' +
             '<form action="Admin.html">' +
             '<div class="boxedText">Bruger oprettet</div>' +
             '<button class="btn">Videre</button>' +
             '</form>'
         )
-    }, function (data) {
+    }, function (data) { //in case of response not ok
+        //change the html to tell the user the update failed, and error message
         $("#error").remove();
         console.log(data);
         $("#container").append('' +

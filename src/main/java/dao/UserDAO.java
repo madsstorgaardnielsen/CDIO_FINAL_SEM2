@@ -30,43 +30,47 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void addUser(UserDTO user) {
-        String addUser = "{call addUser(?,?,?,?,?)}";
+    public void addUser(UserDTO user) { //sends data for new user to the database to be saved
+        String addUser = "{call addUser(?,?,?,?,?)}"; //the format string for the mysql command
         try {
+            //use the format string to make a callable statement
             PreparedStatement statement = database.callableStatement(addUser);
+
+            //insert the new data into the statement
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getInitials());
             statement.setString(4, user.getRole());
             statement.setInt(5, user.isActive() ? 1 : 0);
 
-            statement.executeUpdate();
+            statement.executeUpdate(); //call the command on the database
             System.out.println("User successfully added to database");
-        } catch (SQLException e) {
+        } catch (SQLException e) { //thrown when database intercepts problems
             e.printStackTrace();
             throw new DatabaseException();
         }
     }
 
     @Override
-    public ArrayList<UserDTO> getAllUsers() {
-        ArrayList<UserDTO> userList;
+    public ArrayList<UserDTO> getAllUsers() { //fetches data for all users in the database
+        ArrayList<UserDTO> userList; //list for holding incoming userdata
         try {
-            userList = new ArrayList<>();
+            userList = new ArrayList<>(); //initialize list
+            //make callable statement using format string
             CallableStatement stmt = database.callableStatement("{call GetAllUsers}");
-            ResultSet rs = stmt.executeQuery();
-            UserDTO userDTO;
+            ResultSet rs = stmt.executeQuery(); //resultset for holding raw data from database
+            UserDTO userDTO; //object for making user objects
 
-            while (rs.next()) {
-                userDTO = new UserDTO();
-                getUserInfo(rs, userDTO);
-                userList.add(userDTO);
+            while (rs.next()) { //go though list of data until no more users in list
+                userDTO = new UserDTO(); //make new user object
+                getUserInfo(rs, userDTO); //get data from row in resultset
+                userList.add(userDTO); //add user object to list of users
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DatabaseException();
+            throw new DatabaseException(); //throw exception if database intercepts problems
         }
-        return userList;
+        return userList; //return list of users
     }
 
     private void getUserInfo(ResultSet rs, UserDTO userDTO) {
