@@ -347,40 +347,45 @@ function getIngredient() { //gets existing ingredients from backend
         $.each(data, function () {
             row = $("#tablebody").append(generateIngredientHtml(this));
         });
-        listenerIngredient();
-        listenereditIngredient();
-        listenersaveIngredient();
+        
+
        }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
-    });
+    }
+
+    );
+    listenereditIngredient();
+    listenersaveIngredient();
 }
 
 function generateIngredientHtml(ingredients) { //generates html to show in recipeTable
     return '<tr> ' +
         '<td class = ingredientID>' + ingredients.ingredientID + '</td>' +
         '<td class = ingredientName>' + ingredients.ingredientName + '</td>' +
-        '<td class = editbutton> <button class="editbtn">Rediger</button></td>' +
+        '<td class = editbutton> <button class="editbtnIngredient">Rediger</button></td>' +
         '</tr>'
 }
 
 
 function listenereditIngredient() {
-    $("#container").on('click', '.editbtn', function () {
+    $("#container").on('click', '.editbtnIngredient', function () {
         var row = $(this).closest('tr');
         var ingredientName = row.find(".ingredientName").text();
         row.find(".ingredientName").html('<input type="text" placeholder="' + ingredientName + '" id="editingredientName">');
 
         row.find(".editbutton").empty();
-        row.find(".editbutton").html('<button class="savebtn">Gem</button>');
+        row.find(".editbutton").html('<button class="savebtnIngredient">Gem</button>');
 
     })
 }
 
-function listenersaveIngredient(row) {
-    $("#container").on('click', '.savebtn', function () {
+function listenersaveIngredient() {
+    $("#container").on('click', '.savebtnIngredient', function () {
         var row = $(this).closest('tr');
-        var ingredientId = row.find("#editingredientId").text();
-        var ingredientName = row.find("#editingredientName").text();
+        var ingredientId = row.find(".ingredientID").text();
+        var ingredientName = row.find("#editingredientName").val();
+
+        var origingredientName = row.find("#editingredientName").attr('placeholder');
 
 
         var params = "?ingredientId=" + ingredientId;
@@ -388,7 +393,7 @@ function listenersaveIngredient(row) {
         if (ingredientName !== "")
             params = params + "&ingredientName=" + ingredientName;
         else
-            params = params + "&ingredientName=" + ingredientName;
+            params = params + "&ingredientName=" + origingredientName;
 
         Agent.PUT("rest/ingredient" + params, null, function (data) {
             row.replaceWith(generateIngredientHtml(data));

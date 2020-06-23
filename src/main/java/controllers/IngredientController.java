@@ -57,8 +57,9 @@ public class IngredientController implements IIngredientController {
         ingredientDTO = new IngredientDTO(id, name);
         if (validation.ingredientInputValidation(ingredientDTO))
             try {
-                ingredientDAO.updateIngredient(ingredientDTO);
-                return Response.ok().build();
+
+               IngredientDTO ingredient = ingredientDAO.updateIngredient(ingredientDTO);
+                return Response.ok(ingredient).build();
             } catch (Exception e) {
                 return Response.serverError().build();
             }
