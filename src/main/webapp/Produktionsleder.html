@@ -5,15 +5,6 @@
     <title>Produktionsleder</title>
     <link rel="stylesheet" type="text/css" href="resources/styling/Styles.css">
 </head>
-
-
-
-<!-- generateRow in table-->
-<!-- loadRecipes-->
-<!-- createRecipe-->
-<!-- -->
-<!-- -->
-
 <body>
 <!--navigation bar-->
 <div class="navbar">
@@ -25,15 +16,15 @@
     </a>
 </div>
 
-
+<!--Heading-->
 <h1 class="header" id="header">Vælg Arbejdsområde</h1>
 
-<!--shows options for input-->
+<!--For testing purposes we added a list of possible user id's for the given role-->
 <div class="optionsbox" id="optionsbox">
 </div>
 
+<!--When logged in a menu is displayed, when the buttons are pressed, the javascript methods are called.-->
 <div class="cont" id="container">
-
     <form action="javascript:getAllIngredientBatch()">
         <button class="btn">Vis og opret Råvarebatch</button>
     </form>
@@ -42,6 +33,7 @@
     </form>
 </div>
 
+<!--Javascript libraries-->
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="resources/scripts/ProductFunctions.js"></script>
 <script src="resources/scripts/RequestHandler.js"></script>

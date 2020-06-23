@@ -116,7 +116,6 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
                 ingredientBatch = new IngredientBatchDTO();
                 getIngredientBatchInfo(resultSet, ingredientBatch);
             }
-
             if (ingredientBatch == null) {
                 throw new NotFoundException();
             }
@@ -179,6 +178,5 @@ public class IngredientBatchDAO implements IIngredientBatchDAO {
             e.printStackTrace();
             throw new DatabaseException();
         }
-
     }
 }

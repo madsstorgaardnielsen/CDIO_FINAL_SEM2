@@ -1,5 +1,3 @@
-
-
 function getAllIngredientBatch() { //shows all ingredientbatches in list
     $("#header").text("Råvare Batch Liste");
     $("#container").html(
@@ -8,7 +6,6 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         '<th>Råvare ID</th>' +
         '<th>Mængde</th>' +
         '<th>Leverandør</th>' +
-     //   '<th colspan="1"></th>' +
         '</tr> </thead> ' +
         '<tbody id="tablebody"></tbody> ' +
         '</table>' +
@@ -19,12 +16,11 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         $.each(data, function () {
             row = $("#tablebody").append(genIngBatchList(this));
         });
-
     }, function (data) {
         $("#error").remove();
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            'Råvarebatch ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
             '</div></div>');
     });
 }
@@ -65,12 +61,11 @@ function listenerAdd2() { //shows line to add new batch
             $.each(data, function () {
                 $("#inglistbody").append(genIngList(this));
             });
-
         }, function (data) {
             $("#error").remove();
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                'Råvarebatch ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
                 '</div></div>');
         });
     })

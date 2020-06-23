@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IngredientBatchDAOTest {
 
     @Test
-    void addIngredientBatch() throws Exception {
+    void addIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
         ibDTO.setIngredientBatchId(99999998);
@@ -28,7 +28,7 @@ class IngredientBatchDAOTest {
     }
 
     @Test
-    void updateIngredientBatch() throws Exception {
+    void updateIngredientBatch() {
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
 
@@ -47,7 +47,7 @@ class IngredientBatchDAOTest {
     }
 
     @Test
-    void deleteIngredientBatch() throws SQLException {
+    void deleteIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
         ibDTO.setIngredientBatchId(99999998);
@@ -65,7 +65,7 @@ class IngredientBatchDAOTest {
     }
 
     @Test
-    void getAllIngredientBatch() throws Exception {
+    void getAllIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
 
         if (ibDAO.getAllIngredientBatch().size() > 1) {
@@ -77,7 +77,7 @@ class IngredientBatchDAOTest {
     }
 
     @Test
-    void getIngredientBatch() throws Exception {
+    void getIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
         ibDTO.setIngredientBatchId(99999998);
