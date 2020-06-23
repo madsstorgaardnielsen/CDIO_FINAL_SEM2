@@ -54,6 +54,6 @@ public class IngredientBatchDTO implements IIngredientBatchDTO {
     }
 
     public String toString(){
-        return "ibID: " + ingredientBatchId;
+        return "ID: " + ingredientBatchId;
     }
 }
