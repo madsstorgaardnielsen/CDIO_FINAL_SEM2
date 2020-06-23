@@ -3,16 +3,10 @@ package controllers;
 import dao.ProductBatchComponentDAO;
 import dao.ProductBatchDAO;
 import dao.RecipeDAO;
-import dao.UserDAO;
-import db.DBConnection;
 import dto.ProductBatchDTO;
-import dto.RecipeComponentDTO;
-import dto.RecipeDTO;
-import validation.InputValidation;
+import resources.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ProductBatchController {
 

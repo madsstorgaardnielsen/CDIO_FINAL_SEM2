@@ -4,10 +4,9 @@ import controllers.icontrollers.IUserController;
 import dao.idao.IUserDAO;
 import dao.UserDAO;
 import dto.UserDTO;
-import validation.InputValidation;
+import resources.InputValidation;
 
 import javax.ws.rs.core.Response;
-import java.sql.SQLException;
 
 
 public class UserController implements IUserController {

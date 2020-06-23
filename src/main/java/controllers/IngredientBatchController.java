@@ -2,8 +2,11 @@ package controllers;
 
 import controllers.icontrollers.IIngredientBatchController;
 import dao.IngredientBatchDAO;
+import dao.IngredientDAO;
 import dto.IngredientBatchDTO;
-import validation.InputValidation;
+import resources.InputValidation;
+import dto.IngredientDTO;
+
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -36,18 +39,31 @@ public class IngredientBatchController implements IIngredientBatchController {
     }
 
     public Response addIngredientBatch(IngredientBatchDTO ingredientBatchDTO) {
+        IngredientBatchDTO ingredientBatch = ingredientBatchDAO.getIngredientBatch2(ingredientBatchDTO.getIngredientBatchId());
+        IngredientDTO ingredient = IngredientDAO.getInstance().getIngredient2(ingredientBatchDTO.getIngredientId());
         if (validation.ingredientBatchInputValidation(ingredientBatchDTO)) {
-            ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
-            return Response.ok().build();
+            if (ingredientBatch.getIngredientBatchId() != 0) {
+                return Response.status(418, "Råvare batch ID: " + ingredientBatchDTO.getIngredientBatchId() + " Eksisterer, prøv venligst et andet ID").build();
+            } else if (ingredient.getIngredientID() == 0) {
+                return Response.status(418, "Råvare ID: "+ingredientBatchDTO.getIngredientId()+" eksisterer ikke.").build();
+            } else {
+                ingredientBatchDAO.addIngredientBatch(ingredientBatchDTO);
+                return Response.ok().build();
+            }
+
         } else {
             if (!validation.idValidation(ingredientBatchDTO.getIngredientBatchId())) {
-                return Response.status(418, "Forkert input<br> Indtastet batchid: " + ingredientBatchDTO.getIngredientBatchId() + "<br> Id skal ligge i intervallet 1-99999999").build();
+                return Response.status(418, "Forkert input<br> Indtastet batchid: "
+                        + ingredientBatchDTO.getIngredientBatchId() + "<br> Id skal ligge i intervallet 1-99999999").build();
             } else if (!validation.idValidation(ingredientBatchDTO.getIngredientId())) {
-                return Response.status(418, "Forkert input<br> Indtastet råvare id: " + ingredientBatchDTO.getIngredientId() + "<br> Id skal ligge i intervallet 1-99999999").build();
+                return Response.status(418, "Forkert input<br> Indtastet råvare id: "
+                        + ingredientBatchDTO.getIngredientId() + "<br> Id skal ligge i intervallet 1-99999999").build();
             } else if (!validation.nameValidation(ingredientBatchDTO.getSupplier())) {
-                return Response.status(418, "Forkert input <br>Indtastet leverandør: " + ingredientBatchDTO.getAmount() + "<br> Indtast venligst kun bostaver").build();
+                return Response.status(418, "Forkert input <br>Indtastet leverandør: "
+                        + ingredientBatchDTO.getSupplier() + "<br> Indtast venligst kun bogstaver").build();
             } else
-                return Response.status(418, "Forkert input <br>Indtastet mængde: " + ingredientBatchDTO.getAmount() + "<br> Mængden skal indskrives med 4 decimaler").build();
+                return Response.status(418, "Forkert input <br>Indtastet mængde: "
+                        + ingredientBatchDTO.getAmount() + "<br> Mængden skal indskrives med 4 decimaler").build();
         }
     }
 

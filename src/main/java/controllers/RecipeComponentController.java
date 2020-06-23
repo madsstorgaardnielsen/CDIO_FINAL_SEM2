@@ -3,7 +3,7 @@ package controllers;
 import controllers.icontrollers.IRecipeComponentController;
 import dao.RecipeComponentDAO;
 import dto.RecipeComponentDTO;
-import validation.InputValidation;
+import resources.InputValidation;
 
 import javax.ws.rs.core.Response;
 
