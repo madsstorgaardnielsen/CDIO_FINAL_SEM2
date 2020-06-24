@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * The API for "Råvarer Batches" used as an accesspoint from front to backend, makes sure the correct parameters are passed to the backend and returns the response from the backend.
+ * The API for "Raavarer Batches" used as an accesspoint from front to backend, makes sure the correct parameters are passed to the backend and returns the response from the backend.
  */
 @Path("ingredientbatch")
 public class IngredientBatchAPI {

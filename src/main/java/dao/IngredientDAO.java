@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 /**
- * The DAO Class for "Råvarer" used to access the database and do CRUD operations in the database.
+ * The DAO Class for "Raavarer" used to access the database and do CRUD operations in the database.
  */
 public class IngredientDAO implements IIngredientDAO {
 

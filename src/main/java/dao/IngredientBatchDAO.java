@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * The DAO Class for "Råvare batches" used to access the database and do CRUD operations in the database.
+ * The DAO Class for "Raavare batches" used to access the database and do CRUD operations in the database.
  */
 public class IngredientBatchDAO implements IIngredientBatchDAO {
 
