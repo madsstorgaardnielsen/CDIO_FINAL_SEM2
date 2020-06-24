@@ -14,16 +14,16 @@ class IngredientControllerTest {
     @Test
     void deleteIngredient() {
         IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
-        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
+        assertEquals(Response.ok().build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
 
         IngredientController.getInstance().deleteIngredient(999);
-        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient(999).toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient2(999).toString());
     }
 
     @Test
     void addIngredient() {
         IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
-        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
+        assertEquals(Response.ok().build().toString(), IngredientController.getInstance().addIngredient(ibdto).toString());
         IngredientController.getInstance().deleteIngredient(999);
     }
 
@@ -47,7 +47,7 @@ class IngredientControllerTest {
         IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
         IngredientDAO ibdao = new IngredientDAO();
         ibdao.addIngredient(ibdto);
-        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient(999).toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientController.getInstance().getIngredient2(999).toString());
         IngredientController.getInstance().deleteIngredient(999);
     }
 }

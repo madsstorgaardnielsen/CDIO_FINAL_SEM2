@@ -86,6 +86,10 @@ public class IngredientBatchController implements IIngredientBatchController {
         return Response.ok(ingredientBatchDAO.getIngredientBatch(id)).build();
     }
 
+    public Response getIngredientBatch2(int id) {
+        return Response.ok(ingredientBatchDAO.getIngredientBatch2(id)).build();
+    }
+
     public Response getIngredientBatchByIngredientID(int ID) {
         ArrayList<IngredientBatchDTO> list = IngredientBatchDAO.getInstance().getIngredientBatchByIngredientID(ID);
         return Response.ok(list).build();

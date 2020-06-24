@@ -164,11 +164,12 @@ public class UserDAO implements IUserDAO {
     }
 
     //for testing purposes
-    public void deleteUser(int id) {
+    public void deleteUser(String name, String lastName) {
         try {
-            String deleteUser = "{call DeleteUser(?)}";
+            String deleteUser = "DELETE FROM Users WHERE Firstname = ? AND Lastname = ?";
             PreparedStatement statement = database.callableStatement(deleteUser);
-            statement.setInt(1, id);
+            statement.setString(1,name);
+            statement.setString(2,lastName);
             statement.executeUpdate();
             System.out.println("User successfully deleted");
         } catch (SQLException e) {

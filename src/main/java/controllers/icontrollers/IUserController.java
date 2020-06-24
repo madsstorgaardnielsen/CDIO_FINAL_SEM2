@@ -13,5 +13,5 @@ public interface IUserController {
 
     Response getUser(String userId, String role) ;
 
-    Response deleteUser(int id);
+    Response deleteUser(String name, String lastName);
 }

@@ -62,7 +62,7 @@ class RecipeControllerTest {
         RecipeController.getInstance().deleteRecipe(999);
     }
 
-/*    @Test
+    @Test
     void updateRecipe() {
         ArrayList<RecipeComponentDTO> components = new ArrayList<>();
         RecipeComponentDTO rcdto = new RecipeComponentDTO(999,1,2.2222,3.3333);
@@ -82,7 +82,7 @@ class RecipeControllerTest {
 
         RecipeController.getInstance().deleteRecipe(999);
 
-    }*/
+    }
 
     @Test
     void getAllRecipes() {

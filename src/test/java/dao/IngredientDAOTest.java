@@ -15,13 +15,13 @@ class IngredientDAOTest {
     void addIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
-        iDAO.deleteIngredient(99999999);
-        iDTO.setIngredientID(99999999);
+        iDAO.deleteIngredient(999);
+        iDTO.setIngredientID(999);
         iDTO.setIngredientName("TestName");
         try {
             iDAO.addIngredient(iDTO);
-            assertEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
-            iDAO.deleteIngredient(99999999);
+            assertEquals(999, iDAO.getIngredient(999).getIngredientID());
+            iDAO.deleteIngredient(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,30 +32,30 @@ class IngredientDAOTest {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
 
-        iDAO.deleteIngredient(99999999);
-        iDTO.setIngredientID(99999999);
+        iDAO.deleteIngredient(999);
+        iDTO.setIngredientID(999);
         iDTO.setIngredientName("Testname");
         iDAO.addIngredient(iDTO);
 
-        assertEquals("Testname", iDAO.getIngredient(99999999).getIngredientName());
+        assertEquals("Testname", iDAO.getIngredient(999).getIngredientName());
         iDTO.setIngredientName("TestNameUpdated");
         iDAO.updateIngredient(iDTO);
-        assertEquals("TestNameUpdated", iDAO.getIngredient(99999999).getIngredientName());
-
+        assertEquals("TestNameUpdated", iDAO.getIngredient(999).getIngredientName());
+        iDAO.deleteIngredient(999);
     }
 
     @Test
     void deleteIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
-        iDAO.deleteIngredient(99999999);
-        iDTO.setIngredientID(99999999);
+        iDAO.deleteIngredient(999);
+        iDTO.setIngredientID(999);
         iDTO.setIngredientName("Testname");
         try {
             iDAO.addIngredient(iDTO);
-            assertEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
-            iDAO.deleteIngredient(99999999);
-            assertNotEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
+            assertEquals(999, iDAO.getIngredient2(999).getIngredientID());
+            iDAO.deleteIngredient(999);
+            assertNotEquals(999, iDAO.getIngredient2(999).getIngredientID());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -76,13 +76,14 @@ class IngredientDAOTest {
     void getIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
-        iDAO.deleteIngredient(99999999);
-        iDTO.setIngredientID(99999999);
+        iDAO.deleteIngredient(999);
+        iDTO.setIngredientID(999);
         iDTO.setIngredientName("testname");
 
         try {
             iDAO.addIngredient(iDTO);
-            assertEquals(99999999, iDAO.getIngredient(99999999).getIngredientID());
+            assertEquals(999, iDAO.getIngredient(999).getIngredientID());
+            iDAO.deleteIngredient(999);
         } catch (Exception e) {
             e.printStackTrace();
         }

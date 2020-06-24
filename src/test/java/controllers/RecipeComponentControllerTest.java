@@ -24,7 +24,7 @@ class RecipeComponentControllerTest {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
         RecipeComponentDTO ibdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().addRecipeComponent(ibdto).toString());
+        assertEquals(Response.ok().build().toString(), RecipeComponentController.getInstance().addRecipeComponent(ibdto).toString());
         RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
         assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().getRecipeComponent(999, 1).toString());
         RecipeDAO.getInstance().deleteRecipe(999);
@@ -35,7 +35,7 @@ class RecipeComponentControllerTest {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
         RecipeComponentDTO rcdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getRecipeComponent(999, 1)).build().toString(), RecipeComponentController.getInstance().addRecipeComponent(rcdto).toString());
+        assertEquals(Response.ok().build().toString(), RecipeComponentController.getInstance().addRecipeComponent(rcdto).toString());
         RecipeComponentController.getInstance().deleteRecipeComponent(999, 1);
         RecipeDAO.getInstance().deleteRecipe(999);
     }
@@ -57,7 +57,7 @@ class RecipeComponentControllerTest {
 
     @Test
     void getAllRecipeComponents() {
-        assertEquals(Response.ok(RecipeComponentController.getInstance().getAllRecipeComponents().toString()).build().toString(), RecipeComponentController.getInstance().getAllRecipeComponents().toString());
+        assertEquals(Response.ok(true).build().toString(), RecipeComponentController.getInstance().getAllRecipeComponents().toString());
     }
 
     @Test

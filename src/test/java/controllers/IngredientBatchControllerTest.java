@@ -16,16 +16,16 @@ class IngredientBatchControllerTest {
     @Test
     void deleteIngredientBatch() {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999, 1, "999.9999", "TestSupplier");
-        assertEquals(Response.ok(true).build().toString(), IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
+        assertEquals(Response.ok().build().toString(), IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
 
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
-        assertEquals(Response.ok(true).build().toString(), IngredientBatchController.getInstance().getIngredientBatch(999).toString());
+        assertEquals(Response.ok(true).build().toString(), IngredientBatchController.getInstance().getIngredientBatch2(999).toString());
     }
 
     @Test
     void addIngredientBatch() {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999, 1, "999.9999", "TestSupplier");
-        assertEquals(Response.ok(true).build().toString(), IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
+        assertEquals(Response.ok().build().toString(), IngredientBatchController.getInstance().addIngredientBatch(ibdto).toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
 
@@ -36,7 +36,7 @@ class IngredientBatchControllerTest {
         IngredientBatchDAO ibdao = new IngredientBatchDAO();
         ibdao.addIngredientBatch(ibdto);
         IngredientBatchController.getInstance().updateIngredientBatch(999, 1, "111.1111", "TestSupplierUpdated");
-        assertEquals(Response.ok(true).build().toString(), IngredientBatchController.getInstance().updateIngredientBatch(999, 1, "111.1111", "TestSupplierUpdated").toString());
+        assertEquals(Response.ok().build().toString(), IngredientBatchController.getInstance().updateIngredientBatch(999, 1, "111.1111", "TestSupplierUpdated").toString());
         IngredientBatchController.getInstance().deleteIngredientBatch(999);
     }
 

@@ -36,6 +36,7 @@ class InputValidationTest {
         ingredientBatchDTO.setIngredientBatchId(2);
         ingredientBatchDTO.setIngredientId(2);
         ingredientBatchDTO.setAmount("5.2222");
+        ingredientBatchDTO.setSupplier("Test");
         assertTrue(iv.ingredientBatchInputValidation(ingredientBatchDTO));
 
         ingredientBatchDTO.setIngredientBatchId(-1);
@@ -47,8 +48,6 @@ class InputValidationTest {
         ingredientBatchDTO.setIngredientId(100000000);
         ingredientBatchDTO.setAmount("5");
         assertFalse(iv.ingredientBatchInputValidation(ingredientBatchDTO));
-
-
     }
 
     @Test
@@ -77,7 +76,7 @@ class InputValidationTest {
 
     @Test
     void productBatchInputValidation() {
-/*        InputValidation iv = new InputValidation();
+        InputValidation iv = new InputValidation();
         ProductBatchDTO pbd = new ProductBatchDTO();
         ProductBatchComponentDTO pbcd = new ProductBatchComponentDTO();
 
@@ -85,25 +84,25 @@ class InputValidationTest {
         pbd.setRecipeId(1);
         pbd.setUserId(1);
         pbd.setStatus(1);
-        pbcd.setTara(4.4444);
-        pbcd.setNetto(4.4444);
+        pbcd.setTara("4.4444");
+        pbcd.setNetto("4.4444");
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(-1);
         pbd.setRecipeId(-1);
         pbd.setUserId(-1);
         pbd.setStatus(-1);
-        pbcd.setTara(5.333);
-        pbcd.setNetto(5.333);
+        pbcd.setTara("5.333");
+        pbcd.setNetto("5.333");
         iv.productBatchInputValidation(pbd);
 
         pbd.setProductBatchId(1000000000);
         pbd.setRecipeId(1000000000);
         pbd.setUserId(1000000000);
         pbd.setStatus(4);
-        pbcd.setTara(-4.333);
-        pbcd.setNetto(-4.333);
-        iv.productBatchInputValidation(pbd);*/
+        pbcd.setTara("-4.333");
+        pbcd.setNetto("-4.333");
+        iv.productBatchInputValidation(pbd);
     }
 
     @Test
@@ -126,6 +125,4 @@ class InputValidationTest {
         assertTrue(iv.recipeComponentInputValidation(recipeComponentDTO));
 
     }
-
-
 }

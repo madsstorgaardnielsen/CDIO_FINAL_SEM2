@@ -17,19 +17,19 @@ class RecipeDAOTest {
     void addRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
-        RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
-        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 300.1, 4.2);
+        RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(999, 1, 2.2233, 3.3443);
+        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(999, 2, 300.1144, 4.2242);
 
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
+        recipeDAO.deleteRecipe(999);
+        recipeDTO.setRecipeID(999);
         recipeDTO.setRecipeName("TestRecipe");
         recipeDTO.addToRecipeCompList(recipeComponentDTO1);
         recipeDTO.addToRecipeCompList(recipeComponentDTO2);
 
         try {
             recipeDAO.addRecipe(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
-
+            assertEquals(999, recipeDAO.getRecipe(999).getRecipeID());
+            recipeDAO.deleteRecipe(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,16 +42,16 @@ class RecipeDAOTest {
         //RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
         //RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 300.1, 4.2);
 
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
+        recipeDAO.deleteRecipe(999);
+        recipeDTO.setRecipeID(999);
         recipeDTO.setRecipeName("TestRecipe");
         //recipeDTO.addToRecipeCompList(recipeComponentDTO1);
         //recipeDTO.addToRecipeCompList(recipeComponentDTO2);
 
         try {
             recipeDAO.addRecipeOnly(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipeOnly(99999999).getRecipeID());
-
+            assertEquals(999, recipeDAO.getRecipeOnly(999).getRecipeID());
+            recipeDAO.deleteRecipe(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,17 +72,18 @@ class RecipeDAOTest {
     void getRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
-        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(999, 1, 2.22, 3.33);
 
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
+        recipeDAO.deleteRecipe(999);
+        recipeDTO.setRecipeID(999);
         recipeDTO.setRecipeName("TestRecipe");
         recipeDTO.addToRecipeCompList(recipeComponentDTO);
 
         try {
             recipeDAO.addRecipe(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
-            assertEquals(2.22, recipeDAO.getRecipe(99999999).getRecipeCompList().get(0).getNonNetto());
+            assertEquals(999, recipeDAO.getRecipe(999).getRecipeID());
+            assertEquals(2.22, recipeDAO.getRecipe(999).getRecipeCompList().get(0).getNonNetto());
+            recipeDAO.deleteRecipe(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,18 +94,18 @@ class RecipeDAOTest {
     void deleteRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
-        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
+        RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(999, 1, 2.22, 3.33);
 
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
+        recipeDAO.deleteRecipe(999);
+        recipeDTO.setRecipeID(999);
         recipeDTO.setRecipeName("TestRecipe");
         recipeDTO.addToRecipeCompList(recipeComponentDTO);
 
         try {
             recipeDAO.addRecipe(recipeDTO);
-            assertEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
-            recipeDAO.deleteRecipe(99999999);
-            assertNotEquals(99999999, recipeDAO.getRecipe(99999999).getRecipeID());
+            assertEquals(999, recipeDAO.getRecipe(999).getRecipeID());
+            recipeDAO.deleteRecipe(999);
+            assertNotEquals(999, recipeDAO.getRecipe(999).getRecipeID());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,21 +115,22 @@ class RecipeDAOTest {
     void updateRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
-        RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 3.22, 3.33);
-        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(99999999, 2, 4.22, 3.33);
+        RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(999, 1, 3.22, 3.33);
+        RecipeComponentDTO recipeComponentDTO2 = new RecipeComponentDTO(999, 2, 4.22, 3.33);
 
-        recipeDAO.deleteRecipe(99999999);
-        recipeDTO.setRecipeID(99999999);
+        recipeDAO.deleteRecipe(999);
+        recipeDTO.setRecipeID(999);
         recipeDTO.setRecipeName("TestRecipe");
         recipeDTO.addToRecipeCompList(recipeComponentDTO1);
         recipeDTO.addToRecipeCompList(recipeComponentDTO2);
 
         try {
             recipeDAO.addRecipe(recipeDTO);
-            assertEquals("TestRecipe", recipeDAO.getRecipe(99999999).getRecipeName());
+            assertEquals("TestRecipe", recipeDAO.getRecipe(999).getRecipeName());
             recipeDTO.setRecipeName("UpdatedName");
             recipeDAO.updateRecipe(recipeDTO);
-            assertEquals("UpdatedName", recipeDAO.getRecipe(99999999).getRecipeName());
+            assertEquals("UpdatedName", recipeDAO.getRecipe(999).getRecipeName());
+            recipeDAO.deleteRecipe(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
