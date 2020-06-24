@@ -79,6 +79,7 @@ function generateRecipeComponentHtml(recipeComponent) { //generates html to show
 }
 
 function getRecipeComponent(recipeId) {
+    $("#options").remove();
     $("#header").text("Komponent Oversigt");
     $("#container").attr('data-recipeId', recipeId);
     $("#container").html(
@@ -102,11 +103,7 @@ function getRecipeComponent(recipeId) {
         $.each(data, function () {
             $("#tablebody").append(generateRecipeComponentHtml(this));
         });
-        listener();
-        listeneredit();
-        listenersave();
-        listenerdelete();
-        componentlistenerAdd();
+
     }, function (data) {
         $("#container").html($(data.responseText).find("u").first().text());
     });
@@ -232,7 +229,8 @@ function componentlistenerAdd() {//shows line to add new batch by recipe id
             });
 
         }, function (data) {
-            $("#optionsbox").html('' +
+            $("body").append('<div id="options"></div>');
+            $("#options").html('' +
                 '<div class="boxedText" id="error">'
                 + $(data.responseText).find("u").first().text() +
                 '</div>'
@@ -260,7 +258,7 @@ function saveComponent() {
         recipecomponent.tolerance = $("#toleranceInput").val();
 
 
-        Agent.POST("rest/ingredient", function () {
+        Agent.POST("rest/recipecomponent", recipecomponent , function () {
             getRecipeComponent(recipecomponent.recipeID)
         }, function (data) {
             $("#error").remove();
@@ -354,8 +352,7 @@ function getIngredient() { //gets existing ingredients from backend
     }
 
     );
-    listenereditIngredient();
-    listenersaveIngredient();
+
 }
 
 function generateIngredientHtml(ingredients) { //generates html to show in recipeTable
@@ -406,4 +403,12 @@ function listenersaveIngredient() {
 
 }
 
-
+document.addEventListener('DOMContentLoaded', function () {
+    listener();
+    listeneredit();
+    listenersave();
+    listenerdelete();
+    componentlistenerAdd();
+    listenereditIngredient();
+    listenersaveIngredient();
+});
