@@ -44,19 +44,29 @@ public class ProductBatchComponentController implements IProductBatchComponentCo
     }
 
     @Override
+    //Logic of validating and saving change to productbatch
     public Response updateProductBatchComponent(ProductBatchComponentDTO batchComponent) {
         try {
-            ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().getProductBatchComponentByID(batchComponent.getId());
-            batchComponent.setNetto(String.valueOf(Double.parseDouble(batchComponent.getBrutto()) - Double.parseDouble(batchComponent.getTara())));
+            //get info about productbatchcomponent
+            ProductBatchComponentDTO batch = ProductBatchComponentDAO.getInstance().
+                    getProductBatchComponentByID(batchComponent.getId());
+            //set net value
+            batchComponent.setNetto(String.valueOf(Double.parseDouble(batchComponent.getBrutto())
+                    - Double.parseDouble(batchComponent.getTara())));
+            //validate net weight is within bounds
             if (InputValidation.getInstance().validateAfvejning2(batchComponent, batch)) {
+                //try updating the info
                 ProductBatchComponentDAO.getInstance().updateProductBatchComponent(batchComponent);
-                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(), Double.parseDouble(batchComponent.getNetto()));
-                return Response.ok().build();
+                //update ingredientbatch weight
+                IngredientBatchDAO.getInstance().subtractFromIngredientAmount(batchComponent.getIngredientBatchID(),
+                        Double.parseDouble(batchComponent.getNetto()));
+                return Response.ok().build(); //send response status 200
             } else
+                //if weight not within bounds
                 return Response.status(418, "difference større end tolerance").build();
-        } catch (Exception e) {
+        } catch (Exception e) { //error handling
             e.printStackTrace();
-            return Response.serverError().build();
+            return Response.serverError().build(); //send status internal server error
         }
     }
 

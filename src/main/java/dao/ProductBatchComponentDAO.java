@@ -127,17 +127,25 @@ public class ProductBatchComponentDAO {
         return comp;
     }
 
+    //sends data for updated productbatchcomponent to database to be saved
     public void updateProductBatchComponent(ProductBatchComponentDTO batchComponentDTO) {
+        //format string for mysql command
+        String formString = "{call UpdateProductBatchComponent(?,?,?,?,?,?)}";
         try {
-            CallableStatement stmt = database.callableStatement("{call UpdateProductBatchComponent(?,?,?,?,?,?)}");
+            //use format string to make callable statement
+            CallableStatement stmt = database.callableStatement(formString);
+
+            //insert new data into statement
             stmt.setInt(1, batchComponentDTO.getId());
             stmt.setInt(2, batchComponentDTO.getIngredientBatchID());
             stmt.setInt(3, batchComponentDTO.getLaborantID());
             stmt.setString(4, batchComponentDTO.getTara());
             stmt.setString(5, batchComponentDTO.getNetto());
             stmt.setDouble(6, batchComponentDTO.getTerminal());
+
+            //call command on database
             stmt.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException e) { //thrown when database intercepts problems
             e.printStackTrace();
             throw new DatabaseException();
         }

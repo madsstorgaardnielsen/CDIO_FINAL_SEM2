@@ -178,8 +178,8 @@ function setRaavare() {
     })
 }
 
-function setBrutto() {
-    var batchcomp = {};
+function setBrutto() { //sends the input data to UserAPI to be saved
+    var batchcomp = {}; //creating ProductBatchComponentDTO
     batchcomp.id = $("#container").attr('data-compID');
     batchcomp.ingredientBatchID = $("#container").attr('data-raavarebatch');
     batchcomp.laborantID = $("#container").attr('data-id');
@@ -189,8 +189,8 @@ function setBrutto() {
     batchcomp.productBatchID = $("#container").attr('data-recipeID');
     batchcomp.ingredientID = $("#container").attr('data-ingredientID');
 
-
-    Agent.PUT("rest/productBatchComponent", batchcomp, function () {
+    //Sending request to save data
+    Agent.PUT("rest/productBatchComponent", batchcomp, function () { //procedure for status ok
         $(".errorcont").remove();
         $("#container").html('' +
             '<form action="javascript:setStatus()">' +
@@ -198,9 +198,10 @@ function setBrutto() {
             '<button class="btn">Videre</button>' +
             '</form>'
         )
-    }, function (data) {
+    }, function (data) { //procedure for bad status
         $("#error").remove();
         console.log(data);
+        //show error message
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
             $(data.responseText).find("u").first().text() +
