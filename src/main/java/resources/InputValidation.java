@@ -4,6 +4,9 @@ import dto.*;
 
 import java.text.DecimalFormat;
 
+/**
+ * A Class used to validate input before it is send to the database, if the input isnt validated, the methods will return false.
+ */
 public class InputValidation {
     private static InputValidation instance;
 

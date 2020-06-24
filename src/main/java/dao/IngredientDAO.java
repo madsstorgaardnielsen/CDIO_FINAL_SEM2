@@ -15,7 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
-//TODO implement inputvalidation class
+/**
+ * The DAO Class for "Råvarer" used to access the database and do CRUD operations in the database.
+ */
 public class IngredientDAO implements IIngredientDAO {
 
     private static final IngredientDAO instance;

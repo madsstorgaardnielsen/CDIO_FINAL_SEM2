@@ -8,6 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
+/**
+ * The API for "Råvarer" used as an accesspoint from front to backend, makes sure the correct parameters are passed to the backend and returns the response from the backend.
+ */
 @Path("ingredient")
 public class IngredientAPI {
 

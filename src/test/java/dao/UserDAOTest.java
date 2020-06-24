@@ -19,12 +19,9 @@ class UserDAOTest {
         test.setInitials("Test");
         test.setActive(false);
         test.setRole("Admin");
-
         UserDAO.getInstance().addUser(test);
-
         assertEquals("Test", UserDAO.getInstance().getUserFromFirstNameLastName("Test", "Test").getFirstName());
         UserDAO.getInstance().deleteUser("Test","Test");
-
     }
 
     @Test

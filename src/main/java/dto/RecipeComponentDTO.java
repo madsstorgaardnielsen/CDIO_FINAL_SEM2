@@ -1,5 +1,8 @@
 package dto;
 
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class RecipeComponentDTO {
 
     public RecipeComponentDTO(int recipeID, int ingredientID, double nonNetto, double tolerance) {

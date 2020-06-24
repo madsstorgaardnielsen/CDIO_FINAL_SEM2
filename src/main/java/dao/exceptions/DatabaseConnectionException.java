@@ -2,6 +2,9 @@ package dao.exceptions;
 
 import java.io.Serializable;
 
+/**
+ * Custom exception class for Database connectivity exceptions.
+ */
 public class DatabaseConnectionException extends RuntimeException implements Serializable {
     private static final long serialVersionUID = 4545864587995944260L;
 

@@ -2,6 +2,9 @@ package dao.exceptions;
 
 import java.io.Serializable;
 
+/**
+ * Custom Exception class for Database exceptions where there was a problem adding the data to the database.
+ */
 @SuppressWarnings("serial")
 public class DatabaseException extends RuntimeException implements Serializable {
     private static final long serialVersionUID = 4545864587995944260L;

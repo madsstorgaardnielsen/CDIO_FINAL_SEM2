@@ -5,6 +5,9 @@ import org.glassfish.jersey.server.model.Routed;
 
 import java.math.BigDecimal;
 
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class IngredientBatchDTO implements IIngredientBatchDTO {
     int ingredientBatchId;
     int ingredientId;

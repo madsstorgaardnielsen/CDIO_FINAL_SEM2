@@ -6,6 +6,10 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 import java.util.Arrays;
 
+/**
+ * Exception mapper for the NotFoundException, which is standard in java 8
+ * Exception mappers are used to generate a HTML Response from the thrown Exception.
+ */
 @Provider
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {
     @Override

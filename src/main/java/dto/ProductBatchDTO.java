@@ -4,6 +4,9 @@ import dto.idto.IProductBatchDTO;
 
 import java.util.ArrayList;
 
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class ProductBatchDTO implements IProductBatchDTO {
     int productBatchId;
     int recipeId;

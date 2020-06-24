@@ -6,6 +6,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Exception mapper for the Custom exception class "DatabaseConnectionException".
+ * Exception mappers are used to generate a HTML Response from the thrown Exception.
+ */
 @Provider
 public class DatabaseConnectionExceptionMapper implements ExceptionMapper<DatabaseConnectionException> {
     @Override

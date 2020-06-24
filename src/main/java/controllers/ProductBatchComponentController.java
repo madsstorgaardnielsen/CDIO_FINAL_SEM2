@@ -12,6 +12,11 @@ import resources.InputValidation;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
+/**
+ * The controller class for "Produkt batch komponenter", it takes input from the API class,
+ * validates input and passes the data to the corresponding DAO class, when the DAO class saved/deleted/updated the data,
+ * the controller class returns a Response to the corresponding API.
+ */
 public class ProductBatchComponentController implements IProductBatchComponentController {
     private static final ProductBatchComponentController instance;
 

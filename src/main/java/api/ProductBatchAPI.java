@@ -9,6 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+/**
+ * The API for "Produkt batch" used as an accesspoint from front to backend, makes sure the correct parameters are passed to the backend and returns the response from the backend.
+ */
 @Path("productBatch")
 public class ProductBatchAPI {
 

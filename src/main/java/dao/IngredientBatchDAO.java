@@ -14,7 +14,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-//TODO implement inputvalidation class
+/**
+ * The DAO Class for "Råvare batches" used to access the database and do CRUD operations in the database.
+ */
 public class IngredientBatchDAO implements IIngredientBatchDAO {
 
     private static IngredientBatchDAO instance;

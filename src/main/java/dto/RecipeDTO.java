@@ -4,7 +4,9 @@ import dto.idto.IRecipeDTO;
 
 import java.util.ArrayList;
 
-
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class RecipeDTO implements IRecipeDTO {
     private static final long serialVersionUID = 4732984592846315285L;
     private int recipeID;

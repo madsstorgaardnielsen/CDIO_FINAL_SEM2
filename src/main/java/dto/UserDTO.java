@@ -2,6 +2,9 @@ package dto;
 
 import dto.idto.IUserDTO;
 
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class UserDTO implements IUserDTO {
     private static final long serialVersionUID = 4545864587995944260L;
     private int userId;

@@ -16,6 +16,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ArrayList;
 
+/**
+ * The DAO Class for "Produkt batches" used to access the database and do CRUD operations in the database.
+ */
 public class ProductBatchDAO implements IProductBatchDAO {
     private static final ProductBatchDAO instance;
 

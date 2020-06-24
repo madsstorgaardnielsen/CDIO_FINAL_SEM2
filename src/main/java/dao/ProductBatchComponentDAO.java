@@ -16,6 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * The DAO Class for "Produkt batch komponenter" used to access the database and do CRUD operations in the database.
+ */
 public class ProductBatchComponentDAO {
     private static final ProductBatchComponentDAO instance;
 
@@ -36,7 +39,7 @@ public class ProductBatchComponentDAO {
 
     public void addComponentsByRecipe(RecipeDTO recipe, int batchID) {
         // making string for statement
-        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount, tolerance) VALUES "; //TODO der skal laves procedure i DB hvis vi har tid
+        String statementString = "INSERT INTO ProductBatchComponents (ProductBatchID, IngredientID, amount, tolerance) VALUES ";
         //adding value set for each component
         for (RecipeComponentDTO comp : recipe.getRecipeCompList()) {
             statementString += "(" + batchID + ", " + comp.getIngredientID() + ", " + comp.getNonNetto() + ", " + comp.getTolerance() + "),";

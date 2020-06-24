@@ -2,6 +2,9 @@ package dto;
 
 import dto.idto.IIngredientDTO;
 
+/**
+ * A class used when data has to be "transported" from the backend to the database,
+ */
 public class IngredientDTO implements IIngredientDTO {
     int ingredientID;
     String ingredientName;

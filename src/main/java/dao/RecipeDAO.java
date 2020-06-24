@@ -13,6 +13,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * The DAO Class for "Recept" used to access the database and do CRUD operations in the database.
+ */
 public class RecipeDAO implements IRecipeDAO {
     private static final RecipeDAO instance;
 

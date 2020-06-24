@@ -7,6 +7,10 @@ import dao.exceptions.DatabaseException;
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * A class responsible for connection to the database, the class uses the java methods, Callable Statement and PreparedStatement to avoid
+ * syntactical errors when executing SQL statements in the database through java.
+ */
 public class DBConnection {
 
     private Connection connection;
