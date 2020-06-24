@@ -30,7 +30,7 @@ function getAllProducts() { //shows all productbatches
         $("#error").remove();
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            'Produkt batches kunne ikke hentes: '+ $(data.responseText).find("u").first().text() +
             '</div></div>');
     });
 }
@@ -86,11 +86,11 @@ function getProductBatch(productBatchID){ //shows one product batch and all its 
         $("#tablebody").append('<br>'+
             '<button class="confirmbtn" id="printbtn" onclick="window.print()">Print produkt batch</button>');
     }, function (data){
-        $("#error").remove();
-        $("#container").append('' +
-            '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
-            '</div></div>');
+            $("#error").remove();
+            $("#container").append('' +
+                '<div class="errorcont"><div class="boxedText" id="error">'+
+                'Kunne ikke hente produkt batch: '+ $(data.responseText).find("u").first().text() +
+                '</div></div>');
     });
 }
 
@@ -155,7 +155,7 @@ function listenerAdd() {//creates page for adding product batch
             $("#error").remove();
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                'Kunne ikke hente recepter: '+ $(data.responseText).find("u").first().text() +
                 '</div></div>');
         });
     })
@@ -180,7 +180,7 @@ function confirmAddPB() { // triggered when click "#finishbtn"
             $("#error").remove();
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Bruger ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                'Produkt batch kunne ikke tilføjes: '+ $(data.responseText).find("u").first().text() +
                 '</div></div>');
         } );
     }
@@ -196,7 +196,7 @@ function init() {
         $("#laborantHome").attr('href', 'Laborant.html?ID=' + $("#container").attr('data-id'));
     }
 }
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () { //initiates listeners when doc is loaded.
     init();
     listenerAdd();
     listenerAdd1();

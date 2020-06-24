@@ -20,7 +20,7 @@ function getAllIngredientBatch() { //shows all ingredientbatches in list
         $("#error").remove();
         $("#container").append('' +
             '<div class="errorcont"><div class="boxedText" id="error">'+
-            'Råvarebatch ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+            'Råvare Batches kunne ikke hentes: '+ $(data.responseText).find("u").first().text() +
             '</div></div>');
     });
 }
@@ -57,7 +57,7 @@ function listenerAdd2() { //shows line to add new batch
             '<tbody id="inglistbody"></tbody>' +
             '</table>'
         );
-        Agent.GET("rest/ingredient", function (data) {
+        Agent.GET("rest/ingredient", function (data) { //gets and makes rows of ingredient
             $.each(data, function () {
                 $("#inglistbody").append(genIngList(this));
             });
@@ -65,12 +65,12 @@ function listenerAdd2() { //shows line to add new batch
             $("#error").remove();
             $("#container").append('' +
                 '<div class="errorcont"><div class="boxedText" id="error">'+
-                'Råvarebatch ikke tilføjet: '+ $(data.responseText).find("u").first().text() +
+                'Råvarer kunne ikke hentes: '+ $(data.responseText).find("u").first().text() +
                 '</div></div>');
         });
     })
 }
-function genIngList(ingredient){
+function genIngList(ingredient){ //adds rows to ingredient list
     $("#inglistbody").append(
         '<tr>' +
         '<td>'+ingredient.ingredientID+'</td>'+
