@@ -91,7 +91,7 @@ function generateUserHtml(user) { //generates html to show in user table
         '</tr>'
 }
 
-function listeneredit(row) {
+function listeneredit(row) { //action when edit user button is clicked
     $(row).on('click', '.editbtn', function () {
         var row = $(this).closest('tr');
         var firstName = row.find(".firstName").text();
@@ -115,7 +115,7 @@ function listeneredit(row) {
     })
 }
 
-function listenersave(row) {
+function listenersave(row) { //action when save user button is clicked
     $(row).on('click', '.savebtn', function () {
         var row = $(this).closest('tr');
         var userId = row.find(".userId").text();
@@ -159,7 +159,7 @@ function listenersave(row) {
 
 
 
-function listener(row) {
+function listener(row) { //action when activate/deactivate user button is clicked
     $(row).on('click', '.toglebtn', function () {
         var row = $(this).closest('tr');
         var active = invertTextToBoolean(row.find(".active").text());
@@ -187,7 +187,7 @@ function booleanToText(active) { //generates text according to users active stat
         return "nej";
 }
 
-function invertTextToBoolean(active) {
+function invertTextToBoolean(active) { //convenience function
     if (active === "ja")
         return false;
     else

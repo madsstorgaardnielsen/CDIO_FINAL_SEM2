@@ -1,4 +1,4 @@
-function init() {
+function init() { //runs when page is loaded to get employee id
     if (document.location.search !== '') {
         var ID = location.search.replace(/^.*?\=/, '');
         $("#container").attr('data-id',''+ ID);
@@ -9,7 +9,7 @@ function init() {
     }
 }
 
-function getPID() {
+function getPID() { //sets up html to ask user for productbatchID
     Agent.GET("rest/productBatch", function (data) {
         $("#optionsbox").html('' +
             '<table class="optionstable"><thead><tr>' +
@@ -44,7 +44,7 @@ function getPID() {
     )
 }
 
-function getRecipeName() {
+function getRecipeName() { //gets info from database about productbatch and the recipe, and shows to user
     $("#container").attr('data-batchID', ''+ $("#batchID").val());
     var batchID = $("#container").attr('data-batchID');
     $("#optionsbox").empty();
@@ -78,7 +78,7 @@ function getRecipeName() {
     });
 }
 
-function setStatus() {
+function setStatus() { //gets the next component to be weighed and asks user for tara value
     var batchID = $("#container").attr('data-batchID');
     Agent.GET("rest/productBatchComponent/afvejning/getproductbatchcomponent/"+ batchID +'/',function (data) {
             $("#header").text("Indtast Tara");
@@ -112,7 +112,7 @@ function setStatus() {
     })
 }
 
-function setTara() {
+function setTara() { //gets ingredientbatchId from user and shows options to user
     var compID = $("#container").attr('data-compID');
     $("#container").attr('data-tara',''+ $("#tarainput").val());
     var tara = $("#container").attr('data-tara');
@@ -153,7 +153,7 @@ function setTara() {
     );
 }
 
-function setRaavare() {
+function setRaavare() { //validates ingredientbatchID and asks user for brutto weight
     var compID = $("#container").attr('data-compID');
     $("#container").attr('data-raavareBatch',''+ $("#raavarebatchinput").val());
     var raavareBatch = $("#container").attr('data-raavareBatch');
@@ -210,6 +210,6 @@ function setBrutto() { //sends the input data to UserAPI to be saved
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () { //listener to run initialising function
     init();
 });
