@@ -83,6 +83,19 @@ public class ProductBatchDAO implements IProductBatchDAO {
             throw new DatabaseException();
         }
     }
+    //for testing purposes
+    public void deleteProductBatchByRecipeId(int recipeId) {
+        try {
+            String deleteBatch = "DELETE FROM ProductBatch WHERE RecipeID = ?";
+            PreparedStatement statement = database.prepareStatement(deleteBatch);
+            statement.setInt(1, recipeId);
+            statement.executeUpdate();
+            System.out.println("Product Batch successfully deleted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DatabaseException();
+        }
+    }
 
     public ArrayList<ProductBatchDTO> getAllProductBatch() {
         ArrayList<ProductBatchDTO> productBatchList = new ArrayList<>();

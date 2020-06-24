@@ -83,9 +83,9 @@ public class UserController implements IUserController {
     }
 
     //used for testing purposes
-    public Response deleteUser(int id) {
+    public Response deleteUser(String name, String lastName) {
         try {
-            userDAO.deleteUser(id);
+            userDAO.deleteUser(name, lastName);
             return Response.ok().build();
         } catch (Exception e) {
             return Response.serverError().build();

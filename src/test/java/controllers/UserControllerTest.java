@@ -12,9 +12,9 @@ class UserControllerTest {
 
     @Test
     void addUser() {
-        UserDTO test = new UserDTO(99999999, "test", "test", "test", "Admin", false);
-        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().addUser(test).toString());
-        UserController.getInstance().deleteUser(99999999);
+        UserDTO test = new UserDTO("test", "test", "test", "Admin", false);
+        assertEquals(Response.ok().build().toString(), UserController.getInstance().addUser(test).toString());
+        UserController.getInstance().deleteUser("test","test");
     }
 
     @Test
@@ -24,16 +24,13 @@ class UserControllerTest {
 
     @Test
     void updateUser() {
-
-        UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "true");
-
-        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "true").toString());
-
-        UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "false");
+        UserController.getInstance().updateUser(1, "Pernille", "Rosenkrantz", "PR", "Admin", "false");
+        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(1, "Pernille", "Rosenkrantz", "PR", "Admin", "false").toString());
+        UserController.getInstance().updateUser(1, "test", "test", "test", "Admin", "true");
     }
 
     @Test
     void getUser() {
-        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "false").toString());
+        assertEquals(Response.ok(true).build().toString(), UserController.getInstance().getUser("1","Admin").toString());
     }
 }

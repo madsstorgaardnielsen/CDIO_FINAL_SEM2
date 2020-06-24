@@ -18,6 +18,13 @@ public class UserDTO implements IUserDTO {
         this.role = role;
         this.active = active;
     }
+    public UserDTO(String firstName, String lastName, String initials, String role, boolean active) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.initials = initials;
+        this.role = role;
+        this.active = active;
+    }
     public UserDTO() {
     }
 

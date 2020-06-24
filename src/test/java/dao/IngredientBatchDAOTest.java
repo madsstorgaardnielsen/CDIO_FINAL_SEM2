@@ -14,14 +14,14 @@ class IngredientBatchDAOTest {
     void addIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
-        ibDTO.setIngredientBatchId(99999998);
+        ibDTO.setIngredientBatchId(999);
         ibDTO.setIngredientId(1);
         ibDTO.setAmount("1.1111");
         ibDTO.setSupplier("TestSupplier");
         try {
             ibDAO.addIngredientBatch(ibDTO);
-            assertEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
-            ibDAO.deleteIngredientBatch(99999998);
+            assertEquals(999, ibDAO.getIngredientBatch(999).getIngredientBatchId());
+            ibDAO.deleteIngredientBatch(999);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,33 +32,33 @@ class IngredientBatchDAOTest {
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
 
-        ibDAO.deleteIngredientBatch(99999999);
-        ibDTO.setIngredientBatchId(99999999);
+        ibDAO.deleteIngredientBatch(999);
+        ibDTO.setIngredientBatchId(999);
         ibDTO.setIngredientId(1);
         ibDTO.setAmount("5.5555");
         ibDTO.setSupplier("TestSupplier");
         ibDAO.addIngredientBatch(ibDTO);
 
-        assertEquals("5.5555", ibDAO.getIngredientBatch(99999999).getAmount());
+        assertEquals("5.5555", ibDAO.getIngredientBatch(999).getAmount());
         ibDTO.setAmount("6.6666");
         ibDAO.updateIngredientBatch(ibDTO);
-        assertEquals("6.6666", ibDAO.getIngredientBatch(99999999).getAmount());
-
+        assertEquals("6.6666", ibDAO.getIngredientBatch(999).getAmount());
+        ibDAO.deleteIngredientBatch(999);
     }
 
     @Test
     void deleteIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
-        ibDTO.setIngredientBatchId(99999998);
+        ibDTO.setIngredientBatchId(999);
         ibDTO.setIngredientId(1);
         ibDTO.setAmount("1.1111");
         ibDTO.setSupplier("TestSupplier");
         try {
             ibDAO.addIngredientBatch(ibDTO);
-            assertEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
-            ibDAO.deleteIngredientBatch(99999998);
-            assertNotEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
+            assertEquals(999, ibDAO.getIngredientBatch2(999).getIngredientBatchId());
+            ibDAO.deleteIngredientBatch(999);
+            assertNotEquals(999, ibDAO.getIngredientBatch2(999).getIngredientBatchId());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,14 +80,14 @@ class IngredientBatchDAOTest {
     void getIngredientBatch() {
         IngredientBatchDAO ibDAO = new IngredientBatchDAO();
         IngredientBatchDTO ibDTO = new IngredientBatchDTO();
-        ibDTO.setIngredientBatchId(99999998);
+        ibDTO.setIngredientBatchId(999);
         ibDTO.setIngredientId(1);
         ibDTO.setAmount("1.1111");
         ibDTO.setSupplier("TestSupplier");
         try {
             ibDAO.addIngredientBatch(ibDTO);
-            assertEquals(99999998, ibDAO.getIngredientBatch(99999998).getIngredientBatchId());
-            ibDAO.deleteIngredientBatch(99999998);
+            assertEquals(999, ibDAO.getIngredientBatch(999).getIngredientBatchId());
+            ibDAO.deleteIngredientBatch(999);
         } catch (Exception e) {
             e.printStackTrace();
         }

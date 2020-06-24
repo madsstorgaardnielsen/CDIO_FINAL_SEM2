@@ -17,7 +17,7 @@ public interface IUserDAO {
 
     UserDTO updateActivity(UserDTO user);
 
-    void deleteUser(int id);
+    void deleteUser(String name, String lastName);
 
     UserDTO getUserFromFirstNameLastName(String firstname, String lastname);
 }
