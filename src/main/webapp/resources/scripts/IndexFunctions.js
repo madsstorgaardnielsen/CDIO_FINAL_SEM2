@@ -60,6 +60,6 @@ function displayName() { //gets the information about the user from the backend
     })
 }
 
-function next(ID) {
+function next(ID) { //for getting the user id to next html page
     localStorage.setItem('ID', ID);
 }
