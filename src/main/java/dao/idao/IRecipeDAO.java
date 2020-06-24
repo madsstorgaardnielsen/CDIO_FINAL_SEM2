@@ -17,15 +17,15 @@ public interface IRecipeDAO {
         return null;
     }
 
-    void addRecipe(RecipeDTO recipe) throws IOException, SQLException;
+    void addRecipe(RecipeDTO recipe);
 
-    RecipeDTO updateRecipe(RecipeDTO recipe) throws IOException, SQLException;
+    RecipeDTO updateRecipe(RecipeDTO recipe);
 
-    void deleteRecipe(int ID) throws IOException, SQLException;
+    void deleteRecipe(int ID);
 
-    ArrayList<RecipeDTO> getAllRecipes() throws Exception;
+    ArrayList<RecipeDTO> getAllRecipes();
 
-    void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO) throws SQLException;
+    void getRecipeInfo(ResultSet rs, RecipeDTO recipeDTO);
 
-    RecipeDTO getRecipe(int ID) throws Exception;
+    RecipeDTO getRecipe(int ID);
 }

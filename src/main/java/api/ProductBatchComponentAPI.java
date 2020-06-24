@@ -23,7 +23,7 @@ public class ProductBatchComponentAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProductBatchComponent(@PathParam("ID") int ID) {
-        return Response.ok().build(); //ProductBatchComponentController.getInstance().getProductBatchComponent(ID);
+        return Response.ok().build();
     }
 
     @Path("/validateBatch/{ID}/{ingredientBatchID}/")
@@ -36,7 +36,7 @@ public class ProductBatchComponentAPI {
     @Path("/afvejning/getproductbatchcomponent/{batchID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) throws Exception {
+    public Response getComponentFromBatchID(@PathParam("batchID") int batchId) {
         return ProductBatchComponentController.getInstance().getNextComponent(batchId);
     }
 }

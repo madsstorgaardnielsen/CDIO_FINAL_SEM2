@@ -12,8 +12,8 @@ public interface IIngredientController {
 
     Response updateIngredient(int id, String name);
 
-    Response getAllIngredients() throws Exception;
+    Response getAllIngredients();
 
-    Response getIngredient(int id) throws Exception;
+    Response getIngredient(int id);
 
 }

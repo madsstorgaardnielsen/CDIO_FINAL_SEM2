@@ -18,17 +18,17 @@ public interface IIngredientBatchDAO {
         return null;
     }
 
-    void addIngredientBatch(IngredientBatchDTO ingredientBatch) throws SQLException, IOException;
+    void addIngredientBatch(IngredientBatchDTO ingredientBatch);
 
-    void updateIngredientBatch(IngredientBatchDTO ingredientBatch) throws IOException, SQLException;
+    void updateIngredientBatch(IngredientBatchDTO ingredientBatch);
 
-    void deleteIngredientBatch(int id) throws IOException, SQLException;
-
-
-    ArrayList<IngredientBatchDTO> getAllIngredientBatch() throws Exception;
-
-    void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO) throws SQLException;
+    void deleteIngredientBatch(int id);
 
 
-    IngredientBatchDTO getIngredientBatch(int ID) throws Exception;
+    ArrayList<IngredientBatchDTO> getAllIngredientBatch();
+
+    void getIngredientBatchInfo(ResultSet rs, IngredientBatchDTO ingredientBatchDTO);
+
+
+    IngredientBatchDTO getIngredientBatch(int ID);
 }

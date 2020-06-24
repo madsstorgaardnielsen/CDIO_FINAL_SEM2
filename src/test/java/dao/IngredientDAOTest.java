@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IngredientDAOTest {
 
     @Test
-    void addIngredient() throws SQLException, IOException {
+    void addIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
         iDAO.deleteIngredient(99999999);
@@ -28,7 +28,7 @@ class IngredientDAOTest {
     }
 
     @Test
-    void updateIngredient() throws Exception {
+    void updateIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
 
@@ -45,7 +45,7 @@ class IngredientDAOTest {
     }
 
     @Test
-    void deleteIngredient() throws SQLException, IOException {
+    void deleteIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
         iDAO.deleteIngredient(99999999);
@@ -62,7 +62,7 @@ class IngredientDAOTest {
     }
 
     @Test
-    void getAllIngredients() throws Exception {
+    void getAllIngredients() {
         IngredientDAO ibDAO = new IngredientDAO();
 
         if (ibDAO.getAllIngredients().size() > 1) {
@@ -73,7 +73,7 @@ class IngredientDAOTest {
     }
 
     @Test
-    void getIngredient() throws IOException, SQLException {
+    void getIngredient() {
         IngredientDAO iDAO = new IngredientDAO();
         IngredientDTO iDTO = new IngredientDTO();
         iDAO.deleteIngredient(99999999);

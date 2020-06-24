@@ -48,7 +48,7 @@ public class IngredientBatchAPI {
     @Path("/byIngredient/{ingredientID}/")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getIngredientBatchByIngredient(@PathParam("ingredientID") int ID) throws Exception {
+    public Response getIngredientBatchByIngredient(@PathParam("ingredientID") int ID) {
         return IngredientBatchController.getInstance().getIngredientBatchByIngredientID(ID);
     }
 }

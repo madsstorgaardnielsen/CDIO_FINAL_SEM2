@@ -18,15 +18,15 @@ public interface IIngredientDAO {
         return null;
     }
 
-    void addIngredient(IngredientDTO ingredient) throws SQLException, IOException;
+    void addIngredient(IngredientDTO ingredient);
 
-    IngredientDTO updateIngredient(IngredientDTO ingredient) throws IOException, SQLException;
+    IngredientDTO updateIngredient(IngredientDTO ingredient);
 
-    void deleteIngredient(int id) throws IOException, SQLException;
+    void deleteIngredient(int id);
 
-    ArrayList<IngredientDTO> getAllIngredients() throws Exception;
+    ArrayList<IngredientDTO> getAllIngredients();
 
-    void getIngredientInfo(ResultSet rs, IngredientDTO ingredientDTO) throws SQLException;
+    void getIngredientInfo(ResultSet rs, IngredientDTO ingredientDTO);
 
-    IngredientDTO getIngredient(int ID) throws Exception;
+    IngredientDTO getIngredient(int ID);
 }

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RecipeComponentControllerTest {
 
     @Test
-    void deleteRecipeComponent() throws IOException, SQLException {
+    void deleteRecipeComponent() {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
         RecipeComponentDTO ibdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
@@ -31,7 +31,7 @@ class RecipeComponentControllerTest {
     }
 
     @Test
-    void addRecipeComponent() throws IOException, SQLException {
+    void addRecipeComponent() {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO.getInstance().addRecipe(rdto);
         RecipeComponentDTO rcdto = new RecipeComponentDTO(999, 1, 99.9999, 99.9999);
@@ -41,7 +41,7 @@ class RecipeComponentControllerTest {
     }
 
     @Test
-    void updateRecipeComponent() throws IOException, SQLException {
+    void updateRecipeComponent() {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO rdao = new RecipeDAO();
         rdao.addRecipe(rdto);
@@ -56,12 +56,12 @@ class RecipeComponentControllerTest {
     }
 
     @Test
-    void getAllRecipeComponents() throws Exception {
+    void getAllRecipeComponents() {
         assertEquals(Response.ok(RecipeComponentController.getInstance().getAllRecipeComponents().toString()).build().toString(), RecipeComponentController.getInstance().getAllRecipeComponents().toString());
     }
 
     @Test
-    void getRecipeComponent() throws SQLException, IOException {
+    void getRecipeComponent() {
         RecipeDTO rdto = new RecipeDTO(999, "TestRecipe");
         RecipeDAO rdao = new RecipeDAO();
         rdao.addRecipe(rdto);

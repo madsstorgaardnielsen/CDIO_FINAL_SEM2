@@ -13,14 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductBatchDAOTest {
 
     @Test
-    void addProductBatch() throws IOException, SQLException {
+    void addProductBatch() {
         ProductBatchDAO.getInstance().addProductBatch(99999999, 1);
         int recipeId = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1).getRecipeId();
         assertEquals(99999999, recipeId);
     }
 
     @Test
-    void updateProductBatch() throws IOException, SQLException {
+    void updateProductBatch() {
         ProductBatchDTO pbdto;
         pbdto = ProductBatchDAO.getInstance().getProductBatchFromRecipeIdUserId(99999999, 1);
 
@@ -33,7 +33,7 @@ class ProductBatchDAOTest {
     }
 
     @Test
-    void deleteProductBatch() throws IOException, SQLException {
+    void deleteProductBatch() {
 
         ProductBatchDAO pbdao = new ProductBatchDAO();
         pbdao.addProductBatch(99999999, 1);
@@ -44,7 +44,7 @@ class ProductBatchDAOTest {
     }
 
     @Test
-    void getAllProductBatch() throws Exception {
+    void getAllProductBatch() {
         if (ProductBatchDAO.getInstance().getAllProductBatch().size() > 0) {
             assertTrue(true);
         } else {
@@ -53,7 +53,7 @@ class ProductBatchDAOTest {
     }
 
     @Test
-    void getProductBatch() throws SQLException, IOException {
+    void getProductBatch() {
         ProductBatchDAO pbdao = new ProductBatchDAO();
         pbdao.addProductBatch(99999999, 1);
 

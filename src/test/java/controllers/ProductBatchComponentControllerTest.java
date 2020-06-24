@@ -17,7 +17,7 @@ class ProductBatchComponentControllerTest {
     }
 
     @Test
-    void getNextComponent() throws Exception {
+    void getNextComponent() {
         assertEquals(Response.ok(true).build().toString(),ProductBatchComponentController.getInstance().getNextComponent(35).toString());
     }
 }

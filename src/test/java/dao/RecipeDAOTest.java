@@ -14,7 +14,7 @@ class RecipeDAOTest {
 
 
     @Test
-    void addRecipe() throws SQLException, IOException {
+    void addRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
@@ -36,7 +36,7 @@ class RecipeDAOTest {
     }
 
     @Test
-    void addRecipeOnly() throws SQLException, IOException {
+    void addRecipeOnly() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         //RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
@@ -58,7 +58,7 @@ class RecipeDAOTest {
     }
 
     @Test
-    void getAllRecipes() throws Exception {
+    void getAllRecipes() {
         RecipeDAO recipeDAO = new RecipeDAO();
 
         if (recipeDAO.getAllRecipes().size() > 1) {
@@ -69,7 +69,7 @@ class RecipeDAOTest {
     }
 
     @Test
-    void getRecipe() throws IOException, SQLException {
+    void getRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
@@ -90,7 +90,7 @@ class RecipeDAOTest {
     }
 
     @Test
-    void deleteRecipe() throws SQLException, IOException {
+    void deleteRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         RecipeComponentDTO recipeComponentDTO = new RecipeComponentDTO(99999999, 1, 2.22, 3.33);
@@ -111,7 +111,7 @@ class RecipeDAOTest {
     }
 
     @Test
-    void updateRecipe() throws SQLException, IOException {
+    void updateRecipe() {
         RecipeDAO recipeDAO = new RecipeDAO();
         RecipeDTO recipeDTO = new RecipeDTO();
         RecipeComponentDTO recipeComponentDTO1 = new RecipeComponentDTO(99999999, 1, 3.22, 3.33);

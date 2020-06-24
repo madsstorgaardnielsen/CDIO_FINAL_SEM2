@@ -11,19 +11,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserControllerTest {
 
     @Test
-    void addUser() throws Exception {
+    void addUser() {
         UserDTO test = new UserDTO(99999999, "test", "test", "test", "Admin", false);
         assertEquals(Response.ok(true).build().toString(), UserController.getInstance().addUser(test).toString());
         UserController.getInstance().deleteUser(99999999);
     }
 
     @Test
-    void getAllUsers() throws Exception {
+    void getAllUsers() {
         assertEquals(Response.ok(true).build().toString(), UserController.getInstance().getAllUsers().toString());
     }
 
     @Test
-    void updateUser() throws Exception {
+    void updateUser() {
 
         UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "true");
 
@@ -33,7 +33,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getUser() throws Exception {
+    void getUser() {
         assertEquals(Response.ok(true).build().toString(), UserController.getInstance().updateUser(99999999, "test", "test", "test", "Admin", "false").toString());
     }
 }

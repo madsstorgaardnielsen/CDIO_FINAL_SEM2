@@ -13,8 +13,8 @@ public interface IProductBatchController {
 
     void updateProductBatch(int batchId, int ingredientId, double amount);
 
-    ArrayList<IngredientBatchDTO> getAllProductBatch() throws Exception;
+    ArrayList<IngredientBatchDTO> getAllProductBatch();
 
-    IngredientBatchDTO getProductBatch(int id) throws Exception;
+    IngredientBatchDTO getProductBatch(int id);
 
 }

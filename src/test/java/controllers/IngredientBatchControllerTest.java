@@ -31,7 +31,7 @@ class IngredientBatchControllerTest {
 
 
     @Test
-    void updateIngredientBatch() throws SQLException, IOException {
+    void updateIngredientBatch() {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999, 1, "999.9999", "TestSupplier");
         IngredientBatchDAO ibdao = new IngredientBatchDAO();
         ibdao.addIngredientBatch(ibdto);
@@ -47,7 +47,7 @@ class IngredientBatchControllerTest {
     }
 
     @Test
-    void getIngredientBatch() throws Exception {
+    void getIngredientBatch() {
         IngredientBatchDTO ibdto = new IngredientBatchDTO(999, 1, "999.9999", "TestSupplier");
         IngredientBatchDAO ibdao = new IngredientBatchDAO();
         ibdao.addIngredientBatch(ibdto);

@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 public class UserAPI {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllUsers() throws Exception {
+    public Response getAllUsers() {
         return UserController.getInstance().getAllUsers();
     }
 

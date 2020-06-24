@@ -13,7 +13,7 @@ public interface IRecipeController {
 
     Response updateRecipe(int recipeID, String recipeName);
 
-    Response getAllRecipes() throws Exception;
+    Response getAllRecipes();
 
-    Response getRecipe(int ID) throws Exception;
+    Response getRecipe(int ID);
 }

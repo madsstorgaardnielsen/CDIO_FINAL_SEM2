@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IUserDAO {
-    void addUser(UserDTO user) throws IOException, SQLException;
+    void addUser(UserDTO user);
 
-    ArrayList<UserDTO> getAllUsers() throws Exception;
+    ArrayList<UserDTO> getAllUsers();
 
-    UserDTO getUser(String ID) throws Exception;
+    UserDTO getUser(String ID);
 
-    UserDTO updateUser(UserDTO user) throws Exception;
+    UserDTO updateUser(UserDTO user);
 
-    UserDTO updateActivity(UserDTO user) throws Exception;
+    UserDTO updateActivity(UserDTO user);
 
-    void deleteUser(int id) throws IOException, SQLException;
+    void deleteUser(int id);
 
-    UserDTO getUserFromFirstNameLastName(String firstname, String lastname) throws Exception;
+    UserDTO getUserFromFirstNameLastName(String firstname, String lastname);
 }

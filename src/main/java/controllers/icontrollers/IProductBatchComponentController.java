@@ -16,9 +16,9 @@ public interface IProductBatchComponentController {
 
     Response updateProductBatchComponent(ProductBatchComponentDTO batchComponentDTO);
 
-    Response getAllProductBatchComponents() throws Exception;
+    Response getAllProductBatchComponents();
 
-    Response getProductBatchComponents(int id) throws Exception;
+    Response getProductBatchComponents(int id);
 
-    Response getNextComponent(int batchID) throws Exception;
+    Response getNextComponent(int batchID);
 }

@@ -28,7 +28,7 @@ class IngredientControllerTest {
     }
 
     @Test
-    void updateIngredient() throws Exception {
+    void updateIngredient() {
         IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
         IngredientDAO ibdao = new IngredientDAO();
         ibdao.addIngredient(ibdto);
@@ -43,7 +43,7 @@ class IngredientControllerTest {
     }
 
     @Test
-    void getIngredient() throws Exception {
+    void getIngredient() {
         IngredientDTO ibdto = new IngredientDTO(999, "TestSupplier");
         IngredientDAO ibdao = new IngredientDAO();
         ibdao.addIngredient(ibdto);

@@ -31,5 +31,5 @@ public interface IUserDTO extends Serializable {
 
     void setActive(boolean active);
 
-    void setActive(String active) throws Exception;
+    void setActive(String active);
 }

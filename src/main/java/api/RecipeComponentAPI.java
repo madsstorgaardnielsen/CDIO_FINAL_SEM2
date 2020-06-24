@@ -29,7 +29,7 @@ public class RecipeComponentAPI {
         @GET
         @Produces(MediaType.APPLICATION_JSON)
         public Response getRecipeComponent(@PathParam("recipeComponentId") int recipeComponentId,
-                                           @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID) throws Exception {
+                                           @QueryParam("recipeComponentIngredientID") int recipeComponentIngredientID)  {
             return RecipeComponentController.getInstance().getRecipeComponent(recipeComponentId, recipeComponentIngredientID);
         }
     */

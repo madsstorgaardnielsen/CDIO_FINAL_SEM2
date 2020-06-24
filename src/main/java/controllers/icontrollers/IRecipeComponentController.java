@@ -13,7 +13,7 @@ public interface IRecipeComponentController {
 
     Response updateRecipeComponent(int recipeID, int ingredientID, double nonNetto, double tolerance);
 
-    Response getAllRecipeComponents() throws Exception;
+    Response getAllRecipeComponents();
 
-    Response getRecipeComponent(int recipeID, int ingredientID) throws Exception;
+    Response getRecipeComponent(int recipeID, int ingredientID);
 }

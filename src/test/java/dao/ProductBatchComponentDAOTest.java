@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductBatchComponentDAOTest {
 
     @Test
-    void addComponentsByRecipe() throws SQLException, IOException {
+    void addComponentsByRecipe() {
         RecipeDTO test = new RecipeDTO(999,"Test");
         RecipeComponentDTO test1 = new RecipeComponentDTO(1,1,2.2222,3.3333);
         RecipeComponentDTO test2 = new RecipeComponentDTO(1,2,2.2222,3.3333);

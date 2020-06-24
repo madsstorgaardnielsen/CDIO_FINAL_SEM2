@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDAOTest {
 
     @Test
-    void addUser() throws Exception {
+    void addUser() {
         UserDTO test = new UserDTO();
         test.setFirstName("Test");
         test.setLastName("Test");
@@ -27,7 +27,7 @@ class UserDAOTest {
     }
 
     @Test
-    void getAllUsers() throws Exception {
+    void getAllUsers() {
         if (UserDAO.getInstance().getAllUsers().size() > 0) {
             assertTrue(true);
         } else {
@@ -36,7 +36,7 @@ class UserDAOTest {
     }
 
     @Test
-    void getUser() throws Exception {
+    void getUser() {
         assertEquals(1, UserDAO.getInstance().getUser("1").getUserId());
     }
 
@@ -76,7 +76,7 @@ class UserDAOTest {
     }
 
     @Test
-    void deleteUser() throws Exception {
+    void deleteUser() {
 
         UserDTO test = new UserDTO();
         test.setFirstName("Test");
